@@ -19,7 +19,7 @@
 ```
 {
   "stylelint.enable": true,
-  "stylelint.validate": ["css", "scss", "typescriptreact"],
+  "stylelint.validate": ["css", "scss", "typescript" ,"typescriptreact"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
