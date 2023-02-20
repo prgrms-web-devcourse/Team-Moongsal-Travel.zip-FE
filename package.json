@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "prepare": "husky install",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:style": "stylelint src/**/*.{tsx}"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -43,5 +44,9 @@
     "stylelint-config-recommended": "^9.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "typescript": "4.9.5"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead"
+  ]
 }
