@@ -1,9 +1,13 @@
 import type { AppProps } from 'next/app';
 
+import MobileLayout from '@/styles/MobileLayout';
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Component {...pageProps} />
+      <MobileLayout>
+        <Component {...pageProps} />
+      </MobileLayout>
     </>
   );
 }
