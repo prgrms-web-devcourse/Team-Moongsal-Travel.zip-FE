@@ -28,6 +28,8 @@ const palette = {
   gray030: { main: '#959595' },
   red: { main: '#F25252' },
   white: { main: '#ffffff' },
+  gradient1: { main: '#74C9F3' },
+  gradient2: { main: '#5799F6' },
 } as const;
 
 export const theme = createTheme({

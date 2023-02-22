@@ -10,10 +10,10 @@ const Header = () => {
         <AppBar sx={AppBarStyle}>
           <Toolbar>
             <Typography variant='h1' component='h1' sx={TextStyle}>
-              🛫Travel.zip
+              🛫travel.zip
             </Typography>
             <IconButton size='large' aria-label='search' color='inherit'>
-              <SearchIcon color='blue050' />
+              <SearchIcon color='white' sx={{ fontSize: '1.8rem' }} />
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -26,11 +26,11 @@ const Header = () => {
 export default Header;
 
 const AppBarStyle = {
-  boxShadow: 'none',
   position: 'static',
-  bgcolor: 'blue010.main',
+  bgcolor: 'blue070.main',
   justifyContent: 'center',
   height: 70,
+  boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.2)',
 } as const;
 
 const BoxStyle = {
@@ -43,6 +43,6 @@ const TextStyle = {
   flexGrow: 1,
   fontSize: '1.5rem',
   fontFamily: 'KOHIBaeum',
-  color: 'blue050.main',
+  color: 'white.main',
   textAlign: 'center',
 } as const;
