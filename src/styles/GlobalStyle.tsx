@@ -27,6 +27,7 @@ const style = css`
     margin: 0;
     font-family: 'KOHINanumOTFL', serif;
     line-height: 1;
+    word-spacing: -5px;
   }
 
   div,
