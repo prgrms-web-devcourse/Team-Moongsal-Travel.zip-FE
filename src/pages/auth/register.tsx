@@ -2,7 +2,7 @@ import { Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import { Register, VerifyByEmail } from '@/components/Register';
-import HorizontalLinearStepper from '@/components/Stepper/Stepper';
+import { Stepper } from '@/components/Stepper';
 
 const steps = ['이메일 인증', '회원가입'];
 
@@ -14,12 +14,9 @@ const RegisterPage = () => {
       <Typography component='h1' variant='h4'>
         ✈️ travel.zip 회원가입
       </Typography>
-      <HorizontalLinearStepper
-        steps={steps}
-        activeStep={activeStep}
-        setActiveStep={setActiveStep}>
+      <Stepper steps={steps} activeStep={activeStep} setActiveStep={setActiveStep}>
         {!activeStep ? <VerifyByEmail /> : <Register />}
-      </HorizontalLinearStepper>
+      </Stepper>
     </Stack>
   );
 };
