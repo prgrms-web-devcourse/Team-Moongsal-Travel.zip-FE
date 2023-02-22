@@ -29,4 +29,7 @@ const palette = {
 
 export const theme = createTheme({
   palette,
+  typography: {
+    fontFamily: 'KOHINanumOTFL',
+  },
 });
