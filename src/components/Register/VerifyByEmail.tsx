@@ -5,7 +5,7 @@ import { useState } from 'react';
 const VerifyByEmail = () => {
   const [isSended, setIsSended] = useState(false);
 
-  const handleClick = () => {
+  const handleSendEmail = () => {
     setIsSended(true);
   };
 
@@ -17,15 +17,15 @@ const VerifyByEmail = () => {
           variant='contained'
           endIcon={<SendIcon />}
           sx={{ width: '150px' }}
-          onClick={handleClick}>
+          onClick={handleSendEmail}>
           인증번호
         </Button>
       </Stack>
       {isSended && (
         <Stack direction='row' spacing={2}>
           <TextField id='outlined-basic' label='인증번호' variant='outlined' fullWidth />
-          <Button variant='contained' sx={{ width: '150px' }} onClick={handleClick}>
-            인증확인
+          <Button variant='contained' sx={{ width: '150px' }} onClick={handleSendEmail}>
+            확인
           </Button>
         </Stack>
       )}

@@ -1,5 +1,4 @@
 import {
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -22,18 +21,18 @@ const MenuProps = {
 };
 
 const Register = () => {
-  const [age, setAge] = React.useState('');
+  const [yearOfBirth, setYearOfBirth] = React.useState('');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+  const handleYearOfBirth = (e: SelectChangeEvent) => {
+    setYearOfBirth(e.target.value as string);
   };
 
-  const calcBirthList = () => {
+  const calcYearOfBirthList = () => {
     return Array(80)
       .fill(new Date().getFullYear() - 10)
-      .map((n, i) => (
-        <MenuItem key={i} value={n - i}>
-          {n - i}
+      .map((year, i) => (
+        <MenuItem key={i} value={year - i}>
+          {year - i}
         </MenuItem>
       ));
   };
@@ -48,14 +47,13 @@ const Register = () => {
         <Select
           labelId='demo-simple-select-label'
           id='demo-simple-select'
-          value={age}
+          value={yearOfBirth}
           label='출생연도'
-          onChange={handleChange}
-          MenuProps={MenuProps}>
-          {calcBirthList()}
+          MenuProps={MenuProps}
+          onChange={handleYearOfBirth}>
+          {calcYearOfBirthList()}
         </Select>
       </FormControl>
-      <Button variant='contained'>회원가입</Button>
     </Stack>
   );
 };
