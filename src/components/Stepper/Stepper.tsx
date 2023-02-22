@@ -1,19 +1,19 @@
 import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material';
-import { Dispatch, FC, ReactNode, SetStateAction } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 interface StepperProps {
+  children: ReactNode;
   steps: string[];
   activeStep: number;
   setActiveStep: Dispatch<SetStateAction<number>>;
-  children: ReactNode;
 }
 
-const HorizontalLinearStepper: FC<StepperProps> = ({
+const HorizontalLinearStepper = ({
+  children,
   steps,
   activeStep,
   setActiveStep,
-  children,
-}) => {
+}: StepperProps) => {
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };

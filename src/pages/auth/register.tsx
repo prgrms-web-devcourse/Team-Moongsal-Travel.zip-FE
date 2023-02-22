@@ -1,12 +1,12 @@
 import { Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 
-import { Register, Verify } from '@/components/Register';
+import { Register, VerifyByEmail } from '@/components/Register';
 import HorizontalLinearStepper from '@/components/Stepper/Stepper';
 
 const steps = ['이메일 인증', '회원가입'];
 
-const VerifyPage = () => {
+const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
@@ -18,10 +18,10 @@ const VerifyPage = () => {
         steps={steps}
         activeStep={activeStep}
         setActiveStep={setActiveStep}>
-        {!activeStep ? <Verify /> : <Register />}
+        {!activeStep ? <VerifyByEmail /> : <Register />}
       </HorizontalLinearStepper>
     </Stack>
   );
 };
 
-export default VerifyPage;
+export default RegisterPage;
