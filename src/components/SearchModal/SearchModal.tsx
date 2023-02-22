@@ -3,14 +3,14 @@ import { Box, IconButton, Input, Stack, Typography } from '@mui/material';
 
 import { CenterStyle } from '@/styles/CenterStyle';
 
-const SEARCHPLACEHOLDER = '도시 또는 키워드를 입력해주세요.';
+const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요.';
 
 const SearchModal = () => {
   return (
     <Box sx={WrapperStyle}>
       <Stack flexGrow={1} width='70%'>
         <Box component='form' sx={{ ...CenterStyle, mt: '2rem', mb: '2rem' }}>
-          <Input placeholder={SEARCHPLACEHOLDER} color='blue050' sx={SearchInputStyle} />
+          <Input placeholder={PLACEHOLDER_SEARCH} color='blue050' sx={SearchInputStyle} />
           <IconButton size='large' aria-label='search' color='inherit'>
             <SearchIcon color='blue050' />
           </IconButton>
