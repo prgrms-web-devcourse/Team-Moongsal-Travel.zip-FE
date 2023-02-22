@@ -1,4 +1,5 @@
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 
 const Header = () => {
   return (
@@ -8,7 +9,9 @@ const Header = () => {
           <Typography variant='h1' component='h1' sx={TextStyle}>
             🛫Travel.zip
           </Typography>
-          <Button color='black'>검색</Button>
+          <IconButton size='large' aria-label='search' color='inherit'>
+            <SearchIcon color='blue050' />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
@@ -18,15 +21,15 @@ const Header = () => {
 export default Header;
 
 const AppBarStyle = {
-  height: 70,
   boxShadow: 'none',
   position: 'static',
   bgcolor: 'blue010.main',
+  justifyContent: 'center',
+  height: 70,
 } as const;
 
 const BoxStyle = {
   flexGrow: 1,
-  height: 70,
   position: 'sticky',
   top: 0,
 } as const;
@@ -37,4 +40,4 @@ const TextStyle = {
   fontFamily: 'KOHIBaeum',
   color: 'blue050.main',
   textAlign: 'center',
-};
+} as const;
