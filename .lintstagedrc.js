@@ -7,5 +7,5 @@ const buildEslintCommand = (filenames) =>
 
 module.exports = {
   '*.{js,jsx,ts,tsx}': [buildEslintCommand],
-  '*.{tsx}': ['yarn lint:style'],
+  '*.tsx': ['yarn lint:style'],
 };
