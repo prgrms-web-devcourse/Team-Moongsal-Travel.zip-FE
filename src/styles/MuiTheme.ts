@@ -8,6 +8,7 @@ declare module '@mui/material' {
   interface SwitchPropsColorOverrides extends PaletteOverrides<typeof palette, true> {}
   interface SliderPropsColorOverrides extends PaletteOverrides<typeof palette, true> {}
   interface CheckboxPropsColorOverrides extends PaletteOverrides<typeof palette, true> {}
+  interface AppBarPropsColorOverrides extends PaletteOverrides<typeof palette, true> {}
 }
 
 type PaletteOverrides<T extends object, X> = { [key in keyof T]: X };
@@ -29,4 +30,7 @@ const palette = {
 
 export const theme = createTheme({
   palette,
+  typography: {
+    fontFamily: 'KOHINanumOTFL',
+  },
 });
