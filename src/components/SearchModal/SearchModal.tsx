@@ -4,14 +4,14 @@ import { Box, Drawer, IconButton, Input, Stack, Typography } from '@mui/material
 import { CenterStyle } from '@/styles/CenterStyle';
 import { theme } from '@/styles/MuiTheme';
 
-const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요.';
-
-interface Props {
+interface SearchModalProps {
   isOpen: boolean;
   handleClose: () => void;
 }
 
-const SearchModal = ({ isOpen, handleClose }: Props) => {
+const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요.';
+
+const SearchModal = ({ isOpen, handleClose }: SearchModalProps) => {
   return (
     <Drawer anchor='top' open={isOpen} onClose={handleClose} sx={style}>
       <Box sx={WrapperStyle}>
