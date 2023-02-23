@@ -1,9 +1,11 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { useState } from 'react';
 
 import { SearchModal } from '../SearchModal';
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <Box sx={BoxStyle}>
@@ -12,13 +14,17 @@ const Header = () => {
             <Typography variant='h1' component='h1' sx={TextStyle}>
               🛫travel.zip
             </Typography>
-            <IconButton size='large' aria-label='search' color='inherit'>
+            <IconButton
+              size='large'
+              aria-label='search'
+              color='inherit'
+              onClick={() => setIsOpen(!isOpen)}>
               <SearchIcon color='white' sx={{ fontSize: '1.8rem' }} />
             </IconButton>
           </Toolbar>
         </AppBar>
       </Box>
-      <SearchModal />
+      <SearchModal isOpen={isOpen} handleClose={() => setIsOpen(false)} />
     </>
   );
 };
@@ -37,6 +43,7 @@ const BoxStyle = {
   flexGrow: 1,
   position: 'sticky',
   top: 0,
+  zIndex: '2000',
 } as const;
 
 const TextStyle = {
