@@ -1,28 +1,39 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, IconButton, Input, Stack, Typography } from '@mui/material';
+import { Box, Drawer, IconButton, Input, Stack, Typography } from '@mui/material';
 
 import { CenterStyle } from '@/styles/CenterStyle';
 import { theme } from '@/styles/MuiTheme';
 
 const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요.';
 
-const SearchModal = () => {
+interface Props {
+  isOpen: boolean;
+  handleClose: () => void;
+}
+
+const SearchModal = ({ isOpen, handleClose }: Props) => {
   return (
-    <Box sx={WrapperStyle}>
-      <Stack flexGrow={1} width='70%'>
-        <Box component='form' sx={{ ...CenterStyle, mt: '2rem', mb: '2rem' }}>
-          <Input placeholder={PLACEHOLDER_SEARCH} color='blue050' sx={SearchInputStyle} />
-          <IconButton aria-label='search' color='inherit'>
-            <SearchIcon color='white' />
-          </IconButton>
-        </Box>
-        <Box component='div' sx={CenterStyle}>
-          <Typography component='div' sx={PopularSearchStyle}>
-            최근 인기 검색어
-          </Typography>
-        </Box>
-      </Stack>
-    </Box>
+    <Drawer anchor='top' open={isOpen} onClose={handleClose} sx={style}>
+      <Box sx={WrapperStyle}>
+        <Stack flexGrow={1} width='70%'>
+          <Box component='form' sx={{ ...CenterStyle, mt: '2rem', mb: '2rem' }}>
+            <Input
+              placeholder={PLACEHOLDER_SEARCH}
+              color='blue050'
+              sx={SearchInputStyle}
+            />
+            <IconButton aria-label='search' color='inherit'>
+              <SearchIcon color='white' />
+            </IconButton>
+          </Box>
+          <Box component='div' sx={CenterStyle}>
+            <Typography component='div' sx={PopularSearchStyle}>
+              최근 인기 검색어
+            </Typography>
+          </Box>
+        </Stack>
+      </Box>
+    </Drawer>
   );
 };
 
@@ -63,3 +74,13 @@ const PopularSearchStyle = {
   width: '80%',
   fontSize: '0.8rem',
 };
+
+const style = {
+  position: 'absolute',
+  top: '70px',
+  width: '414px',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  scrollY: 'none',
+  borderRadius: '0px 0px 10px 10px',
+} as const;
