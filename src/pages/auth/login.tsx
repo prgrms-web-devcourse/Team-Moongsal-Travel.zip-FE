@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 
-import { Local } from '@/components/Login';
+import { Local, Social } from '@/components/Login';
 
 const LoginPage = () => {
   return (
@@ -9,6 +9,7 @@ const LoginPage = () => {
         ✈️ travel.zip
       </Typography>
       <Local />
+      <Social />
     </Stack>
   );
 };
