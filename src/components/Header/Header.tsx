@@ -6,8 +6,6 @@ import { SearchModal } from '../SearchModal';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const handleClose = () => setIsOpen(false);
-
   return (
     <>
       <Box sx={BoxStyle}>
@@ -26,7 +24,7 @@ const Header = () => {
           </Toolbar>
         </AppBar>
       </Box>
-      <SearchModal isOpen={isOpen} handleClose={handleClose} />
+      <SearchModal isOpen={isOpen} handleClose={() => setIsOpen(false)} />
     </>
   );
 };
