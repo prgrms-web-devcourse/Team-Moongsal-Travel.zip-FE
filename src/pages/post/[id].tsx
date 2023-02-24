@@ -34,11 +34,11 @@ const Post = () => {
           <SubTitle>여행 기간</SubTitle>
           <Box sx={{ ...locationBoxStyle, flexDirection: 'row', gap: 4 }}>
             <TextField fullWidth label='시작 날짜' type='text' />
-            <IconButton sx={{ position: 'absolute', right: 0, top: '0.5rem' }}>
+            <IconButton sx={{ position: 'absolute', left: '8rem', top: '0.5rem' }}>
               <CalendarMonthOutlinedIcon />
             </IconButton>
             <TextField fullWidth label='종료 날짜' type='text' />
-            <IconButton sx={{ position: 'absolute', left: '8rem', top: '0.5rem' }}>
+            <IconButton sx={{ position: 'absolute', right: '0rem', top: '0.5rem' }}>
               <CalendarMonthOutlinedIcon />
             </IconButton>
           </Box>
@@ -52,10 +52,10 @@ const Post = () => {
       </Stack>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button variant='contained' sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant='body1' component='span' sx={{ textAlign: 'center' }}>
+          <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             작성
           </Typography>
-          {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '1rem' }} />}
+          {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '0.5rem' }} />}
         </Button>
       </Box>
     </Box>
