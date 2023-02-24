@@ -1,18 +1,27 @@
 // import { useRouter } from 'next/router';
 
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import { Box, Button, IconButton, Stack, TextField, Typography } from '@mui/material';
+import dayjs, { Dayjs } from 'dayjs';
+import { useState } from 'react';
 
 import ComplexButton from '@/components/CreatePost/ComplexButton';
+import DatePicker from '@/components/CreatePost/DatePicker';
 import SubTitle from '@/components/CreatePost/SubTitle';
 import Title from '@/components/CreatePost/Titlte';
 
 const Post = () => {
-  // const router = useRouter();
-  // const { id } = router.query;
+  const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(''));
+  const [endDate, setEndDate] = useState<Dayjs | null>(dayjs(''));
 
+  const handleStartDateChange = (newValue: Dayjs | null) => {
+    setStartDate(newValue);
+  };
+
+  const handleEndDateChange = (newValue: Dayjs | null) => {
+    setEndDate(newValue);
+  };
   return (
     <Box sx={{ padding: '0 24px' }}>
       <Stack spacing={2}>
@@ -32,15 +41,13 @@ const Post = () => {
         </Stack>
         <Stack spacing={1}>
           <SubTitle>여행 기간</SubTitle>
-          <Box sx={{ ...locationBoxStyle, flexDirection: 'row', gap: 4 }}>
-            <TextField fullWidth label='시작 날짜' type='text' />
-            <IconButton sx={{ position: 'absolute', left: '8rem', top: '0.5rem' }}>
-              <CalendarMonthOutlinedIcon />
-            </IconButton>
-            <TextField fullWidth label='종료 날짜' type='text' />
-            <IconButton sx={{ position: 'absolute', right: '0rem', top: '0.5rem' }}>
-              <CalendarMonthOutlinedIcon />
-            </IconButton>
+          <Box sx={{ ...locationBoxStyle, flexDirection: 'row', gap: 2 }}>
+            <DatePicker
+              value={startDate}
+              onChange={handleStartDateChange}
+              text='시작날짜'
+            />
+            <DatePicker value={endDate} onChange={handleEndDateChange} text='종료날짜' />
           </Box>
         </Stack>
         <Stack spacing={1}>
