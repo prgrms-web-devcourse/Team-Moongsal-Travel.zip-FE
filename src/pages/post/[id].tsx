@@ -1,5 +1,9 @@
 // import { useRouter } from 'next/router';
 
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import { Box, IconButton, Stack, TextField } from '@mui/material';
+
 import ComplexButton from '@/components/CreatePost/ComplexButton';
 import SubTitle from '@/components/CreatePost/SubTitle';
 import Title from '@/components/CreatePost/Titlte';
@@ -9,12 +13,51 @@ const Post = () => {
   // const { id } = router.query;
 
   return (
-    <>
-      <Title>여행 기본 정보를 입력해주세요</Title>
-      <SubTitle>여행 유형</SubTitle>
-      <ComplexButton />
-    </>
+    <Box sx={{ padding: '0 24px' }}>
+      <Stack spacing={4}>
+        <Title>여행 기본 정보를 입력해주세요</Title>
+        <Stack>
+          <SubTitle>여행 유형</SubTitle>
+          <ComplexButton />
+        </Stack>
+        <Stack spacing={1}>
+          <SubTitle>방문한 지역</SubTitle>
+          <Box sx={locationBoxStyle}>
+            <TextField fullWidth label='지역을 입력하세요' type='text' />
+            <IconButton sx={{ position: 'absolute', right: 0, top: '0.5rem' }}>
+              <LocationOnOutlinedIcon />
+            </IconButton>
+          </Box>
+        </Stack>
+        <Stack spacing={1}>
+          <SubTitle>여행 기간</SubTitle>
+          <Box sx={{ ...locationBoxStyle, flexDirection: 'row', gap: 4 }}>
+            <TextField fullWidth label='시작 날짜' type='text' />
+            <IconButton sx={{ position: 'absolute', right: 0, top: '0.5rem' }}>
+              <CalendarMonthOutlinedIcon />
+            </IconButton>
+            <TextField fullWidth label='종료 날짜' type='text' />
+            <IconButton sx={{ position: 'absolute', left: '8rem', top: '0.5rem' }}>
+              <CalendarMonthOutlinedIcon />
+            </IconButton>
+          </Box>
+        </Stack>
+        <Stack spacing={1}>
+          <SubTitle>총 경비</SubTitle>
+          <Box sx={locationBoxStyle}>
+            <TextField fullWidth label='이번 여행의 총 경비를 입력하세요' type='text' />
+          </Box>
+        </Stack>
+      </Stack>
+    </Box>
   );
 };
 
 export default Post;
+
+const locationBoxStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  paddingBottom: '15px',
+  position: 'relative',
+};
