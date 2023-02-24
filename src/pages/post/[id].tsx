@@ -1,8 +1,9 @@
 // import { useRouter } from 'next/router';
 
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import { Box, IconButton, Stack, TextField } from '@mui/material';
+import { Box, Button, IconButton, Stack, TextField, Typography } from '@mui/material';
 
 import ComplexButton from '@/components/CreatePost/ComplexButton';
 import SubTitle from '@/components/CreatePost/SubTitle';
@@ -14,7 +15,7 @@ const Post = () => {
 
   return (
     <Box sx={{ padding: '0 24px' }}>
-      <Stack spacing={4}>
+      <Stack spacing={2}>
         <Title>여행 기본 정보를 입력해주세요</Title>
         <Stack>
           <SubTitle>여행 유형</SubTitle>
@@ -49,6 +50,14 @@ const Post = () => {
           </Box>
         </Stack>
       </Stack>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button variant='contained' sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant='body1' component='span' sx={{ textAlign: 'center' }}>
+            작성
+          </Typography>
+          {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '1rem' }} />}
+        </Button>
+      </Box>
     </Box>
   );
 };
