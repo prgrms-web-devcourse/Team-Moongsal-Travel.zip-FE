@@ -7,7 +7,7 @@ interface TitleProps {
 
 const Title = ({ children }: TitleProps) => {
   return (
-    <Typography variant='body1' component='h2' fontSize={24} fontWeight='bold'>
+    <Typography variant='body1' component='h2' fontSize='1.5rem' fontWeight='bold'>
       {children}
     </Typography>
   );
