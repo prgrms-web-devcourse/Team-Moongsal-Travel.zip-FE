@@ -1,7 +1,7 @@
-import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import { MouseEvent, useState } from 'react';
 
 const images = [
   {
@@ -17,18 +17,25 @@ const images = [
 ];
 
 const ComplexButton = () => {
+  const [toggle, setToggle] = useState('');
+
+  const handleChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
+    setToggle(selectedValue);
+  };
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: 2,
-        width: '100%',
-      }}>
+    <ToggleButtonGroup
+      color='primary'
+      value={toggle}
+      exclusive
+      onChange={handleChange}
+      aria-label='Platform'
+      sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
       {images.map((image) => (
         <ImageButton
-          focusRipple
-          key={image.title}
+          key={image.url}
+          value={image.title}
+          id='toggle-button'
           style={{
             width: image.width,
             height: '100px',
@@ -52,24 +59,40 @@ const ComplexButton = () => {
           </ImageItem>
         </ImageButton>
       ))}
-    </Box>
+    </ToggleButtonGroup>
   );
 };
 
 export default ComplexButton;
 
-const ImageButton = styled(ButtonBase)(({ theme }) => ({
+const ImageButton = styled(ToggleButton)(({ theme }) => ({
   position: 'relative',
   height: 200,
   borderRadius: '20px',
   [theme.breakpoints.down('sm')]: {
     height: 100,
   },
+  '&#toggle-button': {
+    borderRadius: '20px',
+  },
   '&:hover, &.Mui-focusVisible': {
     zIndex: 1,
     '& .MuiImageBackdrop-root': {
       borderRadius: '20px',
       opacity: 0.15,
+    },
+    '& .MuiImageMarked-root': {
+      opacity: 0,
+    },
+    '& .MuiTypography-root': {
+      border: '4px solid currentColor',
+    },
+  },
+  '&.Mui-selected': {
+    backgroundColor: '#ffffff',
+    '& .MuiImageBackdrop-root': {
+      borderRadius: '20px',
+      opacity: 0.1,
     },
     '& .MuiImageMarked-root': {
       opacity: 0,
