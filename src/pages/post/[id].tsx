@@ -1,10 +1,12 @@
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
+
+import Title from '@/components/CreatePost/Titlte';
 
 const Post = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  // const router = useRouter();
+  // const { id } = router.query;
 
-  return <div>{id}</div>;
+  return <Title>여행 기본 정보를 입력해주세요</Title>;
 };
 
 export default Post;
