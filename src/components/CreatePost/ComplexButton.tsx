@@ -1,6 +1,5 @@
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import { MouseEvent, useState } from 'react';
 
 const images = [
