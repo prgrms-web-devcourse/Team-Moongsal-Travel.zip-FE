@@ -1,5 +1,4 @@
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import { Box, Button, OutlinedInput, Stack, Typography } from '@mui/material';
+import { Box, OutlinedInput, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 
@@ -38,14 +37,6 @@ const PostDetail = () => {
         <SubTitle>글을 자유롭게 작성해보세요</SubTitle>
         <Editor></Editor>
       </Stack>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant='contained' sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
-            다음
-            {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '0.5rem' }} />}
-          </Typography>
-        </Button>
-      </Box>
     </>
   );
 };

@@ -1,5 +1,4 @@
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import { Box, Button, OutlinedInput, Stack, Typography } from '@mui/material';
+import { Box, OutlinedInput, Stack } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
 
@@ -56,15 +55,6 @@ const PostBasic = () => {
           />
         </Box>
       </Stack>
-
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant='contained' sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
-            작성
-          </Typography>
-          {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '0.5rem' }} />}
-        </Button>
-      </Box>
     </>
   );
 };
