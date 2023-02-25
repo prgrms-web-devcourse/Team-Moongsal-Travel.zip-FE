@@ -1,5 +1,5 @@
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, OutlinedInput, Stack, Typography } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
 
@@ -49,7 +49,11 @@ const PostBasic = () => {
       <Stack>
         <SubTitle>총 경비</SubTitle>
         <Box sx={marginBottom}>
-          <TextField fullWidth label='이번 여행의 총 경비를 입력하세요' type='text' />
+          <OutlinedInput
+            fullWidth
+            placeholder='이번 여행의 총 경비를 입력하세요'
+            type='text'
+          />
         </Box>
       </Stack>
 

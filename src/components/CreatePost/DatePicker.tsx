@@ -18,10 +18,10 @@ const DatePicker = ({ value, text, onChange }: DatePickerProps) => {
       adapterLocale='ko'
       localeText={koKR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <MobileDatePicker
-        inputFormat='YYYY년 M월 D일'
+        inputFormat='YYYY년 MM월 DD일'
         label={text}
         value={value}
-        toolbarFormat='YYYY년 M월 D일'
+        toolbarFormat='YYYY년 MM월 DD일'
         onChange={onChange}
         renderInput={(params) => <TextField {...params} />}
       />

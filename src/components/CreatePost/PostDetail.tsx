@@ -1,5 +1,5 @@
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, OutlinedInput, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 
@@ -18,7 +18,7 @@ const PostDetail = () => {
       <Title>1일차</Title>
       <SubTitle>소제목</SubTitle>
       <Box sx={marginBottom}>
-        <TextField fullWidth label='제목을 입력하세요' type='text' />
+        <OutlinedInput fullWidth placeholder='제목을 입력하세요' type='text' />
       </Box>
       <Stack sx={marginBottom}>
         <SubTitle>방문한 도시</SubTitle>
