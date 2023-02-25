@@ -4,8 +4,7 @@ import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 
 import { SubTitle, Title } from '../common';
-import { Location } from './';
-import Transportation from './Transportation';
+import { Location, Transportation } from './';
 
 const PostDetail = () => {
   const [formats, setFormats] = useState<string[]>(() => []);
