@@ -1,6 +1,7 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import { Button, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 
 interface StepperButtonProps {
@@ -10,6 +11,8 @@ interface StepperButtonProps {
 }
 
 const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
+  const router = useRouter();
+
   return (
     <>
       {format === 'forward' ? (
@@ -36,7 +39,7 @@ const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
         <Button
           variant='contained'
           sx={{ display: 'flex', alignItems: 'center' }}
-          onClick={() => setSteps(steps - 1)}>
+          onClick={() => router.push('/')}>
           <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             완료
           </Typography>
