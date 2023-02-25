@@ -2,15 +2,12 @@
 
 import { Box } from '@mui/material';
 
-import { PostDetail } from '@/components/CreatePost';
+import { PostBasic, PostDetail } from '@/components/CreatePost';
 
 const Post = () => {
   return (
     <Box sx={layout}>
-      {/* <PostBasic />
-      <br />
-      <br />
-      <br /> */}
+      <PostBasic />
       <PostDetail />
     </Box>
   );
