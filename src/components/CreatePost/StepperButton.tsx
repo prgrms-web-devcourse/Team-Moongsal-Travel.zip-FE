@@ -4,7 +4,7 @@ import { Button, Typography } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
 
 interface StepperButtonProps {
-  format: 'forward' | 'backword';
+  format: 'forward' | 'backword' | 'complete';
   steps: number;
   setSteps: Dispatch<SetStateAction<number>>;
 }
@@ -22,7 +22,7 @@ const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
           </Typography>
           {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '0.5rem' }} />}
         </Button>
-      ) : (
+      ) : format === 'backword' ? (
         <Button
           variant='contained'
           sx={{ display: 'flex', alignItems: 'center' }}
@@ -31,6 +31,16 @@ const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
           <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             이전
           </Typography>
+        </Button>
+      ) : (
+        <Button
+          variant='contained'
+          sx={{ display: 'flex', alignItems: 'center' }}
+          onClick={() => setSteps(steps - 1)}>
+          <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
+            완료
+          </Typography>
+          {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '0.5rem' }} />}
         </Button>
       )}
     </>
