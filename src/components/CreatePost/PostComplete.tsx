@@ -13,9 +13,8 @@ const PostComplete = () => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
-        <OutlinedInput fullWidth placeholder='제목을 입력하세요' type='file' />
+        <OutlinedInput fullWidth type='file' />
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>미리보기</SubTitle>
         <DummyPreview />

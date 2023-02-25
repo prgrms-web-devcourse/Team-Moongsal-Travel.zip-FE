@@ -45,9 +45,9 @@ const PostBasic = () => {
           <DatePicker value={endDate} onChange={handleEndDateChange} text='종료날짜' />
         </Box>
       </Stack>
-      <Stack>
+      <Stack sx={marginBottom}>
         <SubTitle>총 경비</SubTitle>
-        <Box sx={marginBottom}>
+        <Box>
           <OutlinedInput
             fullWidth
             placeholder='이번 여행의 총 경비를 입력하세요'
