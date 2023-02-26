@@ -1,4 +1,4 @@
-import { Box, OutlinedInput, Stack } from '@mui/material';
+import { OutlinedInput, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 
@@ -16,10 +16,10 @@ const PostDetail = () => {
   return (
     <>
       <Title>1일차</Title>
-      <SubTitle>소제목</SubTitle>
-      <Box sx={marginBottom}>
+      <Stack sx={marginBottom}>
+        <SubTitle>소제목</SubTitle>
         <OutlinedInput fullWidth placeholder='제목을 입력하세요' type='text' />
-      </Box>
+      </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>방문한 도시</SubTitle>
         <Location />
@@ -28,12 +28,10 @@ const PostDetail = () => {
         <SubTitle>방문한 장소</SubTitle>
         <Location />
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>이동수단</SubTitle>
         <Transportation value={formats} handleFormat={onFormatChange} />
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>글을 자유롭게 작성해보세요</SubTitle>
         <Editor></Editor>
