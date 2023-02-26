@@ -26,7 +26,7 @@ const Post = () => {
         <>
           <PostDetail />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <StepperButton format='backword' steps={steps} setSteps={setSteps} />
+            <StepperButton format='backward' steps={steps} setSteps={setSteps} />
             <StepperButton format='forward' steps={steps} setSteps={setSteps} />
           </Box>
         </>
@@ -34,7 +34,7 @@ const Post = () => {
         <>
           <PostComplete />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <StepperButton format='backword' steps={steps} setSteps={setSteps} />
+            <StepperButton format='backward' steps={steps} setSteps={setSteps} />
             <StepperButton format='complete' steps={steps} setSteps={setSteps} />
           </Box>
         </>

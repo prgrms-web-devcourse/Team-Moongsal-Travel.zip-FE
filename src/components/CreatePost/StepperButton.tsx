@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 
 interface StepperButtonProps {
-  format: 'forward' | 'backword' | 'complete';
+  format: 'forward' | 'backward' | 'complete';
   steps: number;
   setSteps: Dispatch<SetStateAction<number>>;
 }
@@ -24,7 +24,7 @@ const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
           </Typography>
           {<ArrowForwardIosOutlined sx={{ fontSize: '0.5rem' }} />}
         </Button>
-      ) : format === 'backword' ? (
+      ) : format === 'backward' ? (
         <Button
           variant='contained'
           sx={{ display: 'flex', alignItems: 'center' }}
@@ -42,7 +42,7 @@ const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
           <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             완료
           </Typography>
-          {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '0.5rem' }} />}
+          {<ArrowForwardIosOutlined sx={{ fontSize: '0.5rem' }} />}
         </Button>
       )}
     </>
