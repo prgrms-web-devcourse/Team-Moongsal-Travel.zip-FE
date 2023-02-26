@@ -24,12 +24,12 @@ const Register = () => {
   const [yearOfBirth, setYearOfBirth] = React.useState('');
 
   const handleYearOfBirth = (e: SelectChangeEvent) => {
-    setYearOfBirth(e.target.value as string);
+    setYearOfBirth(e.target.value);
   };
 
   const calcYearOfBirthList = () => {
     return Array(80)
-      .fill(new Date().getFullYear() - 10)
+      .fill(new Date().getFullYear() - 7)
       .map((year, i) => (
         <MenuItem key={i} value={year - i}>
           {year - i}
