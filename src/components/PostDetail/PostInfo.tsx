@@ -5,8 +5,9 @@ import {
   Flight,
   Payment,
   Public,
+  VisibilityOutlined,
 } from '@mui/icons-material';
-import { Box, Grid } from '@mui/material';
+import { Avatar, Box, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Stack } from '@mui/system';
 
@@ -22,8 +23,18 @@ const PostInfo = ({ authority }: PostInfo) => {
       <Title bold='bold'>여기 제목</Title>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '1rem' }}>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
-          <div>여기 프로필</div>
-          <div>여기 조회수</div>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Avatar src='default' sx={{ width: '1rem', height: '1rem' }} />
+            <SubTitle fontSize='0.8rem' color='gray030.main'>
+              닉네임
+            </SubTitle>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <VisibilityOutlined color='gray030' sx={{ width: '1rem', height: '1rem' }} />
+            <SubTitle fontSize='0.8rem' color='gray030.main'>
+              123123회
+            </SubTitle>
+          </Box>
         </Box>
         {authority === 'writer' && (
           <Box sx={{ display: 'flex', gap: '1rem' }}>
