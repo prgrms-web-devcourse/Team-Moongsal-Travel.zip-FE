@@ -1,5 +1,4 @@
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import { ArrowBackIosNew, ArrowForwardIosOutlined } from '@mui/icons-material';
 import { Button, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
@@ -23,14 +22,14 @@ const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
           <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             다음
           </Typography>
-          {<ArrowForwardIosOutlinedIcon sx={{ fontSize: '0.5rem' }} />}
+          {<ArrowForwardIosOutlined sx={{ fontSize: '0.5rem' }} />}
         </Button>
       ) : format === 'backword' ? (
         <Button
           variant='contained'
           sx={{ display: 'flex', alignItems: 'center' }}
           onClick={() => setSteps(steps - 1)}>
-          {<ArrowBackIosNewIcon sx={{ fontSize: '0.5rem' }} />}
+          {<ArrowBackIosNew sx={{ fontSize: '0.5rem' }} />}
           <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             이전
           </Typography>
