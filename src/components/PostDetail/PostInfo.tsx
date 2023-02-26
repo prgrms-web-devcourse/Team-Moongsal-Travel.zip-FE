@@ -77,7 +77,6 @@ const PostInfo = ({ authority }: PostInfo) => {
             <Stack flexDirection='row' mt='0.3rem'>
               {/* SvgIcon 조건별 출력
             <SvgIcon component={아이콘 이름} /> */}
-              {}
               <Flight color='gray030' />
               <DirectionsBus color='gray030' />
               <DirectionsCar color='gray030' />
