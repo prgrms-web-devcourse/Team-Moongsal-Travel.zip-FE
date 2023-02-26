@@ -1,5 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { usePostUserRegister } from '@/api/hooks/user';
 import { Register, VerifyByEmail } from '@/components/Register';
@@ -11,15 +12,17 @@ const testData = {
   email: 'testb@gmail.com',
   password: 'qwe123!@#',
   nickname: 'testb',
-  birthYear: 1997,
+  birthYear: '1997',
 };
 
 const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const { mutate } = usePostUserRegister();
+  const { mutate: userRegisterMutate } = usePostUserRegister();
+  const registerForm = useForm({ mode: 'onChange' });
+  const [activateNext, setActivateNext] = useState(false);
 
   const handleRegister = () => {
-    mutate(testData, {
+    userRegisterMutate(testData, {
       onSuccess: () => {
         console.log('post test 성공');
       },
@@ -31,13 +34,23 @@ const RegisterPage = () => {
       <Typography component='h1' variant='h4'>
         ✈️ travel.zip 회원가입
       </Typography>
-      <Stepper
-        steps={steps}
-        activeStep={activeStep}
-        setActiveStep={setActiveStep}
-        onSubmit={handleRegister}>
-        {!activeStep ? <VerifyByEmail /> : <Register />}
-      </Stepper>
+      <form onSubmit={registerForm.handleSubmit(() => console.log('폼 제출 완료'))}>
+        <Stepper
+          steps={steps}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+          onSubmit={handleRegister}
+          activateNext={activateNext}>
+          {!activeStep ? (
+            <VerifyByEmail
+              registerForm={registerForm}
+              setActivateNext={setActivateNext}
+            />
+          ) : (
+            <Register />
+          )}
+        </Stepper>
+      </form>
     </Stack>
   );
 };

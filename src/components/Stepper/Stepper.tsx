@@ -7,6 +7,7 @@ interface StepperProps {
   activeStep: number;
   setActiveStep: Dispatch<SetStateAction<number>>;
   onSubmit: () => void;
+  activateNext: boolean;
 }
 
 const HorizontalLinearStepper = ({
@@ -15,6 +16,7 @@ const HorizontalLinearStepper = ({
   activeStep,
   setActiveStep,
   onSubmit,
+  activateNext,
 }: StepperProps) => {
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -50,7 +52,9 @@ const HorizontalLinearStepper = ({
               뒤로
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={activeStep === steps.length - 1 ? onSubmit : handleNext}>
+            <Button
+              onClick={activeStep === steps.length - 1 ? onSubmit : handleNext}
+              disabled={!activateNext}>
               {activeStep === steps.length - 1 ? '완료' : '다음'}
             </Button>
           </Box>
