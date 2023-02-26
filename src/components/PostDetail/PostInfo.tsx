@@ -23,13 +23,13 @@ const PostInfo = ({ authority }: PostInfo) => {
       <Title bold='bold'>여기 제목</Title>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: '1rem' }}>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <Avatar src='default' sx={{ width: '1rem', height: '1rem' }} />
             <SubTitle fontSize='0.8rem' color='gray030.main'>
               닉네임
             </SubTitle>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
             <VisibilityOutlined color='gray030' sx={{ width: '1rem', height: '1rem' }} />
             <SubTitle fontSize='0.8rem' color='gray030.main'>
               123123회
