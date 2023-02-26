@@ -18,6 +18,6 @@ export const postSendEmail = async (data: { email: string }) =>
 export const postVerifyCode = async (data: { email: string; code: string }) =>
   await baseRequest.request({
     method: 'POST',
-    url: 'api/valid/code',
+    url: 'api/auth/valid/code',
     data,
   });
