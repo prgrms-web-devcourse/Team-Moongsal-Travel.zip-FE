@@ -13,7 +13,7 @@ const Title = ({ children, color, bold, fontSize }: TitleProps) => {
     <Typography
       variant='body1'
       component='h2'
-      fontSize={fontSize ? fontSize : '1.2rem'}
+      fontSize={fontSize ? fontSize : '1.5rem'}
       color={color && color}
       fontWeight={bold && bold}>
       {children}
