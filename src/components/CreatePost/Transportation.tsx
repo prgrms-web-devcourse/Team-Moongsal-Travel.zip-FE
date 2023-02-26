@@ -1,10 +1,12 @@
-import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import FlightIcon from '@mui/icons-material/Flight';
-import PedalBikeIcon from '@mui/icons-material/PedalBike';
-import SailingIcon from '@mui/icons-material/Sailing';
-import TrainIcon from '@mui/icons-material/Train';
+import {
+  DirectionsBus,
+  DirectionsCar,
+  DirectionsRun,
+  Flight,
+  PedalBike,
+  Sailing,
+  Train,
+} from '@mui/icons-material';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -17,25 +19,25 @@ const Transportation = ({ value, handleFormat }: TransportationProps) => {
   return (
     <ToggleButtonGroup value={value} onChange={handleFormat} aria-label='text formatting'>
       <ToggleIconButton value='flight' aria-label='flight'>
-        <FlightIcon />
+        <Flight />
       </ToggleIconButton>
       <ToggleIconButton value='boat' aria-label='boat'>
-        <SailingIcon />
+        <Sailing />
       </ToggleIconButton>
       <ToggleIconButton value='bus' aria-label='bus'>
-        <DirectionsBusIcon />
+        <DirectionsBus />
       </ToggleIconButton>
       <ToggleIconButton value='train' aria-label='train'>
-        <TrainIcon />
+        <Train />
       </ToggleIconButton>
       <ToggleIconButton value='car' aria-label='car'>
-        <DirectionsCarIcon />
+        <DirectionsCar />
       </ToggleIconButton>
       <ToggleIconButton value='bicycle' aria-label='bicycle'>
-        <PedalBikeIcon />
+        <PedalBike />
       </ToggleIconButton>
       <ToggleIconButton value='walk' aria-label='walk'>
-        <DirectionsRunIcon />
+        <DirectionsRun />
       </ToggleIconButton>
     </ToggleButtonGroup>
   );
