@@ -7,7 +7,7 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import React from 'react';
+import { useState } from 'react';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -21,15 +21,15 @@ const MenuProps = {
 };
 
 const Register = () => {
-  const [yearOfBirth, setYearOfBirth] = React.useState('');
+  const [yearOfBirth, setYearOfBirth] = useState('');
 
   const handleYearOfBirth = (e: SelectChangeEvent) => {
-    setYearOfBirth(e.target.value as string);
+    setYearOfBirth(e.target.value);
   };
 
   const calcYearOfBirthList = () => {
     return Array(80)
-      .fill(new Date().getFullYear() - 10)
+      .fill(new Date().getFullYear() - 7)
       .map((year, i) => (
         <MenuItem key={i} value={year - i}>
           {year - i}
