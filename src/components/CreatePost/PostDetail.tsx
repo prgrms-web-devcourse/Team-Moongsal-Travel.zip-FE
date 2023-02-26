@@ -2,7 +2,8 @@ import { Box, OutlinedInput, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 
-import { SubTitle, Title } from '../common';
+import { SubTitle, Title } from '@/components/common';
+
 import { Location, Transportation } from './';
 
 const PostDetail = () => {
