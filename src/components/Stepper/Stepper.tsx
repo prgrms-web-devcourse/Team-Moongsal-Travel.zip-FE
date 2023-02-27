@@ -1,40 +1,36 @@
 import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material';
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 
 interface StepperProps {
   children: ReactNode;
   steps: string[];
   activeStep: number;
+  authSuccess: boolean;
   setActiveStep: Dispatch<SetStateAction<number>>;
-  onSubmit: () => void;
 }
 
 const HorizontalLinearStepper = ({
   children,
   steps,
   activeStep,
+  authSuccess,
   setActiveStep,
-  onSubmit,
 }: StepperProps) => {
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  const [buttonType, setButtonType] = useState<'submit' | 'button'>('button');
+  const lastStep = activeStep === steps.length - 1;
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  useEffect(() => {
+    setButtonType(lastStep ? 'submit' : 'button');
+  }, [lastStep]);
 
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep} sx={{ height: '80px' }}>
-        {steps.map((label) => {
-          const stepProps: { completed?: boolean } = {};
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          );
-        })}
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
       </Stepper>
       {activeStep === steps.length ? (
         <Typography sx={{ mt: 2, mb: 1 }}>회원가입 완료</Typography>
@@ -42,16 +38,14 @@ const HorizontalLinearStepper = ({
         <>
           {children}
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button
-              color='inherit'
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}>
-              뒤로
-            </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={activeStep === steps.length - 1 ? onSubmit : handleNext}>
-              {activeStep === steps.length - 1 ? '완료' : '다음'}
+            <Button
+              type={buttonType}
+              onClick={!lastStep ? () => setActiveStep((prev) => prev + 1) : undefined}
+              disabled={!authSuccess}
+              variant='contained'
+              fullWidth>
+              {lastStep ? '완료' : '다음'}
             </Button>
           </Box>
         </>
