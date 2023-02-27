@@ -1,7 +1,12 @@
 import { LocationOn } from '@mui/icons-material';
-import { Box, Grid, Stack, Typography } from '@mui/material';
-import { Combobox, ComboboxInput, ComboboxList, ComboboxPopover } from '@reach/combobox';
-import { Fragment } from 'react';
+import { Box, Stack, Typography } from '@mui/material';
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxList,
+  ComboboxOption,
+  ComboboxPopover,
+} from '@reach/combobox';
 import usePlacesAutocomplete from 'use-places-autocomplete';
 
 const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요';
@@ -27,27 +32,28 @@ const PlacesAutocomplete = () => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}
+        style={{ width: '100%' }}
       />
       <ComboboxPopover>
         <ComboboxList>
-          <Grid container alignItems='center'>
-            <Grid item sx={{ width: 'calc(100% -44px)', wordWrap: 'break-word' }}>
-              {status === 'OK' &&
-                data.map(({ place_id, structured_formatting }) => (
-                  <Fragment key={place_id}>
-                    <Grid item sx={{ display: 'flex', width: 44 }}>
-                      <LocationOn />
-                    </Grid>
-                    <Stack>
-                      <Box component='span'>{structured_formatting.main_text}</Box>
-                      <Typography variant='body2' color='primary'>
-                        {structured_formatting.secondary_text}
-                      </Typography>
-                    </Stack>
-                  </Fragment>
-                ))}
-            </Grid>
-          </Grid>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+            {status === 'OK' &&
+              data.map(({ place_id, structured_formatting }) => (
+                <Box key={place_id} sx={{ display: 'flex' }}>
+                  <LocationOn />
+                  <Stack>
+                    <ComboboxOption
+                      key={place_id}
+                      value={structured_formatting.main_text}
+                    />
+                    <Typography variant='body2' color='primary'>
+                      {structured_formatting.secondary_text}
+                    </Typography>
+                  </Stack>
+                </Box>
+              ))}
+          </Box>
         </ComboboxList>
       </ComboboxPopover>
     </Combobox>
@@ -55,7 +61,7 @@ const PlacesAutocomplete = () => {
 };
 
 export default PlacesAutocomplete;
-
+//  wordWrap: 'break-word'
 // const SearchInputStyle = {
 //   width: '100%',
 //   '&.MuiInput-root': {
