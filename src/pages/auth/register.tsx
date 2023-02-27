@@ -2,20 +2,19 @@ import { Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { usePostUserRegister } from '@/api/hooks/user';
+// import { usePostUserRegister } from '@/api/hooks/user';
 import { UserRegister } from '@/api/user/type';
 import { Register, VerifyByEmail } from '@/components/Register';
-import Test from '@/components/Register/Test';
 import { Stepper } from '@/components/Stepper';
 
 const steps = ['이메일 인증', '회원가입'];
 
-const testData = {
-  email: 'testb@gmail.com',
-  password: 'qwe123!@#',
-  nickname: 'testb',
-  birthYear: '1997',
-};
+// const testData = {
+//   email: 'testb@gmail.com',
+//   password: 'qwe123!@#',
+//   nickname: 'testb',
+//   birthYear: '1997',
+// };
 
 export type VerifyRegisterForm = UserRegister & {
   code: string;
@@ -56,9 +55,14 @@ const RegisterPage = () => {
         ✈️ travel.zip 회원가입
       </Typography>
       <form
-        onSubmit={methods.handleSubmit(() => {
-          console.log('폼 제출 완료');
-        })}>
+        onSubmit={methods.handleSubmit(
+          () => {
+            console.log('폼 제출 완료');
+          },
+          () => {
+            console.log('폼 제출 에러');
+          },
+        )}>
         <Stepper
           steps={steps}
           activeStep={activeStep}
@@ -69,7 +73,6 @@ const RegisterPage = () => {
             <VerifyByEmail methods={methods} setActivateNext={setActivateNext} />
           ) : (
             <Register methods={methods} />
-            // <Test />
           )}
         </Stepper>
       </form>
@@ -78,8 +81,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-
-/**
- * 리렌더링 조건
- * 자기 state, 부모 props or state 변경되면 수행
- */

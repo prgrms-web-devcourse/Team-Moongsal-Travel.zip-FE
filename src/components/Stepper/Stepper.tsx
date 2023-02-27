@@ -1,5 +1,5 @@
 import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material';
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 
 interface StepperProps {
   children: ReactNode;
@@ -25,6 +25,13 @@ const HorizontalLinearStepper = ({
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+  // console.log(activeStep === steps.length - 1 ? 'submit' : 'button');
+
+  const [type, setType] = useState<'submit' | 'button'>('button');
+  useEffect(() => {
+    activeStep === steps.length - 1 ? setType('submit') : setType('button');
+  }, [activeStep, steps.length]);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -52,20 +59,44 @@ const HorizontalLinearStepper = ({
               뒤로
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button
+
+            {/* <Button
               type={activeStep === steps.length - 1 ? 'submit' : 'button'}
-              // type='button'
+              // type='submit'
+              // onClick={activeStep === steps.length - 1 ? undefined : handleNext}
               onClick={activeStep === steps.length - 1 ? onSubmit : handleNext}
               // disabled={!activateNext}
             >
               {activeStep === steps.length - 1 ? '완료' : '다음'}
-            </Button>
-            {/* <Button type='button' onClick={handleNext}>
-              다음
-            </Button>
-            <Button type='submit' onClick={onSubmit}>
-              완료
             </Button> */}
+
+            <Button
+              type={type}
+              onClick={activeStep === steps.length - 1 ? onSubmit : handleNext}
+              disabled={!activateNext}>
+              {activeStep === steps.length - 1 ? '완료' : '다음'}
+            </Button>
+
+            {/* {activeStep !== steps.length - 1 && (
+              <Button type='button' onClick={handleNext}>
+                다음
+              </Button>
+            )}
+            {activeStep === steps.length - 1 && (
+              <Button type='submit' onClick={onSubmit}>
+                완료
+              </Button>
+            )} */}
+
+            {/* {activeStep !== steps.length - 1 ? (
+              <Button type='button' onClick={handleNext}>
+                다음
+              </Button>
+            ) : (
+              <Button type='submit' onClick={onSubmit}>
+                완료
+              </Button>
+            )} */}
           </Box>
         </>
       )}

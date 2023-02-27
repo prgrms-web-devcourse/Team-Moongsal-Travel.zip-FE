@@ -43,6 +43,8 @@ const VerifyByEmail = ({ methods, setActivateNext }: VerifyEmailProps) => {
     );
   };
 
+  console.log('1단계 렌더링')
+
   return (
     <Stack spacing={2}>
       <Stack direction='row' spacing={2}>

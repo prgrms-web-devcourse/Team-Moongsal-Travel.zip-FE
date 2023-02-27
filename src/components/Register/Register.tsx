@@ -51,6 +51,9 @@ const Register = ({ methods }: RegisterProps) => {
     control: methods.control,
   });
 
+  console.log('2단계 렌더링');
+  console.log('에러', nicknameState.error);
+
   return (
     <Stack spacing={2}>
       <TextField
