@@ -63,7 +63,7 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
         <Button
           variant='contained'
           endIcon={<SendIcon />}
-          sx={{ width: '150px', height: '56px' }}
+          sx={ButtonStyle}
           disabled={verifyCode.isSuccess}
           onClick={handleSendEmail}>
           인증번호
@@ -81,7 +81,7 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
           />
           <Button
             variant='contained'
-            sx={{ width: '150px', height: '56px' }}
+            sx={ButtonStyle}
             disabled={verifyCode.isSuccess}
             onClick={handleVerifyCode}>
             확인
@@ -93,3 +93,5 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
 };
 
 export default VerifyByEmail;
+
+const ButtonStyle = { width: '150px', height: '56px' } as const;
