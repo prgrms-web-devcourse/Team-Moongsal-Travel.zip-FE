@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { usePostUserRegister } from '@/api/hooks/user';
 import { UserRegister } from '@/api/user/type';
 import { Register, VerifyByEmail } from '@/components/Register';
+import Test from '@/components/Register/Test';
 import { Stepper } from '@/components/Stepper';
 
 const steps = ['이메일 인증', '회원가입'];
@@ -23,7 +24,7 @@ export type VerifyRegisterForm = UserRegister & {
 
 const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const { mutate: userRegisterMutate } = usePostUserRegister();
+  // const { mutate: userRegisterMutate } = usePostUserRegister();
 
   const methods = useForm<VerifyRegisterForm>({
     mode: 'onChange',
@@ -41,11 +42,12 @@ const RegisterPage = () => {
   const [activateNext, setActivateNext] = useState(false);
 
   const handleRegister = () => {
-    userRegisterMutate(testData, {
-      onSuccess: () => {
-        console.log('post test 성공');
-      },
-    });
+    // userRegisterMutate(testData, {
+    //   onSuccess: () => {
+    //     console.log('post test 성공');
+    //   },
+    // });
+    console.log('onSubmit');
   };
 
   return (
@@ -53,7 +55,10 @@ const RegisterPage = () => {
       <Typography component='h1' variant='h4'>
         ✈️ travel.zip 회원가입
       </Typography>
-      <form onSubmit={methods.handleSubmit(() => console.log('폼 제출 완료'))}>
+      <form
+        onSubmit={methods.handleSubmit(() => {
+          console.log('폼 제출 완료');
+        })}>
         <Stepper
           steps={steps}
           activeStep={activeStep}
@@ -64,6 +69,7 @@ const RegisterPage = () => {
             <VerifyByEmail methods={methods} setActivateNext={setActivateNext} />
           ) : (
             <Register methods={methods} />
+            // <Test />
           )}
         </Stepper>
       </form>
@@ -72,3 +78,8 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+
+/**
+ * 리렌더링 조건
+ * 자기 state, 부모 props or state 변경되면 수행
+ */

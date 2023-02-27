@@ -49,14 +49,12 @@ const VerifyByEmail = ({ methods, setActivateNext }: VerifyEmailProps) => {
         <TextField
           {...email}
           id='outlined-basic'
-          placeholder='닉네임 2~12자 한글/영문'
-          label='닉네임'
+          label='이메일'
           variant='outlined'
           fullWidth
           helperText={emailState.error && emailState.error.message}
         />
         <Button
-          type='submit'
           variant='contained'
           endIcon={<SendIcon />}
           sx={{ width: '150px', height: '56px' }}
@@ -64,7 +62,7 @@ const VerifyByEmail = ({ methods, setActivateNext }: VerifyEmailProps) => {
           인증번호
         </Button>
       </Stack>
-      {sendEmail.isSuccess && (
+      {true && (
         <Stack direction='row' spacing={2}>
           <TextField
             {...code}

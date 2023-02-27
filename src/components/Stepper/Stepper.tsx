@@ -53,11 +53,19 @@ const HorizontalLinearStepper = ({
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
             <Button
-              type='submit'
+              type={activeStep === steps.length - 1 ? 'submit' : 'button'}
+              // type='button'
               onClick={activeStep === steps.length - 1 ? onSubmit : handleNext}
-              disabled={!activateNext}>
+              // disabled={!activateNext}
+            >
               {activeStep === steps.length - 1 ? '완료' : '다음'}
             </Button>
+            {/* <Button type='button' onClick={handleNext}>
+              다음
+            </Button>
+            <Button type='submit' onClick={onSubmit}>
+              완료
+            </Button> */}
           </Box>
         </>
       )}
