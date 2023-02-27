@@ -9,7 +9,7 @@ const images = [
     width: '40%',
   },
   {
-    url: '/images/buttons/foreign.svg',
+    url: '/images/buttons/world.svg',
     title: '해외',
     width: '40%',
   },
