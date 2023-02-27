@@ -1,7 +1,7 @@
 import SendIcon from '@mui/icons-material/Send';
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
-import { Control } from 'react-hook-form';
+import { Control, UseFormSetError } from 'react-hook-form';
 
 import { usePostSendEmail, usePostVerifyCode } from '@/api/hooks/user';
 import useGetUserForms from '@/components/Register/useGetUserForms';
@@ -10,24 +10,27 @@ import { UserRegisterForm } from '@/pages/auth/register';
 interface VerifyEmailProps {
   control: Control<UserRegisterForm>;
   setAuthSuccess: (success: boolean) => void;
+  setError: UseFormSetError<UserRegisterForm>;
 }
 
-const VerifyByEmail = ({ control, setAuthSuccess }: VerifyEmailProps) => {
+const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) => {
   const sendEmail = usePostSendEmail();
   const verifyCode = usePostVerifyCode();
   const { email, emailState, code, codeState } = useGetUserForms(control);
   const [prevCode, setPrevCode] = useState('0');
 
   const handleSendEmail = () => {
-    sendEmail.mutate({ email: email.value });
+    if (/[A-Za-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(email.value)) {
+      setError('email', { message: '' });
+      sendEmail.mutate({ email: email.value });
+    } else {
+      setError('email', { message: '이메일 형식에 맞지 않습니다.' });
+    }
   };
 
   const handleVerifyCode = () => {
     verifyCode.mutate(
-      {
-        email: email.value,
-        code: code.value,
-      },
+      { email: email.value, code: code.value },
       {
         onSuccess: () => setAuthSuccess(true),
         onError: () => setAuthSuccess(false),

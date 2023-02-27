@@ -31,19 +31,13 @@ const RegisterPage = () => {
       birthYear: '',
     },
   });
-  const { handleSubmit, getValues, control } = methods;
+  const { handleSubmit, control, setError } = methods;
 
-  const handleRegister = () => {
+  const handleRegister = (data: UserRegisterForm) => {
+    const { email, nickname, password, birthYear } = data;
     userRegisterMutate(
-      {
-        email: getValues('email'),
-        nickname: getValues('nickname'),
-        password: getValues('password'),
-        birthYear: getValues('birthYear'),
-      },
-      {
-        onSuccess: () => router.push('/auth/login'),
-      },
+      { email, nickname, password, birthYear },
+      { onSuccess: () => router.push('/auth/login') },
     );
   };
 
@@ -52,14 +46,18 @@ const RegisterPage = () => {
       <Typography component='h1' variant='h4'>
         ✈️ travel.zip 회원가입
       </Typography>
-      <form onSubmit={handleSubmit(handleRegister)}>
+      <form onSubmit={handleSubmit((data) => handleRegister(data))}>
         <Stepper
           steps={steps}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
           authSuccess={authSuccess}>
           {!activeStep ? (
-            <VerifyByEmail control={control} setAuthSuccess={setAuthSuccess} />
+            <VerifyByEmail
+              control={control}
+              setAuthSuccess={setAuthSuccess}
+              setError={setError}
+            />
           ) : (
             <Register control={control} />
           )}
