@@ -20,7 +20,6 @@ const RegisterPage = () => {
   const { mutate: userRegisterMutate } = usePostUserRegister();
   const [activeStep, setActiveStep] = useState(0);
   const [authSuccess, setAuthSuccess] = useState(false);
-
   const methods = useForm<UserRegisterForm>({
     mode: 'onChange',
     defaultValues: {
@@ -32,14 +31,15 @@ const RegisterPage = () => {
       birthYear: '',
     },
   });
+  const { handleSubmit, getValues, control } = methods;
 
   const handleRegister = () => {
     userRegisterMutate(
       {
-        email: methods.getValues('email'),
-        nickname: methods.getValues('nickname'),
-        password: methods.getValues('password'),
-        birthYear: methods.getValues('birthYear'),
+        email: getValues('email'),
+        nickname: getValues('nickname'),
+        password: getValues('password'),
+        birthYear: getValues('birthYear'),
       },
       {
         onSuccess: () => router.push('/auth/login'),
@@ -52,16 +52,16 @@ const RegisterPage = () => {
       <Typography component='h1' variant='h4'>
         ✈️ travel.zip 회원가입
       </Typography>
-      <form onSubmit={methods.handleSubmit(handleRegister)}>
+      <form onSubmit={handleSubmit(handleRegister)}>
         <Stepper
           steps={steps}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
           authSuccess={authSuccess}>
           {!activeStep ? (
-            <VerifyByEmail methods={methods} setAuthSuccess={setAuthSuccess} />
+            <VerifyByEmail control={control} setAuthSuccess={setAuthSuccess} />
           ) : (
-            <Register methods={methods} />
+            <Register control={control} />
           )}
         </Stepper>
       </form>

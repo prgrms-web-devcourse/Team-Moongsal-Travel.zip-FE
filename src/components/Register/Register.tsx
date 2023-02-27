@@ -7,7 +7,7 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import { UseFormReturn } from 'react-hook-form';
+import { Control } from 'react-hook-form';
 
 import useGetUserForms from '@/components/Register/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
@@ -24,20 +24,10 @@ const MenuProps = {
 };
 
 interface RegisterProps {
-  methods: UseFormReturn<UserRegisterForm>;
+  control: Control<UserRegisterForm>;
 }
 
-const Register = ({ methods }: RegisterProps) => {
-  const calcYearOfBirthList = () => {
-    return Array(80)
-      .fill(new Date().getFullYear() - 7)
-      .map((year, i) => (
-        <MenuItem key={i} value={year - i}>
-          {year - i}
-        </MenuItem>
-      ));
-  };
-
+const Register = ({ control }: RegisterProps) => {
   const {
     nickname,
     nicknameState,
@@ -47,7 +37,17 @@ const Register = ({ methods }: RegisterProps) => {
     passwordConfirmState,
     birthYear,
     birthYearState,
-  } = useGetUserForms(methods.control);
+  } = useGetUserForms(control);
+
+  const calcYearOfBirthList = () => {
+    return Array(80)
+      .fill(new Date().getFullYear() - 7)
+      .map((year, i) => (
+        <MenuItem key={i} value={year - i}>
+          {year - i}
+        </MenuItem>
+      ));
+  };
 
   return (
     <Stack spacing={2}>
