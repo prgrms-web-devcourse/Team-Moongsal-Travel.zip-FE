@@ -20,7 +20,7 @@ const PostBasic = () => {
   };
   return (
     <>
-      <Title>여행 기본 정보를 입력해주세요</Title>
+      <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
       <Stack sx={marginBottom}>
         <SubTitle>여행 유형</SubTitle>
         <ComplexButton />
@@ -54,6 +54,15 @@ const PostBasic = () => {
             type='text'
           />
         </Box>
+      </Stack>
+      <Title bold='bold'>여행 일기를 작성하세요 </Title>
+      <Stack sx={marginBottom}>
+        <SubTitle>제목</SubTitle>
+        <OutlinedInput fullWidth placeholder='제목을 입력하세요' type='text' />
+      </Stack>
+      <Stack sx={marginBottom}>
+        <SubTitle>썸네일</SubTitle>
+        <OutlinedInput fullWidth type='file' />
       </Stack>
     </>
   );
