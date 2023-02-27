@@ -1,6 +1,6 @@
 import { Box, OutlinedInput, Stack } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
 import { SubTitle, Title } from '@/components/common';
 
@@ -10,6 +10,11 @@ const PostBasic = () => {
   // api 연결시 커스텀 훅으로 분리 예정
   const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(''));
   const [endDate, setEndDate] = useState<Dayjs | null>(dayjs(''));
+  const [toggleValue, setToggleValue] = useState('');
+
+  const handleChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
+    setToggleValue(selectedValue);
+  };
 
   const handleStartDateChange = (newValue: Dayjs | null) => {
     setStartDate(newValue);
@@ -18,16 +23,17 @@ const PostBasic = () => {
   const handleEndDateChange = (newValue: Dayjs | null) => {
     setEndDate(newValue);
   };
+
   return (
     <>
       <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
       <Stack sx={marginBottom}>
         <SubTitle>여행 유형</SubTitle>
-        <ComplexButton />
+        <ComplexButton value={toggleValue} handleChange={handleChange} />
       </Stack>
       <Stack sx={marginBottom}>
-        <SubTitle>방문한 지역</SubTitle>
-        <Location />
+        <SubTitle>방문한 나라</SubTitle>
+        <Location readonly={toggleValue === '국내' && true} />
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>여행 기간</SubTitle>

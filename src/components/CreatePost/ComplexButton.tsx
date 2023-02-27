@@ -1,6 +1,6 @@
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent } from 'react';
 
 const images = [
   {
@@ -15,17 +15,16 @@ const images = [
   },
 ];
 
-const ComplexButton = () => {
-  const [toggle, setToggle] = useState('');
+interface ComplexButtonProps {
+  value: string;
+  handleChange: (e: MouseEvent<HTMLElement>, selectedValue: string) => void;
+}
 
-  const handleChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
-    setToggle(selectedValue);
-  };
-
+const ComplexButton = ({ value, handleChange }: ComplexButtonProps) => {
   return (
     <ToggleButtonGroup
       color='primary'
-      value={toggle}
+      value={value}
       exclusive
       onChange={handleChange}
       aria-label='Platform'
