@@ -1,12 +1,8 @@
 import { Control, useController } from 'react-hook-form';
 
-import { VerifyRegisterForm } from '@/pages/auth/register';
+import { UserRegisterForm } from '@/pages/auth/register';
 
-export default function useGetUserForms({
-  control,
-}: {
-  control: Control<VerifyRegisterForm>;
-}) {
+export default function useGetUserForms(control: Control<UserRegisterForm>) {
   const { field: email, fieldState: emailState } = useController({
     name: 'email',
     control,
@@ -56,7 +52,7 @@ export default function useGetUserForms({
   });
 
   const { field: passwordConfirm, fieldState: passwordConfirmState } = useController({
-    name: 'password',
+    name: 'passwordConfirm',
     control,
     rules: {
       required: '비밀번호 확인은 필수 입력입니다.',

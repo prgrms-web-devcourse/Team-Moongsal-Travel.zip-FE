@@ -4,20 +4,18 @@ import { UseFormReturn } from 'react-hook-form';
 
 import { usePostSendEmail, usePostVerifyCode } from '@/api/hooks/user';
 import useGetUserForms from '@/components/Register/useGetUserForms';
-import { VerifyRegisterForm } from '@/pages/auth/register';
+import { UserRegisterForm } from '@/pages/auth/register';
 
 interface VerifyEmailProps {
-  methods: UseFormReturn<VerifyRegisterForm>;
-  setActivateNext: (activate: boolean) => void;
+  methods: UseFormReturn<UserRegisterForm>;
+  setAuthSuccess: (success: boolean) => void;
 }
 
-const VerifyByEmail = ({ methods, setActivateNext }: VerifyEmailProps) => {
+const VerifyByEmail = ({ methods, setAuthSuccess }: VerifyEmailProps) => {
   const sendEmail = usePostSendEmail();
   const { mutate } = usePostVerifyCode();
 
-  const { email, emailState, code, codeState } = useGetUserForms({
-    control: methods.control,
-  });
+  const { email, emailState, code, codeState } = useGetUserForms(methods.control);
 
   const handleSendEmail = () => {
     sendEmail.mutate(
@@ -35,15 +33,10 @@ const VerifyByEmail = ({ methods, setActivateNext }: VerifyEmailProps) => {
         code: code.value,
       },
       {
-        onSuccess: () => {
-          console.log('인증 코드 검증 성공');
-          setActivateNext(true);
-        },
+        onSuccess: () => setAuthSuccess(true),
       },
     );
   };
-
-  console.log('1단계 렌더링')
 
   return (
     <Stack spacing={2}>
@@ -64,7 +57,7 @@ const VerifyByEmail = ({ methods, setActivateNext }: VerifyEmailProps) => {
           인증번호
         </Button>
       </Stack>
-      {true && (
+      {sendEmail.isSuccess && (
         <Stack direction='row' spacing={2}>
           <TextField
             {...code}

@@ -10,7 +10,7 @@ import {
 import { UseFormReturn } from 'react-hook-form';
 
 import useGetUserForms from '@/components/Register/useGetUserForms';
-import { VerifyRegisterForm } from '@/pages/auth/register';
+import { UserRegisterForm } from '@/pages/auth/register';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -24,7 +24,7 @@ const MenuProps = {
 };
 
 interface RegisterProps {
-  methods: UseFormReturn<VerifyRegisterForm>;
+  methods: UseFormReturn<UserRegisterForm>;
 }
 
 const Register = ({ methods }: RegisterProps) => {
@@ -47,12 +47,7 @@ const Register = ({ methods }: RegisterProps) => {
     passwordConfirmState,
     birthYear,
     birthYearState,
-  } = useGetUserForms({
-    control: methods.control,
-  });
-
-  console.log('2단계 렌더링');
-  console.log('에러', nicknameState.error);
+  } = useGetUserForms(methods.control);
 
   return (
     <Stack spacing={2}>

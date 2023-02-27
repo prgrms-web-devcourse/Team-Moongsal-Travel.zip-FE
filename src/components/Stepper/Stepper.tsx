@@ -5,19 +5,20 @@ interface StepperProps {
   children: ReactNode;
   steps: string[];
   activeStep: number;
+  authSuccess: boolean;
   setActiveStep: Dispatch<SetStateAction<number>>;
-  onSubmit: () => void;
-  activateNext: boolean;
 }
 
 const HorizontalLinearStepper = ({
   children,
   steps,
   activeStep,
+  authSuccess,
   setActiveStep,
-  onSubmit,
-  activateNext,
 }: StepperProps) => {
+  const [buttonType, setButtonType] = useState<'submit' | 'button'>('button');
+  const lastStep = activeStep === steps.length - 1;
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -26,24 +27,18 @@ const HorizontalLinearStepper = ({
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  // console.log(activeStep === steps.length - 1 ? 'submit' : 'button');
-
-  const [type, setType] = useState<'submit' | 'button'>('button');
   useEffect(() => {
-    activeStep === steps.length - 1 ? setType('submit') : setType('button');
-  }, [activeStep, steps.length]);
+    setButtonType(lastStep ? 'submit' : 'button');
+  }, [lastStep]);
 
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep} sx={{ height: '80px' }}>
-        {steps.map((label) => {
-          const stepProps: { completed?: boolean } = {};
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          );
-        })}
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
       </Stepper>
       {activeStep === steps.length ? (
         <Typography sx={{ mt: 2, mb: 1 }}>회원가입 완료</Typography>
@@ -59,44 +54,12 @@ const HorizontalLinearStepper = ({
               뒤로
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-
-            {/* <Button
-              type={activeStep === steps.length - 1 ? 'submit' : 'button'}
-              // type='submit'
-              // onClick={activeStep === steps.length - 1 ? undefined : handleNext}
-              onClick={activeStep === steps.length - 1 ? onSubmit : handleNext}
-              // disabled={!activateNext}
-            >
-              {activeStep === steps.length - 1 ? '완료' : '다음'}
-            </Button> */}
-
             <Button
-              type={type}
-              onClick={activeStep === steps.length - 1 ? onSubmit : handleNext}
-              disabled={!activateNext}>
-              {activeStep === steps.length - 1 ? '완료' : '다음'}
+              type={buttonType}
+              onClick={lastStep ? undefined : handleNext}
+              disabled={!authSuccess}>
+              {lastStep ? '완료' : '다음'}
             </Button>
-
-            {/* {activeStep !== steps.length - 1 && (
-              <Button type='button' onClick={handleNext}>
-                다음
-              </Button>
-            )}
-            {activeStep === steps.length - 1 && (
-              <Button type='submit' onClick={onSubmit}>
-                완료
-              </Button>
-            )} */}
-
-            {/* {activeStep !== steps.length - 1 ? (
-              <Button type='button' onClick={handleNext}>
-                다음
-              </Button>
-            ) : (
-              <Button type='submit' onClick={onSubmit}>
-                완료
-              </Button>
-            )} */}
           </Box>
         </>
       )}
