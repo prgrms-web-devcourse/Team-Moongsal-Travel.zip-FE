@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import { AutoComplete } from '@/components/SearchModal';
+
 export default function Home() {
   return (
     <>
@@ -11,6 +13,7 @@ export default function Home() {
       </Head>
       <main>
         <div>Home</div>
+        <AutoComplete />
       </main>
     </>
   );
