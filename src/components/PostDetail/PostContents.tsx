@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import { SubTitle, Title } from '../common';
+import { SubTitle, Title } from '@/components/common';
 
 const PostContents = () => {
   return (
