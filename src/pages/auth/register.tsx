@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { usePostUserRegister } from '@/api/hooks/user';
+import { UserRegister } from '@/api/user/type';
 import { Register, VerifyByEmail } from '@/components/Register';
 import { Stepper } from '@/components/Stepper';
 
@@ -15,10 +16,28 @@ const testData = {
   birthYear: '1997',
 };
 
+export type VerifyRegisterForm = UserRegister & {
+  code: string;
+  passwordConfirm: string;
+};
+
 const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const { mutate: userRegisterMutate } = usePostUserRegister();
-  const registerForm = useForm({ mode: 'onChange' });
+
+  const methods = useForm<VerifyRegisterForm>({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+      code: '',
+      nickname: '',
+      password: '',
+      passwordConfirm: '',
+      birthYear: '',
+    },
+  });
+  console.log('methods watch', methods.watch());
+
   const [activateNext, setActivateNext] = useState(false);
 
   const handleRegister = () => {
@@ -34,7 +53,7 @@ const RegisterPage = () => {
       <Typography component='h1' variant='h4'>
         ✈️ travel.zip 회원가입
       </Typography>
-      <form onSubmit={registerForm.handleSubmit(() => console.log('폼 제출 완료'))}>
+      <form onSubmit={methods.handleSubmit(() => console.log('폼 제출 완료'))}>
         <Stepper
           steps={steps}
           activeStep={activeStep}
@@ -42,12 +61,9 @@ const RegisterPage = () => {
           onSubmit={handleRegister}
           activateNext={activateNext}>
           {!activeStep ? (
-            <VerifyByEmail
-              registerForm={registerForm}
-              setActivateNext={setActivateNext}
-            />
+            <VerifyByEmail methods={methods} setActivateNext={setActivateNext} />
           ) : (
-            <Register />
+            <Register methods={methods} />
           )}
         </Stepper>
       </form>

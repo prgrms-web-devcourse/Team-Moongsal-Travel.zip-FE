@@ -1,13 +1,16 @@
 import {
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   Stack,
   TextField,
 } from '@mui/material';
-import { useState } from 'react';
+import { UseFormReturn } from 'react-hook-form';
+
+import useGetUserForms from '@/components/Register/useGetUserForms';
+import { VerifyRegisterForm } from '@/pages/auth/register';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -20,13 +23,11 @@ const MenuProps = {
   },
 };
 
-const Register = () => {
-  const [yearOfBirth, setYearOfBirth] = useState('');
+interface RegisterProps {
+  methods: UseFormReturn<VerifyRegisterForm>;
+}
 
-  const handleYearOfBirth = (e: SelectChangeEvent) => {
-    setYearOfBirth(e.target.value);
-  };
-
+const Register = ({ methods }: RegisterProps) => {
   const calcYearOfBirthList = () => {
     return Array(80)
       .fill(new Date().getFullYear() - 7)
@@ -37,22 +38,54 @@ const Register = () => {
       ));
   };
 
+  const {
+    nickname,
+    nicknameState,
+    password,
+    passwordState,
+    passwordConfirm,
+    passwordConfirmState,
+    birthYear,
+    birthYearState,
+  } = useGetUserForms({
+    control: methods.control,
+  });
+
   return (
     <Stack spacing={2}>
-      <TextField id='outlined-basic' label='닉네임' variant='outlined' />
-      <TextField id='outlined-basic' label='비밀번호' variant='outlined' />
-      <TextField id='outlined-basic' label='비밀번호 확인' variant='outlined' />
+      <TextField
+        {...nickname}
+        id='outlined-basic'
+        placeholder='닉네임 2~12자 한글/영문'
+        label='닉네임'
+        variant='outlined'
+        helperText={nicknameState.error && nicknameState.error.message}
+      />
+      <TextField
+        {...password}
+        id='outlined-basic'
+        placeholder='비밀번호 최소 8자 영문/숫자/특수문자'
+        label='비밀번호'
+        variant='outlined'
+        // type='password'
+        helperText={passwordState.error && passwordState.error.message}
+      />
+      <TextField
+        {...passwordConfirm}
+        id='outlined-basic'
+        label='비밀번호 확인'
+        variant='outlined'
+        // type='password'
+        helperText={passwordConfirmState.error && passwordConfirmState.error.message}
+      />
       <FormControl fullWidth>
         <InputLabel id='demo-simple-select-label'>출생연도</InputLabel>
-        <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={yearOfBirth}
-          label='출생연도'
-          MenuProps={MenuProps}
-          onChange={handleYearOfBirth}>
+        <Select {...birthYear} label='출생연도' MenuProps={MenuProps}>
           {calcYearOfBirthList()}
         </Select>
+        <FormHelperText>
+          {birthYearState.error && birthYearState.error.message}
+        </FormHelperText>
       </FormControl>
     </Stack>
   );

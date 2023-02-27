@@ -1,21 +1,27 @@
 import SendIcon from '@mui/icons-material/Send';
 import { Button, Stack, TextField } from '@mui/material';
-import { FieldValues, UseFormReturn } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 
 import { usePostSendEmail, usePostVerifyCode } from '@/api/hooks/user';
+import useGetUserForms from '@/components/Register/useGetUserForms';
+import { VerifyRegisterForm } from '@/pages/auth/register';
 
 interface VerifyEmailProps {
-  registerForm: UseFormReturn<FieldValues>;
+  methods: UseFormReturn<VerifyRegisterForm>;
   setActivateNext: (activate: boolean) => void;
 }
 
-const VerifyByEmail = ({ registerForm, setActivateNext }: VerifyEmailProps) => {
+const VerifyByEmail = ({ methods, setActivateNext }: VerifyEmailProps) => {
   const sendEmail = usePostSendEmail();
   const { mutate } = usePostVerifyCode();
 
+  const { email, emailState, code, codeState } = useGetUserForms({
+    control: methods.control,
+  });
+
   const handleSendEmail = () => {
     sendEmail.mutate(
-      { email: registerForm.getValues('email') },
+      { email: email.value },
       {
         onSuccess: () => console.log('인증 코드 요청 성공'),
       },
@@ -25,8 +31,8 @@ const VerifyByEmail = ({ registerForm, setActivateNext }: VerifyEmailProps) => {
   const handleVerifyCode = () => {
     mutate(
       {
-        email: registerForm.getValues('email'),
-        code: registerForm.getValues('code'),
+        email: email.value,
+        code: code.value,
       },
       {
         onSuccess: () => {
@@ -37,27 +43,17 @@ const VerifyByEmail = ({ registerForm, setActivateNext }: VerifyEmailProps) => {
     );
   };
 
-  console.log(registerForm.formState.errors.email?.message);
-
   return (
     <Stack spacing={2}>
       <Stack direction='row' spacing={2}>
         <TextField
-          {...registerForm.register('email', {
-            required: '이메일은 필수 입력입니다.',
-            pattern: {
-              value: /[A-Za-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-              message: '이메일 형식에 맞지 않습니다.',
-            },
-          })}
+          {...email}
           id='outlined-basic'
-          label='이메일'
+          placeholder='닉네임 2~12자 한글/영문'
+          label='닉네임'
           variant='outlined'
           fullWidth
-          helperText={
-            registerForm.formState.errors.email &&
-            (registerForm.formState.errors.email?.message as string)
-          }
+          helperText={emailState.error && emailState.error.message}
         />
         <Button
           type='submit'
@@ -71,21 +67,12 @@ const VerifyByEmail = ({ registerForm, setActivateNext }: VerifyEmailProps) => {
       {sendEmail.isSuccess && (
         <Stack direction='row' spacing={2}>
           <TextField
-            {...registerForm.register('code', {
-              required: '인증번호는 필수 입력입니다.',
-              pattern: {
-                value: /[0-9]{6}/,
-                message: '인증번호 형식에 맞지 않습니다.',
-              },
-            })}
+            {...code}
             id='outlined-basic'
             label='인증번호'
             variant='outlined'
             fullWidth
-            helperText={
-              registerForm.formState.errors.code &&
-              (registerForm.formState.errors.code?.message as string)
-            }
+            helperText={codeState.error && codeState.error.message}
           />
           <Button
             variant='contained'
