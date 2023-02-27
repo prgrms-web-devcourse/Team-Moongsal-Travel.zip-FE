@@ -1,15 +1,15 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Box, Drawer, IconButton, Input, Stack, Typography } from '@mui/material';
+import { Box, Drawer, IconButton, Stack, Typography } from '@mui/material';
 
 import { CenterStyle } from '@/styles/CenterStyle';
 import { theme } from '@/styles/MuiTheme';
+
+import { AutoComplete } from './';
 
 interface SearchModalProps {
   isOpen: boolean;
   handleClose: () => void;
 }
-
-const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요.';
 
 const SearchModal = ({ isOpen, handleClose }: SearchModalProps) => {
   return (
@@ -18,11 +18,7 @@ const SearchModal = ({ isOpen, handleClose }: SearchModalProps) => {
         <Stack flexGrow={1} width='70%'>
           {/* Box 단위로 컴포넌트 분리 */}
           <Box component='form' sx={{ ...CenterStyle, mt: '2rem', mb: '2rem' }}>
-            <Input
-              placeholder={PLACEHOLDER_SEARCH}
-              color='blue050'
-              sx={SearchInputStyle}
-            />
+            <AutoComplete />
             <IconButton aria-label='search' color='inherit'>
               <SearchIcon color='white' />
             </IconButton>
@@ -50,31 +46,11 @@ const WrapperStyle = {
   borderRadius: '0px 0px 10px 10px',
 } as const;
 
-const SearchInputStyle = {
-  width: '70%',
-  '&.MuiInput-root': {
-    color: 'white.main',
-    fontWeight: 'bold',
-    padding: 0,
-    '&:hover': {
-      borderBottomColor: 'white.main',
-    },
-  },
-  '&.MuiInput-root:before': {
-    borderBottom: '2px solid',
-    borderBottomColor: 'white.main',
-  },
-  '&.MuiInput-root:after': {
-    borderBottom: '2px solid',
-    borderBottomColor: 'gray030.main',
-  },
-};
-
 const PopularSearchStyle = {
   fontWeight: 'bold',
   width: '80%',
   fontSize: '0.8rem',
-};
+} as const;
 
 const style = {
   position: 'absolute',
