@@ -20,7 +20,7 @@ const Location = ({ readonly }: LocationProps) => {
         type='text'
         onChange={onChange}
         readOnly={readonly && readonly}
-        value={readonly ? '국내' : value}
+        value={readonly ? '대한민국' : value}
       />
       <IconButton sx={{ position: 'absolute', right: 0, top: '0.5rem' }}>
         <LocationOnOutlined />
