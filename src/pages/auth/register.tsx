@@ -1,4 +1,5 @@
 import { Stack, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -15,6 +16,7 @@ export type UserRegisterForm = UserRegister & {
 };
 
 const RegisterPage = () => {
+  const router = useRouter();
   const { mutate: userRegisterMutate } = usePostUserRegister();
   const [activeStep, setActiveStep] = useState(0);
   const [authSuccess, setAuthSuccess] = useState(false);
@@ -40,9 +42,7 @@ const RegisterPage = () => {
         birthYear: methods.getValues('birthYear'),
       },
       {
-        onSuccess: () => {
-          console.log('회원가입 성공');
-        },
+        onSuccess: () => router.push('/auth/login'),
       },
     );
   };
