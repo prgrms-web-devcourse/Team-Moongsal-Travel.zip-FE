@@ -35,23 +35,21 @@ const dummyData = [
 
 const PostCategory = () => {
   return (
-    <>
-      <Grid container rowSpacing={1}>
-        {dummyData.map(({ title, subtitle, icons }) => (
-          <Grid item xs={6} key={title}>
-            <Underline>{title}</Underline>
-            <Stack flexDirection='row' mt='0.3rem'>
-              {icons.map((icon, i) => (
-                <SvgIcon component={icon} color='gray030' key={i} />
-              ))}
-              <SubTitle color='gray030.main' bold='bold' fontSize='1rem'>
-                {subtitle}
-              </SubTitle>
-            </Stack>
-          </Grid>
-        ))}
-      </Grid>
-    </>
+    <Grid container rowSpacing={1}>
+      {dummyData.map(({ title, subtitle, icons }) => (
+        <Grid item xs={6} key={title}>
+          <Underline>{title}</Underline>
+          <Stack flexDirection='row' mt='0.3rem'>
+            {icons.map((icon, i) => (
+              <SvgIcon component={icon} color='gray030' key={i} />
+            ))}
+            <SubTitle color='gray030.main' bold='bold' fontSize='1rem'>
+              {subtitle}
+            </SubTitle>
+          </Stack>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
