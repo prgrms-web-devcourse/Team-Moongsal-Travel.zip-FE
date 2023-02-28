@@ -5,6 +5,7 @@ import { Control } from 'react-hook-form';
 import { CreatePost } from '@/api/createPost/type';
 import { SubTitle, Title } from '@/components/common';
 
+import FileInput from '../common/FileInput';
 import usePostForm from '../hooks/usePostForm';
 import { ComplexButton, DatePicker, Location } from './';
 
@@ -62,7 +63,7 @@ const PostBasic = ({ control }: ControlProps) => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
-        <OutlinedInput {...thumbnail} fullWidth type='file' />
+        <FileInput thumbnail={thumbnail} />
       </Stack>
       <button type='submit'>제출</button>
     </>
