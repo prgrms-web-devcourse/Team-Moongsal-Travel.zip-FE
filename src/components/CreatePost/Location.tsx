@@ -3,7 +3,7 @@ import { Box, IconButton, OutlinedInput } from '@mui/material';
 import { useEffect } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePost } from '@/api/createPost/type';
+import { CreatePost } from '@/types/CreatePost';
 
 interface LocationProps {
   readonly?: boolean;

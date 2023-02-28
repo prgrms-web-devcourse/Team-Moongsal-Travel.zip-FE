@@ -1,6 +1,5 @@
 import http from '@/api/core';
-
-import { CreatePost } from './type';
+import { CreatePost } from '@/types/CreatePost';
 
 export const createPost = async (data: CreatePost, userId: string) => {
   await http.post({

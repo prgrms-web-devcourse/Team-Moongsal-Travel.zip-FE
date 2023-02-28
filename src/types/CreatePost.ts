@@ -1,4 +1,4 @@
-export type CreatePost = {
+export interface CreatePost {
   country: {
     name: string;
   };
@@ -11,4 +11,4 @@ export type CreatePost = {
   };
   title: string;
   thumbnail: string;
-};
+}

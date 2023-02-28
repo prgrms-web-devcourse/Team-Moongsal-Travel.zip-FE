@@ -2,9 +2,9 @@ import { Box, OutlinedInput, Stack } from '@mui/material';
 import { MouseEvent, useState } from 'react';
 import { Control } from 'react-hook-form';
 
-import { CreatePost } from '@/api/createPost/type';
 import { FileInput, SubTitle, Title } from '@/components/common';
 import usePostForm from '@/hooks/usePostForm';
+import { CreatePost } from '@/types/CreatePost';
 
 import { ComplexButton, DatePicker, Location } from './';
 

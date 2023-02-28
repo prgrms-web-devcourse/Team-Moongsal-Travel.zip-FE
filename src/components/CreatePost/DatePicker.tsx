@@ -5,7 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePost } from '@/api/createPost/type';
+import { CreatePost } from '@/types/CreatePost';
 
 interface DatePickerProps {
   text?: string;

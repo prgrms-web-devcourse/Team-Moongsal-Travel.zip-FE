@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { CreatePost } from '@/api/createPost/type';
 import { PostBasic, PostDetail, StepperButton } from '@/components/CreatePost';
+import { CreatePost } from '@/types/CreatePost';
 
 const Post = () => {
   const [steps, setSteps] = useState(0);

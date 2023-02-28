@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 
-import { CreatePost } from '@/api/createPost/type';
+import { CreatePost } from '@/types/CreatePost';
 
 interface StepperButtonProps {
   format: 'forward' | 'backward' | 'complete';
