@@ -4,3 +4,8 @@ export type UserRegister = {
   nickname: string;
   birthYear: number;
 };
+
+export type UserSignIn = {
+  email: string;
+  password: string;
+};

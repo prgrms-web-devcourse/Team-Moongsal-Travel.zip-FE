@@ -1,9 +1,11 @@
-import { Box, Button, Stack } from '@mui/material';
+import { Alert, Box, Button, Stack } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import CommonInput from '../common/CommonInput';
+import { usePostUserSignIn } from '@/api/hooks/user';
+import { CommonInput } from '@/components/common';
 
 interface FormState {
   email: string;
@@ -18,14 +20,23 @@ const Local = () => {
       password: '',
     },
   });
+  const { mutate, error } = usePostUserSignIn();
+  const router = useRouter();
 
-  const onSubmit = (data: FormState) => {
-    console.log(data);
+  const onSubmit = (formData: FormState) => {
+    mutate(formData, {
+      onSuccess: ({ data }) => {
+        localStorage.setItem('accessToken', JSON.stringify(data.accessToken));
+        router.push('/');
+      },
+    });
   };
 
   return (
     <>
       <Stack spacing={2} component='form' onSubmit={handleSubmit(onSubmit)}>
+        {error && <Alert severity='error'>이메일 또는 비밀번호가 잘못되었습니다.</Alert>}
+
         <CommonInput<FormState>
           id='email'
           label='이메일'
