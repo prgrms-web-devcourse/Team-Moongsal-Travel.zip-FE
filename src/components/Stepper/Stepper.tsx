@@ -6,6 +6,7 @@ interface StepperProps {
   steps: string[];
   activeStep: number;
   authSuccess: boolean;
+  validNickname: boolean;
   setActiveStep: Dispatch<SetStateAction<number>>;
 }
 
@@ -14,6 +15,7 @@ const HorizontalLinearStepper = ({
   steps,
   activeStep,
   authSuccess,
+  validNickname,
   setActiveStep,
 }: StepperProps) => {
   const [buttonType, setButtonType] = useState<'submit' | 'button'>('button');
@@ -42,7 +44,7 @@ const HorizontalLinearStepper = ({
             <Button
               type={buttonType}
               onClick={!lastStep ? () => setActiveStep((prev) => prev + 1) : undefined}
-              disabled={!authSuccess}
+              disabled={!lastStep ? !authSuccess : !validNickname}
               variant='contained'
               fullWidth>
               {lastStep ? '완료' : '다음'}
