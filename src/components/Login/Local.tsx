@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 
 import { usePostUserSignIn } from '@/api/hooks/user';
 import { CommonInput } from '@/components/common';
+import { User } from '@/types/auth';
 
 interface FormState {
   email: string;
@@ -13,7 +14,7 @@ interface FormState {
 }
 
 const Local = () => {
-  const { control, handleSubmit } = useForm<FormState>({
+  const { control, handleSubmit } = useForm<User>({
     mode: 'onSubmit',
     defaultValues: {
       email: '',
@@ -37,7 +38,7 @@ const Local = () => {
       <Stack spacing={2} component='form' onSubmit={handleSubmit(onSubmit)}>
         {error && <Alert severity='error'>이메일 또는 비밀번호가 잘못되었습니다.</Alert>}
 
-        <CommonInput<FormState>
+        <CommonInput
           id='email'
           label='이메일'
           variant='outlined'
@@ -51,7 +52,7 @@ const Local = () => {
             },
           }}
         />
-        <CommonInput<FormState>
+        <CommonInput
           id='password'
           label='비밀번호'
           variant='outlined'
