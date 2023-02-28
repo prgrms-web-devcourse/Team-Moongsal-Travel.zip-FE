@@ -75,7 +75,7 @@ const Local = () => {
 
       <Stack spacing={6} direction='row' justifyContent='center'>
         <Link href='/'>비밀번호 찾기</Link>
-        <Link href='/'>회원가입</Link>
+        <Link href='/auth/register'>회원가입</Link>
       </Stack>
     </>
   );
