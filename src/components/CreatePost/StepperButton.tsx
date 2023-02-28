@@ -2,14 +2,18 @@ import { ArrowBackIosNew, ArrowForwardIosOutlined } from '@mui/icons-material';
 import { Button, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
+import { UseFormHandleSubmit } from 'react-hook-form';
+
+import { CreatePost } from '@/api/createPost/type';
 
 interface StepperButtonProps {
   format: 'forward' | 'backward' | 'complete';
   steps: number;
   setSteps: Dispatch<SetStateAction<number>>;
+  onClick: UseFormHandleSubmit<CreatePost>;
 }
 
-const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
+const StepperButton = ({ format, steps, setSteps, onClick }: StepperButtonProps) => {
   const router = useRouter();
 
   return (
@@ -19,7 +23,10 @@ const StepperButton = ({ format, steps, setSteps }: StepperButtonProps) => {
           variant='contained'
           sx={centered}
           type='submit'
-          onClick={() => setSteps(steps + 1)}>
+          onClick={() => {
+            onClick((data) => console.log(data))();
+            setSteps(steps + 1);
+          }}>
           <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             다음
           </Typography>

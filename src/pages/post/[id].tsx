@@ -28,23 +28,28 @@ const Post = () => {
   });
   const { handleSubmit, control } = methods;
 
-  const onSubmit = (data: any) => console.log(data);
-
   return (
     <Box sx={layout}>
       {!steps ? (
-        <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-          <PostBasic control={control} />
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <StepperButton format='forward' steps={steps} setSteps={setSteps} />
-          </Box>
-        </form>
+        <>
+          <form>
+            <PostBasic control={control} />
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <StepperButton
+                format='forward'
+                steps={steps}
+                setSteps={setSteps}
+                onClick={handleSubmit}
+              />
+            </Box>
+          </form>
+        </>
       ) : (
         <>
           <PostDetail />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <StepperButton format='backward' steps={steps} setSteps={setSteps} />
-            <StepperButton format='complete' steps={steps} setSteps={setSteps} />
+            {/* <StepperButton format='backward' steps={steps} setSteps={setSteps} />
+            <StepperButton format='complete' steps={steps} setSteps={setSteps} /> */}
           </Box>
         </>
       )}

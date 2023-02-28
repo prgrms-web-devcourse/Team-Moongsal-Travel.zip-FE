@@ -34,12 +34,7 @@ const PostBasic = ({ control }: ControlProps) => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>여행 기간</SubTitle>
-        <Box
-          sx={{
-            ...marginBottom,
-            display: 'flex',
-            gap: 1,
-          }}>
+        <Box sx={{ ...marginBottom, display: 'flex', gap: 1 }}>
           <DatePicker control={startDate} text='시작날짜' />
           <DatePicker control={endDate} text='종료날짜' />
         </Box>
@@ -64,7 +59,6 @@ const PostBasic = ({ control }: ControlProps) => {
         <SubTitle>썸네일</SubTitle>
         <FileInput thumbnail={thumbnail} />
       </Stack>
-      <button type='submit'>제출</button>
     </>
   );
 };
