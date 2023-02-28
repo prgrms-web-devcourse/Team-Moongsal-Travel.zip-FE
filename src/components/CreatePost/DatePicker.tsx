@@ -24,7 +24,6 @@ const DatePicker = ({ text, control }: DatePickerProps) => {
         {...control}
         inputFormat='YYYY년 MM월 DD일'
         label={text}
-        value={new Date()}
         toolbarFormat='YYYY년 MM월 DD일'
         disableMaskedInput
         renderInput={(params) => <TextField {...params} />}
