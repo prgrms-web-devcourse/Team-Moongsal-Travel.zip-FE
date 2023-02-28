@@ -1,17 +1,17 @@
 import { Box, Typography } from '@mui/material';
 
-import { FeedContentProps } from './FeedContent';
+interface FeedSubContent {
+  chipTitle: '기간' | '총 경비';
+  chipContent: string;
+}
 
-const FeedSubContent = ({
-  nights,
-  days,
-}: Omit<FeedContentProps, 'title' | 'totalCost'>) => {
+const FeedChip = ({ chipTitle, chipContent }: FeedSubContent) => {
   return (
     <>
       <Typography
         component='div'
         sx={{ fontSize: 0.75, fontWeight: 'bold', color: 'gray030.main', pr: 0.5 }}>
-        기간
+        {chipTitle}
       </Typography>
       <Box
         sx={{
@@ -24,11 +24,11 @@ const FeedSubContent = ({
           mr: 0.5,
         }}>
         <Typography component='span' fontSize={0.75} color='blue050.main'>
-          {`${nights}박 ${days}일`}
+          {chipContent}
         </Typography>
       </Box>
     </>
   );
 };
 
-export default FeedSubContent;
+export default FeedChip;

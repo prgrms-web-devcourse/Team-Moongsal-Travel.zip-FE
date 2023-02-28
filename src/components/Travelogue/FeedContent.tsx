@@ -6,7 +6,7 @@ import {
 import { IconButton, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 
-import FeedSubContent from './FeedSubContent';
+import FeedChip from './FeedChip';
 
 export interface FeedContentProps {
   title: string;
@@ -21,9 +21,6 @@ interface RowProps {
 
 const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
-
-  console.log(totalCost);
-
   const CurrentFavoriteIcon = () =>
     isFavorite ? <FavoriteIcon sx={iconStyle} /> : <FavoriteBorderIcon sx={iconStyle} />;
 
@@ -54,8 +51,8 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
         </Row>
       </Row>
       <Row justifyContentType='start'>
-        <FeedSubContent nights={nights} days={days} />
-        <FeedSubContent nights={nights} days={days} />
+        <FeedChip chipTitle='기간' chipContent={`${nights}박 ${days}일`} />
+        <FeedChip chipTitle='총 경비' chipContent={String(totalCost)} />
       </Row>
     </Stack>
   );
