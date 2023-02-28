@@ -6,7 +6,7 @@ import {
   postUserSignIn,
   postVerifyCode,
 } from '@/api/user';
-import { UserRegister, UserSignIn } from '@/api/user/type';
+import { User, UserRegister } from '@/types/auth';
 
 export const usePostUserRegister = () => {
   return useMutation({
@@ -38,7 +38,7 @@ export const usePostVerifyCode = () => {
 
 export const usePostUserSignIn = () => {
   return useMutation({
-    mutationFn: async (data: UserSignIn) => await postUserSignIn(data),
+    mutationFn: async (data: User) => await postUserSignIn(data),
     onError: (error: { message: string }) => {
       console.error(error.message);
     },

@@ -1,5 +1,5 @@
 import { baseRequest } from '@/api/core';
-import { UserRegister, UserSignIn } from '@/api/user/type';
+import { User, UserRegister } from '@/types/auth';
 
 export const postUserRegister = async (data: UserRegister) =>
   await baseRequest.request({
@@ -22,7 +22,7 @@ export const postVerifyCode = async (data: { email: string; code: string }) =>
     data,
   });
 
-export const postUserSignIn = async (data: UserSignIn) =>
+export const postUserSignIn = async (data: User) =>
   await baseRequest.request({
     method: 'POST',
     url: 'api/auth/signin',
