@@ -8,7 +8,7 @@ import { UserRegister } from '@/api/user/type';
 import { Register, VerifyByEmail } from '@/components/Register';
 import { Stepper } from '@/components/Stepper';
 
-const steps = ['이메일 인증', '회원가입'];
+const REGISTER_STEP = ['이메일 인증', '회원가입'];
 
 export type UserRegisterForm = UserRegister & {
   code: string;
@@ -49,7 +49,7 @@ const RegisterPage = () => {
       </Typography>
       <form onSubmit={handleSubmit((data) => handleRegister(data))}>
         <Stepper
-          steps={steps}
+          steps={REGISTER_STEP}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
           authSuccess={authSuccess}
