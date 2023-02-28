@@ -11,8 +11,8 @@ const DUMMY_DATA = {
   thumbnail:
     'https://firebasestorage.googleapis.com/v0/b/junglee-habit.appspot.com/o/challanges%2FIMQBHIsoNIMngElt9sRf%2F0aWv3BRsSVJMcz5yU4uS?alt=media&token=6dce71b4-e11f-4fa3-9b5a-fab54bb100d8',
   member: {
-    nickname: 'nickname',
-    profileImageUrl: 'default',
+    nickname: 'moen',
+    profileImageUrl: 'https://mui.com/static/images/avatar/3.jpg',
   },
 };
 
@@ -21,6 +21,7 @@ const TravelogueFeed = () => {
     <Stack spacing={1.5} sx={{ maxWidth: '90%', height: 300 }}>
       <FeedHeader
         profileImage={DUMMY_DATA.member.profileImageUrl}
+        nickname={DUMMY_DATA.member.nickname}
         country={DUMMY_DATA.country}
       />
       <FeedImage thumbnailURL={DUMMY_DATA.thumbnail} ImageAlt={DUMMY_DATA.title} />
