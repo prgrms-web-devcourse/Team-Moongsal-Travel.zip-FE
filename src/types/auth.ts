@@ -5,5 +5,5 @@ export interface User {
 
 export interface UserRegister extends User {
   nickname: string;
-  birthYear: number;
+  birthYear: string;
 }

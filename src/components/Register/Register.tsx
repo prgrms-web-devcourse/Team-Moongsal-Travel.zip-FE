@@ -1,13 +1,18 @@
 import {
+  Button,
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   Stack,
   TextField,
 } from '@mui/material';
-import { useState } from 'react';
+import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
+
+import { getVerifyNickname } from '@/api/user';
+import useGetUserForms from '@/components/Register/useGetUserForms';
+import { UserRegisterForm } from '@/pages/auth/register';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -20,12 +25,24 @@ const MenuProps = {
   },
 };
 
-const Register = () => {
-  const [yearOfBirth, setYearOfBirth] = useState('');
+interface RegisterProps {
+  control: Control<UserRegisterForm>;
+  setValidNickname: (valid: boolean) => void;
+  setError: UseFormSetError<UserRegisterForm>;
+  trigger: UseFormTrigger<UserRegisterForm>;
+}
 
-  const handleYearOfBirth = (e: SelectChangeEvent) => {
-    setYearOfBirth(e.target.value);
-  };
+const Register = ({ control, setValidNickname, setError, trigger }: RegisterProps) => {
+  const {
+    nickname,
+    nicknameState,
+    password,
+    passwordState,
+    passwordConfirm,
+    passwordConfirmState,
+    birthYear,
+    birthYearState,
+  } = useGetUserForms(control);
 
   const calcYearOfBirthList = () => {
     return Array(80)
@@ -37,22 +54,72 @@ const Register = () => {
       ));
   };
 
+  const handleVerifyNickname = async () => {
+    if (await trigger('nickname')) {
+      const status = await getVerifyNickname(nickname.value);
+
+      let message = '';
+      switch (status) {
+        case 200:
+          message = '사용 가능한 닉네임입니다.';
+          setValidNickname(true);
+          break;
+        case 409:
+          message = '이미 존재하는 닉네임입니다.';
+          break;
+      }
+      setError('nickname', { message });
+    }
+  };
+
   return (
     <Stack spacing={2}>
-      <TextField id='outlined-basic' label='닉네임' variant='outlined' />
-      <TextField id='outlined-basic' label='비밀번호' variant='outlined' />
-      <TextField id='outlined-basic' label='비밀번호 확인' variant='outlined' />
+      <Stack direction='row' spacing={2}>
+        <TextField
+          {...nickname}
+          id='outlined-basic'
+          placeholder='닉네임 2~12자 한글/영문'
+          label='닉네임'
+          variant='outlined'
+          fullWidth
+          onChange={(e) => {
+            nickname.onChange(e.target.value);
+            setValidNickname(false);
+          }}
+          helperText={nicknameState.error && nicknameState.error.message}
+        />
+        <Button
+          variant='contained'
+          sx={{ width: '150px', height: '56px' }}
+          onClick={handleVerifyNickname}>
+          중복확인
+        </Button>
+      </Stack>
+      <TextField
+        {...password}
+        id='outlined-basic'
+        placeholder='비밀번호 최소 8자 영문/숫자/특수문자'
+        label='비밀번호'
+        variant='outlined'
+        // type='password'
+        helperText={passwordState.error && passwordState.error.message}
+      />
+      <TextField
+        {...passwordConfirm}
+        id='outlined-basic'
+        label='비밀번호 확인'
+        variant='outlined'
+        // type='password'
+        helperText={passwordConfirmState.error && passwordConfirmState.error.message}
+      />
       <FormControl fullWidth>
         <InputLabel id='demo-simple-select-label'>출생연도</InputLabel>
-        <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={yearOfBirth}
-          label='출생연도'
-          MenuProps={MenuProps}
-          onChange={handleYearOfBirth}>
+        <Select {...birthYear} label='출생연도' MenuProps={MenuProps}>
           {calcYearOfBirthList()}
         </Select>
+        <FormHelperText>
+          {birthYearState.error && birthYearState.error.message}
+        </FormHelperText>
       </FormControl>
     </Stack>
   );
