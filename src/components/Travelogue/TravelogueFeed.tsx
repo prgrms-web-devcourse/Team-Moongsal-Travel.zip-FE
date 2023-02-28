@@ -18,7 +18,7 @@ const DUMMY_DATA = {
 
 const TravelogueFeed = () => {
   return (
-    <Stack spacing={1.5} sx={{ maxWidth: '90%', height: 300, border: '1px solid black' }}>
+    <Stack spacing={1.5} sx={{ maxWidth: '90%', height: 300 }}>
       <FeedHeader
         profileImage={DUMMY_DATA.member.profileImageUrl}
         country={DUMMY_DATA.country}
