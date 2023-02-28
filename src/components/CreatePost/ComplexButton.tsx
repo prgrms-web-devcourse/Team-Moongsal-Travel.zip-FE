@@ -2,18 +2,7 @@ import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { MouseEvent } from 'react';
 
-const images = [
-  {
-    url: '/images/buttons/domestic.svg',
-    title: '국내',
-    width: '40%',
-  },
-  {
-    url: '/images/buttons/foreign.svg',
-    title: '해외',
-    width: '40%',
-  },
-];
+import { COMPLEX_BUTTON_IMAGE } from '@/constants';
 
 interface ComplexButtonProps {
   value: string;
@@ -29,7 +18,7 @@ const ComplexButton = ({ value, handleChange }: ComplexButtonProps) => {
       onChange={handleChange}
       aria-label='Platform'
       sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-      {images.map((image) => (
+      {COMPLEX_BUTTON_IMAGE.map((image) => (
         <ImageButton
           key={image.url}
           value={image.title}

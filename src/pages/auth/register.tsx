@@ -8,7 +8,7 @@ import { UserRegister } from '@/api/user/type';
 import { Register, VerifyByEmail } from '@/components/Register';
 import { Stepper } from '@/components/Stepper';
 
-const steps = ['이메일 인증', '회원가입'];
+const REGISTER_STEP = ['이메일 인증', '회원가입'];
 
 export type UserRegisterForm = UserRegister & {
   code: string;
@@ -20,6 +20,7 @@ const RegisterPage = () => {
   const { mutate: userRegisterMutate } = usePostUserRegister();
   const [activeStep, setActiveStep] = useState(0);
   const [authSuccess, setAuthSuccess] = useState(false);
+  const [validNickname, setValidNickname] = useState(false);
   const methods = useForm<UserRegisterForm>({
     mode: 'onChange',
     defaultValues: {
@@ -31,7 +32,7 @@ const RegisterPage = () => {
       birthYear: '',
     },
   });
-  const { handleSubmit, control, setError } = methods;
+  const { handleSubmit, control, setError, trigger } = methods;
 
   const handleRegister = (data: UserRegisterForm) => {
     const { email, nickname, password, birthYear } = data;
@@ -48,10 +49,11 @@ const RegisterPage = () => {
       </Typography>
       <form onSubmit={handleSubmit((data) => handleRegister(data))}>
         <Stepper
-          steps={steps}
+          steps={REGISTER_STEP}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
-          authSuccess={authSuccess}>
+          authSuccess={authSuccess}
+          validNickname={validNickname}>
           {!activeStep ? (
             <VerifyByEmail
               control={control}
@@ -59,7 +61,12 @@ const RegisterPage = () => {
               setError={setError}
             />
           ) : (
-            <Register control={control} />
+            <Register
+              control={control}
+              setValidNickname={setValidNickname}
+              setError={setError}
+              trigger={trigger}
+            />
           )}
         </Stepper>
       </form>

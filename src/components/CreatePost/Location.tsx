@@ -22,7 +22,7 @@ const Location = ({ readonly, name }: LocationProps) => {
         fullWidth
         placeholder='지역을 입력하세요'
         type='text'
-        readOnly={readonly && readonly}
+        readOnly={readonly}
       />
       <IconButton sx={{ position: 'absolute', right: 0, top: '0.5rem' }}>
         <LocationOnOutlined />
