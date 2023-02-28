@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -7,8 +8,9 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import { Control } from 'react-hook-form';
+import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
 
+import { getVerifyNickname } from '@/api/user';
 import useGetUserForms from '@/components/Register/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
 
@@ -25,9 +27,12 @@ const MenuProps = {
 
 interface RegisterProps {
   control: Control<UserRegisterForm>;
+  setValidNickname: (valid: boolean) => void;
+  setError: UseFormSetError<UserRegisterForm>;
+  trigger: UseFormTrigger<UserRegisterForm>;
 }
 
-const Register = ({ control }: RegisterProps) => {
+const Register = ({ control, setValidNickname, setError, trigger }: RegisterProps) => {
   const {
     nickname,
     nicknameState,
@@ -49,16 +54,47 @@ const Register = ({ control }: RegisterProps) => {
       ));
   };
 
+  const handleVerifyNickname = async () => {
+    if (await trigger('nickname')) {
+      const status = await getVerifyNickname(nickname.value);
+
+      let message = '';
+      switch (status) {
+        case 200:
+          message = '사용 가능한 닉네임입니다.';
+          setValidNickname(true);
+          break;
+        case 409:
+          message = '이미 존재하는 닉네임입니다.';
+          break;
+      }
+      setError('nickname', { message });
+    }
+  };
+
   return (
     <Stack spacing={2}>
-      <TextField
-        {...nickname}
-        id='outlined-basic'
-        placeholder='닉네임 2~12자 한글/영문'
-        label='닉네임'
-        variant='outlined'
-        helperText={nicknameState.error && nicknameState.error.message}
-      />
+      <Stack direction='row' spacing={2}>
+        <TextField
+          {...nickname}
+          id='outlined-basic'
+          placeholder='닉네임 2~12자 한글/영문'
+          label='닉네임'
+          variant='outlined'
+          fullWidth
+          onChange={(e) => {
+            nickname.onChange(e.target.value);
+            setValidNickname(false);
+          }}
+          helperText={nicknameState.error && nicknameState.error.message}
+        />
+        <Button
+          variant='contained'
+          sx={{ width: '150px', height: '56px' }}
+          onClick={handleVerifyNickname}>
+          중복확인
+        </Button>
+      </Stack>
       <TextField
         {...password}
         id='outlined-basic'

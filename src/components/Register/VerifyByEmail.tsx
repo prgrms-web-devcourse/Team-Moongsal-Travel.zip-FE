@@ -21,7 +21,7 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
 
   const handleSendEmail = () => {
     if (/[A-Za-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(email.value)) {
-      setError('email', { message: '' });
+      setError('email', { message: '3분 이내로 인증번호(6자리)를 입력해주세요.' });
       sendEmail.mutate({ email: email.value });
     } else {
       setError('email', { message: '이메일 형식에 맞지 않습니다.' });
@@ -54,11 +54,7 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
           label='이메일'
           variant='outlined'
           fullWidth
-          helperText={
-            emailState.error
-              ? emailState.error.message
-              : sendEmail.isSuccess && '3분 이내로 인증번호(6자리)를 입력해주세요.'
-          }
+          helperText={emailState.error && emailState.error.message}
         />
         <Button
           variant='contained'
