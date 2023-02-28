@@ -7,12 +7,14 @@ import { CreatePost } from '@/api/createPost/type';
 
 interface LocationProps {
   readonly?: boolean;
-  name: ControllerRenderProps<CreatePost, 'country.name'>;
+  name?: ControllerRenderProps<CreatePost, 'country.name'>;
 }
 
 const Location = ({ readonly, name }: LocationProps) => {
   useEffect(() => {
-    readonly ? name.onChange('대한민국') : name.onChange('');
+    if (name) {
+      readonly ? name.onChange('대한민국') : name.onChange('');
+    }
   }, [readonly]);
 
   return (

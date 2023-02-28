@@ -6,7 +6,7 @@ import { ControllerRenderProps } from 'react-hook-form';
 
 import { CreatePost } from '@/api/createPost/type';
 
-import SubTitle from './SubTitle';
+import { SubTitle } from './';
 
 interface FileInputProps {
   thumbnail: ControllerRenderProps<CreatePost, 'thumbnail'>;

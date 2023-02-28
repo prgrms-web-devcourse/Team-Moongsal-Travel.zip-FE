@@ -1,7 +1,7 @@
 import { OutlinedInput, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import { SubTitle, Title } from '../common';
+import { SubTitle, Title } from '@/components/common';
 
 const PostComplete = () => {
   return (

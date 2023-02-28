@@ -3,10 +3,9 @@ import { MouseEvent, useState } from 'react';
 import { Control } from 'react-hook-form';
 
 import { CreatePost } from '@/api/createPost/type';
-import { SubTitle, Title } from '@/components/common';
+import { FileInput, SubTitle, Title } from '@/components/common';
+import usePostForm from '@/hooks/usePostForm';
 
-import FileInput from '../common/FileInput';
-import usePostForm from '../hooks/usePostForm';
 import { ComplexButton, DatePicker, Location } from './';
 
 interface ControlProps {
