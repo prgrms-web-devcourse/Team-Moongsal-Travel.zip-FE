@@ -3,9 +3,11 @@ import { koKR } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { Dayjs } from 'dayjs';
 import { ControllerRenderProps } from 'react-hook-form';
 
 import { CreatePost } from '@/types/CreatePost';
+import { getDateInfo } from '@/utils/helper';
 
 interface DatePickerProps {
   text?: string;
@@ -15,6 +17,12 @@ interface DatePickerProps {
 }
 
 const DatePicker = ({ text, control }: DatePickerProps) => {
+  const handleDateChange = (newValue: Dayjs | null) => {
+    if (newValue) {
+      control.onChange(getDateInfo(newValue));
+    }
+  };
+
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
@@ -24,6 +32,7 @@ const DatePicker = ({ text, control }: DatePickerProps) => {
         {...control}
         inputFormat='YYYY년 MM월 DD일'
         label={text}
+        onChange={handleDateChange}
         toolbarFormat='YYYY년 MM월 DD일'
         disableMaskedInput
         renderInput={(params) => <TextField {...params} />}

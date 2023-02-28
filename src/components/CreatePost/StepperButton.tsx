@@ -4,17 +4,22 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 
+// import { createPost } from '@/api/createPost';
 import { CreatePost } from '@/types/CreatePost';
 
 interface StepperButtonProps {
   format: 'forward' | 'backward' | 'complete';
   steps: number;
   setSteps: Dispatch<SetStateAction<number>>;
-  onClick: UseFormHandleSubmit<CreatePost>;
+  onClick?: UseFormHandleSubmit<CreatePost>;
 }
 
 const StepperButton = ({ format, steps, setSteps, onClick }: StepperButtonProps) => {
   const router = useRouter();
+
+  const onSubmit = (data: CreatePost) => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -24,8 +29,10 @@ const StepperButton = ({ format, steps, setSteps, onClick }: StepperButtonProps)
           sx={centered}
           type='submit'
           onClick={() => {
-            onClick((data) => console.log(data))();
-            setSteps(steps + 1);
+            if (onClick) {
+              onClick(onSubmit)();
+              setSteps(steps + 1);
+            }
           }}>
           <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             다음

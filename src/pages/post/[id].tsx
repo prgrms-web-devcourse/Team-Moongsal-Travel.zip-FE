@@ -48,8 +48,8 @@ const Post = () => {
         <>
           <PostDetail />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            {/* <StepperButton format='backward' steps={steps} setSteps={setSteps} />
-            <StepperButton format='complete' steps={steps} setSteps={setSteps} /> */}
+            <StepperButton format='backward' steps={steps} setSteps={setSteps} />
+            <StepperButton format='complete' steps={steps} setSteps={setSteps} />
           </Box>
         </>
       )}
