@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 import React from 'react';
 
-import { FeedHeader } from '@/components/Travelogue';
+import { FeedHeader, FeedImage } from '@/components/Travelogue';
 
 const DUMMY_DATA = {
   title: '일본 오사카 여행기',
@@ -10,20 +10,21 @@ const DUMMY_DATA = {
   totalCost: 400000,
   country: '일본',
   thumbnail:
-    'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1794&q=80',
+    'https://firebasestorage.googleapis.com/v0/b/junglee-habit.appspot.com/o/challanges%2FIMQBHIsoNIMngElt9sRf%2F0aWv3BRsSVJMcz5yU4uS?alt=media&token=6dce71b4-e11f-4fa3-9b5a-fab54bb100d8',
   member: {
     nickname: 'nickname',
     profileImageUrl: 'default',
   },
-} as const;
+};
 
 const TravelogueFeed = () => {
   return (
-    <Stack sx={{ maxWidth: '90%', border: '1px solid black' }}>
+    <Stack spacing={1.5} sx={{ maxWidth: '90%', height: 300, border: '1px solid black' }}>
       <FeedHeader
         profileImage={DUMMY_DATA.member.profileImageUrl}
         country={DUMMY_DATA.country}
       />
+      <FeedImage thumbnailURL={DUMMY_DATA.thumbnail} ImageAlt={DUMMY_DATA.title} />
     </Stack>
   );
 };
