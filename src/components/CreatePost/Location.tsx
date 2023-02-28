@@ -19,7 +19,7 @@ const Location = ({ readonly }: LocationProps) => {
         placeholder='지역을 입력하세요'
         type='text'
         onChange={onChange}
-        readOnly={readonly && readonly}
+        readOnly={readonly}
         value={readonly ? '대한민국' : value}
       />
       <IconButton sx={{ position: 'absolute', right: 0, top: '0.5rem' }}>
