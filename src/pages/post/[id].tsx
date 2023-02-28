@@ -3,12 +3,7 @@
 import { Box } from '@mui/material';
 import { useState } from 'react';
 
-import {
-  PostBasic,
-  PostComplete,
-  PostDetail,
-  StepperButton,
-} from '@/components/CreatePost';
+import { PostBasic, PostDetail, StepperButton } from '@/components/CreatePost';
 
 const Post = () => {
   const [steps, setSteps] = useState(0);
@@ -22,17 +17,9 @@ const Post = () => {
             <StepperButton format='forward' steps={steps} setSteps={setSteps} />
           </Box>
         </>
-      ) : steps === 1 ? (
-        <>
-          <PostDetail />
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <StepperButton format='backward' steps={steps} setSteps={setSteps} />
-            <StepperButton format='forward' steps={steps} setSteps={setSteps} />
-          </Box>
-        </>
       ) : (
         <>
-          <PostComplete />
+          <PostDetail />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <StepperButton format='backward' steps={steps} setSteps={setSteps} />
             <StepperButton format='complete' steps={steps} setSteps={setSteps} />
