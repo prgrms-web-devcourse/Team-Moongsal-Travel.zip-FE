@@ -1,12 +1,19 @@
 import { Box, OutlinedInput, Stack } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { MouseEvent, useState } from 'react';
+import { Control } from 'react-hook-form';
 
+import { CreatePostForm } from '@/api/createPost/type';
 import { SubTitle, Title } from '@/components/common';
 
+import usePostForm from '../hooks/usePostForm';
 import { ComplexButton, DatePicker, Location } from './';
 
-const PostBasic = () => {
+interface ControlProps {
+  control: Control<CreatePostForm>;
+}
+
+const PostBasic = ({ control }: ControlProps) => {
   // api 연결시 커스텀 훅으로 분리 예정
   const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(''));
   const [endDate, setEndDate] = useState<Dayjs | null>(dayjs(''));
@@ -23,6 +30,8 @@ const PostBasic = () => {
   const handleEndDateChange = (newValue: Dayjs | null) => {
     setEndDate(newValue);
   };
+
+  const { title } = usePostForm(control);
 
   return (
     <>
@@ -57,19 +66,20 @@ const PostBasic = () => {
           <OutlinedInput
             fullWidth
             placeholder='이번 여행의 총 경비를 입력하세요'
-            type='text'
+            type='number'
           />
         </Box>
       </Stack>
       <Title bold='bold'>여행 일기를 작성하세요 </Title>
       <Stack sx={marginBottom}>
         <SubTitle>제목</SubTitle>
-        <OutlinedInput fullWidth placeholder='제목을 입력하세요' type='text' />
+        <OutlinedInput {...title} fullWidth placeholder='제목을 입력하세요' type='text' />
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
         <OutlinedInput fullWidth type='file' />
       </Stack>
+      <button type='submit'>제출</button>
     </>
   );
 };
