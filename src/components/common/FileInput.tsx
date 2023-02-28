@@ -15,7 +15,6 @@ interface FileInputProps {
 const FileInput = ({ thumbnail }: FileInputProps) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [imageBase64, setImageBase64] = useState('');
 
   useEffect(() => {
     if (selectedImage) {
@@ -30,7 +29,7 @@ const FileInput = ({ thumbnail }: FileInputProps) => {
       reader.onload = () => {
         if (!reader.result || typeof reader.result !== 'string') return;
         const result = reader.result;
-        setImageBase64(result);
+        thumbnail.onChange(result);
         resolve(Promise);
       };
     });
@@ -47,7 +46,6 @@ const FileInput = ({ thumbnail }: FileInputProps) => {
           if (e.target.files && e.target.files[0]) {
             setSelectedImage(e.target.files[0]);
             encodeFileToBase64(e.target.files[0]);
-            thumbnail.onChange(imageBase64);
           }
         }}
       />

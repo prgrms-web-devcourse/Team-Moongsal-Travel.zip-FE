@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 
-// import { createPost } from '@/api/createPost';
+import { createPost } from '@/api/createPost';
 import { CreatePost } from '@/types/CreatePost';
 
 interface StepperButtonProps {
@@ -19,6 +19,7 @@ const StepperButton = ({ format, steps, setSteps, onClick }: StepperButtonProps)
 
   const onSubmit = (data: CreatePost) => {
     console.log(data);
+    createPost({ ...data, thumbnail: '123' }, '178');
   };
 
   return (
