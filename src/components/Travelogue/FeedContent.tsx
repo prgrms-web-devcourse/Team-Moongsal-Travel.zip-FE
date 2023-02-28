@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import {
   Favorite as FavoriteIcon,
   FavoriteBorder as FavoriteBorderIcon,
@@ -6,17 +5,14 @@ import {
 import { IconButton, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 
-import FeedChip from './FeedChip';
+import { Row } from '@/components/common';
+import { FeedChip } from '@/components/Travelogue';
 
 export interface FeedContentProps {
   title: string;
   nights: number;
   days: number;
   totalCost: number;
-}
-
-interface RowProps {
-  justifyContentType: string;
 }
 
 const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
@@ -68,12 +64,5 @@ const textEllipsis = (width: string | number) => {
 };
 
 const iconStyle = { fontSize: '1rem', color: 'blue050.main' };
-
-const Row = styled.div<RowProps>`
-  display: flex;
-  align-items: center;
-  justify-content: ${({ justifyContentType }) => justifyContentType};
-  width: '100%';
-`;
 
 export default FeedContent;
