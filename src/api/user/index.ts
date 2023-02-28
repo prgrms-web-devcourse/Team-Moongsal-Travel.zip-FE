@@ -1,5 +1,7 @@
+import { AxiosError } from 'axios';
+
 import { baseRequest } from '@/api/core';
-import { UserRegister } from '@/api/user/type';
+import { User, UserRegister } from '@/types/auth';
 
 export const postUserRegister = async (data: UserRegister) =>
   await baseRequest.request({
@@ -21,3 +23,24 @@ export const postVerifyCode = async (data: { email: string; code: string }) =>
     url: 'api/auth/valid/code',
     data,
   });
+
+export const postUserSignIn = async (data: User) =>
+  await baseRequest.request({
+    method: 'POST',
+    url: 'api/auth/signin',
+    data,
+  });
+
+export const getVerifyNickname = async (nickname: string) => {
+  try {
+    const response = await baseRequest.request({
+      method: 'GET',
+      url: `api/auth/valid/nickname/${nickname}`,
+    });
+    return response.status;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return error.response?.status;
+    }
+  }
+};
