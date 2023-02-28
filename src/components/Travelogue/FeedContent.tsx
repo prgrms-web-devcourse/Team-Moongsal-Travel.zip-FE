@@ -8,12 +8,9 @@ import { useState } from 'react';
 import { Row } from '@/components/common';
 import { FeedChip } from '@/components/Travelogue';
 
-export interface FeedContentProps {
-  title: string;
-  nights: number;
-  days: number;
-  totalCost: number;
-}
+import { TravelogueFeed } from './type';
+
+type FeedContentProps = Pick<TravelogueFeed, 'title' | 'nights' | 'days' | 'totalCost'>;
 
 const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
   const [isFavorite, setIsFavorite] = useState(false);

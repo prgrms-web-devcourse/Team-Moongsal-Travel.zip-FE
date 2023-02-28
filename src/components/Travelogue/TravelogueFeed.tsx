@@ -20,7 +20,7 @@ const TravelogueFeed = () => {
   return (
     <Stack spacing={1.5} sx={{ maxWidth: '90%', height: 300 }}>
       <FeedHeader
-        profileImage={DUMMY_DATA.member.profileImageUrl}
+        profileImageUrl={DUMMY_DATA.member.profileImageUrl}
         nickname={DUMMY_DATA.member.nickname}
         country={DUMMY_DATA.country}
       />

@@ -1,9 +1,11 @@
 import { Box } from '@mui/material';
 import Image from 'next/image';
 
+import { TravelogueFeed } from './type';
+
 interface FeedImageProps {
-  thumbnailURL: string;
-  ImageAlt: string;
+  thumbnailURL: TravelogueFeed['thumbnail'];
+  ImageAlt: TravelogueFeed['title'];
 }
 
 const FeedImage = ({ thumbnailURL, ImageAlt }: FeedImageProps) => {
