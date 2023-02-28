@@ -4,21 +4,24 @@ import { Box } from '@mui/material';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { CreatePostForm } from '@/api/createPost/type';
+import { CreatePost } from '@/api/createPost/type';
 import { PostBasic, PostDetail, StepperButton } from '@/components/CreatePost';
 
 const Post = () => {
   const [steps, setSteps] = useState(0);
-  const methods = useForm<CreatePostForm>({
+  const methods = useForm<CreatePost>({
     mode: 'onChange',
     defaultValues: {
-      name: '',
-      startDate: '',
-      endDate: '',
-      transportation: '',
-      lodge: '',
-      etc: '',
-      total: '',
+      country: {
+        name: '',
+      },
+      period: { startDate: '', endDate: '' },
+      cost: {
+        transportation: '',
+        lodge: '',
+        etc: '',
+        total: '',
+      },
       title: '',
       thumbnail: '',
     },

@@ -1,30 +1,25 @@
 import { Control, useController } from 'react-hook-form';
 
-import { CreatePostForm } from '@/api/createPost/type';
+import { CreatePost } from '@/api/createPost/type';
 
-const usePostForm = (control: Control<CreatePostForm>) => {
-  const { field: total, fieldState: totalState } = useController({
-    name: 'total',
+const usePostForm = (control: Control<CreatePost>) => {
+  const { field: countryName, fieldState: countryNameState } = useController({
+    name: 'country.name',
     control,
   });
 
-  const { field: name, fieldState: nameState } = useController({
-    name: 'name',
+  const { field: costTotal, fieldState: costTotalState } = useController({
+    name: 'cost.total',
     control,
   });
 
   const { field: startDate, fieldState: startDateState } = useController({
-    name: 'startDate',
+    name: 'period.startDate',
     control,
   });
 
   const { field: endDate, fieldState: endDateState } = useController({
-    name: 'endDate',
-    control,
-  });
-
-  const { field: thumbnail, fieldState: thumbnailState } = useController({
-    name: 'thumbnail',
+    name: 'period.endDate',
     control,
   });
 
@@ -33,19 +28,24 @@ const usePostForm = (control: Control<CreatePostForm>) => {
     control,
   });
 
+  const { field: thumbnail, fieldState: thumbnailState } = useController({
+    name: 'thumbnail',
+    control,
+  });
+
   return {
-    total,
-    totalState,
-    name,
-    nameState,
+    countryName,
+    countryNameState,
+    costTotal,
+    costTotalState,
     startDate,
     startDateState,
     endDate,
     endDateState,
-    thumbnail,
-    thumbnailState,
     title,
     titleState,
+    thumbnail,
+    thumbnailState,
   };
 };
 

@@ -1,38 +1,26 @@
 import { Box, OutlinedInput, Stack } from '@mui/material';
-import dayjs, { Dayjs } from 'dayjs';
 import { MouseEvent, useState } from 'react';
 import { Control } from 'react-hook-form';
 
-import { CreatePostForm } from '@/api/createPost/type';
+import { CreatePost } from '@/api/createPost/type';
 import { SubTitle, Title } from '@/components/common';
 
 import usePostForm from '../hooks/usePostForm';
 import { ComplexButton, DatePicker, Location } from './';
 
 interface ControlProps {
-  control: Control<CreatePostForm>;
+  control: Control<CreatePost>;
 }
 
 const PostBasic = ({ control }: ControlProps) => {
-  // api 연결시 커스텀 훅으로 분리 예정
-  const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(''));
-  const [endDate, setEndDate] = useState<Dayjs | null>(dayjs(''));
   const [toggleValue, setToggleValue] = useState('');
 
   const handleChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
     setToggleValue(selectedValue);
   };
 
-  const handleStartDateChange = (newValue: Dayjs | null) => {
-    setStartDate(newValue);
-  };
-
-  const handleEndDateChange = (newValue: Dayjs | null) => {
-    setEndDate(newValue);
-  };
-
-  const { title } = usePostForm(control);
-
+  const { countryName, costTotal, startDate, endDate, title, thumbnail } =
+    usePostForm(control);
   return (
     <>
       <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
@@ -42,7 +30,7 @@ const PostBasic = ({ control }: ControlProps) => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>방문한 나라</SubTitle>
-        <Location readonly={toggleValue === '국내' && true} />
+        <Location name={countryName} readonly={toggleValue === '국내'} />
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>여행 기간</SubTitle>
@@ -50,20 +38,17 @@ const PostBasic = ({ control }: ControlProps) => {
           sx={{
             ...marginBottom,
             display: 'flex',
-            gap: 2,
+            gap: 1,
           }}>
-          <DatePicker
-            value={startDate}
-            onChange={handleStartDateChange}
-            text='시작날짜'
-          />
-          <DatePicker value={endDate} onChange={handleEndDateChange} text='종료날짜' />
+          <DatePicker control={startDate} text='시작날짜' />
+          <DatePicker control={endDate} text='종료날짜' />
         </Box>
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>총 경비</SubTitle>
         <Box>
           <OutlinedInput
+            {...costTotal}
             fullWidth
             placeholder='이번 여행의 총 경비를 입력하세요'
             type='number'
@@ -77,7 +62,7 @@ const PostBasic = ({ control }: ControlProps) => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
-        <OutlinedInput fullWidth type='file' />
+        <OutlinedInput {...thumbnail} fullWidth type='file' />
       </Stack>
       <button type='submit'>제출</button>
     </>
