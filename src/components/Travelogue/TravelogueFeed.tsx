@@ -1,7 +1,6 @@
 import { Stack } from '@mui/material';
-import React from 'react';
 
-import { FeedHeader, FeedImage } from '@/components/Travelogue';
+import { FeedContent, FeedHeader, FeedImage } from '@/components/Travelogue';
 
 const DUMMY_DATA = {
   title: '일본 오사카 여행기',
@@ -25,6 +24,12 @@ const TravelogueFeed = () => {
         country={DUMMY_DATA.country}
       />
       <FeedImage thumbnailURL={DUMMY_DATA.thumbnail} ImageAlt={DUMMY_DATA.title} />
+      <FeedContent
+        title={DUMMY_DATA.title}
+        totalCost={DUMMY_DATA.totalCost}
+        nights={DUMMY_DATA.nights}
+        days={DUMMY_DATA.days}
+      />
     </Stack>
   );
 };
