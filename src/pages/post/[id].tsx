@@ -31,19 +31,17 @@ const Post = () => {
   return (
     <Box sx={layout}>
       {!steps ? (
-        <>
-          <form>
-            <PostBasic control={control} />
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <StepperButton
-                format='forward'
-                steps={steps}
-                setSteps={setSteps}
-                onClick={handleSubmit}
-              />
-            </Box>
-          </form>
-        </>
+        <form>
+          <PostBasic control={control} />
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <StepperButton
+              format='forward'
+              steps={steps}
+              setSteps={setSteps}
+              onClick={handleSubmit}
+            />
+          </Box>
+        </form>
       ) : (
         <>
           <PostDetail />
