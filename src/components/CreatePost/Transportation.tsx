@@ -7,38 +7,47 @@ import {
   Sailing,
   Train,
 } from '@mui/icons-material';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Control, Controller, useFieldArray } from 'react-hook-form';
+
+import { SubTravelogueForm } from '@/types/post';
+
+const transportType = [
+  { icon: Flight, type: 'PLANE' },
+  { icon: Sailing, type: 'SHIP' },
+  { icon: DirectionsBus, type: 'BUS' },
+  { icon: Train, type: 'TRAIN' },
+  { icon: DirectionsCar, type: 'CAR' },
+  { icon: PedalBike, type: 'BICYCLE' },
+  { icon: DirectionsRun, type: 'WALK' },
+];
 
 interface TransportationProps {
   value: string[];
   handleFormat: (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => void;
+  control: Control<SubTravelogueForm>;
 }
 
-const Transportation = ({ value, handleFormat }: TransportationProps) => {
+const Transportation = ({ value, handleFormat, control }: TransportationProps) => {
+  const { fields } = useFieldArray({ control, name: 'transports' });
+
   return (
-    <ToggleButtonGroup value={value} onChange={handleFormat} aria-label='text formatting'>
-      <ToggleIconButton value='flight' aria-label='flight'>
-        <Flight />
-      </ToggleIconButton>
-      <ToggleIconButton value='boat' aria-label='boat'>
-        <Sailing />
-      </ToggleIconButton>
-      <ToggleIconButton value='bus' aria-label='bus'>
-        <DirectionsBus />
-      </ToggleIconButton>
-      <ToggleIconButton value='train' aria-label='train'>
-        <Train />
-      </ToggleIconButton>
-      <ToggleIconButton value='car' aria-label='car'>
-        <DirectionsCar />
-      </ToggleIconButton>
-      <ToggleIconButton value='bicycle' aria-label='bicycle'>
-        <PedalBike />
-      </ToggleIconButton>
-      <ToggleIconButton value='walk' aria-label='walk'>
-        <DirectionsRun />
-      </ToggleIconButton>
+    <ToggleButtonGroup value={value} onChange={handleFormat}>
+      {fields.map((item, i) => (
+        <Controller
+          key={item.id}
+          render={({ field }) => (
+            <ToggleIconButton
+              {...field}
+              onChange={() => field.onChange(field.value ? '' : transportType[i].type)}>
+              <SvgIcon component={transportType[i].icon} />
+            </ToggleIconButton>
+          )}
+          name={`transports.${i}.transport`}
+          control={control}
+        />
+      ))}
     </ToggleButtonGroup>
   );
 };
