@@ -5,8 +5,6 @@ import { FeedContent, FeedHeader, FeedImage } from '@/components/Travelogue';
 import { TravelogueFeed as TravelogueFeedType } from './type';
 
 const TravelogueFeed = ({ data }: { data: TravelogueFeedType }) => {
-  console.log('hello');
-
   return (
     <Stack spacing={1.5} sx={{ maxWidth: '90%', height: 300, margin: '0 auto', pb: 3 }}>
       <FeedHeader

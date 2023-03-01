@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { Box, Stack } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
 import Link from 'next/link';
@@ -7,14 +6,10 @@ const TemporaryButton = () => {
   return (
     <Stack spacing={4} direction='row' justifyContent='space-between'>
       <CustomBox>
-        <Link href='/auth/login'>
-          <CustomLink>로그인</CustomLink>
-        </Link>
+        <CustomLink href='/auth/login'>로그인</CustomLink>
       </CustomBox>
       <CustomBox>
-        <Link href='/post/1'>
-          <CustomLink>피드작성</CustomLink>
-        </Link>
+        <CustomLink href='/post/1'>피드작성</CustomLink>
       </CustomBox>
     </Stack>
   );
@@ -29,9 +24,9 @@ const CustomBox = muiStyled(Box)(({ theme }) => ({
   color: theme.palette.white.main,
 }));
 
-const CustomLink = styled.a`
-  display: inline-block;
-  padding: 10px;
-  color: #ffffff;
-  font-weight: bold;
-`;
+const CustomLink = muiStyled(Link)(({ theme }) => ({
+  display: 'inline-block',
+  padding: '10px',
+  color: theme.palette.white.main,
+  fontWeight: 'bold',
+}));
