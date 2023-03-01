@@ -1,6 +1,6 @@
 import { Control, useController } from 'react-hook-form';
 
-import { CreatePost } from '@/types/CreatePost';
+import { CreatePost } from '@/types/post';
 
 const usePostForm = (control: Control<CreatePost>) => {
   const { field: countryName, fieldState: countryNameState } = useController({

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePost } from '@/types/CreatePost';
+import { CreatePost } from '@/types/post';
 
 import { SubTitle } from './';
 

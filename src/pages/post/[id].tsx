@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { PostBasic, PostDetail, StepperButton } from '@/components/CreatePost';
-import { CreatePost } from '@/types/CreatePost';
+import { CreatePost } from '@/types/post';
 
 const Post = () => {
   const [steps, setSteps] = useState(0);
