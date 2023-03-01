@@ -18,7 +18,6 @@ const PostDetail = () => {
       title: '',
       content: '',
       addresses: [{ country: '', city: '', spot: '' }],
-      transports: Array.from({ length: 7 }, () => ({ transport: '' })),
     },
   });
   const { title, content } = useSubTravelogueForm(control);
@@ -30,18 +29,14 @@ const PostDetail = () => {
   };
 
   const handlePostSubTravelogue = (data: SubTravelogueForm) => {
-    const { title, content, addresses, transports } = data;
-    const transportationSet = transports
-      .filter(({ transport }) => transport !== '')
-      .map(({ transport }) => transport);
+    const { title, content, addresses } = data;
     const subData = {
       title,
       content,
       addresses,
-      transportationSet,
+      transportationSet: formats,
       travelPhotoCreateReqs: [{ url: 'temp' }],
     };
-    console.log(JSON.stringify(subData));
     mutate({ data: subData, travelogueId: '14' });
   };
 
@@ -83,7 +78,7 @@ const PostDetail = () => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>이동수단</SubTitle>
-        <Transportation control={control} value={formats} handleFormat={onFormatChange} />
+        <Transportation value={formats} handleFormat={onFormatChange} />
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>글을 자유롭게 작성해보세요</SubTitle>

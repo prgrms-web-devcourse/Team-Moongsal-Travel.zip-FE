@@ -9,9 +9,6 @@ import {
 } from '@mui/icons-material';
 import { SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Control, Controller, useFieldArray } from 'react-hook-form';
-
-import { SubTravelogueForm } from '@/types/post';
 
 const transportType = [
   { icon: Flight, type: 'PLANE' },
@@ -26,27 +23,15 @@ const transportType = [
 interface TransportationProps {
   value: string[];
   handleFormat: (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => void;
-  control: Control<SubTravelogueForm>;
 }
 
-const Transportation = ({ value, handleFormat, control }: TransportationProps) => {
-  const { fields } = useFieldArray({ control, name: 'transports' });
-
+const Transportation = ({ value, handleFormat }: TransportationProps) => {
   return (
-    <ToggleButtonGroup value={value} onChange={handleFormat}>
-      {fields.map((item, i) => (
-        <Controller
-          key={item.id}
-          render={({ field }) => (
-            <ToggleIconButton
-              {...field}
-              onChange={() => field.onChange(field.value ? '' : transportType[i].type)}>
-              <SvgIcon component={transportType[i].icon} />
-            </ToggleIconButton>
-          )}
-          name={`transports.${i}.transport`}
-          control={control}
-        />
+    <ToggleButtonGroup value={value} onChange={handleFormat} aria-label='text formatting'>
+      {transportType.map((transport, i) => (
+        <ToggleIconButton key={transport.type} value={transport.type}>
+          <SvgIcon component={transportType[i].icon} />
+        </ToggleIconButton>
       ))}
     </ToggleButtonGroup>
   );
