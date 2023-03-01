@@ -12,3 +12,19 @@ export interface CreatePost {
   title: string;
   thumbnail: string;
 }
+
+export interface SubTravelogue {
+  title: string;
+  content: string;
+  addresses: [
+    {
+      country: string;
+      city: string;
+      spot: string;
+    },
+  ];
+  transportationSet: string[];
+  travelPhotoCreateReqs: { url: string }[];
+}
+
+
