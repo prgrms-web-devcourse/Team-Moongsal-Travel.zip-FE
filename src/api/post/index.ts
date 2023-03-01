@@ -1,5 +1,5 @@
 import http from '@/api/core';
-import { CreatePost } from '@/types/post';
+import { CreatePost, SubTravelogue } from '@/types/post';
 
 export const createPost = async (data: CreatePost, userId: string) => {
   await http.post({
@@ -7,3 +7,15 @@ export const createPost = async (data: CreatePost, userId: string) => {
     data,
   });
 };
+
+export const postSubTravelogue = async ({
+  data,
+  travelogueId,
+}: {
+  data: SubTravelogue;
+  travelogueId: string;
+}) =>
+  await http.post({
+    url: `api/travelogues/${travelogueId}/subTravelogues`,
+    data,
+  });
