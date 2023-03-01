@@ -1,17 +1,24 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { SearchModal } from '../SearchModal';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
   return (
     <>
       <Box sx={BoxStyle}>
         <AppBar sx={AppBarStyle}>
           <Toolbar>
-            <Typography variant='h1' component='h1' sx={TextStyle}>
+            <Typography
+              variant='h1'
+              component='h1'
+              sx={TextStyle}
+              onClick={() => router.push('/')}>
               🛫travel.zip
             </Typography>
             <IconButton
@@ -53,4 +60,5 @@ const TextStyle = {
   fontFamily: 'KOHIBaeum',
   color: 'white.main',
   textAlign: 'center',
+  cursor: 'pointer',
 } as const;

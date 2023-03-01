@@ -1,15 +1,14 @@
 import { Box, Button } from '@mui/material';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import { createPost } from '@/api/post/createPost';
 import { AlertMessage } from '@/components/common';
 import { PostBasic } from '@/components/CreatePost';
 import { CreatePost } from '@/types/CreatePost';
 
-// const dummy_data = '123';
-
 const First = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const methods = useForm<CreatePost>({
     mode: 'onChange',
     defaultValues: {
@@ -34,17 +33,13 @@ const First = () => {
   } = methods;
 
   const handleComplete = (data: CreatePost) => {
-    // api 호출후 subtravelogues로 이동시키기
-    console.log(data);
-  };
-
-  const handleError = () => {
-    // return ;;
+    createPost(data);
+    router.push('/post/1');
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(handleComplete, handleError)}>
+      <form onSubmit={handleSubmit(handleComplete)}>
         <PostBasic control={control} />
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           {Object.keys(errors).length > 0 && <AlertMessage />}
