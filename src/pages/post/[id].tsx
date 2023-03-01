@@ -1,7 +1,7 @@
 // import { useRouter } from 'next/router';
 
 import { Box } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { PostBasic, PostDetail, StepperButton } from '@/components/CreatePost';
@@ -9,6 +9,7 @@ import { CreatePost } from '@/types/CreatePost';
 
 const Post = () => {
   const [steps, setSteps] = useState(0);
+  const [isActive, setIsActive] = useState(false);
   const methods = useForm<CreatePost>({
     mode: 'onChange',
     defaultValues: {
@@ -26,7 +27,17 @@ const Post = () => {
       thumbnail: '',
     },
   });
-  const { handleSubmit, control } = methods;
+  const { handleSubmit, control, watch } = methods;
+
+  const watchAll = Object.values(watch());
+
+  useEffect(() => {
+    if (watchAll.every((el) => el)) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [watchAll]);
 
   return (
     <Box sx={layout}>
@@ -40,6 +51,7 @@ const Post = () => {
                 steps={steps}
                 setSteps={setSteps}
                 onClick={handleSubmit}
+                isActive={isActive}
               />
             </Box>
           </form>

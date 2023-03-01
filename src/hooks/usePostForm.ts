@@ -6,6 +6,9 @@ const usePostForm = (control: Control<CreatePost>) => {
   const { field: countryName, fieldState: countryNameState } = useController({
     name: 'country.name',
     control,
+    rules: {
+      required: '필수입력',
+    },
   });
 
   const { field: costTotal, fieldState: costTotalState } = useController({

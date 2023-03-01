@@ -4,22 +4,29 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 
-import { createPost } from '@/api/createPost';
+// import { createPost } from '@/api/createPost';
 import { CreatePost } from '@/types/CreatePost';
 
 interface StepperButtonProps {
   format: 'forward' | 'backward' | 'complete';
   steps: number;
+  isActive?: boolean;
   setSteps: Dispatch<SetStateAction<number>>;
   onClick?: UseFormHandleSubmit<CreatePost>;
 }
 
-const StepperButton = ({ format, steps, setSteps, onClick }: StepperButtonProps) => {
+const StepperButton = ({
+  format,
+  steps,
+  setSteps,
+  isActive,
+  onClick,
+}: StepperButtonProps) => {
   const router = useRouter();
 
   const onSubmit = (data: CreatePost) => {
     console.log(data);
-    createPost({ ...data, thumbnail: '123' }, '178');
+    // createPost(data, '2');
   };
 
   return (
@@ -29,6 +36,7 @@ const StepperButton = ({ format, steps, setSteps, onClick }: StepperButtonProps)
           variant='contained'
           sx={centered}
           type='submit'
+          disabled={!isActive}
           onClick={() => {
             if (onClick) {
               onClick(onSubmit)();
