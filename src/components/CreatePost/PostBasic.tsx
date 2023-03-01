@@ -4,7 +4,7 @@ import { Control } from 'react-hook-form';
 
 import { FileInput, SubTitle, Title } from '@/components/common';
 import usePostForm from '@/hooks/usePostForm';
-import { CreatePost } from '@/types/CreatePost';
+import { CreatePost } from '@/types/post';
 
 import { ComplexButton, DatePicker, Location } from './';
 

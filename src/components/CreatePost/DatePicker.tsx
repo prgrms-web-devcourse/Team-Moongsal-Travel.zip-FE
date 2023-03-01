@@ -6,7 +6,7 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { Dayjs } from 'dayjs';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePost } from '@/types/CreatePost';
+import { CreatePost } from '@/types/post';
 import { getDateInfo } from '@/utils/helper';
 
 interface DatePickerProps {
