@@ -149,4 +149,18 @@ const style = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+  /* 데모 데이를 위한 임시 스타일 */
+  a:link {
+    color: #333;
+    text-decoration: none;
+  }
+  a:visited {
+    color: #333;
+    text-decoration: none;
+  }
+  a:hover {
+    color: inherit;
+    text-decoration: none;
+  }
 `;

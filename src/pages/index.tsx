@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { TravelogueFeed } from '@/components/Travelogue';
+import { TravelogueList } from '@/components/Travelogue';
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <TravelogueFeed />
+        <TravelogueList />
       </main>
     </>
   );
