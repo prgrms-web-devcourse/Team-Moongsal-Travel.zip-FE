@@ -1,26 +1,30 @@
 import { LocationOnOutlined } from '@mui/icons-material';
 import { Box, IconButton, OutlinedInput } from '@mui/material';
-import { ChangeEvent, useState } from 'react';
+import { useEffect } from 'react';
+import { ControllerRenderProps } from 'react-hook-form';
+
+import { CreatePost } from '@/types/CreatePost';
 
 interface LocationProps {
   readonly?: boolean;
+  name?: ControllerRenderProps<CreatePost, 'country.name'>;
 }
 
-const Location = ({ readonly }: LocationProps) => {
-  const [value, setValue] = useState('');
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
+const Location = ({ readonly, name }: LocationProps) => {
+  useEffect(() => {
+    if (name) {
+      readonly ? name.onChange('대한민국') : name.onChange('');
+    }
+  }, [readonly]);
 
   return (
     <Box sx={locationBoxStyle}>
       <OutlinedInput
+        {...name}
         fullWidth
         placeholder='지역을 입력하세요'
         type='text'
-        onChange={onChange}
         readOnly={readonly}
-        value={readonly ? '대한민국' : value}
       />
       <IconButton sx={{ position: 'absolute', right: 0, top: '0.5rem' }}>
         <LocationOnOutlined />
