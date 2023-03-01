@@ -2,6 +2,7 @@ import { Box, Button } from '@mui/material';
 // import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import { AlertMessage } from '@/components/common';
 import { PostBasic } from '@/components/CreatePost';
 import { CreatePost } from '@/types/CreatePost';
 
@@ -26,7 +27,11 @@ const First = () => {
       thumbnail: '',
     },
   });
-  const { handleSubmit, control } = methods;
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = methods;
 
   const handleComplete = (data: CreatePost) => {
     // api 호출후 subtravelogues로 이동시키기
@@ -34,16 +39,19 @@ const First = () => {
   };
 
   const handleError = () => {
-    // toast 띄우기
+    // return ;;
   };
 
   return (
-    <form onSubmit={handleSubmit(handleComplete, handleError)}>
-      <PostBasic control={control} />
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button type='submit'>다음</Button>
-      </Box>
-    </form>
+    <>
+      <form onSubmit={handleSubmit(handleComplete, handleError)}>
+        <PostBasic control={control} />
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          {Object.keys(errors).length > 0 && <AlertMessage />}
+          <Button type='submit'>다음</Button>
+        </Box>
+      </form>
+    </>
   );
 };
 
