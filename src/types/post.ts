@@ -17,8 +17,6 @@ export interface SubTravelogueForm {
   title: string;
   content: string;
   addresses: { country: string; city: string; spot: string }[];
-  transports: { transport: string }[];
-  travelPhotos?: { url: string }[];
 }
 
 export interface SubTravelogue {
