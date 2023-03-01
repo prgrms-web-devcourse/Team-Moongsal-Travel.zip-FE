@@ -31,11 +31,12 @@ export const postUserSignIn = async (data: User) =>
     data,
   });
 
-export const getVerifyNickname = async (nickname: string) => {
+export const postVerifyNickname = async (data: { nickname: string }) => {
   try {
     const response = await baseRequest.request({
-      method: 'GET',
-      url: `api/auth/valid/nickname/${nickname}`,
+      method: 'POST',
+      url: `api/auth/valid/nickname`,
+      data,
     });
     return response.status;
   } catch (error) {

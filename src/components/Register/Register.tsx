@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
 
-import { getVerifyNickname } from '@/api/user';
+import { postVerifyNickname } from '@/api/user';
 import useGetUserForms from '@/components/Register/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
 
@@ -56,7 +56,7 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
 
   const handleVerifyNickname = async () => {
     if (await trigger('nickname')) {
-      const status = await getVerifyNickname(nickname.value);
+      const status = await postVerifyNickname({ nickname: nickname.value });
 
       let message = '';
       switch (status) {
