@@ -17,7 +17,7 @@ const TravelogueList = () => {
   return (
     <Stack>
       {travelogues.map((travelogue) => {
-        return <TravelogueFeed key={travelogue.id} data={travelogue} />;
+        return <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />;
       })}
     </Stack>
   );
