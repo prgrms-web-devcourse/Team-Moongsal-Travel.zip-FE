@@ -3,14 +3,15 @@ import { Box, IconButton, OutlinedInput } from '@mui/material';
 import { useEffect } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePost } from '@/types/post';
+import { CreatePost, SubTravelogueForm } from '@/types/post';
 
 interface LocationProps {
   readonly?: boolean;
   name?: ControllerRenderProps<CreatePost, 'country.name'>;
+  field: ControllerRenderProps<SubTravelogueForm, `addresses.${number}.spot`>;
 }
 
-const Location = ({ readonly, name }: LocationProps) => {
+const Location = ({ readonly, name, field }: LocationProps) => {
   useEffect(() => {
     if (name) {
       readonly ? name.onChange('대한민국') : name.onChange('');
@@ -21,6 +22,7 @@ const Location = ({ readonly, name }: LocationProps) => {
     <Box sx={locationBoxStyle}>
       <OutlinedInput
         {...name}
+        {...field}
         fullWidth
         placeholder='지역을 입력하세요'
         type='text'
@@ -40,4 +42,5 @@ const locationBoxStyle = {
   alignItems: 'center',
   paddingBottom: '15px',
   position: 'relative',
+  width: '100%',
 };
