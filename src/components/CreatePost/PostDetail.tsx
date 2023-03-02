@@ -14,6 +14,7 @@ import { Location, Transportation } from './';
 const PostDetail = () => {
   const [formats, setFormats] = useState<string[]>(() => []);
   const { control, handleSubmit } = useForm<SubTravelogueForm>({
+    mode: 'onChange',
     defaultValues: {
       title: '',
       content: '',
@@ -37,7 +38,7 @@ const PostDetail = () => {
       transportationSet: formats,
       travelPhotoCreateReqs: [{ url: 'temp' }],
     };
-    mutate({ data: subData, travelogueId: '14' });
+    formats.length && mutate({ data: subData, travelogueId: '14' });
   };
 
   return (
@@ -63,6 +64,7 @@ const PostDetail = () => {
               render={({ field }) => <Location field={field} />}
               name={`addresses.${index}.spot`}
               control={control}
+              rules={{ required: true }}
             />
             <Button
               type='button'
