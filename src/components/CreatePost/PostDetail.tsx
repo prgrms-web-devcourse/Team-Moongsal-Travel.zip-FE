@@ -57,24 +57,23 @@ const PostDetail = () => {
             <AddCircle />
           </IconButton>
         </Stack>
-        {fields.map((item, index) => {
-          return (
-            <Stack key={item.id} direction='row' spacing={2} component='li'>
-              <Controller
-                render={({ field }) => <Location field={field} />}
-                name={`addresses.${index}.spot`}
-                control={control}
-              />
-              <Button
-                type='button'
-                variant='outlined'
-                sx={{ width: '60px', height: '56px' }}
-                onClick={() => remove(index)}>
-                삭제
-              </Button>
-            </Stack>
-          );
-        })}
+        {fields.map((item, index) => (
+          <Stack key={item.id} direction='row' spacing={2} component='li'>
+            <Controller
+              render={({ field }) => <Location field={field} />}
+              name={`addresses.${index}.spot`}
+              control={control}
+            />
+            <Button
+              type='button'
+              variant='outlined'
+              sx={{ width: '60px', height: '56px' }}
+              onClick={() => remove(index)}
+              disabled={fields.length === 1}>
+              삭제
+            </Button>
+          </Stack>
+        ))}
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>이동수단</SubTitle>
