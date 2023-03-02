@@ -11,7 +11,19 @@ baseRequest.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
-const handleRequest = (config: AxiosRequestConfig) => config;
+const handleRequest = (config: AxiosRequestConfig) => {
+  const token = localStorage.getItem('accessToken');
+
+  return token
+    ? ({
+        ...config,
+        headers: {
+          ...config.headers,
+          AccessToken: `Bearer ${JSON.parse(token)}`,
+        },
+      } as AxiosRequestConfig)
+    : config;
+};
 
 const createApiMethod =
   (axiosInstance: AxiosInstance, methodType: Method) => (config: AxiosRequestConfig) => {
