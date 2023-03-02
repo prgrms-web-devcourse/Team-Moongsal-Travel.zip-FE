@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import { createPost } from '@/api/post/createPost';
@@ -8,7 +8,7 @@ import { PostBasic } from '@/components/CreatePost';
 import { CreatePost } from '@/types/CreatePost';
 
 const First = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const methods = useForm<CreatePost>({
     mode: 'onChange',
     defaultValues: {
@@ -34,19 +34,17 @@ const First = () => {
 
   const handleComplete = (data: CreatePost) => {
     createPost(data);
-    router.push('/post/1');
+    // 성공시 subtravelogues로 넘김
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(handleComplete)}>
-        <PostBasic control={control} />
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          {Object.keys(errors).length > 0 && <AlertMessage />}
-          <Button type='submit'>다음</Button>
-        </Box>
-      </form>
-    </>
+    <form onSubmit={handleSubmit(handleComplete)}>
+      <PostBasic control={control} />
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        {Object.keys(errors).length > 0 && <AlertMessage />}
+        <Button type='submit'>다음</Button>
+      </Box>
+    </form>
   );
 };
 

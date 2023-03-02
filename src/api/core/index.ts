@@ -17,7 +17,7 @@ const handleRequest = (config: AxiosRequestConfig) => {
   return token
     ? ({
         ...config,
-        header: {
+        headers: {
           ...config.headers,
           AccessToken: `Bearer ${token}`,
         },
