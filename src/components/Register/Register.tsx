@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
 
-import { getVerifyNickname } from '@/api/user';
+import { postVerifyNickname } from '@/api/user';
 import useGetUserForms from '@/components/Register/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
 
@@ -56,19 +56,18 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
 
   const handleVerifyNickname = async () => {
     if (await trigger('nickname')) {
-      const status = await getVerifyNickname(nickname.value);
-
-      let message = '';
-      switch (status) {
-        case 200:
-          message = '사용 가능한 닉네임입니다.';
-          setValidNickname(true);
-          break;
-        case 409:
-          message = '이미 존재하는 닉네임입니다.';
-          break;
+      try {
+        const { isDuplicated } = await postVerifyNickname({
+          nickname: nickname.value,
+        });
+        if (isDuplicated) {
+          return setError('nickname', { message: '이미 존재하는 닉네임입니다.' });
+        }
+        setError('nickname', { message: '사용 가능한 닉네임입니다.' });
+        setValidNickname(true);
+      } catch (e) {
+        console.error(e);
       }
-      setError('nickname', { message });
     }
   };
 
