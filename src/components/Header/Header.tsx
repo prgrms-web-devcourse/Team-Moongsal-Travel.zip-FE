@@ -3,7 +3,7 @@ import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import { SearchModal } from '../SearchModal';
+import { SearchModal } from '@/components/SearchModal';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);

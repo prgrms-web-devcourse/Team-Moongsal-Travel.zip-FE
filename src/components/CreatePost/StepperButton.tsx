@@ -37,9 +37,7 @@ const StepperButton = ({
           sx={centered}
           type='submit'
           onClick={() => {
-            if (onClick) {
-              onClick(onSubmit)();
-            }
+            onClick && onClick(onSubmit)();
           }}>
           <Typography variant='body1' component='span' sx={{ fontSize: '0.5rem' }}>
             다음
