@@ -56,12 +56,18 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
 
   const handleVerifyNickname = async () => {
     if (await trigger('nickname')) {
-      const { isDuplicated } = await postVerifyNickname({ nickname: nickname.value });
-      if (isDuplicated) {
-        return setError('nickname', { message: '이미 존재하는 닉네임입니다.' });
+      try {
+        const { isDuplicated } = await postVerifyNickname({
+          nickname: nickname.value,
+        });
+        if (isDuplicated) {
+          return setError('nickname', { message: '이미 존재하는 닉네임입니다.' });
+        }
+        setError('nickname', { message: '사용 가능한 닉네임입니다.' });
+        setValidNickname(true);
+      } catch (e) {
+        console.error(e);
       }
-      setError('nickname', { message: '사용 가능한 닉네임입니다.' });
-      setValidNickname(true);
     }
   };
 

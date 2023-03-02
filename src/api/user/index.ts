@@ -1,5 +1,5 @@
 import { baseRequest } from '@/api/core';
-import { User, UserRegister } from '@/types/auth';
+import { User, UserRegister, VerifyNickname } from '@/types/auth';
 
 export const postUserRegister = async (data: UserRegister) =>
   await baseRequest.request({
@@ -30,14 +30,10 @@ export const postUserSignIn = async (data: User) =>
   });
 
 export const postVerifyNickname = async (data: { nickname: string }) => {
-  try {
-    const response = await baseRequest.request({
-      method: 'POST',
-      url: `api/auth/valid/nickname`,
-      data,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
+  const response = await baseRequest.request<VerifyNickname>({
+    method: 'POST',
+    url: `api/auth/valid/nickname`,
+    data,
+  });
+  return response.data;
 };
