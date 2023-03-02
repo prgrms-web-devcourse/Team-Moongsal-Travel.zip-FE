@@ -7,8 +7,18 @@ import {
   Sailing,
   Train,
 } from '@mui/icons-material';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
+
+const transportType = [
+  { icon: Flight, type: 'PLANE' },
+  { icon: Sailing, type: 'SHIP' },
+  { icon: DirectionsBus, type: 'BUS' },
+  { icon: Train, type: 'TRAIN' },
+  { icon: DirectionsCar, type: 'CAR' },
+  { icon: PedalBike, type: 'BICYCLE' },
+  { icon: DirectionsRun, type: 'WALK' },
+];
 
 interface TransportationProps {
   value: string[];
@@ -18,27 +28,11 @@ interface TransportationProps {
 const Transportation = ({ value, handleFormat }: TransportationProps) => {
   return (
     <ToggleButtonGroup value={value} onChange={handleFormat} aria-label='text formatting'>
-      <ToggleIconButton value='flight' aria-label='flight'>
-        <Flight />
-      </ToggleIconButton>
-      <ToggleIconButton value='boat' aria-label='boat'>
-        <Sailing />
-      </ToggleIconButton>
-      <ToggleIconButton value='bus' aria-label='bus'>
-        <DirectionsBus />
-      </ToggleIconButton>
-      <ToggleIconButton value='train' aria-label='train'>
-        <Train />
-      </ToggleIconButton>
-      <ToggleIconButton value='car' aria-label='car'>
-        <DirectionsCar />
-      </ToggleIconButton>
-      <ToggleIconButton value='bicycle' aria-label='bicycle'>
-        <PedalBike />
-      </ToggleIconButton>
-      <ToggleIconButton value='walk' aria-label='walk'>
-        <DirectionsRun />
-      </ToggleIconButton>
+      {transportType.map((transport, i) => (
+        <ToggleIconButton key={transport.type} value={transport.type}>
+          <SvgIcon component={transportType[i].icon} />
+        </ToggleIconButton>
+      ))}
     </ToggleButtonGroup>
   );
 };
