@@ -1,4 +1,4 @@
-import { AddCircle } from '@mui/icons-material';
+import { AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { Button, IconButton, OutlinedInput, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
@@ -54,7 +54,7 @@ const PostDetail = () => {
             color='primary'
             component='label'
             onClick={() => append({ country: '', city: '', spot: '' })}>
-            <AddCircle />
+            <AddCircleIcon />
           </IconButton>
         </Stack>
         {fields.map((item, index) => {
