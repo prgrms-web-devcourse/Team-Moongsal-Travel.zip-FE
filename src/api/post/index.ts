@@ -1,9 +1,9 @@
 import http from '@/api/core';
 import { CreatePost, SubTravelogue } from '@/types/post';
 
-export const createPost = async (data: CreatePost, userId: string) => {
+export const createPost = async (data: CreatePost) => {
   await http.post({
-    url: `api/travelogues?memberId=${userId}`,
+    url: `api/travelogues`,
     data,
   });
 };
