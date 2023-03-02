@@ -19,7 +19,7 @@ const handleRequest = (config: AxiosRequestConfig) => {
         ...config,
         headers: {
           ...config.headers,
-          AccessToken: `Bearer ${token}`,
+          AccessToken: `Bearer ${JSON.parse(token)}`,
         },
       } as AxiosRequestConfig)
     : config;
