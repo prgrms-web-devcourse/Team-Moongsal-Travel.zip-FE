@@ -1,5 +1,3 @@
-import { AxiosError } from 'axios';
-
 import { baseRequest } from '@/api/core';
 import { User, UserRegister } from '@/types/auth';
 
@@ -38,10 +36,8 @@ export const postVerifyNickname = async (data: { nickname: string }) => {
       url: `api/auth/valid/nickname`,
       data,
     });
-    return response.status;
+    return response.data;
   } catch (error) {
-    if (error instanceof AxiosError) {
-      return error.response?.status;
-    }
+    console.error(error);
   }
 };
