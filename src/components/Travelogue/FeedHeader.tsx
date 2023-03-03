@@ -1,10 +1,10 @@
 import { Person, Room as Marker } from '@mui/icons-material';
 import { Avatar, Stack, Typography } from '@mui/material';
 
-import { TravelogueFeed } from './type';
+import { TravelogueFeedType } from '@/types/travelogue';
 
-type FeedHeaderProps = TravelogueFeed['member'] & {
-  country: TravelogueFeed['country'];
+type FeedHeaderProps = TravelogueFeedType['member'] & {
+  country: TravelogueFeedType['country'];
 };
 
 const FeedHeader = ({
