@@ -1,4 +1,4 @@
-export interface TravelogueFeed {
+export interface TravelogueFeedType {
   title: string;
   country: string;
   thumbnail: string;
