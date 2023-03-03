@@ -3,7 +3,7 @@ import { MouseEvent, useState } from 'react';
 import { Control } from 'react-hook-form';
 
 import { FileInput, SubTitle, Title } from '@/components/common';
-import usePostForm from '@/hooks/usePostForm';
+import usePostForm from '@/hooks/useTravelogueForm';
 import { CreatePost } from '@/types/post';
 
 import { ComplexButton, DatePicker, Location } from './';
@@ -21,6 +21,7 @@ const PostBasic = ({ control }: ControlProps) => {
 
   const { countryName, costTotal, startDate, endDate, title, thumbnail } =
     usePostForm(control);
+
   return (
     <>
       <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
@@ -46,7 +47,7 @@ const PostBasic = ({ control }: ControlProps) => {
             {...costTotal}
             fullWidth
             placeholder='이번 여행의 총 경비를 입력하세요'
-            type='number'
+            type='text'
           />
         </Box>
       </Stack>

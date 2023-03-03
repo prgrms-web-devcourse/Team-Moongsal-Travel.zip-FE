@@ -7,7 +7,7 @@ const usePostForm = (control: Control<CreatePost>) => {
     name: 'country.name',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '방문 나라는 필수 입력 사항입니다.',
     },
   });
 
@@ -15,7 +15,7 @@ const usePostForm = (control: Control<CreatePost>) => {
     name: 'cost.total',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '비용은 필수 입력 사항입니다.',
     },
   });
 
@@ -23,7 +23,7 @@ const usePostForm = (control: Control<CreatePost>) => {
     name: 'period.startDate',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '시작날짜는 필수 입력 사항입니다.',
     },
   });
 
@@ -31,7 +31,7 @@ const usePostForm = (control: Control<CreatePost>) => {
     name: 'period.endDate',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '종료날짜는 필수 입력 사항입니다.',
     },
   });
 
@@ -39,7 +39,8 @@ const usePostForm = (control: Control<CreatePost>) => {
     name: 'title',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '제목은 필수 입력 사항입니다.',
+      pattern: /\d/,
     },
   });
 
@@ -47,7 +48,7 @@ const usePostForm = (control: Control<CreatePost>) => {
     name: 'thumbnail',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '썸네일은 필수 입력 사항입니다.',
     },
   });
 

@@ -36,7 +36,7 @@ const First = () => {
     createPost(data);
     // 성공시 subtravelogues로 넘김
   };
-
+  console.log(errors);
   return (
     <form onSubmit={handleSubmit(handleComplete)}>
       <PostBasic control={control} />
