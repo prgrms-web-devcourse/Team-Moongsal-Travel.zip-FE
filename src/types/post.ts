@@ -13,6 +13,10 @@ export interface CreatePost {
   thumbnail: string;
 }
 
+export type TravelogueForm = Omit<CreatePost, 'thumbnail'> & {
+  thumbnail: File;
+};
+
 export interface SubTravelogueForm {
   title: string;
   content: string;
