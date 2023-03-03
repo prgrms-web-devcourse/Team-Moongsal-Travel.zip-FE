@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form';
 
 import { createPost } from '@/api/post';
 import { AlertMessage } from '@/components/common';
+import useImageUpload from '@/components/common/useImageUpload';
 import { PostBasic } from '@/components/CreatePost';
-import { CreatePost } from '@/types/post';
+import { TravelogueForm } from '@/types/post';
 
 const First = () => {
   // const router = useRouter();
-  const methods = useForm<CreatePost>({
+  const methods = useForm<TravelogueForm>({
     mode: 'onChange',
     defaultValues: {
       country: {
@@ -23,7 +24,7 @@ const First = () => {
         total: '',
       },
       title: '',
-      thumbnail: '',
+      thumbnail: undefined,
     },
   });
   const {
@@ -31,9 +32,15 @@ const First = () => {
     control,
     formState: { errors },
   } = methods;
+  const { location, uploadFile } = useImageUpload();
 
-  const handleComplete = (data: CreatePost) => {
-    createPost(data);
+  const handleComplete = async (data: TravelogueForm) => {
+    await uploadFile(data.thumbnail);
+    const postData = {
+      ...data,
+      thumbnail: location,
+    };
+    createPost(postData);
     // 성공시 subtravelogues로 넘김
   };
 
