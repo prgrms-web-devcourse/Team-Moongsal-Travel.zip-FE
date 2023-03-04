@@ -37,7 +37,7 @@ const PostDetail = () => {
       transportationSet: formats,
       travelPhotoCreateReqs: [{ url: 'temp' }],
     };
-    mutate({ data: subData, travelogueId: '14' });
+    mutate({ data: subData, travelogueId: '45' });
   };
 
   return (

@@ -1,11 +1,10 @@
 import AWS from 'aws-sdk';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 import { IMAGE_EXTENSION, IMAGE_TYPE } from '@/constants';
 
 const useImageUpload = () => {
   const S3_BUCKET = 'travel-zip-bucket';
-  const [location, setLocation] = useState('');
   const s3 = new AWS.S3({ params: { ACL: 'public-read' } });
 
   AWS.config.update({
@@ -30,8 +29,10 @@ const useImageUpload = () => {
   };
 
   const uploadFile = async (file: File, key: string) => {
+    let location = '';
     const upload = s3.upload({ Bucket: S3_BUCKET, Body: file, Key: key });
-    await upload.promise().then(({ Location }) => setLocation(Location));
+    await upload.promise().then(({ Location }) => (location = Location));
+    return location;
   };
 
   const deleteFile = async (key: string) => {

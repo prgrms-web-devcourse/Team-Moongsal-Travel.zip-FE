@@ -33,19 +33,17 @@ const First = () => {
     control,
     formState: { errors },
   } = methods;
-  const { location, uploadFile, deleteFile } = useImageUpload();
+  const { uploadFile, deleteFile } = useImageUpload();
 
   const handleComplete = async (data: TravelogueForm) => {
     const file = data.thumbnail;
     const key = 'upload/' + v4() + file.name;
-    await uploadFile(file, key);
-    if (location) {
-      const { status } = await createPost({
-        ...data,
-        thumbnail: location,
-      });
-      status !== 200 && deleteFile(key);
-    }
+    const location = await uploadFile(file, key);
+    const { status } = await createPost({
+      ...data,
+      thumbnail: location,
+    });
+    status !== 200 && deleteFile(key);
     // 성공시 subtravelogues로 넘김
   };
 
