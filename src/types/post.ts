@@ -1,4 +1,4 @@
-export interface CreatePost {
+export interface CreatePostType {
   country: {
     name: string;
   };
@@ -13,17 +13,17 @@ export interface CreatePost {
   thumbnail: string;
 }
 
-export type TravelogueForm = Omit<CreatePost, 'thumbnail'> & {
+export type TravelogueFormType = Omit<CreatePostType, 'thumbnail'> & {
   thumbnail: File | null;
 };
 
-export interface SubTravelogueForm {
+export interface SubTravelogueFormType {
   title: string;
   content: string;
   addresses: { country: string; city: string; spot: string }[];
 }
 
-export interface SubTravelogue {
+export interface SubTravelogueType {
   title: string;
   content: string;
   addresses: {

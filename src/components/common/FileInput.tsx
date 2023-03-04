@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
 import useImageUpload from '@/hooks/useImageUpload';
-import { TravelogueForm } from '@/types/post';
+import { TravelogueFormType } from '@/types/post';
 
 import { SubTitle } from './';
 
 interface FileInputProps {
-  thumbnail: ControllerRenderProps<TravelogueForm, 'thumbnail'>;
+  thumbnail: ControllerRenderProps<TravelogueFormType, 'thumbnail'>;
 }
 
 const FileInput = ({ thumbnail }: FileInputProps) => {

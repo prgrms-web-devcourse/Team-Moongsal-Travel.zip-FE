@@ -6,17 +6,17 @@ import { AlertMessage } from '@/components/common';
 import { PostBasic } from '@/components/CreatePost';
 import { travelogueFormProps } from '@/constants/defaultFormValue';
 import useImageUpload from '@/hooks/useImageUpload';
-import { TravelogueForm } from '@/types/post';
+import { TravelogueFormType } from '@/types/post';
 
 const First = () => {
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<TravelogueForm>(travelogueFormProps);
+  } = useForm<TravelogueFormType>(travelogueFormProps);
   const { getImageUrlFromS3, deleteFile } = useImageUpload();
 
-  const handleComplete = async (data: TravelogueForm) => {
+  const handleComplete = async (data: TravelogueFormType) => {
     const { key, url } = await getImageUrlFromS3(data.thumbnail as File);
     const response = await createPost({ ...data, thumbnail: url });
     if (response.status !== 200) {
