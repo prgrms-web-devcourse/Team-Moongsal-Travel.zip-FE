@@ -40,7 +40,6 @@ export default Location;
 const locationBoxStyle = {
   display: 'flex',
   alignItems: 'center',
-  paddingBottom: '15px',
   position: 'relative',
   width: '100%',
 };

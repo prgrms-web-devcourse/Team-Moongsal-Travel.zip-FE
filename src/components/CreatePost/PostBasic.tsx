@@ -1,4 +1,5 @@
-import { Box, OutlinedInput, Stack } from '@mui/material';
+import { Box, FormHelperText, OutlinedInput, Stack } from '@mui/material';
+import dayjs from 'dayjs';
 import { MouseEvent, useState } from 'react';
 import { Control } from 'react-hook-form';
 
@@ -19,8 +20,20 @@ const PostBasic = ({ control }: ControlProps) => {
     setToggleValue(selectedValue);
   };
 
-  const { countryName, costTotal, startDate, endDate, title, thumbnail } =
-    usePostForm(control);
+  const {
+    countryName,
+    countryNameState,
+    costTotal,
+    costTotalState,
+    startDate,
+    startDateState,
+    endDate,
+    endDateState,
+    title,
+    titleState,
+    thumbnail,
+    thumbnailState,
+  } = usePostForm(control);
 
   return (
     <>
@@ -29,17 +42,36 @@ const PostBasic = ({ control }: ControlProps) => {
         <SubTitle>여행 유형</SubTitle>
         <ComplexButton value={toggleValue} handleChange={handleChange} />
       </Stack>
+
       <Stack sx={marginBottom}>
         <SubTitle>방문한 나라</SubTitle>
         <Location name={countryName} readonly={toggleValue === '국내'} />
+        {countryNameState.error && (
+          <FormHelperText sx={HelperTextColor}>
+            {countryNameState.error.message}
+          </FormHelperText>
+        )}
       </Stack>
+
       <Stack sx={marginBottom}>
         <SubTitle>여행 기간</SubTitle>
-        <Box sx={{ ...marginBottom, display: 'flex', gap: 1 }}>
-          <DatePicker control={startDate} text='시작날짜' />
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <DatePicker
+            control={startDate}
+            maxDate={dayjs(endDate.value)}
+            text='시작날짜'
+          />
           <DatePicker control={endDate} text='종료날짜' />
         </Box>
+        {/* 로직 분리 예정 */}
+        {(startDateState.error || endDateState.error) && (
+          <FormHelperText sx={HelperTextColor}>
+            {(startDateState.error && startDateState.error.message) ||
+              (endDateState.error && endDateState.error.message)}
+          </FormHelperText>
+        )}
       </Stack>
+
       <Stack sx={marginBottom}>
         <SubTitle>총 경비</SubTitle>
         <Box>
@@ -49,16 +81,31 @@ const PostBasic = ({ control }: ControlProps) => {
             placeholder='이번 여행의 총 경비를 입력하세요'
             type='text'
           />
+          {costTotalState.error && (
+            <FormHelperText sx={HelperTextColor}>
+              {costTotalState.error.message}
+            </FormHelperText>
+          )}
         </Box>
       </Stack>
+
       <Title bold='bold'>여행 일기를 작성하세요 </Title>
       <Stack sx={marginBottom}>
         <SubTitle>제목</SubTitle>
         <OutlinedInput {...title} fullWidth placeholder='제목을 입력하세요' type='text' />
+        {titleState.error && (
+          <FormHelperText sx={HelperTextColor}>{titleState.error.message}</FormHelperText>
+        )}
       </Stack>
+
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
         <FileInput thumbnail={thumbnail} />
+        {thumbnailState.error && (
+          <FormHelperText sx={HelperTextColor}>
+            {thumbnailState.error.message}
+          </FormHelperText>
+        )}
       </Stack>
     </>
   );
@@ -68,4 +115,8 @@ export default PostBasic;
 
 const marginBottom = {
   marginBottom: '1rem',
+};
+
+const HelperTextColor = {
+  color: 'red.main',
 };
