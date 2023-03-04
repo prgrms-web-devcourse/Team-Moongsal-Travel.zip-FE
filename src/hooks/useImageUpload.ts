@@ -36,7 +36,12 @@ const useImageUpload = () => {
 
   const uploadFile = async (file: File, key: string) => {
     let location = '';
-    const upload = s3.upload({ Bucket: S3_BUCKET, Body: file, Key: key });
+    const upload = s3.upload({
+      Bucket: S3_BUCKET,
+      Body: file,
+      Key: key,
+      ContentType: file.type,
+    });
     await upload.promise().then(({ Location }) => (location = Location));
     return location;
   };
