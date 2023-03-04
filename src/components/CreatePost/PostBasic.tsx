@@ -7,6 +7,7 @@ import { FileInput, SubTitle, Title } from '@/components/common';
 import usePostForm from '@/hooks/useTravelogueForm';
 import { CreatePost } from '@/types/post';
 
+import CountrySelect from '../common/CountrySelect';
 import { ComplexButton, DatePicker, Location } from './';
 
 interface ControlProps {
@@ -37,12 +38,12 @@ const PostBasic = ({ control }: ControlProps) => {
 
   return (
     <>
+      <CountrySelect />
       <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
       <Stack sx={marginBottom}>
         <SubTitle>여행 유형</SubTitle>
         <ComplexButton value={toggleValue} handleChange={handleChange} />
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>방문한 나라</SubTitle>
         <Location name={countryName} readonly={toggleValue === '국내'} />
@@ -52,7 +53,6 @@ const PostBasic = ({ control }: ControlProps) => {
           </FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>여행 기간</SubTitle>
         <Box sx={{ display: 'flex', gap: 1 }}>
@@ -71,7 +71,6 @@ const PostBasic = ({ control }: ControlProps) => {
           </FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>총 경비</SubTitle>
         <Box>
@@ -88,7 +87,6 @@ const PostBasic = ({ control }: ControlProps) => {
           )}
         </Box>
       </Stack>
-
       <Title bold='bold'>여행 일기를 작성하세요 </Title>
       <Stack sx={marginBottom}>
         <SubTitle>제목</SubTitle>
@@ -97,7 +95,6 @@ const PostBasic = ({ control }: ControlProps) => {
           <FormHelperText sx={HelperTextColor}>{titleState.error.message}</FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
         <FileInput thumbnail={thumbnail} />
