@@ -14,8 +14,9 @@ export const postSubTravelogue = async ({
 }: {
   data: SubTravelogue;
   travelogueId: string;
-}) =>
-  await http.post({
+}) => {
+  return await http.post({
     url: `api/travelogues/${travelogueId}/subTravelogues`,
     data,
   });
+};
