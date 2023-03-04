@@ -1,7 +1,7 @@
 import http from '@/api/core';
-import { CreatePost, SubTravelogue } from '@/types/post';
+import { CreatePostType, SubTravelogue } from '@/types/post';
 
-export const createPost = async (data: CreatePost) => {
+export const createPost = async (data: CreatePostType) => {
   await http.post({
     url: `api/travelogues`,
     data,

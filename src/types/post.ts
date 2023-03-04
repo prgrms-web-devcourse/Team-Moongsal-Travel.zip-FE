@@ -1,4 +1,4 @@
-export interface CreatePost {
+export interface CreatePostType {
   country: {
     name: string;
   };

@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 
 // import { createPost } from '@/api/post';
 import { PostBasic } from '@/components/CreatePost';
-import { CreatePost } from '@/types/post';
+import { CreatePostType } from '@/types/post';
 
 const First = () => {
   // const router = useRouter();
-  const methods = useForm<CreatePost>({
+  const methods = useForm<CreatePostType>({
     mode: 'onChange',
     defaultValues: {
       country: {
@@ -27,7 +27,7 @@ const First = () => {
   });
   const { handleSubmit, control } = methods;
 
-  const handleComplete = (data: CreatePost) => {
+  const handleComplete = (data: CreatePostType) => {
     console.log(data);
     // createPost(data);
     // 성공시 subtravelogues로 넘김

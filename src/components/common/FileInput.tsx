@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePost } from '@/types/post';
+import { CreatePostType } from '@/types/post';
 
 import { SubTitle } from './';
 
 interface FileInputProps {
-  thumbnail: ControllerRenderProps<CreatePost, 'thumbnail'>;
+  thumbnail: ControllerRenderProps<CreatePostType, 'thumbnail'>;
 }
 
 const FileInput = ({ thumbnail }: FileInputProps) => {
