@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 
 import { createPost } from '@/api/post';
 import { AlertMessage } from '@/components/common';
-import useImageUpload from '@/components/common/useImageUpload';
 import { PostBasic } from '@/components/CreatePost';
+import useImageUpload from '@/hooks/useImageUpload';
 import { TravelogueForm } from '@/types/post';
 
 const First = () => {
