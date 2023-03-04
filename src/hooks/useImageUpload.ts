@@ -39,7 +39,7 @@ const useImageUpload = () => {
     s3.deleteObject({ Bucket: S3_BUCKET, Key: key });
   };
 
-  return { location, deleteFile, handleFileInput, uploadFile };
+  return { deleteFile, handleFileInput, uploadFile };
 };
 
 export default useImageUpload;
