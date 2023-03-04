@@ -1,7 +1,5 @@
 import { Box, Button } from '@mui/material';
-// import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { v4 } from 'uuid';
 
 import { createPost } from '@/api/post';
 import { AlertMessage } from '@/components/common';
@@ -10,7 +8,6 @@ import useImageUpload from '@/hooks/useImageUpload';
 import { TravelogueForm } from '@/types/post';
 
 const First = () => {
-  // const router = useRouter();
   const methods = useForm<TravelogueForm>({
     mode: 'onChange',
     defaultValues: {
@@ -33,18 +30,16 @@ const First = () => {
     control,
     formState: { errors },
   } = methods;
-  const { uploadFile, deleteFile } = useImageUpload();
+  const { getImageUrlFromS3, deleteFile } = useImageUpload();
 
   const handleComplete = async (data: TravelogueForm) => {
-    const file = data.thumbnail;
-    const key = 'upload/' + v4() + file.name;
-    const location = await uploadFile(file, key);
-    const { status } = await createPost({
-      ...data,
-      thumbnail: location,
-    });
-    status !== 200 && deleteFile(key);
-    // 성공시 subtravelogues로 넘김
+    const { key, url } = await getImageUrlFromS3(data.thumbnail);
+    const response = await createPost({ ...data, thumbnail: url });
+    if (response.status !== 200) {
+      deleteFile(key);
+      return;
+    }
+    // Todo: 트래블로그 작성 성공시 서브 트래블로그로 아이디와 일수 넘기기
   };
 
   return (

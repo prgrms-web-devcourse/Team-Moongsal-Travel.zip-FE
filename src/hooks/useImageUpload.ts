@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk';
 import { ChangeEvent } from 'react';
+import { v4 } from 'uuid';
 
 import {
   ACCESS_KEY_ID,
@@ -34,23 +35,27 @@ const useImageUpload = () => {
     }
   };
 
-  const uploadFile = async (file: File, key: string) => {
-    let location = '';
+  const uploadFile = ({ file, key }: { file: File; key: string }) => {
     const upload = s3.upload({
       Bucket: S3_BUCKET,
       Body: file,
       Key: key,
       ContentType: file.type,
     });
-    await upload.promise().then(({ Location }) => (location = Location));
-    return location;
+    return upload.promise();
+  };
+
+  const getImageUrlFromS3 = async (file: File) => {
+    const key = 'upload/' + v4() + file.name;
+    const url = await uploadFile({ file, key }).then(({ Location }) => Location);
+    return { key, url };
   };
 
   const deleteFile = async (key: string) => {
     s3.deleteObject({ Bucket: S3_BUCKET, Key: key });
   };
 
-  return { deleteFile, handleFileInput, uploadFile };
+  return { deleteFile, handleFileInput, getImageUrlFromS3 };
 };
 
 export default useImageUpload;
