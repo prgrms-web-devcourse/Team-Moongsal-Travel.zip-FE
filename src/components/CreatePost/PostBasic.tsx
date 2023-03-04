@@ -43,6 +43,7 @@ const PostBasic = ({ control }: ControlProps) => {
         <SubTitle>여행 유형</SubTitle>
         <ComplexButton value={toggleValue} handleChange={handleChange} />
       </Stack>
+
       <Stack sx={marginBottom}>
         <SubTitle>방문한 나라</SubTitle>
         <CountrySelect name={countryName} isSelected={toggleValue === '국내'} />
@@ -52,6 +53,7 @@ const PostBasic = ({ control }: ControlProps) => {
           </FormHelperText>
         )}
       </Stack>
+
       <Stack sx={marginBottom}>
         <SubTitle>여행 기간</SubTitle>
         <Box sx={{ display: 'flex', gap: 1 }}>
@@ -62,7 +64,6 @@ const PostBasic = ({ control }: ControlProps) => {
           />
           <DatePicker control={endDate} text='종료날짜' />
         </Box>
-        {/* 로직 분리 예정 */}
         {(startDateState.error || endDateState.error) && (
           <FormHelperText sx={HelperTextColor}>
             {(startDateState.error && startDateState.error.message) ||
@@ -70,6 +71,7 @@ const PostBasic = ({ control }: ControlProps) => {
           </FormHelperText>
         )}
       </Stack>
+
       <Stack sx={marginBottom}>
         <SubTitle>총 경비</SubTitle>
         <Box>
@@ -86,6 +88,7 @@ const PostBasic = ({ control }: ControlProps) => {
           )}
         </Box>
       </Stack>
+
       <Title bold='bold'>여행 일기를 작성하세요 </Title>
       <Stack sx={marginBottom}>
         <SubTitle>제목</SubTitle>
@@ -94,6 +97,7 @@ const PostBasic = ({ control }: ControlProps) => {
           <FormHelperText sx={HelperTextColor}>{titleState.error.message}</FormHelperText>
         )}
       </Stack>
+
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
         <FileInput thumbnail={thumbnail} />
