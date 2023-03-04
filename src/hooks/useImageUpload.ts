@@ -1,16 +1,22 @@
 import AWS from 'aws-sdk';
 import { ChangeEvent } from 'react';
 
-import { IMAGE_EXTENSION, IMAGE_TYPE } from '@/constants';
+import {
+  ACCESS_KEY_ID,
+  IMAGE_EXTENSION,
+  IMAGE_TYPE,
+  REGION,
+  S3_BUCKET,
+  SECRET_ACCESS_KEY,
+} from '@/constants';
 
 const useImageUpload = () => {
-  const S3_BUCKET = 'travel-zip-bucket';
   const s3 = new AWS.S3({ params: { ACL: 'public-read' } });
 
   AWS.config.update({
-    accessKeyId: process.env.NEXT_PUBLIC_ACCESS_KEY_ID,
-    secretAccessKey: process.env.NEXT_PUBLIC_SECRET_ACCESS_KEY,
-    region: 'ap-northeast-2',
+    accessKeyId: ACCESS_KEY_ID,
+    secretAccessKey: SECRET_ACCESS_KEY,
+    region: REGION,
   });
 
   const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
