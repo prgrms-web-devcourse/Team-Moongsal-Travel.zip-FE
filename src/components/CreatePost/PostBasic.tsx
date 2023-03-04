@@ -4,11 +4,11 @@ import { MouseEvent, useState } from 'react';
 import { Control } from 'react-hook-form';
 
 import { FileInput, SubTitle, Title } from '@/components/common';
+import { CountrySelect } from '@/components/common';
 import usePostForm from '@/hooks/useTravelogueForm';
 import { CreatePost } from '@/types/post';
 
-import CountrySelect from '../common/CountrySelect';
-import { ComplexButton, DatePicker, Location } from './';
+import { ComplexButton, DatePicker } from './';
 
 interface ControlProps {
   control: Control<CreatePost>;
@@ -38,7 +38,6 @@ const PostBasic = ({ control }: ControlProps) => {
 
   return (
     <>
-      <CountrySelect />
       <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
       <Stack sx={marginBottom}>
         <SubTitle>여행 유형</SubTitle>
@@ -46,7 +45,7 @@ const PostBasic = ({ control }: ControlProps) => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>방문한 나라</SubTitle>
-        <Location name={countryName} readonly={toggleValue === '국내'} />
+        <CountrySelect name={countryName} isSelected={toggleValue === '국내'} />
         {countryNameState.error && (
           <FormHelperText sx={HelperTextColor}>
             {countryNameState.error.message}

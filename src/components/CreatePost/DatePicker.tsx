@@ -19,9 +19,7 @@ interface DatePickerProps {
 
 const DatePicker = ({ text, control, maxDate }: DatePickerProps) => {
   const handleDateChange = (newValue: Dayjs | null) => {
-    if (newValue) {
-      control.onChange(getDateInfo(newValue));
-    }
+    if (newValue) control.onChange(getDateInfo(newValue));
   };
 
   return (

@@ -9,7 +9,7 @@ const usePostForm = (control: Control<CreatePost>) => {
     rules: {
       required: '방문 나라는 필수 입력 사항입니다.',
       pattern: {
-        value: /^[가-힣]+$/,
+        value: /^[가-힣 ]+$/,
         message: '한글로 입력해주세요.',
       },
     },
