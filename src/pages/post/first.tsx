@@ -1,6 +1,7 @@
 import { Box, Button } from '@mui/material';
 // import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { v4 } from 'uuid';
 
 import { createPost } from '@/api/post';
 import { AlertMessage } from '@/components/common';
@@ -32,15 +33,19 @@ const First = () => {
     control,
     formState: { errors },
   } = methods;
-  const { location, uploadFile } = useImageUpload();
+  const { location, uploadFile, deleteFile } = useImageUpload();
 
   const handleComplete = async (data: TravelogueForm) => {
-    await uploadFile(data.thumbnail);
-    const postData = {
-      ...data,
-      thumbnail: location,
-    };
-    createPost(postData);
+    const file = data.thumbnail;
+    const key = 'upload/' + v4() + file.name;
+    await uploadFile(file, key);
+    if (location) {
+      const { status } = await createPost({
+        ...data,
+        thumbnail: location,
+      });
+      status !== 200 && deleteFile(key);
+    }
     // 성공시 subtravelogues로 넘김
   };
 

@@ -2,7 +2,7 @@ import http from '@/api/core';
 import { CreatePost, SubTravelogue } from '@/types/post';
 
 export const createPost = async (data: CreatePost) => {
-  await http.post({
+  return await http.post({
     url: `api/travelogues`,
     data,
   });
