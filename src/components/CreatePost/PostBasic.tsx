@@ -42,11 +42,12 @@ const PostBasic = ({ control }: ControlProps) => {
       <Stack sx={marginBottom}>
         <SubTitle>여행 유형</SubTitle>
         <ComplexButton value={toggleValue} handleChange={handleChange} />
-      </Stack>
-
-      <Stack sx={marginBottom}>
-        <SubTitle>방문한 나라</SubTitle>
-        <CountrySelect name={countryName} isSelected={toggleValue === '국내'} />
+        {toggleValue && (
+          <>
+            <SubTitle>방문한 나라</SubTitle>
+            <CountrySelect name={countryName} isSelected={toggleValue === '국내'} />
+          </>
+        )}
         {countryNameState.error && (
           <FormHelperText sx={HelperTextColor}>
             {countryNameState.error.message}

@@ -1,4 +1,4 @@
-import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Button, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { MouseEvent } from 'react';
 
@@ -10,43 +10,51 @@ interface ComplexButtonProps {
 }
 
 const ComplexButton = ({ value, handleChange }: ComplexButtonProps) => {
+  const handleReset = (e: MouseEvent<HTMLElement>) => {
+    handleChange(e, '');
+  };
+
   return (
-    <ToggleButtonGroup
-      color='primary'
-      value={value}
-      exclusive
-      onChange={handleChange}
-      aria-label='Platform'
-      sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-      {COMPLEX_BUTTON_IMAGE.map((image) => (
-        <ImageButton
-          key={image.url}
-          value={image.title}
-          id='toggle-button'
-          style={{
-            width: image.width,
-            height: '100px',
-          }}>
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-          <ImageBackdrop className='MuiImageBackdrop-root' />
-          <ImageItem>
-            <Typography
-              component='span'
-              variant='subtitle1'
-              color='inherit'
-              sx={{
-                position: 'relative',
-                p: 4,
-                pt: 2,
-                pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-              }}>
-              {image.title}
-              <ImageMarked className='MuiImageMarked-root' />
-            </Typography>
-          </ImageItem>
-        </ImageButton>
-      ))}
-    </ToggleButtonGroup>
+    <>
+      <ToggleButtonGroup
+        color='primary'
+        value={value}
+        disabled={!!value}
+        exclusive
+        onChange={handleChange}
+        aria-label='Platform'
+        sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: '1rem' }}>
+        {COMPLEX_BUTTON_IMAGE.map((image) => (
+          <ImageButton
+            key={image.url}
+            value={image.title}
+            id='toggle-button'
+            style={{
+              width: image.width,
+              height: '100px',
+            }}>
+            <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+            <ImageBackdrop className='MuiImageBackdrop-root' />
+            <ImageItem>
+              <Typography
+                component='span'
+                variant='subtitle1'
+                color='inherit'
+                sx={{
+                  position: 'relative',
+                  p: 4,
+                  pt: 2,
+                  pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                }}>
+                {image.title}
+                <ImageMarked className='MuiImageMarked-root' />
+              </Typography>
+            </ImageItem>
+          </ImageButton>
+        ))}
+      </ToggleButtonGroup>
+      {value && <Button onClick={handleReset}>다시 선택</Button>}
+    </>
   );
 };
 
