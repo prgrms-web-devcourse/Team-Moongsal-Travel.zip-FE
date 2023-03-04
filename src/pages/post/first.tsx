@@ -2,10 +2,10 @@ import { Box, Button } from '@mui/material';
 // import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
-import { createPost } from '@/api/post/createPost';
+import { createPost } from '@/api/post';
 import { AlertMessage } from '@/components/common';
 import { PostBasic } from '@/components/CreatePost';
-import { CreatePost } from '@/types/CreatePost';
+import { CreatePost } from '@/types/post';
 
 const First = () => {
   // const router = useRouter();

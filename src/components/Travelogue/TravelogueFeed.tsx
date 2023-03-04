@@ -1,8 +1,7 @@
 import { Stack } from '@mui/material';
 
 import { FeedContent, FeedHeader, FeedImage } from '@/components/Travelogue';
-
-import { TravelogueFeed as TravelogueFeedType } from './type';
+import { TravelogueFeedType } from '@/types/travelogue';
 
 const TravelogueFeed = ({ data }: { data: TravelogueFeedType }) => {
   return (
