@@ -1,14 +1,14 @@
 import { Box } from '@mui/material';
 import Image from 'next/image';
 
-import { TravelogueFeed } from './type';
+import { TravelogueFeedType } from '@/types/travelogue';
 
-interface FeedImageProps {
-  thumbnailURL: TravelogueFeed['thumbnail'];
-  ImageAlt: TravelogueFeed['title'];
+interface TravelogueFeedProps {
+  thumbnailURL: TravelogueFeedType['thumbnail'];
+  ImageAlt: TravelogueFeedType['title'];
 }
 
-const FeedImage = ({ thumbnailURL, ImageAlt }: FeedImageProps) => {
+const FeedImage = ({ thumbnailURL, ImageAlt }: TravelogueFeedProps) => {
   return (
     <Box sx={boxStyle}>
       <Image src={thumbnailURL} fill alt={ImageAlt} />

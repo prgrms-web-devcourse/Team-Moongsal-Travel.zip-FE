@@ -7,10 +7,12 @@ import { useState } from 'react';
 
 import { Row } from '@/components/common';
 import { FeedChip } from '@/components/Travelogue';
+import { TravelogueFeedType } from '@/types/travelogue';
 
-import { TravelogueFeed } from './type';
-
-type FeedContentProps = Pick<TravelogueFeed, 'title' | 'nights' | 'days' | 'totalCost'>;
+type FeedContentProps = Pick<
+  TravelogueFeedType,
+  'title' | 'nights' | 'days' | 'totalCost'
+>;
 
 const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
