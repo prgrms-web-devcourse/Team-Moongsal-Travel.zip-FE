@@ -45,28 +45,6 @@ const CountrySelect = ({ isSelected, name }: LocationProps) => {
         />
       )}
     </>
-    // <>
-    // <Autocomplete
-    //   sx={{ width: '100%' }}
-    //   options={COUNTRIES}
-    //   autoHighlight
-    //   getOptionLabel={(option) => option.label}
-    //   popupIcon={<LocationOnOutlinedIcon />}
-    //   renderOption={(props, option) => (
-    //     <Box component='li' {...props}>
-    //       {option.label} ({option.code})
-    //     </Box>
-    //   )}
-    //   renderInput={(params) => {
-    //     return <TextField {...params} placeholder='지역을 입력하세요' />;
-    //   }}
-    //   onChange={(_, data) => {
-    //     if (data) {
-    //       name.onChange(data.label);
-    //     }
-    //   }}
-    // />
-    // </>
   );
 };
 
