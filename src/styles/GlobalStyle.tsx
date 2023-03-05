@@ -163,4 +163,12 @@ const style = css`
     color: inherit;
     text-decoration: none;
   }
+
+  /* quill editor */
+  .ql-editor strong {
+    font-weight: bold;
+  }
+  .ql-editor em {
+    font-style: italic;
+  }
 `;
