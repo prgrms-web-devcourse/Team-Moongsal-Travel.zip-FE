@@ -17,6 +17,12 @@ export type TravelogueFormType = Omit<CreatePostType, 'thumbnail'> & {
   thumbnail: File | null;
 };
 
+export interface TravelogueResponseType {
+  id: number;
+  days: number;
+  nights: number;
+}
+
 export interface SubTravelogueFormType {
   title: string;
   content: string;
