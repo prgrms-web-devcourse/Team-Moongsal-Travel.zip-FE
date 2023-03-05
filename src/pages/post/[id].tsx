@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import VerticalLinearStepper from '@/components/Stepper/VerticalStepper';
+import { VerticalStepper } from '@/components/Stepper';
 
 const SubTraveloguePage = () => {
   const router = useRouter();
@@ -22,7 +22,10 @@ const SubTraveloguePage = () => {
 
   return (
     <Box sx={layout}>
-      <VerticalLinearStepper travelogueId={travelogueId} subTravelogueStep={subTravelogueStep} />
+      <VerticalStepper
+        travelogueId={travelogueId}
+        subTravelogueStep={subTravelogueStep}
+      />
     </Box>
   );
 };
