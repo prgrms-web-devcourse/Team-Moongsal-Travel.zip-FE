@@ -5,26 +5,24 @@ import { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
 import { usePostSubTravelogue } from '@/api/hooks/post';
-import { SubTitle, Title } from '@/components/common';
+import { SubTitle } from '@/components/common';
 import { subTravelogueFormProps } from '@/constants/defaultFormValue';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
-import { TravelogueQueryType } from '@/pages/post/[id]';
 import { SubTravelogueFormType } from '@/types/post';
 
 import { Location, Transportation } from '.';
 
 interface SubTravelogueProps {
-  travelogueQuery: TravelogueQueryType;
+  travelogueId: string;
 }
 
-const SubTravelogue = ({ travelogueQuery }: SubTravelogueProps) => {
+const SubTravelogue = ({ travelogueId }: SubTravelogueProps) => {
   const [formats, setFormats] = useState<string[]>(() => []);
   const { control, handleSubmit } =
     useForm<SubTravelogueFormType>(subTravelogueFormProps);
   const { title, content } = useSubTravelogueForm(control);
   const { fields, append, remove } = useFieldArray({ control, name: 'addresses' });
   const { mutate } = usePostSubTravelogue();
-  const { travelogueId } = travelogueQuery;
 
   const onFormatChange = (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
     setFormats(newFormats);
@@ -44,10 +42,15 @@ const SubTravelogue = ({ travelogueQuery }: SubTravelogueProps) => {
 
   return (
     <form onSubmit={handleSubmit(handlePostSubTravelogue)}>
-      <Title>1일차</Title>
+      {/* <Title>1일차</Title> */}
       <Stack sx={marginBottom}>
         <SubTitle>소제목</SubTitle>
-        <OutlinedInput {...title} fullWidth placeholder='제목을 입력하세요' type='text' />
+        <OutlinedInput
+          {...title}
+          fullWidth
+          placeholder='소제목을 입력하세요'
+          type='text'
+        />
       </Stack>
       <Stack sx={marginBottom} component='ul'>
         <Stack direction='row' alignItems='center'>
