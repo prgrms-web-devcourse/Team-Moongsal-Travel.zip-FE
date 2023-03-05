@@ -4,8 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 
 import { useGetRecentTravelogue } from '@/api/hooks/travelogue';
-
-import TravelogueFeed from '../TravelogueFeed';
+import { TravelogueFeed } from '@/components/Travelogue';
 
 const PopularFeed = () => {
   const { data: travelogues } = useGetRecentTravelogue();
