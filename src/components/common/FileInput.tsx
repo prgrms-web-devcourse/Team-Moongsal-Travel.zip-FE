@@ -1,39 +1,21 @@
 import { PhotoCamera } from '@mui/icons-material';
 import { Box, IconButton } from '@mui/material';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePost } from '@/types/post';
+import useImageUpload from '@/hooks/useImageUpload';
+import { TravelogueFormType } from '@/types/post';
 
 import { SubTitle } from './';
 
 interface FileInputProps {
-  thumbnail: ControllerRenderProps<CreatePost, 'thumbnail'>;
+  thumbnail: ControllerRenderProps<TravelogueFormType, 'thumbnail'>;
 }
 
 const FileInput = ({ thumbnail }: FileInputProps) => {
+  const { handleFileInput } = useImageUpload();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (selectedImage) {
-      setImageUrl(URL.createObjectURL(selectedImage));
-    }
-  }, [selectedImage]);
-
-  const encodeFileToBase64 = (fileBlob: File) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        if (!reader.result || typeof reader.result !== 'string') return;
-        const result = reader.result;
-        thumbnail.onChange(result);
-        resolve(Promise);
-      };
-    });
-  };
 
   return (
     <>
@@ -43,10 +25,9 @@ const FileInput = ({ thumbnail }: FileInputProps) => {
         id='select-image'
         style={{ display: 'none' }}
         onChange={(e) => {
-          if (e.target.files && e.target.files[0]) {
-            setSelectedImage(e.target.files[0]);
-            encodeFileToBase64(e.target.files[0]);
-          }
+          handleFileInput(e);
+          setSelectedImage(e.target.files && e.target.files[0]);
+          thumbnail.onChange(e.target.files && e.target.files[0]);
         }}
       />
       <label htmlFor='select-image'>
@@ -55,14 +36,14 @@ const FileInput = ({ thumbnail }: FileInputProps) => {
           <SubTitle>Upload Image</SubTitle>
         </IconButton>
       </label>
-      {imageUrl && selectedImage && (
+      {selectedImage && (
         <Box
           mt={2}
           textAlign='center'
           sx={{ position: 'relative', height: '100px', minWidth: '200px' }}>
           <Image
             fill
-            src={imageUrl}
+            src={URL.createObjectURL(selectedImage)}
             alt={selectedImage.name}
             style={{ objectFit: 'contain' }}
           />
