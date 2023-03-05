@@ -58,7 +58,7 @@ const SubTravelogue = ({ travelogueId }: SubTravelogueProps) => {
           <IconButton
             color='primary'
             component='label'
-            onClick={() => append({ country: '', city: '', spot: '' })}>
+            onClick={() => append({ region: '' })}>
             <AddCircleIcon />
           </IconButton>
         </Stack>
@@ -66,7 +66,7 @@ const SubTravelogue = ({ travelogueId }: SubTravelogueProps) => {
           <Stack key={item.id} direction='row' spacing={2} component='li'>
             <Controller
               render={({ field }) => <Location field={field} />}
-              name={`addresses.${index}.spot`}
+              name={`addresses.${index}.region`}
               control={control}
               rules={{ required: true }}
             />

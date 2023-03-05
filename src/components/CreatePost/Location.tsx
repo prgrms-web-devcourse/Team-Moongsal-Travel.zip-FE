@@ -8,7 +8,7 @@ import { SubTravelogueFormType, TravelogueFormType } from '@/types/post';
 interface LocationProps {
   readonly?: boolean;
   name?: ControllerRenderProps<TravelogueFormType, 'country.name'>;
-  field?: ControllerRenderProps<SubTravelogueFormType, `addresses.${number}.spot`>;
+  field?: ControllerRenderProps<SubTravelogueFormType, `addresses.${number}.region`>;
 }
 
 const Location = ({ readonly, name, field }: LocationProps) => {

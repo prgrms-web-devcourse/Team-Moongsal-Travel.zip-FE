@@ -26,16 +26,14 @@ export interface TravelogueResponseType {
 export interface SubTravelogueFormType {
   title: string;
   content: string;
-  addresses: { country: string; city: string; spot: string }[];
+  addresses: { region: string }[];
 }
 
 export interface SubTravelogueType {
   title: string;
   content: string;
   addresses: {
-    country: string;
-    city: string;
-    spot: string;
+    region: string;
   }[];
   transportationSet: string[];
   travelPhotoCreateReqs: { url: string }[];

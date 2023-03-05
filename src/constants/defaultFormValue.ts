@@ -27,6 +27,6 @@ export const subTravelogueFormProps: UseFormProps = {
   defaultValues: {
     title: '',
     content: '',
-    addresses: [{ country: '', city: '', spot: '' }],
+    addresses: [{ region: '' }],
   },
 };
