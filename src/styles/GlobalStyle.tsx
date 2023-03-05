@@ -171,4 +171,7 @@ const style = css`
   .ql-editor em {
     font-style: italic;
   }
+  .ql-editor {
+    word-spacing: 0;
+  }
 `;

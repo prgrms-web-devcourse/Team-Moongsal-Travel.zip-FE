@@ -1,11 +1,11 @@
 import { AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { Button, IconButton, OutlinedInput, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
-import { usePostSubTravelogue } from '@/api/hooks/post';
+// import { usePostSubTravelogue } from '@/api/hooks/post';
 import { SubTitle, Title } from '@/components/common';
+import { RichEditor } from '@/components/Editor';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
 import { SubTravelogueFormType } from '@/types/post';
 
@@ -22,7 +22,7 @@ const PostDetail = () => {
   });
   const { title, content } = useSubTravelogueForm(control);
   const { fields, append, remove } = useFieldArray({ control, name: 'addresses' });
-  const { mutate } = usePostSubTravelogue();
+  // const { mutate } = usePostSubTravelogue();
 
   const onFormatChange = (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
     setFormats(newFormats);
@@ -37,7 +37,8 @@ const PostDetail = () => {
       transportationSet: formats,
       travelPhotoCreateReqs: [{ url: 'temp' }],
     };
-    mutate({ data: subData, travelogueId: '45' });
+    console.log(subData);
+    // mutate({ data: subData, travelogueId: '45' });
   };
 
   return (
@@ -82,7 +83,8 @@ const PostDetail = () => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>글을 자유롭게 작성해보세요</SubTitle>
-        <Editor {...content}></Editor>
+        {/* <Editor {...content}></Editor> */}
+        <RichEditor content={content} />
       </Stack>
       <button type='submit'>임시 제출 버튼</button>
     </form>
@@ -94,11 +96,3 @@ export default PostDetail;
 const marginBottom = {
   marginBottom: '1rem',
 };
-
-const Editor = styled('textarea')(({ theme }) => ({
-  height: '20rem',
-  width: '100%',
-  resize: 'none',
-  overflowY: 'auto',
-  outlineColor: theme.palette.blue050.main,
-}));

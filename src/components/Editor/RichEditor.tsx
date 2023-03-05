@@ -1,7 +1,10 @@
 import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { ControllerRenderProps } from 'react-hook-form';
+
+import { SubTravelogueFormType } from '@/types/post';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
@@ -63,17 +66,15 @@ const modules = {
   },
 };
 
-const RichEditor = () => {
-  const [quillContents, setQuillContents] = useState('');
+interface RichEditorType {
+  content: ControllerRenderProps<SubTravelogueFormType, 'content'>;
+}
 
+const RichEditor = ({ content }: RichEditorType) => {
   return (
     <div>
-      <ReactQuill
-        theme='snow'
-        modules={modules}
-        value={quillContents}
-        onChange={(e) => setQuillContents(e)}
-      />
+      <ReactQuill {...content} theme='snow' modules={modules} />
+      <div dangerouslySetInnerHTML={{ __html: content.value }} />
     </div>
   );
 };

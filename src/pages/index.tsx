@@ -1,6 +1,5 @@
 import Head from 'next/head';
 
-import { RichEditor } from '@/components/Editor';
 import { TravelogueList } from '@/components/Travelogue';
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       </Head>
       <main>
         <TravelogueList />
-        <RichEditor />
       </main>
     </>
   );
