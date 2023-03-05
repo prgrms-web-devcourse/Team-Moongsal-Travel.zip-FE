@@ -7,14 +7,13 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { usePostSubTravelogue } from '@/api/hooks/post';
 import { SubTitle, Title } from '@/components/common';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
-import { SubTravelogueForm } from '@/types/post';
+import { SubTravelogueFormType } from '@/types/post';
 
 import { Location, Transportation } from './';
 
 const PostDetail = () => {
   const [formats, setFormats] = useState<string[]>(() => []);
-  const { control, handleSubmit } = useForm<SubTravelogueForm>({
-    mode: 'onChange',
+  const { control, handleSubmit } = useForm<SubTravelogueFormType>({
     defaultValues: {
       title: '',
       content: '',
@@ -29,7 +28,7 @@ const PostDetail = () => {
     setFormats(newFormats);
   };
 
-  const handlePostSubTravelogue = (data: SubTravelogueForm) => {
+  const handlePostSubTravelogue = (data: SubTravelogueFormType) => {
     const { title, content, addresses } = data;
     const subData = {
       title,
@@ -38,7 +37,7 @@ const PostDetail = () => {
       transportationSet: formats,
       travelPhotoCreateReqs: [{ url: 'temp' }],
     };
-    formats.length && mutate({ data: subData, travelogueId: '14' });
+    formats.length && mutate({ data: subData, travelogueId: '75' });
   };
 
   return (

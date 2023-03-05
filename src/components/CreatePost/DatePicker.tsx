@@ -6,14 +6,14 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { Dayjs } from 'dayjs';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePost } from '@/types/post';
+import { CreatePostType } from '@/types/post';
 import { getDateInfo } from '@/utils/helper';
 
 interface DatePickerProps {
   text?: string;
   control:
-    | ControllerRenderProps<CreatePost, 'period.startDate'>
-    | ControllerRenderProps<CreatePost, 'period.endDate'>;
+    | ControllerRenderProps<CreatePostType, 'period.startDate'>
+    | ControllerRenderProps<CreatePostType, 'period.endDate'>;
 }
 
 const DatePicker = ({ text, control }: DatePickerProps) => {
