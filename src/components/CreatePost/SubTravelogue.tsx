@@ -6,20 +6,16 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
 import { usePostSubTravelogue } from '@/api/hooks/post';
 import { SubTitle, Title } from '@/components/common';
+import { subTravelogueFormProps } from '@/constants/defaultFormValue';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
 import { SubTravelogueFormType } from '@/types/post';
 
-import { Location, Transportation } from './';
+import { Location, Transportation } from '.';
 
-const PostDetail = () => {
+const SubTravelogue = () => {
   const [formats, setFormats] = useState<string[]>(() => []);
-  const { control, handleSubmit } = useForm<SubTravelogueFormType>({
-    defaultValues: {
-      title: '',
-      content: '',
-      addresses: [{ country: '', city: '', spot: '' }],
-    },
-  });
+  const { control, handleSubmit } =
+    useForm<SubTravelogueFormType>(subTravelogueFormProps);
   const { title, content } = useSubTravelogueForm(control);
   const { fields, append, remove } = useFieldArray({ control, name: 'addresses' });
   const { mutate } = usePostSubTravelogue();
@@ -89,7 +85,7 @@ const PostDetail = () => {
   );
 };
 
-export default PostDetail;
+export default SubTravelogue;
 
 const marginBottom = {
   marginBottom: '1rem',
