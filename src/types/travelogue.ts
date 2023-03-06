@@ -1,4 +1,5 @@
 export interface TravelogueFeedType {
+  travelogueId: number;
   title: string;
   country: string;
   thumbnail: string;

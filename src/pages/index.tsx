@@ -1,8 +1,16 @@
 import Head from 'next/head';
 
-import { TravelogueList } from '@/components/Travelogue';
+import { useGetPersonalTravelogues } from '@/api/hooks/travelogue';
+
+// import { TravelogueList } from '@/components/Travelogue';
 
 export default function Home() {
+  const { data } = useGetPersonalTravelogues({
+    size: 5,
+  });
+
+  console.log(data?.pages);
+
   return (
     <>
       <Head>
@@ -12,7 +20,8 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <TravelogueList />
+        <div>하이</div>
+        {/* <TravelogueFeed /> */}
       </main>
     </>
   );
