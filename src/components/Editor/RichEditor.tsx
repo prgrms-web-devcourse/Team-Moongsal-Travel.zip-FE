@@ -3,18 +3,25 @@ import 'react-quill/dist/quill.bubble.css';
 
 import AWS from 'aws-sdk';
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo, useRef } from 'react';
+import { RefObject, useEffect, useMemo, useRef } from 'react';
 import React from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
+import ReactQuill from 'react-quill';
 import { v4 } from 'uuid';
 
 import { ACCESS_KEY_ID, REGION, S3_BUCKET, SECRET_ACCESS_KEY } from '@/constants';
 import { SubTravelogueFormType } from '@/types/post';
 
-const ReactQuill = dynamic(
+const Reactquill = dynamic(
   async () => {
     const { default: RQ } = await import('react-quill');
-    const comp = ({ forwardedRef, ...props }) => {
+    const comp = ({
+      forwardedRef,
+      ...props
+    }: {
+      forwardedRef: RefObject<ReactQuill>;
+      [key: string]: any;
+    }) => {
       return <RQ ref={forwardedRef} {...props} />;
     };
     return comp;
@@ -29,7 +36,7 @@ interface RichEditorType {
 }
 
 const RichEditor = ({ content }: RichEditorType) => {
-  const quillRef = useRef();
+  const quillRef = useRef<ReactQuill | null>(null);
 
   useEffect(() => {
     new AWS.S3({ params: { ACL: 'public-read' } });
@@ -78,8 +85,14 @@ const RichEditor = ({ content }: RichEditorType) => {
 
     input.onchange = async () => {
       const file = input.files;
+      const editor = quillRef.current?.getEditor();
+      const range = editor?.getSelection(true).index;
       if (file) {
-        await getImageUrlFromS3(file[0]);
+        const { url } = await getImageUrlFromS3(file[0]);
+        if (range) {
+          editor?.insertEmbed(range, 'image', url);
+          editor?.setSelection(range + 1, 0);
+        }
       }
     };
   };
@@ -145,11 +158,12 @@ const RichEditor = ({ content }: RichEditorType) => {
     }),
     [],
   );
+
   console.log(content.value);
 
   return (
     <div>
-      <ReactQuill forwardedRef={quillRef} {...content} theme='snow' modules={modules} />
+      <Reactquill forwardedRef={quillRef} {...content} theme='snow' modules={modules} />
     </div>
   );
 };
