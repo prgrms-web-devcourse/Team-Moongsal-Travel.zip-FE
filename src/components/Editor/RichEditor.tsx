@@ -3,7 +3,7 @@ import 'react-quill/dist/quill.bubble.css';
 
 import AWS from 'aws-sdk';
 import dynamic from 'next/dynamic';
-import { RefObject, useEffect, useMemo, useRef } from 'react';
+import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import React from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 import ReactQuill from 'react-quill';
@@ -36,11 +36,10 @@ interface RichEditorType {
 }
 
 const RichEditor = ({ content }: RichEditorType) => {
-  const quillRef = useRef<ReactQuill | null>(null);
+  const [imageList, setImageList] = useState<string[]>([]);
+  const quillRef = useRef<ReactQuill>(null);
 
   useEffect(() => {
-    new AWS.S3({ params: { ACL: 'public-read' } });
-
     AWS.config.update({
       accessKeyId: ACCESS_KEY_ID,
       secretAccessKey: SECRET_ACCESS_KEY,
@@ -51,11 +50,6 @@ const RichEditor = ({ content }: RichEditorType) => {
   const imageS3 = () => {
     const s3 = new AWS.S3({ params: { ACL: 'public-read' } });
 
-    AWS.config.update({
-      accessKeyId: ACCESS_KEY_ID,
-      secretAccessKey: SECRET_ACCESS_KEY,
-      region: REGION,
-    });
     const uploadFile = ({ file, key }: { file: File; key: string }) => {
       const upload = s3.upload({
         Bucket: S3_BUCKET,
@@ -68,16 +62,20 @@ const RichEditor = ({ content }: RichEditorType) => {
 
     const getImageUrlFromS3 = async (file: File) => {
       const key = 'upload/' + v4() + file.name;
-      const url = await uploadFile({ file, key }).then(({ Location }) => Location);
+      const url = await uploadFile({ file, key })?.then(({ Location }) => Location);
       return { key, url };
     };
 
-    return { getImageUrlFromS3 };
+    const deleteFile = (key: string) => {
+      s3.deleteObject({ Bucket: S3_BUCKET, Key: key }).send();
+    };
+
+    return { getImageUrlFromS3, deleteFile };
   };
 
   const imageHandler = () => {
-    const input = document.createElement('input');
     const { getImageUrlFromS3 } = imageS3();
+    const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
 
@@ -88,8 +86,10 @@ const RichEditor = ({ content }: RichEditorType) => {
       const editor = quillRef.current?.getEditor();
       const range = editor?.getSelection(true).index;
       if (file) {
-        const { url } = await getImageUrlFromS3(file[0]);
-        if (range) {
+        const { url, key } = await getImageUrlFromS3(file[0]);
+        console.log(key);
+        setImageList((prev) => [...prev, url]);
+        if (range !== undefined) {
           editor?.insertEmbed(range, 'image', url);
           editor?.setSelection(range + 1, 0);
         }
@@ -159,7 +159,14 @@ const RichEditor = ({ content }: RichEditorType) => {
     [],
   );
 
-  console.log(content.value);
+  const { deleteFile } = imageS3();
+
+  imageList.map((item) => {
+    if (!content.value.includes(item)) {
+      const key = item.match(/upload\/(.*)$/);
+      key && deleteFile(key[0]);
+    }
+  });
 
   return (
     <div>
