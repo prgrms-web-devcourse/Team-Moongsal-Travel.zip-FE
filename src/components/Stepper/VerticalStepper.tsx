@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Step from '@mui/material/Step';
 import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
@@ -7,6 +6,8 @@ import Stepper from '@mui/material/Stepper';
 import { useState } from 'react';
 
 import { SubTravelogue } from '@/components/CreatePost';
+import { ButtonEventType } from '@/types/common';
+import { StepType } from '@/types/post';
 
 interface VerticalStepperProps {
   travelogueId: string;
@@ -16,44 +17,24 @@ interface VerticalStepperProps {
 const VerticalStepper = ({ travelogueId, subTravelogueStep }: VerticalStepperProps) => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const handleNext = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleStep = (e: ButtonEventType, type: StepType) => {
     e.stopPropagation();
-    setActiveStep((prev) => prev + 1);
-  };
-
-  const handleBack = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
-    setActiveStep((prev) => prev - 1);
-  };
-
-  const handleStep = (step: number) => {
-    setActiveStep(step);
+    setActiveStep((prev) => (type === 'next' ? prev + 1 : prev - 1));
   };
 
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper activeStep={activeStep} orientation='vertical'>
         {subTravelogueStep.map((step, index) => (
-          <Step key={index} onClick={() => handleStep(index)}>
+          <Step key={index} onClick={() => setActiveStep(index)}>
             <StepLabel>{step}</StepLabel>
             <StepContent>
-              <SubTravelogue travelogueId={travelogueId} />
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button
-                    variant='contained'
-                    onClick={(e) => handleNext(e)}
-                    sx={{ mt: 1, mr: 1 }}>
-                    {index === subTravelogueStep.length - 1 ? '완료' : '다음'}
-                  </Button>
-                  <Button
-                    disabled={index === 0}
-                    onClick={(e) => handleBack(e)}
-                    sx={{ mt: 1, mr: 1 }}>
-                    이전
-                  </Button>
-                </div>
-              </Box>
+              <SubTravelogue
+                travelogueId={travelogueId}
+                index={index}
+                isLastStep={index === subTravelogueStep.length - 1}
+                handleStep={handleStep}
+              />
             </StepContent>
           </Step>
         ))}

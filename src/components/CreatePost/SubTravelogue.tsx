@@ -1,48 +1,48 @@
 import { AddCircle as AddCircleIcon } from '@mui/icons-material';
-import { Button, IconButton, OutlinedInput, Stack } from '@mui/material';
+import { Box, Button, IconButton, OutlinedInput, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import useFormPersist from 'react-hook-form-persist';
 
 import { usePostSubTravelogue } from '@/api/hooks/post';
 import { SubTitle } from '@/components/common';
 import { subTravelogueFormProps } from '@/constants/defaultFormValue';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
-import { SubTravelogueFormType } from '@/types/post';
+import { ButtonEventType } from '@/types/common';
+import { StepType, SubTravelogueType } from '@/types/post';
 
 import { Location, Transportation } from '.';
 
 interface SubTravelogueProps {
   travelogueId: string;
+  isLastStep: boolean;
+  index: number;
+  handleStep: (e: ButtonEventType, type: StepType) => void;
 }
 
-const SubTravelogue = ({ travelogueId }: SubTravelogueProps) => {
-  const [formats, setFormats] = useState<string[]>(() => []);
-  const { control, handleSubmit } =
-    useForm<SubTravelogueFormType>(subTravelogueFormProps);
-  const { title, content } = useSubTravelogueForm(control);
+const SubTravelogue = ({
+  travelogueId,
+  isLastStep,
+  index,
+  handleStep,
+}: SubTravelogueProps) => {
+  const { control, handleSubmit, watch, setValue } =
+    useForm<SubTravelogueType>(subTravelogueFormProps);
+  const { title, content, transportationSet } = useSubTravelogueForm(control);
   const { fields, append, remove } = useFieldArray({ control, name: 'addresses' });
   const { mutate } = usePostSubTravelogue();
+  useFormPersist(`travelogue-${travelogueId}-${index}`, { watch, setValue });
 
   const onFormatChange = (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
-    setFormats(newFormats);
+    setValue('transportationSet', newFormats);
   };
 
-  const handlePostSubTravelogue = (data: SubTravelogueFormType) => {
-    const { title, content, addresses } = data;
-    const subData = {
-      title,
-      content,
-      addresses,
-      transportationSet: formats,
-      travelPhotoCreateReqs: [{ url: 'temp' }],
-    };
-    formats.length && mutate({ data: subData, travelogueId });
+  const handlePostSubTravelogue = (data: SubTravelogueType) => {
+    mutate({ data, travelogueId });
   };
 
   return (
     <form onSubmit={handleSubmit(handlePostSubTravelogue)}>
-      {/* <Title>1일차</Title> */}
       <Stack sx={marginBottom}>
         <SubTitle>소제목</SubTitle>
         <OutlinedInput
@@ -83,13 +83,30 @@ const SubTravelogue = ({ travelogueId }: SubTravelogueProps) => {
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>이동수단</SubTitle>
-        <Transportation value={formats} handleFormat={onFormatChange} />
+        <Transportation value={transportationSet.value} handleFormat={onFormatChange} />
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>글을 자유롭게 작성해보세요</SubTitle>
         <Editor {...content}></Editor>
       </Stack>
-      <button type='submit'>임시 제출 버튼</button>
+      <Box sx={{ mb: 2 }}>
+        <div>
+          <Button
+            type='submit'
+            variant='contained'
+            onClick={(e) => handleStep(e, 'next')}
+            sx={{ mt: 1, mr: 1 }}>
+            {isLastStep ? '완료' : '다음'}
+          </Button>
+          <Button
+            type='button'
+            disabled={index === 0}
+            onClick={(e) => handleStep(e, 'back')}
+            sx={{ mt: 1, mr: 1 }}>
+            이전
+          </Button>
+        </div>
+      </Box>
     </form>
   );
 };

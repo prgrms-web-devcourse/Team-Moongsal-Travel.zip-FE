@@ -28,5 +28,7 @@ export const subTravelogueFormProps: UseFormProps = {
     title: '',
     content: '',
     addresses: [{ region: '' }],
+    transportationSet: [],
+    travelPhotoCreateReqs: [{ url: 'https://temp.com' }],
   },
 };

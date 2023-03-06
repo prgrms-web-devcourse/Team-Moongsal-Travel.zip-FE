@@ -23,18 +23,12 @@ export interface TravelogueResponseType {
   nights: number;
 }
 
-export interface SubTravelogueFormType {
-  title: string;
-  content: string;
-  addresses: { region: string }[];
-}
-
 export interface SubTravelogueType {
   title: string;
   content: string;
-  addresses: {
-    region: string;
-  }[];
+  addresses: { region: string }[];
   transportationSet: string[];
   travelPhotoCreateReqs: { url: string }[];
 }
+
+export type StepType = 'next' | 'back';
