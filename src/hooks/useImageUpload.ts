@@ -51,8 +51,8 @@ const useImageUpload = () => {
     return { key, url };
   };
 
-  const deleteFile = async (key: string) => {
-    s3.deleteObject({ Bucket: S3_BUCKET, Key: key });
+  const deleteFile = (key: string) => {
+    s3.deleteObject({ Bucket: S3_BUCKET, Key: key }).send();
   };
 
   return { deleteFile, handleFileInput, getImageUrlFromS3 };
