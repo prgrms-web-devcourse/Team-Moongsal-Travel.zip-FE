@@ -11,3 +11,14 @@ export interface TravelogueFeedType {
     profileImageUrl: string;
   };
 }
+
+export interface TravelogueListType {
+  content: TravelogueFeedType[];
+  pageabl: string;
+  size: number;
+  number: number;
+  numberOfElements: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
