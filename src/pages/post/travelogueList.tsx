@@ -1,4 +1,5 @@
-import { Box } from '@mui/material';
+import { Tune as TuneIcon } from '@mui/icons-material';
+import { Box, Button } from '@mui/material';
 // import { CircularProgress, Fade} from '@mui/material';
 import { useRouter } from 'next/router';
 // import { useMemo } from 'react';
@@ -68,18 +69,30 @@ const TravelogueList = () => {
   // );
 
   return (
-    <>
+    <Box sx={{ justifyContent: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          mt: '2rem',
+          maxWidth: '90%',
+          margin: '2rem auto',
+        }}>
+        <Button variant='outlined' startIcon={<TuneIcon />}>
+          필터
+        </Button>
+      </Box>
       {isLoading ? (
-        <div>123</div>
+        <div>loading...</div>
       ) : (
-        <Box component='section' margin='0 auto'>
+        <Box component='section'>
           {travelogues &&
             travelogues.map((travelogue) => (
               <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
             ))}
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 
