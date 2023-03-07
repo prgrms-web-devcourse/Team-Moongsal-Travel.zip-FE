@@ -7,12 +7,12 @@ import { AutoComplete } from './';
 
 interface SearchModalProps {
   isOpen: boolean;
-  handleClose: () => void;
+  onClose: () => void;
 }
 
-const SearchModal = ({ isOpen, handleClose }: SearchModalProps) => {
+const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
   return (
-    <Drawer anchor='top' open={isOpen} onClose={handleClose} sx={style}>
+    <Drawer anchor='top' open={isOpen} onClose={onClose} sx={style}>
       <Box sx={WrapperStyle}>
         <Stack flexGrow={1} width='70%'>
           <Box sx={{ ...CenterStyle, mt: '2rem', mb: '2rem' }}>

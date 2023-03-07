@@ -21,11 +21,11 @@ export const getPersonalTravelogues = async (params: TravelogueParams) => {
   });
 };
 
-export const getTravelogueListByKeyword = async (keyword = '') => {
+export const getTravelogueListByKeyword = async (keyword = '', page = 0, size = 5) => {
   const response = await baseRequest({
     method: 'GET',
-    url: `/api/travelogues/search?keyword=${keyword}`,
+    url: `/api/travelogues/search?keyword=${keyword}&page=${page}&size=${size}`,
   });
 
-  return response.data.content;
+  return response;
 };

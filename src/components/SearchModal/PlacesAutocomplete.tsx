@@ -9,11 +9,16 @@ import {
   ComboboxPopover,
 } from '@reach/combobox';
 import { useRouter } from 'next/router';
+import { KeyboardEvent} from 'react'
+import { useSetRecoilState } from 'recoil';
 import usePlacesAutocomplete from 'use-places-autocomplete';
+
+import { isHeaderOpenState } from '@/recoil';
 
 const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요';
 
 const PlacesAutocomplete = () => {
+  const setIsOpen = useSetRecoilState(isHeaderOpenState);
   const router = useRouter();
   const {
     ready,
@@ -29,18 +34,24 @@ const PlacesAutocomplete = () => {
   };
 
   const handleSubmit = () => {
+    setIsOpen(false);
     router.push({
       pathname: '/post/travelogueList',
       query: { keyword: value },
     });
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit();
+    }
+  }
+
   return (
     <Combobox
       onSelect={handleSelect}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') handleSubmit();
-      }}
+      onKeyDown={handleKeyDown}
       style={{ width: '70%' }}>
       <Stack flexDirection='row'>
         <SearchInput

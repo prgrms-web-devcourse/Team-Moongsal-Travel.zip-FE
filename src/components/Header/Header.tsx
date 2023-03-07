@@ -1,12 +1,13 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { SearchModal } from '@/components/SearchModal';
+import { isHeaderOpenState } from '@/recoil';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(isHeaderOpenState);
   const router = useRouter();
 
   return (
@@ -31,7 +32,7 @@ const Header = () => {
           </Toolbar>
         </AppBar>
       </Box>
-      <SearchModal isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+      <SearchModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );
 };

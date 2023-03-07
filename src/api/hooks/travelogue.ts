@@ -2,7 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-import { getPersonalTravelogues, getRecentTravelogueList } from '@/api/travelogue';
+import {
+  getPersonalTravelogues,
+  getRecentTravelogueList,
+  // getTravelogueListByKeyword,
+} from '@/api/travelogue';
 import { TravelogueParams } from '@/mocks/handlers/travelogue';
 import { TravelogueFeedType } from '@/types/travelogue';
 
@@ -24,3 +28,15 @@ export const useGetPersonalTravelogues = ({ size }: TravelogueParams) => {
     },
   );
 };
+
+// export const useGetTravelogueByKeyword = (keyword, size) => {
+//   return useInfiniteQuery(
+//     ['KEYWORD_TRAVELOGUES'],
+//     ({ pageParam = 0 }: QueryFunctionContext) =>
+//       getTravelogueListByKeyword(keyword, pageParam, size),
+//     {
+//       getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
+//         isLastPage ? undefined : pageNumber + 1,
+//     },
+//   );
+// };
