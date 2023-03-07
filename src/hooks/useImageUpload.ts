@@ -12,12 +12,11 @@ import {
 } from '@/constants';
 
 const useImageUpload = () => {
-  const s3 = new AWS.S3({ params: { ACL: 'public-read' } });
-
-  AWS.config.update({
+  const s3 = new AWS.S3({
     accessKeyId: ACCESS_KEY_ID,
     secretAccessKey: SECRET_ACCESS_KEY,
     region: REGION,
+    params: { ACL: 'public-read' },
   });
 
   const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +50,7 @@ const useImageUpload = () => {
     return { key, url };
   };
 
-  const deleteFile = (key: string) => {
+  const deleteFile = async (key: string) => {
     s3.deleteObject({ Bucket: S3_BUCKET, Key: key }).send();
   };
 
