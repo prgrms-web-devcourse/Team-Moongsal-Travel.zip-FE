@@ -8,11 +8,13 @@ import {
   ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox';
+import { useRouter } from 'next/router';
 import usePlacesAutocomplete from 'use-places-autocomplete';
 
 const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요';
 
 const PlacesAutocomplete = () => {
+  const router = useRouter();
   const {
     ready,
     value,
@@ -26,8 +28,11 @@ const PlacesAutocomplete = () => {
     clearSuggestions();
   };
 
-  const handleClick = () => {
-    console.log(value);
+  const handleSubmit = () => {
+    router.push({
+      pathname: '/post/travelogueList',
+      query: { keyword: value },
+    });
   };
 
   return (
@@ -37,9 +42,10 @@ const PlacesAutocomplete = () => {
           placeholder={PLACEHOLDER_SEARCH}
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          onSubmit={handleSubmit}
           disabled={!ready}
         />
-        <IconButton aria-label='search' color='inherit' onClick={handleClick}>
+        <IconButton aria-label='search' color='inherit' onClick={handleSubmit}>
           <SearchIcon color='white' />
         </IconButton>
       </Stack>

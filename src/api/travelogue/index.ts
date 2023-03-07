@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { baseRequest } from '@/api/core';
 import { TravelogueParams, TravelogueResponse } from '@/mocks/handlers/travelogue';
-import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
+import { TravelogueFeedType } from '@/types/travelogue';
 
 export const getRecentTravelogueList = async (
   page = 1,
@@ -21,13 +21,11 @@ export const getPersonalTravelogues = async (params: TravelogueParams) => {
   });
 };
 
-export const getTravelogueListByKeyword = async (
-  keyword = '',
-): Promise<TravelogueListType> => {
+export const getTravelogueListByKeyword = async (keyword = '') => {
   const response = await baseRequest({
     method: 'GET',
     url: `/api/travelogues/search?keyword=${keyword}`,
   });
 
-  return response.data;
+  return response.data.content;
 };
