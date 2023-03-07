@@ -13,14 +13,14 @@ export const useGetRecentTravelogue = () => {
   });
 };
 
-export const useGetPersonalTravelogues = ({ size }: TravelogueParams) =>
-  useInfiniteQuery(
+export const useGetPersonalTravelogues = ({ size }: TravelogueParams) => {
+  return useInfiniteQuery(
     ['PERSONAL_TRAVELOGUES'],
     ({ pageParam = 0 }: QueryFunctionContext) =>
       getPersonalTravelogues({ page: pageParam, size }),
-
     {
       getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
         isLastPage ? undefined : pageNumber + 1,
     },
   );
+};
