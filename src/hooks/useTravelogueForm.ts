@@ -1,8 +1,8 @@
 import { Control, useController } from 'react-hook-form';
 
-import { TravelogueType } from '@/types/post';
+import { TravelogueFormType } from '@/types/post';
 
-const useTravelogueForm = (control: Control<TravelogueType>) => {
+const useTravelogueForm = (control: Control<TravelogueFormType>) => {
   const { field: countryName, fieldState: countryNameState } = useController({
     name: 'country.name',
     control,

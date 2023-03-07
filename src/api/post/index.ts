@@ -1,8 +1,8 @@
 import http from '@/api/core';
-import { SubTravelogue, TravelogueType } from '@/types/post';
+import { SubTravelogueType, TravelogueType } from '@/types/post';
 
 export const postTravelogue = async (data: TravelogueType) => {
-  await http.post({
+  return await http.post({
     url: `api/travelogues`,
     data,
   });
@@ -12,10 +12,11 @@ export const postSubTravelogue = async ({
   data,
   travelogueId,
 }: {
-  data: SubTravelogue;
+  data: SubTravelogueType;
   travelogueId: string;
-}) =>
-  await http.post({
+}) => {
+  return await http.post({
     url: `api/travelogues/${travelogueId}/subTravelogues`,
     data,
   });
+};

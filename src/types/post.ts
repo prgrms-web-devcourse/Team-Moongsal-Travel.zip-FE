@@ -13,13 +13,17 @@ export interface TravelogueType {
   thumbnail: string;
 }
 
-export interface SubTravelogueForm {
+export type TravelogueFormType = Omit<TravelogueType, 'thumbnail'> & {
+  thumbnail: File | null;
+};
+
+export interface SubTravelogueFormType {
   title: string;
   content: string;
   addresses: { country: string; city: string; spot: string }[];
 }
 
-export interface SubTravelogue {
+export interface SubTravelogueType {
   title: string;
   content: string;
   addresses: {

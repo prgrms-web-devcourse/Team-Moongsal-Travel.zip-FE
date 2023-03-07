@@ -1,10 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: false,
-  },
   images: {
     domains: ['firebasestorage.googleapis.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'travel-zip-bucket.s3.ap-northeast-2.amazonaws.com',
+      },
+    ],
+  },
+  experimental: {
+    appDir: false,
   },
 };
 

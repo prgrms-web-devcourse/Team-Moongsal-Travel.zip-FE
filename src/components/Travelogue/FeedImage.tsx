@@ -11,7 +11,7 @@ interface TravelogueFeedProps {
 const FeedImage = ({ thumbnailURL, ImageAlt }: TravelogueFeedProps) => {
   return (
     <Box sx={boxStyle}>
-      <Image src={thumbnailURL} fill alt={ImageAlt} />
+      <Image src={thumbnailURL} fill alt={ImageAlt} sizes='300px' priority />
     </Box>
   );
 };
