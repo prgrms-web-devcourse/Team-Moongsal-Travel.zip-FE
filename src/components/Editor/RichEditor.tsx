@@ -1,5 +1,4 @@
 import 'react-quill/dist/quill.snow.css';
-import 'react-quill/dist/quill.bubble.css';
 
 import AWS from 'aws-sdk';
 import dynamic from 'next/dynamic';
@@ -159,14 +158,15 @@ const RichEditor = ({ content }: RichEditorType) => {
     [],
   );
 
-  const { deleteFile } = imageS3();
-
-  imageList.map((item) => {
-    if (!content.value.includes(item)) {
-      const key = item.match(/upload\/(.*)$/);
-      key && deleteFile(key[0]);
-    }
-  });
+  useEffect(() => {
+    const { deleteFile } = imageS3();
+    imageList.map((item) => {
+      if (!content.value.includes(item)) {
+        const key = item.match(/upload\/(.*)$/);
+        key && deleteFile(key[0]);
+      }
+    });
+  }, [imageList]);
 
   return (
     <div>
