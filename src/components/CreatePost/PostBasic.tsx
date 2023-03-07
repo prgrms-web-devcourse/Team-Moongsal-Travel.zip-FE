@@ -45,7 +45,7 @@ const PostBasic = ({ control }: ControlProps) => {
         {toggleValue && (
           <>
             <SubTitle>방문한 나라</SubTitle>
-            <CountrySelect name={countryName} isSelected={toggleValue === '국내'} />
+            <CountrySelect name={countryName} isKorea={toggleValue === '국내'} />
           </>
         )}
         {countryNameState.error && (

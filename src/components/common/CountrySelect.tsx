@@ -7,20 +7,20 @@ import { COUNTRIES } from '@/constants';
 import { TravelogueType } from '@/types/post';
 
 interface LocationProps {
-  isSelected: boolean;
+  isKorea: boolean;
   name: ControllerRenderProps<TravelogueType, 'country.name'>;
 }
 
-const CountrySelect = ({ isSelected, name }: LocationProps) => {
+const CountrySelect = ({ isKorea, name }: LocationProps) => {
   useEffect(() => {
     if (name) {
-      isSelected ? name.onChange('대한민국') : name.onChange('');
+      isKorea ? name.onChange('대한민국') : name.onChange('');
     }
-  }, [isSelected]);
+  }, [isKorea]);
 
   return (
     <>
-      {isSelected ? (
+      {isKorea ? (
         <FormHelperText sx={{ fontSize: '1rem' }}>대한민국</FormHelperText>
       ) : (
         <Autocomplete
