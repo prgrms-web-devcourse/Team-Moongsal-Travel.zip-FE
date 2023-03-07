@@ -23,12 +23,10 @@ export const travelogueFormProps: UseFormProps = {
   },
 };
 
-export const subTravelogueFormProps: UseFormProps = {
-  defaultValues: {
-    title: '',
-    content: '',
-    addresses: [{ region: '' }],
-    transportationSet: [],
-    travelPhotoCreateReqs: [{ url: 'https://temp.com' }],
-  },
+export const subTravelogueFormDefault = {
+  title: '',
+  content: '',
+  addresses: [{ region: '' }],
+  transportationSet: [],
+  travelPhotoCreateReqs: [{ url: 'https://temp.com' }],
 };
