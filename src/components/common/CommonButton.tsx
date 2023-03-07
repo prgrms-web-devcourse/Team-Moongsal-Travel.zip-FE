@@ -1,6 +1,5 @@
 import { Button } from '@mui/material';
 import { SxProps, Theme } from '@mui/system';
-// import { CSSProperties } from 'react';
 
 interface CommonButtonProps {
   content: string;

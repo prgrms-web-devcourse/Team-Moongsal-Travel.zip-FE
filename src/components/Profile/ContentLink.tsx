@@ -52,12 +52,3 @@ const buttonStyle = {
   mb: 0.5,
   boxShadow: 3,
 } as const;
-
-// const iconStyle = {
-//   color: 'blue040.main',
-// };
-
-// const CustomArrowForwardIcon = styled(ArrowForwardIcon)(({ theme }) => ({
-//   ...iconStyle,
-//   color: theme.palette.blue040.main,
-// }));
