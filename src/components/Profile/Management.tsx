@@ -9,7 +9,12 @@ interface ManagementProps {
 
 const Management = ({ nickname, profileImage }: ManagementProps) => {
   return (
-    <Stack spacing={1} alignItems='center'>
+    <Stack
+      spacing={2}
+      minHeight={350}
+      alignItems='center'
+      justifyContent='center'
+      bgcolor='gray005.main'>
       <ProfileAvatar url={profileImage} size={100} iconSize={5} />
       <Typography
         variant='h2'

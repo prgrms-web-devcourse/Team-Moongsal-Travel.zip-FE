@@ -14,7 +14,7 @@ interface ContentLinkProps {
 }
 
 const ContentLink = ({ contentName, route, iconName }: ContentLinkProps) => {
-  console.log(route);
+  console.log(route); // route 이동 경로 확인 test 용도
 
   let IconComponent: ReactNode;
 
