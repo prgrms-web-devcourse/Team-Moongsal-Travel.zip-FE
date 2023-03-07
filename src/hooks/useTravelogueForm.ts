@@ -2,12 +2,16 @@ import { Control, useController } from 'react-hook-form';
 
 import { TravelogueFormType } from '@/types/post';
 
-const usePostForm = (control: Control<TravelogueFormType>) => {
+const useTravelogueForm = (control: Control<TravelogueFormType>) => {
   const { field: countryName, fieldState: countryNameState } = useController({
     name: 'country.name',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '방문 나라는 필수 입력 사항입니다.',
+      pattern: {
+        value: /^[가-힣 ]+$/,
+        message: '한글로 입력해주세요.',
+      },
     },
   });
 
@@ -15,7 +19,11 @@ const usePostForm = (control: Control<TravelogueFormType>) => {
     name: 'cost.total',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '비용은 필수 입력 사항입니다.',
+      pattern: {
+        value: /^[0-9]+$/,
+        message: '비용은 숫자만 입력가능합니다.',
+      },
     },
   });
 
@@ -23,7 +31,7 @@ const usePostForm = (control: Control<TravelogueFormType>) => {
     name: 'period.startDate',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '여행기간은 필수 입력 사항입니다.',
     },
   });
 
@@ -31,7 +39,7 @@ const usePostForm = (control: Control<TravelogueFormType>) => {
     name: 'period.endDate',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '여행기간은 필수 입력 사항입니다.',
     },
   });
 
@@ -39,7 +47,7 @@ const usePostForm = (control: Control<TravelogueFormType>) => {
     name: 'title',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '제목은 필수 입력 사항입니다.',
     },
   });
 
@@ -47,7 +55,7 @@ const usePostForm = (control: Control<TravelogueFormType>) => {
     name: 'thumbnail',
     control,
     rules: {
-      required: '필수 입력 사항입니다.',
+      required: '썸네일은 필수 입력 사항입니다.',
     },
   });
 
@@ -67,4 +75,4 @@ const usePostForm = (control: Control<TravelogueFormType>) => {
   };
 };
 
-export default usePostForm;
+export default useTravelogueForm;

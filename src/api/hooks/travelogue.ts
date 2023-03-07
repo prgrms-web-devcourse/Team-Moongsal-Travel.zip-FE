@@ -8,7 +8,7 @@ import { TravelogueFeedType } from '@/types/travelogue';
 
 export const useGetRecentTravelogue = () => {
   return useQuery<TravelogueFeedType[], AxiosError>({
-    queryKey: ['RecentTravelogueData'],
+    queryKey: ['RECENT_TRAVELOGUES'],
     queryFn: () => getRecentTravelogueList(),
   });
 };
