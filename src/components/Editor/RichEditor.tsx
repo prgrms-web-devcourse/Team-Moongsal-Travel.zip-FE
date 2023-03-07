@@ -87,8 +87,7 @@ const RichEditor = ({ content }: RichEditorType) => {
       const editor = quillRef.current?.getEditor();
       const range = editor?.getSelection(true).index;
       if (file) {
-        const { url, key } = await getImageUrlFromS3(file[0]);
-        console.log(key);
+        const { url } = await getImageUrlFromS3(file[0]);
         setImageList((prev) => [...prev, url]);
         if (range !== undefined) {
           editor?.insertEmbed(range, 'image', url);
