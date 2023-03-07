@@ -1,5 +1,6 @@
 import { LocationOn } from '@mui/icons-material';
-import { Box, Stack, styled, Typography } from '@mui/material';
+import { Search as SearchIcon } from '@mui/icons-material';
+import { Box, IconButton, Stack, styled, Typography } from '@mui/material';
 import {
   Combobox,
   ComboboxInput,
@@ -25,14 +26,23 @@ const PlacesAutocomplete = () => {
     clearSuggestions();
   };
 
+  const handleClick = () => {
+    console.log(value);
+  };
+
   return (
     <Combobox onSelect={handleSelect} style={{ width: '70%' }}>
-      <SearchInput
-        placeholder={PLACEHOLDER_SEARCH}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-      />
+      <Stack flexDirection='row'>
+        <SearchInput
+          placeholder={PLACEHOLDER_SEARCH}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={!ready}
+        />
+        <IconButton aria-label='search' color='inherit' onClick={handleClick}>
+          <SearchIcon color='white' />
+        </IconButton>
+      </Stack>
       <PopOver>
         <ComboboxList
           style={{ listStyle: 'none', margin: 0, padding: 0, userSelect: 'none' }}>

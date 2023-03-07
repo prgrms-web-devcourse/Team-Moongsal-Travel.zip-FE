@@ -1,5 +1,4 @@
-import SearchIcon from '@mui/icons-material/Search';
-import { Box, Drawer, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Drawer, Stack, Typography } from '@mui/material';
 
 import { CenterStyle } from '@/styles/CenterStyle';
 import { theme } from '@/styles/MuiTheme';
@@ -16,12 +15,8 @@ const SearchModal = ({ isOpen, handleClose }: SearchModalProps) => {
     <Drawer anchor='top' open={isOpen} onClose={handleClose} sx={style}>
       <Box sx={WrapperStyle}>
         <Stack flexGrow={1} width='70%'>
-          {/* Box 단위로 컴포넌트 분리 */}
           <Box component='form' sx={{ ...CenterStyle, mt: '2rem', mb: '2rem' }}>
             <AutoComplete />
-            <IconButton aria-label='search' color='inherit'>
-              <SearchIcon color='white' />
-            </IconButton>
           </Box>
           <Box component='div' sx={CenterStyle}>
             <Typography component='div' sx={PopularSearchStyle}>
