@@ -51,7 +51,7 @@ const BoxStyle = {
   position: 'sticky',
   top: 0,
   zIndex: '2000',
-  mb: '2rem',
+  // mb: '2rem',
 } as const;
 
 const TextStyle = {

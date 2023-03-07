@@ -1,5 +1,6 @@
 import Head from 'next/head';
 
+import { PersonalFeedList } from '@/components/Main';
 import { PopularFeed } from '@/components/Travelogue/PopularFeed';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       </Head>
       <main>
         <PopularFeed />
+        <PersonalFeedList />
       </main>
     </>
   );
