@@ -7,6 +7,18 @@ import GlobalStyle from '@/styles/GlobalStyle';
 import MobileLayout from '@/styles/MobileLayout';
 import { theme } from '@/styles/MuiTheme';
 
+const initMockAPI = async (): Promise<void> => {
+  if (typeof window === 'undefined') {
+    const { server } = await import('@/mocks/server');
+    server.listen();
+  } else {
+    const { worker } = await import('@/mocks/browser');
+    worker.start();
+  }
+};
+
+initMockAPI();
+
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient({
     defaultOptions: {
