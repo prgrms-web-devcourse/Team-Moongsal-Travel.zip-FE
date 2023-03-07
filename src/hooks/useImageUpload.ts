@@ -12,12 +12,11 @@ import {
 } from '@/constants';
 
 const useImageUpload = () => {
-  const s3 = new AWS.S3({ params: { ACL: 'public-read' } });
-
-  AWS.config.update({
+  const s3 = new AWS.S3({
     accessKeyId: ACCESS_KEY_ID,
     secretAccessKey: SECRET_ACCESS_KEY,
     region: REGION,
+    params: { ACL: 'public-read' },
   });
 
   const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,13 +35,13 @@ const useImageUpload = () => {
   };
 
   const uploadFile = ({ file, key }: { file: File; key: string }) => {
-    const upload = s3.upload({
+    const params = {
       Bucket: S3_BUCKET,
       Body: file,
       Key: key,
       ContentType: file.type,
-    });
-    return upload.promise();
+    };
+    return s3.upload(params).promise();
   };
 
   const getImageUrlFromS3 = async (file: File) => {
@@ -52,7 +51,7 @@ const useImageUpload = () => {
   };
 
   const deleteFile = async (key: string) => {
-    s3.deleteObject({ Bucket: S3_BUCKET, Key: key });
+    s3.deleteObject({ Bucket: S3_BUCKET, Key: key }).send();
   };
 
   return { deleteFile, handleFileInput, getImageUrlFromS3 };
