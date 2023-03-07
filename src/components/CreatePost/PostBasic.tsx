@@ -5,7 +5,7 @@ import { Control } from 'react-hook-form';
 
 import { FileInput, SubTitle, Title } from '@/components/common';
 import { CountrySelect } from '@/components/common';
-import usePostForm from '@/hooks/useTravelogueForm';
+import useTravelogueForm from '@/hooks/useTravelogueForm';
 import { TravelogueType } from '@/types/post';
 
 import { ComplexButton, DatePicker } from './';
@@ -34,7 +34,7 @@ const PostBasic = ({ control }: ControlProps) => {
     titleState,
     thumbnail,
     thumbnailState,
-  } = usePostForm(control);
+  } = useTravelogueForm(control);
 
   return (
     <>

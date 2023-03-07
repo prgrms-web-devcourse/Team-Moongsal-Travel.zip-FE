@@ -2,7 +2,7 @@ import { Control, useController } from 'react-hook-form';
 
 import { TravelogueType } from '@/types/post';
 
-const usePostForm = (control: Control<TravelogueType>) => {
+const useTravelogueForm = (control: Control<TravelogueType>) => {
   const { field: countryName, fieldState: countryNameState } = useController({
     name: 'country.name',
     control,
@@ -75,4 +75,4 @@ const usePostForm = (control: Control<TravelogueType>) => {
   };
 };
 
-export default usePostForm;
+export default useTravelogueForm;
