@@ -17,7 +17,7 @@ interface ControlProps {
 const PostBasic = ({ control }: ControlProps) => {
   const [toggleValue, setToggleValue] = useState('');
 
-  const handleChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
+  const onChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
     setToggleValue(selectedValue);
   };
 
@@ -41,7 +41,7 @@ const PostBasic = ({ control }: ControlProps) => {
       <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
       <Stack sx={marginBottom}>
         <SubTitle>여행 유형</SubTitle>
-        <ComplexButton value={toggleValue} handleChange={handleChange} />
+        <ComplexButton value={toggleValue} onChange={onChange} />
         {toggleValue && (
           <>
             <SubTitle>방문한 나라</SubTitle>

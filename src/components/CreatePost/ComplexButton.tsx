@@ -6,12 +6,12 @@ import { COMPLEX_BUTTON_IMAGE } from '@/constants';
 
 interface ComplexButtonProps {
   value: string;
-  handleChange: (e: MouseEvent<HTMLElement>, selectedValue: string) => void;
+  onChange: (e: MouseEvent<HTMLElement>, selectedValue: string) => void;
 }
 
-const ComplexButton = ({ value, handleChange }: ComplexButtonProps) => {
+const ComplexButton = ({ value, onChange }: ComplexButtonProps) => {
   const handleReset = (e: MouseEvent<HTMLElement>) => {
-    handleChange(e, '');
+    onChange(e, '');
   };
 
   return (
@@ -21,7 +21,7 @@ const ComplexButton = ({ value, handleChange }: ComplexButtonProps) => {
         value={value}
         disabled={!!value}
         exclusive
-        onChange={handleChange}
+        onChange={onChange}
         aria-label='Platform'
         sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: '1rem' }}>
         {COMPLEX_BUTTON_IMAGE.map((image) => (
