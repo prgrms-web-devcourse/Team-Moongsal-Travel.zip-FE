@@ -6,14 +6,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Dayjs } from 'dayjs';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePostType } from '@/types/post';
+import { TravelogueType } from '@/types/post';
 import { getDateInfo } from '@/utils/helper';
 
 interface DatePickerProps {
   text?: string;
   control:
-    | ControllerRenderProps<CreatePostType, 'period.startDate'>
-    | ControllerRenderProps<CreatePostType, 'period.endDate'>;
+    | ControllerRenderProps<TravelogueType, 'period.startDate'>
+    | ControllerRenderProps<TravelogueType, 'period.endDate'>;
   maxDate?: Dayjs;
 }
 

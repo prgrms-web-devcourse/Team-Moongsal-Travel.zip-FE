@@ -4,11 +4,11 @@ import { useEffect } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
 import { COUNTRIES } from '@/constants';
-import { CreatePostType } from '@/types/post';
+import { TravelogueType } from '@/types/post';
 
 interface LocationProps {
   isSelected: boolean;
-  name: ControllerRenderProps<CreatePostType, 'country.name'>;
+  name: ControllerRenderProps<TravelogueType, 'country.name'>;
 }
 
 const CountrySelect = ({ isSelected, name }: LocationProps) => {

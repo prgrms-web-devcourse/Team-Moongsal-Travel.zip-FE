@@ -1,4 +1,4 @@
-export interface CreatePostType {
+export interface TravelogueType {
   country: {
     name: string;
   };

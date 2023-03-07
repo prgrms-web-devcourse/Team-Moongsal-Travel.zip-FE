@@ -2,13 +2,13 @@ import { Box, Button } from '@mui/material';
 // import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
-// import { createPost } from '@/api/post';
+// import { postTravelogue } from '@/api/post';
 import { PostBasic } from '@/components/CreatePost';
-import { CreatePostType } from '@/types/post';
+import { TravelogueType } from '@/types/post';
 
 const First = () => {
   // const router = useRouter();
-  const methods = useForm<CreatePostType>({
+  const methods = useForm<TravelogueType>({
     mode: 'onChange',
     defaultValues: {
       country: {
@@ -27,9 +27,9 @@ const First = () => {
   });
   const { handleSubmit, control } = methods;
 
-  const handleComplete = (data: CreatePostType) => {
+  const handleComplete = (data: TravelogueType) => {
     console.log(data);
-    // createPost(data);
+    // postTravelogue(data);
     // 성공시 subtravelogues로 넘김
   };
   return (

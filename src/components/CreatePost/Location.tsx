@@ -3,11 +3,11 @@ import { Box, IconButton, OutlinedInput } from '@mui/material';
 import { useEffect } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePostType, SubTravelogueForm } from '@/types/post';
+import { SubTravelogueForm, TravelogueType } from '@/types/post';
 
 interface LocationProps {
   readonly?: boolean;
-  name?: ControllerRenderProps<CreatePostType, 'country.name'>;
+  name?: ControllerRenderProps<TravelogueType, 'country.name'>;
   field?: ControllerRenderProps<SubTravelogueForm, `addresses.${number}.spot`>;
 }
 

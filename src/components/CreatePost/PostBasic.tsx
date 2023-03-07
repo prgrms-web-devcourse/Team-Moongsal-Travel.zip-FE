@@ -6,12 +6,12 @@ import { Control } from 'react-hook-form';
 import { FileInput, SubTitle, Title } from '@/components/common';
 import { CountrySelect } from '@/components/common';
 import usePostForm from '@/hooks/useTravelogueForm';
-import { CreatePostType } from '@/types/post';
+import { TravelogueType } from '@/types/post';
 
 import { ComplexButton, DatePicker } from './';
 
 interface ControlProps {
-  control: Control<CreatePostType>;
+  control: Control<TravelogueType>;
 }
 
 const PostBasic = ({ control }: ControlProps) => {
