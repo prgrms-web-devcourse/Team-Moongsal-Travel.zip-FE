@@ -4,14 +4,14 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
 import { FieldErrors, UseFormHandleSubmit } from 'react-hook-form';
 
-import { CreatePostType } from '@/types/post';
+import { TravelogueType } from '@/types/post';
 
 interface StepperButtonProps {
   format: 'forward' | 'backward' | 'complete';
   steps: number;
-  errors?: FieldErrors<CreatePostType>;
+  errors?: FieldErrors<TravelogueType>;
   setSteps: Dispatch<SetStateAction<number>>;
-  onClick?: UseFormHandleSubmit<CreatePostType>;
+  onClick?: UseFormHandleSubmit<TravelogueType>;
 }
 
 const StepperButton = ({
@@ -23,7 +23,7 @@ const StepperButton = ({
 }: StepperButtonProps) => {
   const router = useRouter();
 
-  const onSubmit = (data: CreatePostType) => {
+  const onSubmit = (data: TravelogueType) => {
     //test
     console.log(data);
     console.log(errors);

@@ -1,4 +1,4 @@
-export interface CreatePostType {
+export interface TravelogueType {
   country: {
     name: string;
   };
@@ -13,7 +13,7 @@ export interface CreatePostType {
   thumbnail: string;
 }
 
-export type TravelogueFormType = Omit<CreatePostType, 'thumbnail'> & {
+export type TravelogueFormType = Omit<TravelogueType, 'thumbnail'> & {
   thumbnail: File | null;
 };
 
