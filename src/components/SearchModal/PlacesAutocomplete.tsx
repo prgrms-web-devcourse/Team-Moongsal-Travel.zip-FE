@@ -36,13 +36,17 @@ const PlacesAutocomplete = () => {
   };
 
   return (
-    <Combobox onSelect={handleSelect} style={{ width: '70%' }}>
+    <Combobox
+      onSelect={handleSelect}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') handleSubmit();
+      }}
+      style={{ width: '70%' }}>
       <Stack flexDirection='row'>
         <SearchInput
           placeholder={PLACEHOLDER_SEARCH}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          onSubmit={handleSubmit}
           disabled={!ready}
         />
         <IconButton aria-label='search' color='inherit' onClick={handleSubmit}>

@@ -16,7 +16,6 @@ const TravelogueList = () => {
         try {
           setIsLoading(true);
           const response = await getTravelogueListByKeyword(router.query.keyword);
-          console.log(response);
           setTravelogues(response);
         } catch (error) {
           console.error(error);

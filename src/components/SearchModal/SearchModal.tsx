@@ -15,7 +15,7 @@ const SearchModal = ({ isOpen, handleClose }: SearchModalProps) => {
     <Drawer anchor='top' open={isOpen} onClose={handleClose} sx={style}>
       <Box sx={WrapperStyle}>
         <Stack flexGrow={1} width='70%'>
-          <Box component='form' sx={{ ...CenterStyle, mt: '2rem', mb: '2rem' }}>
+          <Box sx={{ ...CenterStyle, mt: '2rem', mb: '2rem' }}>
             <AutoComplete />
           </Box>
           <Box component='div' sx={CenterStyle}>
