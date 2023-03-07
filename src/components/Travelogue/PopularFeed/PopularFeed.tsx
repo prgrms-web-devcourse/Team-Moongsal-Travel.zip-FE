@@ -7,7 +7,7 @@ import { useGetRecentTravelogue } from '@/api/hooks/travelogue';
 import { TravelogueFeed } from '@/components/Travelogue';
 
 const PopularFeed = () => {
-  const { data: travelogues } = useGetRecentTravelogue();
+  const { data: popularTravelogues } = useGetRecentTravelogue();
 
   const settings = {
     dots: true,
@@ -17,13 +17,13 @@ const PopularFeed = () => {
     slidesToScroll: 1,
   };
 
-  if (!travelogues || travelogues.length === 0) {
+  if (!popularTravelogues || popularTravelogues.length === 0) {
     return null;
   }
 
   return (
     <Slider {...settings}>
-      {travelogues.map((travelogue) => {
+      {popularTravelogues.map((travelogue) => {
         return <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />;
       })}
     </Slider>
