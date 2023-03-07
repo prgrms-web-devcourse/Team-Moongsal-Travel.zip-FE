@@ -1,26 +1,25 @@
 import TextField from '@mui/material/TextField';
 import { koKR } from '@mui/x-date-pickers';
+import { MobileDatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { Dayjs } from 'dayjs';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { CreatePostType } from '@/types/post';
+import { TravelogueType } from '@/types/post';
 import { getDateInfo } from '@/utils/helper';
 
 interface DatePickerProps {
   text?: string;
   control:
-    | ControllerRenderProps<CreatePostType, 'period.startDate'>
-    | ControllerRenderProps<CreatePostType, 'period.endDate'>;
+    | ControllerRenderProps<TravelogueType, 'period.startDate'>
+    | ControllerRenderProps<TravelogueType, 'period.endDate'>;
+  maxDate?: Dayjs;
 }
 
-const DatePicker = ({ text, control }: DatePickerProps) => {
+const DatePicker = ({ text, control, maxDate }: DatePickerProps) => {
   const handleDateChange = (newValue: Dayjs | null) => {
-    if (newValue) {
-      control.onChange(getDateInfo(newValue));
-    }
+    if (newValue) control.onChange(getDateInfo(newValue));
   };
 
   return (
@@ -31,10 +30,16 @@ const DatePicker = ({ text, control }: DatePickerProps) => {
       <MobileDatePicker
         {...control}
         inputFormat='YYYY년 MM월 DD일'
+        showToolbar={false}
         label={text}
         onChange={handleDateChange}
-        toolbarFormat='YYYY년 MM월 DD일'
-        disableMaskedInput
+        disableFuture
+        maxDate={maxDate}
+        onError={(reason) => {
+          control.name === 'period.startDate' &&
+            reason === 'maxDate' &&
+            control.onChange(null);
+        }}
         renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>
