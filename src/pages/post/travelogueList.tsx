@@ -36,10 +36,9 @@ const TravelogueList = () => {
 
   return (
     <Box component='section'>
-      {keywordTravelogues &&
-        keywordTravelogues.map((travelogue) => (
-          <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
-        ))}
+      {keywordTravelogues.map((travelogue) => (
+        <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
+      ))}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Fade in={isFetching}>
           <Box sx={{ bgcolor: 'white.main' }}>
