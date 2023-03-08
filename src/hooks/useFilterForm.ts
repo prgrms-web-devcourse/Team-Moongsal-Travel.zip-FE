@@ -10,18 +10,50 @@ const useFilterForm = (control: Control<FilterFormType>) => {
   const { field: minDays, fieldState: minDaysState } = useController({
     name: 'minDays',
     control,
+    rules: {
+      validate: (value) => {
+        if (maxDays.value && !value) {
+          return '최소 기간을 입력하세요';
+        }
+        return true;
+      },
+    },
   });
   const { field: maxDays, fieldState: maxDaysState } = useController({
     name: 'maxDays',
     control,
+    rules: {
+      validate: (value) => {
+        if (minDays.value && !value) {
+          return '최대 기간을 입력하세요';
+        }
+        return true;
+      },
+    },
   });
   const { field: minCost, fieldState: minCostState } = useController({
     name: 'minCost',
     control,
+    rules: {
+      validate: (value) => {
+        if (maxCost.value && !value) {
+          return '최소 비용을 입력하세요';
+        }
+        return true;
+      },
+    },
   });
   const { field: maxCost, fieldState: maxCostState } = useController({
     name: 'maxCost',
     control,
+    rules: {
+      validate: (value) => {
+        if (minCost.value && !value) {
+          return '최대 비용을 입력하세요';
+        }
+        return true;
+      },
+    },
   });
 
   return {
