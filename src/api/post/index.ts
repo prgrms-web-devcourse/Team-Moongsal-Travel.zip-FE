@@ -25,8 +25,12 @@ export const postSubTravelogue = async ({
   });
 };
 
-export const patchTraveloguePublish = async (travelogueId: number) => {
-  return await http.post({
+export const patchTraveloguePublish = async ({
+  travelogueId,
+}: {
+  travelogueId: number;
+}) => {
+  return await http.patch({
     url: `api/travelogues/${travelogueId}/publish`,
   });
 };
