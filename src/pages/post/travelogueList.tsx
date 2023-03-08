@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useGetTravelogueByKeyword } from '@/api/hooks/travelogue';
+import { FilterButton } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 import useIntersect from '@/hooks/useIntersect';
 
@@ -36,6 +37,7 @@ const TravelogueList = () => {
 
   return (
     <Box component='section'>
+      <FilterButton />
       {keywordTravelogues.map((travelogue) => (
         <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
       ))}

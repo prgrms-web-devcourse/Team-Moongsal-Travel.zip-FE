@@ -2,7 +2,7 @@ import { Tune as TuneIcon } from '@mui/icons-material';
 import { Box, Button, Dialog, Popover } from '@mui/material';
 import { useState } from 'react';
 
-import { SubTitle, Title } from '@/components/common';
+import { SubTitle } from '@/components/common';
 
 const FilterButton = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -42,9 +42,22 @@ const FilterButton = () => {
             horizontal: 'right',
           }}>
           <Box width={250} height={300}>
-            <Title>정렬</Title>
-            <SubTitle>여행 경비</SubTitle>
-            <SubTitle>여행 기간</SubTitle>
+            <Box>
+              <SubTitle>정렬</SubTitle>
+              <button>최신순</button>
+              <button>인기순</button>
+            </Box>
+            <Box>
+              <SubTitle>여행 경비</SubTitle>
+              <input placeholder='최소금액' />
+              <input placeholder='최대금액' />
+            </Box>
+            <Box>
+              <SubTitle>여행 기간</SubTitle>
+              <input placeholder='최소기간' />
+              <input placeholder='최대기간' />
+            </Box>
+            <button>적용</button>
           </Box>
         </Popover>
       </Dialog>
