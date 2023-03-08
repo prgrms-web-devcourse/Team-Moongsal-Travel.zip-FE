@@ -7,7 +7,7 @@ import { ControllerRenderProps } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 
 import useImageUpload from '@/hooks/useImageUpload';
-import { SubTravelogueFormType } from '@/types/post';
+import { SubTravelogueType } from '@/types/post';
 
 import { editorModules } from './index';
 
@@ -31,10 +31,11 @@ const Reactquill = dynamic(
 );
 
 interface RichEditorType {
-  content: ControllerRenderProps<SubTravelogueFormType, 'content'>;
+  content: ControllerRenderProps<SubTravelogueType, 'content'>;
+  disabled: boolean;
 }
 
-const RichEditor = ({ content }: RichEditorType) => {
+const RichEditor = ({ content, disabled }: RichEditorType) => {
   const [imageList, setImageList] = useState<string[]>([]);
   const quillRef = useRef<ReactQuill>(null);
   const { getImageUrlFromS3, deleteFile } = useImageUpload();
@@ -84,7 +85,13 @@ const RichEditor = ({ content }: RichEditorType) => {
 
   return (
     <div>
-      <Reactquill forwardedRef={quillRef} {...content} theme='snow' modules={modules} />
+      <Reactquill
+        forwardedRef={quillRef}
+        {...content}
+        disabled={disabled}
+        theme='snow'
+        modules={modules}
+      />
     </div>
   );
 };
