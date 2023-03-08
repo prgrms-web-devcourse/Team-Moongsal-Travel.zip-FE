@@ -1,23 +1,30 @@
 import { Control, useController } from 'react-hook-form';
 
-import { SubTravelogueFormType } from '@/types/post';
+import { SubTravelogueType } from '@/types/post';
 
-const useSubTravelogueForm = (control: Control<SubTravelogueFormType>) => {
-  const { field: title, fieldState: titleState } = useController({
+const useSubTravelogueForm = (control: Control<SubTravelogueType>) => {
+  const { field: title } = useController({
     name: 'title',
     control,
+    rules: { required: true },
   });
 
-  const { field: content, fieldState: contentState } = useController({
+  const { field: content } = useController({
     name: 'content',
     control,
+    rules: { required: true },
+  });
+
+  const { field: transportationSet } = useController({
+    name: 'transportationSet',
+    control,
+    rules: { required: true },
   });
 
   return {
     title,
-    titleState,
     content,
-    contentState,
+    transportationSet,
   };
 };
 

@@ -26,6 +26,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.2",
     "react-quill": "^2.0.0",
+    "react-hook-form-persist": "^3.0.0",
     "recoil": "^0.7.6",
     "use-places-autocomplete": "^4.0.0",
     "uuid": "^9.0.0"
@@ -50,6 +51,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.1.2",
+    "msw": "^1.1.0",
     "postcss": "^8.4.21",
     "postcss-syntax": "^0.36.2",
     "prettier": "^2.8.4",
@@ -66,5 +68,8 @@
   "browserslist": [
     ">0.2%",
     "not dead"
-  ]
+  ],
+  "msw": {
+    "workerDirectory": "public"
+  }
 }

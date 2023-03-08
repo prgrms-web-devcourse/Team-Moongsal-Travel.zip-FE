@@ -1,7 +1,11 @@
-import http from '@/api/core';
-import { SubTravelogueType, TravelogueType } from '@/types/post';
+import { AxiosResponse } from 'axios';
 
-export const postTravelogue = async (data: TravelogueType) => {
+import http from '@/api/core';
+import { SubTravelogueType, TravelogueResponseType, TravelogueType } from '@/types/post';
+
+export const postTravelogue = async (
+  data: TravelogueType,
+): Promise<AxiosResponse<TravelogueResponseType>> => {
   return await http.post({
     url: `api/travelogues`,
     data,

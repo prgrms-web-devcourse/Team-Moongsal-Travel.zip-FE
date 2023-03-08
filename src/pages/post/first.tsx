@@ -1,13 +1,15 @@
 import { Box, Button } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import { postTravelogue } from '@/api/post';
 import { PostBasic } from '@/components/CreatePost';
 import { travelogueFormProps } from '@/constants/defaultFormValue';
 import useImageUpload from '@/hooks/useImageUpload';
-import { TravelogueFormType } from '@/types/post';
+import { TravelogueFormType, TravelogueResponseType } from '@/types/post';
 
 const First = () => {
+  const router = useRouter();
   const { handleSubmit, control } = useForm<TravelogueFormType>(travelogueFormProps);
   const { getImageUrlFromS3, deleteFile } = useImageUpload();
 
@@ -18,7 +20,15 @@ const First = () => {
       deleteFile(key);
       return;
     }
-    // Todo: 트래블로그 작성 성공시 서브 트래블로그로 아이디와 일수 넘기기
+    goToSubTravelogue(response.data);
+  };
+
+  const goToSubTravelogue = (data: TravelogueResponseType) => {
+    const { id: travelogueId, days } = data;
+    router.push(
+      { pathname: '/post/[id]', query: { travelogueId, days } },
+      '/post/detail',
+    );
   };
   return (
     <form onSubmit={handleSubmit(handleComplete)}>

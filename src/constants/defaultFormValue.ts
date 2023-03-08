@@ -22,3 +22,11 @@ export const travelogueFormProps: UseFormProps = {
     thumbnail: null,
   },
 };
+
+export const subTravelogueFormDefault = {
+  title: '',
+  content: '',
+  addresses: [{ region: '' }],
+  transportationSet: [],
+  travelPhotoCreateReqs: [{ url: 'https://temp.com' }],
+};

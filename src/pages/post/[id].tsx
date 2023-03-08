@@ -1,24 +1,35 @@
-// import { useRouter } from 'next/router';
-
 import { Box } from '@mui/material';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-import { PostDetail, StepperButton } from '@/components/CreatePost';
+import { VerticalStepper } from '@/components/Stepper';
 
-const Post = () => {
-  const [steps, setSteps] = useState(0);
+const SubTraveloguePage = () => {
+  const router = useRouter();
+  const [travelogueId, setTravelogueId] = useState('');
+  const [subTravelogueStep, setSubTravelogueStep] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    const { travelogueId, days } = router.query;
+    const array = Array.from(
+      { length: parseInt(days as string) },
+      (_, i) => `${i + 1}일차`,
+    );
+    setTravelogueId(travelogueId as string);
+    setSubTravelogueStep(array);
+  }, [router.isReady, router.query]);
 
   return (
     <Box sx={layout}>
-      <PostDetail />
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <StepperButton format='backward' steps={steps} setSteps={setSteps} />
-        <StepperButton format='complete' steps={steps} setSteps={setSteps} />
-      </Box>
+      <VerticalStepper
+        travelogueId={travelogueId}
+        subTravelogueStep={subTravelogueStep}
+      />
     </Box>
   );
 };
 
-export default Post;
+export default SubTraveloguePage;
 
 const layout = { padding: '0 24px' };

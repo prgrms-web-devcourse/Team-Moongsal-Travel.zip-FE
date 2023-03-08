@@ -17,20 +17,18 @@ export type TravelogueFormType = Omit<TravelogueType, 'thumbnail'> & {
   thumbnail: File | null;
 };
 
-export interface SubTravelogueFormType {
-  title: string;
-  content: string;
-  addresses: { country: string; city: string; spot: string }[];
+export interface TravelogueResponseType {
+  id: number;
+  days: number;
+  nights: number;
 }
 
 export interface SubTravelogueType {
   title: string;
   content: string;
-  addresses: {
-    country: string;
-    city: string;
-    spot: string;
-  }[];
+  addresses: { region: string }[];
   transportationSet: string[];
   travelPhotoCreateReqs: { url: string }[];
 }
+
+export type StepType = 'next' | 'back';

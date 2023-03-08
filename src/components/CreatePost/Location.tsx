@@ -2,10 +2,10 @@ import { LocationOnOutlined } from '@mui/icons-material';
 import { Box, IconButton, OutlinedInput } from '@mui/material';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { SubTravelogueFormType } from '@/types/post';
+import { SubTravelogueType } from '@/types/post';
 
 interface LocationProps {
-  field?: ControllerRenderProps<SubTravelogueFormType, `addresses.${number}.spot`>;
+  field?: ControllerRenderProps<SubTravelogueType, `addresses.${number}.region`>;
 }
 
 const Location = ({ field }: LocationProps) => {
