@@ -42,7 +42,7 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
   const fieldValue = watch();
   const isFormEmpty =
     JSON.stringify(fieldValue) === JSON.stringify(subTravelogueFormDefault);
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(saveData !== null);
 
   useEffect(() => {
     if (!isFormEmpty) {
@@ -56,14 +56,12 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
   };
 
   const handlePostSubTravelogue = (data: SubTravelogueType) => {
-    console.log('data', data);
     mutate(
       { data, travelogueId },
       {
-        onSuccess: (response) => {
+        onSuccess: () => {
           reset(data);
           setItem(`save-${travelogueId}-${index}`, data);
-          console.log(response);
           setSaved(true);
         },
       },
@@ -129,7 +127,12 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
             <Alert severity='error'>모든 정보를 입력해주세요.</Alert>
           )}
           {isDirty && <Alert severity='info'>저장되지 않은 변경사항이 있습니다.</Alert>}
-          <Button type='submit' variant='outlined' fullWidth sx={{ mt: 1, mr: 1 }}>
+          <Button
+            type='submit'
+            variant='outlined'
+            fullWidth
+            sx={{ mt: 1, mr: 1 }}
+            disabled={saved}>
             저장
           </Button>
         </Box>
