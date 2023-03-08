@@ -5,7 +5,7 @@ import StepContent from '@mui/material/StepContent';
 import Stepper from '@mui/material/Stepper';
 import { useState } from 'react';
 
-import { SubTravelogue } from '@/components/CreatePost';
+import { SubTravelogue } from '@/components/SubTravelogue';
 
 interface VerticalStepperProps {
   travelogueId: string;

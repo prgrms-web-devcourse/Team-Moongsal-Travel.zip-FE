@@ -6,12 +6,11 @@ import useFormPersist from 'react-hook-form-persist';
 
 import { usePostSubTravelogue } from '@/api/hooks/post';
 import { SubTitle } from '@/components/common';
+import { Transportation, VisitedRegion } from '@/components/SubTravelogue';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
 import { SubTravelogueType } from '@/types/post';
 import { getItem, setItem } from '@/utils/storage';
-
-import { Transportation, VisitedRegion } from '.';
 
 interface SubTravelogueProps {
   travelogueId: string;
