@@ -9,7 +9,7 @@ import useIntersect from '@/hooks/useIntersect';
 
 const TravelogueList = () => {
   const router = useRouter();
-  const [keyword, setKeyword] = useState<string>('""');
+  const [keyword, setKeyword] = useState<string>("''");
 
   useEffect(() => {
     if (router.isReady && typeof router.query.keyword === 'string') {
