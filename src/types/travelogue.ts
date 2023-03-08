@@ -14,7 +14,7 @@ export interface TravelogueFeedType {
 
 export interface TravelogueListType {
   content: TravelogueFeedType[];
-  pageabl: string;
+  pageable: string;
   size: number;
   number: number;
   numberOfElements: number;
