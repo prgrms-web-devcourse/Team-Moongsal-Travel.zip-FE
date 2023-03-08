@@ -27,7 +27,10 @@ const SubTraveloguePage = () => {
       { travelogueId: parseInt(travelogueId) },
       {
         onSuccess: ({ data }) => {
-          console.log('최종 발행 성공', data.travelogueId);
+          router.push({
+            pathname: '/detail',
+            query: { travelogueId: data.travelogueId },
+          });
         },
       },
     );
