@@ -1,5 +1,6 @@
 import { LocationOn } from '@mui/icons-material';
-import { Box, Stack, styled, Typography } from '@mui/material';
+import { Search as SearchIcon } from '@mui/icons-material';
+import { Box, IconButton, Stack, styled, Typography } from '@mui/material';
 import {
   Combobox,
   ComboboxInput,
@@ -7,11 +8,18 @@ import {
   ComboboxOption,
   ComboboxPopover,
 } from '@reach/combobox';
+import { useRouter } from 'next/router';
+import { KeyboardEvent} from 'react'
+import { useSetRecoilState } from 'recoil';
 import usePlacesAutocomplete from 'use-places-autocomplete';
+
+import { isHeaderOpenState } from '@/recoil';
 
 const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요';
 
 const PlacesAutocomplete = () => {
+  const setIsOpen = useSetRecoilState(isHeaderOpenState);
+  const router = useRouter();
   const {
     ready,
     value,
@@ -25,14 +33,37 @@ const PlacesAutocomplete = () => {
     clearSuggestions();
   };
 
+  const handleSubmit = () => {
+    setIsOpen(false);
+    router.push({
+      pathname: '/post/travelogueList',
+      query: { keyword: value },
+    });
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit();
+    }
+  }
+
   return (
-    <Combobox onSelect={handleSelect} style={{ width: '70%' }}>
-      <SearchInput
-        placeholder={PLACEHOLDER_SEARCH}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-      />
+    <Combobox
+      onSelect={handleSelect}
+      onKeyDown={handleKeyDown}
+      style={{ width: '70%' }}>
+      <Stack flexDirection='row'>
+        <SearchInput
+          placeholder={PLACEHOLDER_SEARCH}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={!ready}
+        />
+        <IconButton aria-label='search' color='inherit' onClick={handleSubmit}>
+          <SearchIcon color='white' />
+        </IconButton>
+      </Stack>
       <PopOver>
         <ComboboxList
           style={{ listStyle: 'none', margin: 0, padding: 0, userSelect: 'none' }}>

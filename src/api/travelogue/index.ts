@@ -20,3 +20,13 @@ export const getPersonalTravelogues = async (params: TravelogueParams) => {
     params,
   });
 };
+
+export const getTravelogueListByKeyword = async (keyword = "''", page = 0, size = 5) => {
+  keyword === '' ? (keyword = "''") : keyword;
+  const response = await baseRequest({
+    method: 'GET',
+    url: `/api/travelogues/search?keyword=${keyword}&page=${page}&size=${size}`,
+  });
+
+  return response;
+};
