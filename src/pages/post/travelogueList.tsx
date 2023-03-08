@@ -38,13 +38,15 @@ const TravelogueList = () => {
     <Box component='section'>
       {keywordTravelogues &&
         keywordTravelogues.map((travelogue) => (
-          <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
+          <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
         ))}
-      <Fade in={isFetching}>
-        <Box sx={{ bgcolor: 'white.main' }}>
-          <CircularProgress color='primary' size={25} />
-        </Box>
-      </Fade>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Fade in={isFetching}>
+          <Box sx={{ bgcolor: 'white.main' }}>
+            <CircularProgress color='primary' size={25} />
+          </Box>
+        </Fade>
+      </Box>
       <Box height={5} ref={ref} />
     </Box>
   );
