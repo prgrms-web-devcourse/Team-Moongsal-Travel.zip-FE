@@ -36,6 +36,7 @@ const http = {
   get: createApiMethod(baseRequest, 'GET'),
   post: createApiMethod(baseRequest, 'POST'),
   put: createApiMethod(baseRequest, 'PUT'),
+  patch: createApiMethod(baseRequest, 'PATCH'),
   delete: createApiMethod(baseRequest, 'DELETE'),
 };
 

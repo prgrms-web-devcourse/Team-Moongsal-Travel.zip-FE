@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Control, UseFormSetError } from 'react-hook-form';
 
 import { usePostSendEmail, usePostVerifyCode } from '@/api/hooks/user';
-import useGetUserForms from '@/components/Register/useGetUserForms';
+import useGetUserForms from '@/hooks/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
 
 interface VerifyEmailProps {

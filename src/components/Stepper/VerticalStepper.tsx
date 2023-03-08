@@ -5,9 +5,7 @@ import StepContent from '@mui/material/StepContent';
 import Stepper from '@mui/material/Stepper';
 import { useState } from 'react';
 
-import { SubTravelogue } from '@/components/CreatePost';
-import { ButtonEventType } from '@/types/common';
-import { StepType } from '@/types/post';
+import { SubTravelogue } from '@/components/SubTravelogue';
 
 interface VerticalStepperProps {
   travelogueId: string;
@@ -18,22 +16,8 @@ const VerticalStepper = ({ travelogueId, subTravelogueStep }: VerticalStepperPro
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
 
-  const handleComplete = (modified?: boolean) => {
-    if (modified !== undefined) {
-      const newCompleted = completed;
-      newCompleted[activeStep] = !modified;
-      setCompleted((prev) => ({ ...prev, [activeStep]: !modified }));
-    }
-  };
-
-  const handleStep = (e: ButtonEventType, type: StepType) => {
-    e.stopPropagation();
-    if (type === 'next') {
-      setCompleted((prev) => ({ ...prev, [activeStep]: true }));
-      setActiveStep((prev) => prev + 1);
-    } else {
-      setActiveStep((prev) => prev - 1);
-    }
+  const handleComplete = () => {
+    setCompleted((prev) => ({ ...prev, [activeStep]: true }));
   };
 
   return (
@@ -48,8 +32,6 @@ const VerticalStepper = ({ travelogueId, subTravelogueStep }: VerticalStepperPro
               <SubTravelogue
                 travelogueId={travelogueId}
                 index={index}
-                isLastStep={index === subTravelogueStep.length - 1}
-                handleStep={handleStep}
                 handleComplete={handleComplete}
               />
             </StepContent>
