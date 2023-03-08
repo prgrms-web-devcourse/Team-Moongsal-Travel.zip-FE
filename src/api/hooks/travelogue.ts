@@ -29,20 +29,13 @@ export const useGetPersonalTravelogues = ({ size }: TravelogueParams) => {
   );
 };
 
-export const useGetTravelogueByKeyword = ({
-  keyword,
-  size,
-}: {
-  keyword: any;
-  size: any;
-}) => {
+export const useGetTravelogueByKeyword = (keyword: string, size: number) => {
   return useInfiniteQuery(
-    ['KEYWORD_TRAVELOGUES'],
+    ['KEYWORD_TRAVELOGUES', keyword],
     ({ pageParam = 0 }: QueryFunctionContext) =>
       getTravelogueListByKeyword(keyword, pageParam, size),
     {
-      getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
-        isLastPage ? undefined : pageNumber + 1,
+      getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
     },
   );
 };
