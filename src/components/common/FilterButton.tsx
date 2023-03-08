@@ -73,13 +73,13 @@ const FilterButton = () => {
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <SubTitle>여행 경비</SubTitle>
-                <TextField {...minCost} placeholder='최소금액' />
-                <TextField {...maxCost} placeholder='최대금액' />
+                <TextField {...minCost} placeholder='최소금액' type='number' />
+                <TextField {...maxCost} placeholder='최대금액' type='number' />
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <SubTitle>여행 기간</SubTitle>
-                <TextField {...minDays} placeholder='최소기간' />
-                <TextField {...maxDays} placeholder='최대기간' />
+                <TextField {...minDays} placeholder='최소기간' type='number' />
+                <TextField {...maxDays} placeholder='최대기간' type='number' />
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button type='submit'>적용</Button>
