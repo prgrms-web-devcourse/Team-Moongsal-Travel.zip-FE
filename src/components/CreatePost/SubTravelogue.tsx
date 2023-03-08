@@ -48,7 +48,6 @@ const SubTravelogue = ({
     watch,
     setValue,
   });
-
   const fieldValue = watch();
   const isFormEmpty =
     JSON.stringify(fieldValue) === JSON.stringify(subTravelogueFormDefault);
@@ -103,7 +102,7 @@ const SubTravelogue = ({
                 render={({ field }) => <Location field={field} />}
                 name={`addresses.${index}.region`}
                 control={control}
-                rules={{ required: true }}
+                // rules={{ required: true }}
               />
               <Button
                 type='button'
