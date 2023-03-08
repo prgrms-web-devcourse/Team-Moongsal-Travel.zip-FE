@@ -30,3 +30,30 @@ export const getTravelogueListByKeyword = async (keyword = "''", page = 0, size 
 
   return response;
 };
+
+interface FilterProps {
+  keyword: string;
+  minDays?: string;
+  maxDays?: string;
+  minCost?: string;
+  maxCost?: string;
+}
+
+export const getTravelogueListByFilter = async ({
+  keyword,
+  minDays,
+  maxDays,
+  minCost,
+  maxCost,
+}: FilterProps) => {
+  const response = await baseRequest({
+    method: 'GET',
+    url: `/api/travelogues/search/filters?keyword=${keyword}${
+      minDays && `&minDays=${minDays}`
+    }${maxDays && `&maxDays=${maxDays}`}${minCost && `&minCost=${minCost}`}${
+      maxCost && `&maxCost=${maxCost}`
+    }`,
+  });
+
+  return response;
+};
