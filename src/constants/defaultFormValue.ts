@@ -30,3 +30,14 @@ export const subTravelogueFormDefault = {
   transportationSet: [],
   travelPhotoCreateReqs: [{ url: 'https://temp.com' }],
 };
+
+export const filterFormDefault: UseFormProps = {
+  mode: 'onChange',
+  defaultValues: {
+    keyword: '',
+    minDays: '',
+    maxDays: '',
+    minCost: '',
+    maxCost: '',
+  },
+};

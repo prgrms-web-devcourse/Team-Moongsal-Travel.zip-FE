@@ -1,11 +1,19 @@
 import { Tune as TuneIcon } from '@mui/icons-material';
 import { Box, Button, Dialog, Popover } from '@mui/material';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { SubTitle } from '@/components/common';
+import { filterFormDefault } from '@/constants/defaultFormValue';
+import useFilterForm from '@/hooks/useFilterForm';
+import { FilterFormType } from '@/types/filter';
 
 const FilterButton = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const { control } = useForm<FilterFormType>(filterFormDefault);
+
+  const { minDays, maxDays, minCost, maxCost } = useFilterForm(control);
+
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -15,7 +23,6 @@ const FilterButton = () => {
   };
 
   const open = Boolean(anchorEl);
-
   return (
     <Box
       sx={{
@@ -49,15 +56,15 @@ const FilterButton = () => {
             </Box>
             <Box>
               <SubTitle>여행 경비</SubTitle>
-              <input placeholder='최소금액' />
-              <input placeholder='최대금액' />
+              <input {...minDays} placeholder='최소금액' />
+              <input {...maxDays} placeholder='최대금액' />
             </Box>
             <Box>
               <SubTitle>여행 기간</SubTitle>
-              <input placeholder='최소기간' />
-              <input placeholder='최대기간' />
+              <input {...minCost} placeholder='최소기간' />
+              <input {...maxCost} placeholder='최대기간' />
             </Box>
-            <button>적용</button>
+            <button type='submit'>적용</button>
           </Box>
         </Popover>
       </Dialog>
