@@ -51,7 +51,7 @@ const BoxStyle = {
   flexGrow: 1,
   position: 'sticky',
   top: 0,
-  zIndex: '2000',
+  zIndex: '1201',
   // mb: '2rem',
 } as const;
 
