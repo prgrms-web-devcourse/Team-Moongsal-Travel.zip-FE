@@ -11,6 +11,7 @@ import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
 import { ButtonEventType } from '@/types/common';
 import { StepType, SubTravelogueType } from '@/types/post';
+import { getItem, setItem } from '@/utils/storage';
 
 import { Location, Transportation } from '.';
 
@@ -29,9 +30,7 @@ const SubTravelogue = ({
   handleStep,
   handleComplete,
 }: SubTravelogueProps) => {
-  const saveData = JSON.parse(
-    sessionStorage.getItem(`save-${travelogueId}-${index}`) as string,
-  );
+  const saveData = getItem<SubTravelogueType>(`save-${travelogueId}-${index}`);
   const {
     control,
     handleSubmit,
@@ -70,7 +69,7 @@ const SubTravelogue = ({
       {
         onSuccess: () => {
           reset(data);
-          sessionStorage.setItem(`save-${travelogueId}-${index}`, JSON.stringify(data));
+          setItem(`save-${travelogueId}-${index}`, data);
         },
       },
     );
