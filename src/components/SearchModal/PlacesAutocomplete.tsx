@@ -9,7 +9,7 @@ import {
   ComboboxPopover,
 } from '@reach/combobox';
 import { useRouter } from 'next/router';
-import { KeyboardEvent} from 'react'
+import { KeyboardEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 import usePlacesAutocomplete from 'use-places-autocomplete';
 
@@ -42,17 +42,15 @@ const PlacesAutocomplete = () => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.nativeEvent.isComposing) return;
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSubmit();
     }
-  }
+  };
 
   return (
-    <Combobox
-      onSelect={handleSelect}
-      onKeyDown={handleKeyDown}
-      style={{ width: '70%' }}>
+    <Combobox onSelect={handleSelect} onKeyDown={handleKeyDown} style={{ width: '70%' }}>
       <Stack flexDirection='row'>
         <SearchInput
           placeholder={PLACEHOLDER_SEARCH}
