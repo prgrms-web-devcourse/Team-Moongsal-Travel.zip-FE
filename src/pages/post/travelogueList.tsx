@@ -1,5 +1,4 @@
-import { Tune as TuneIcon } from '@mui/icons-material';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 // import { CircularProgress, Fade} from '@mui/material';
 import { useRouter } from 'next/router';
 // import { useMemo } from 'react';
@@ -7,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 // import { useGetTravelogueByKeyword } from '@/api/hooks/travelogue';
 import { getTravelogueListByKeyword } from '@/api/travelogue';
+import { FilterButton } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 // import useIntersect from '@/hooks/useIntersect';
 import { TravelogueFeedType } from '@/types/travelogue';
@@ -14,6 +14,7 @@ import { TravelogueFeedType } from '@/types/travelogue';
 const TravelogueList = () => {
   const router = useRouter();
   const [travelogues, setTravelogues] = useState<TravelogueFeedType[]>();
+
   const [isLoading, setIsLoading] = useState(false);
 
   // const { data, hasNextPage, isFetching, fetchNextPage } = useGetTravelogueByKeyword(
@@ -70,18 +71,7 @@ const TravelogueList = () => {
 
   return (
     <Box sx={{ justifyContent: 'center' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          mt: '2rem',
-          maxWidth: '90%',
-          margin: '2rem auto',
-        }}>
-        <Button variant='outlined' startIcon={<TuneIcon />}>
-          필터
-        </Button>
-      </Box>
+      <FilterButton />
       {isLoading ? (
         <div>loading...</div>
       ) : (
