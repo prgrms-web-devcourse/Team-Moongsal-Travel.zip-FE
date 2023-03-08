@@ -35,13 +35,13 @@ const useImageUpload = () => {
   };
 
   const uploadFile = ({ file, key }: { file: File; key: string }) => {
-    const upload = s3.upload({
+    const params = {
       Bucket: S3_BUCKET,
       Body: file,
       Key: key,
       ContentType: file.type,
-    });
-    return upload.promise();
+    };
+    return s3.upload(params).promise();
   };
 
   const getImageUrlFromS3 = async (file: File) => {
