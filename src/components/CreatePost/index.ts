@@ -6,3 +6,4 @@ export { default as PostComplete } from './PostComplete';
 export { default as StepperButton } from './StepperButton';
 export { default as SubTravelogue } from './SubTravelogue';
 export { default as Transportation } from './Transportation';
+export { default as VisitedRegion } from './VisitedRegion';

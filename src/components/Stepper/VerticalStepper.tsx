@@ -16,12 +16,8 @@ const VerticalStepper = ({ travelogueId, subTravelogueStep }: VerticalStepperPro
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({});
 
-  const handleComplete = (modified?: boolean) => {
-    if (modified !== undefined) {
-      const newCompleted = completed;
-      newCompleted[activeStep] = !modified;
-      setCompleted((prev) => ({ ...prev, [activeStep]: !modified }));
-    }
+  const handleComplete = () => {
+    setCompleted((prev) => ({ ...prev, [activeStep]: true }));
   };
 
   return (

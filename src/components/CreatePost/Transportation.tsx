@@ -7,8 +7,10 @@ import {
   Sailing,
   Train,
 } from '@mui/icons-material';
-import { SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Stack, SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
+
+import { SubTitle } from '@/components/common';
 
 const transportType = [
   { icon: Flight, type: 'PLANE' },
@@ -23,22 +25,25 @@ const transportType = [
 interface TransportationProps {
   value: string[];
   disabled: boolean;
-  handleFormat: (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => void;
+  onTransportSelect: (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => void;
 }
 
-const Transportation = ({ value, disabled, handleFormat }: TransportationProps) => {
+const Transportation = ({ value, disabled, onTransportSelect }: TransportationProps) => {
   return (
-    <ToggleButtonGroup
-      value={value}
-      onChange={handleFormat}
-      disabled={disabled}
-      aria-label='text formatting'>
-      {transportType.map((transport, i) => (
-        <ToggleIconButton key={transport.type} value={transport.type}>
-          <SvgIcon component={transportType[i].icon} />
-        </ToggleIconButton>
-      ))}
-    </ToggleButtonGroup>
+    <Stack sx={{ mb: '1rem' }}>
+      <SubTitle>이동수단</SubTitle>
+      <ToggleButtonGroup
+        value={value}
+        onChange={onTransportSelect}
+        disabled={disabled}
+        aria-label='text formatting'>
+        {transportType.map((transport, i) => (
+          <ToggleIconButton key={transport.type} value={transport.type}>
+            <SvgIcon component={transportType[i].icon} />
+          </ToggleIconButton>
+        ))}
+      </ToggleButtonGroup>
+    </Stack>
   );
 };
 
