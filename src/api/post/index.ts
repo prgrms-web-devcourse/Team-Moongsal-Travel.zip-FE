@@ -24,3 +24,9 @@ export const postSubTravelogue = async ({
     data,
   });
 };
+
+export const patchTraveloguePublish = async (travelogueId: number) => {
+  return await http.post({
+    url: `api/travelogues/${travelogueId}/publish`,
+  });
+};
