@@ -33,6 +33,7 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
   const { mutate } = usePostSubTravelogue();
   useFormPersist(`temp-${travelogueId}-${index}`, { watch, setValue });
   const [saved, setSaved] = useState(saveData !== null);
+  const hasErrors = Object.keys(errors).length > 0;
 
   const handlePostSubTravelogue = (data: SubTravelogueType) => {
     mutate(
@@ -57,7 +58,7 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
 
   return (
     <form onSubmit={handleSubmit(handlePostSubTravelogue)}>
-      <Stack sx={marginBottom}>
+      <Stack sx={{ mb: '1rem' }}>
         <SubTitle>소제목</SubTitle>
         <OutlinedInput
           {...title}
@@ -73,14 +74,12 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
         disabled={saved}
         onTransportSelect={handleTransportSelect}
       />
-      <Stack sx={marginBottom}>
+      <Stack sx={{ mb: '1rem' }}>
         <SubTitle>글을 자유롭게 작성해보세요</SubTitle>
         <Editor {...content} disabled={saved}></Editor>
       </Stack>
       <Box sx={{ mb: 2 }}>
-        {Object.keys(errors).length > 0 && (
-          <Alert severity='error'>모든 정보를 입력해주세요.</Alert>
-        )}
+        {hasErrors && <Alert severity='error'>모든 정보를 입력해주세요.</Alert>}
         {isDirty && <Alert severity='info'>저장되지 않은 변경사항이 있습니다.</Alert>}
         <Button
           type='submit'
@@ -96,10 +95,6 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
 };
 
 export default SubTravelogue;
-
-const marginBottom = {
-  marginBottom: '1rem',
-};
 
 const Editor = styled('textarea')(({ theme }) => ({
   height: '20rem',
