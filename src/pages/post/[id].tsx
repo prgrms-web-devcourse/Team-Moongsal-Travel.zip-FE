@@ -2,12 +2,14 @@ import { Box, Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { usePatchTraveloguePublish } from '@/api/hooks/post';
 import { VerticalStepper } from '@/components/Stepper';
 
 const SubTraveloguePage = () => {
   const router = useRouter();
   const [travelogueId, setTravelogueId] = useState('');
   const [subTravelogueStep, setSubTravelogueStep] = useState<string[]>([]);
+  const { mutate } = usePatchTraveloguePublish();
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -20,6 +22,17 @@ const SubTraveloguePage = () => {
     setSubTravelogueStep(array);
   }, [router.isReady, router.query]);
 
+  const handleTraveloguePublish = () => {
+    mutate(
+      { travelogueId: parseInt(travelogueId) },
+      {
+        onSuccess: ({ data }) => {
+          console.log('최종 발행 성공', data.travelogueId);
+        },
+      },
+    );
+  };
+
   return (
     <Box sx={layout}>
       <VerticalStepper
@@ -31,7 +44,8 @@ const SubTraveloguePage = () => {
           type='button'
           variant='contained'
           fullWidth
-          sx={{ m: '20px 0' }}>
+          sx={{ m: '20px 0' }}
+          onClick={handleTraveloguePublish}>
           발행
         </Button>
       </Box>

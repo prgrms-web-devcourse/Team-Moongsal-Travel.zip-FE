@@ -15,8 +15,8 @@ export const usePostSubTravelogue = () => {
 
 export const usePatchTraveloguePublish = () => {
   return useMutation({
-    mutationFn: async (travelogueId: number) =>
-      await patchTraveloguePublish(travelogueId),
+    mutationFn: async (data: { travelogueId: number }) =>
+      await patchTraveloguePublish(data),
     onError: (error: { message: string }) => {
       console.error(error.message);
     },
