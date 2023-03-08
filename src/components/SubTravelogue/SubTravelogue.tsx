@@ -1,11 +1,11 @@
 import { Alert, Box, Button, OutlinedInput, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
 import { usePostSubTravelogue } from '@/api/hooks/post';
 import { SubTitle } from '@/components/common';
+import { RichEditor } from '@/components/Editor';
 import { Transportation, VisitedRegion } from '@/components/SubTravelogue';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
@@ -75,7 +75,7 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
       />
       <Stack sx={{ mb: '1rem' }}>
         <SubTitle>글을 자유롭게 작성해보세요</SubTitle>
-        <Editor {...content} disabled={saved}></Editor>
+        <RichEditor content={content} disabled={saved} />
       </Stack>
       <Box sx={{ mb: 2 }}>
         {hasErrors && <Alert severity='error'>모든 정보를 입력해주세요.</Alert>}
@@ -94,11 +94,3 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
 };
 
 export default SubTravelogue;
-
-const Editor = styled('textarea')(({ theme }) => ({
-  height: '20rem',
-  width: '100%',
-  resize: 'none',
-  overflowY: 'auto',
-  outlineColor: theme.palette.blue050.main,
-}));
