@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { usePatchTraveloguePublish } from '@/api/hooks/post';
 import { VerticalStepper } from '@/components/Stepper';
+import { createPeriodArray } from '@/utils/helper';
 
 const SubTraveloguePage = () => {
   const router = useRouter();
@@ -14,12 +15,8 @@ const SubTraveloguePage = () => {
   useEffect(() => {
     if (!router.isReady) return;
     const { travelogueId, days } = router.query;
-    const array = Array.from(
-      { length: parseInt(days as string) },
-      (_, i) => `${i + 1}일차`,
-    );
+    setSubTravelogueStep(createPeriodArray(days as string));
     setTravelogueId(travelogueId as string);
-    setSubTravelogueStep(array);
   }, [router.isReady, router.query]);
 
   const handleTraveloguePublish = () => {
