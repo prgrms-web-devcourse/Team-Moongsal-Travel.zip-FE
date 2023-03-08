@@ -5,7 +5,7 @@ import { AxiosError } from 'axios';
 import {
   getPersonalTravelogues,
   getRecentTravelogueList,
-  // getTravelogueListByKeyword,
+  getTravelogueListByKeyword,
 } from '@/api/travelogue';
 import { TravelogueParams } from '@/mocks/handlers/travelogue';
 import { TravelogueFeedType } from '@/types/travelogue';
@@ -29,14 +29,20 @@ export const useGetPersonalTravelogues = ({ size }: TravelogueParams) => {
   );
 };
 
-// export const useGetTravelogueByKeyword = (keyword, size) => {
-//   return useInfiniteQuery(
-//     ['KEYWORD_TRAVELOGUES'],
-//     ({ pageParam = 0 }: QueryFunctionContext) =>
-//       getTravelogueListByKeyword(keyword, pageParam, size),
-//     {
-//       getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
-//         isLastPage ? undefined : pageNumber + 1,
-//     },
-//   );
-// };
+export const useGetTravelogueByKeyword = ({
+  keyword,
+  size,
+}: {
+  keyword: any;
+  size: any;
+}) => {
+  return useInfiniteQuery(
+    ['KEYWORD_TRAVELOGUES'],
+    ({ pageParam = 0 }: QueryFunctionContext) =>
+      getTravelogueListByKeyword(keyword, pageParam, size),
+    {
+      getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
+        isLastPage ? undefined : pageNumber + 1,
+    },
+  );
+};

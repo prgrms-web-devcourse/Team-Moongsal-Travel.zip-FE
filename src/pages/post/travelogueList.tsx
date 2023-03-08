@@ -1,89 +1,89 @@
 import { Box } from '@mui/material';
-// import { CircularProgress, Fade} from '@mui/material';
+import { CircularProgress, Fade } from '@mui/material';
 import { useRouter } from 'next/router';
-// import { useMemo } from 'react';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
-// import { useGetTravelogueByKeyword } from '@/api/hooks/travelogue';
-import { getTravelogueListByKeyword } from '@/api/travelogue';
-import { FilterButton } from '@/components/common';
+// import { useEffect, useState } from 'react';
+import { useGetTravelogueByKeyword } from '@/api/hooks/travelogue';
+// import { getTravelogueListByKeyword } from '@/api/travelogue';
+// import { FilterButton } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
-// import useIntersect from '@/hooks/useIntersect';
-import { TravelogueFeedType } from '@/types/travelogue';
+import useIntersect from '@/hooks/useIntersect';
+// import { TravelogueFeedType } from '@/types/travelogue';
 
 const TravelogueList = () => {
   const router = useRouter();
-  const [travelogues, setTravelogues] = useState<TravelogueFeedType[]>();
+  // const [travelogues, setTravelogues] = useState<TravelogueFeedType[]>();
 
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  // const { data, hasNextPage, isFetching, fetchNextPage } = useGetTravelogueByKeyword(
-  //   router.query.keyword,
-  //   5,
-  // );
+  const { data, hasNextPage, isFetching, fetchNextPage } = useGetTravelogueByKeyword({
+    keyword: router.query.keyword,
+    size: 5,
+  });
 
-  useEffect(() => {
-    const fetchTravelogues = async () => {
-      if (router.isReady && typeof router.query.keyword === 'string') {
-        try {
-          setIsLoading(true);
-          const response = await getTravelogueListByKeyword(router.query.keyword, 0, 100);
-          console.log(response.data);
-          setTravelogues(response.data.content);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setIsLoading(false);
-        }
-      }
-    };
-    fetchTravelogues();
-  }, [router.isReady, router.query.keyword]);
+  // useEffect(() => {
+  //   const fetchTravelogues = async () => {
+  //     if (router.isReady && typeof router.query.keyword === 'string') {
+  //       try {
+  //         setIsLoading(true);
+  //         const response = await getTravelogueListByKeyword(router.query.keyword, 0, 100);
+  //         console.log(response.data);
+  //         setTravelogues(response.data.content);
+  //       } catch (error) {
+  //         console.error(error);
+  //       } finally {
+  //         setIsLoading(false);
+  //       }
+  //     }
+  //   };
+  //   fetchTravelogues();
+  // }, [router.isReady, router.query.keyword]);
 
-  // const keywordTravelogues = useMemo(
-  //   () => (data ? data.pages.flatMap(({ data }) => data.content) : []),
-  //   [data],
-  // );
+  const keywordTravelogues = useMemo(
+    () => (data ? data.pages.flatMap(({ data }) => data.content) : []),
+    [data],
+  );
 
-  // const ref = useIntersect(async (entry, observer) => {
-  //   observer.unobserve(entry.target);
-  //   if (hasNextPage && !isFetching) {
-  //     fetchNextPage();
-  //   }
-  // });
-
-  // return (
-  //   <Box component='section' margin='0 auto'>
-  //     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-  //       {travelogues &&
-  //         travelogues.map((travelogue) => (
-  //           <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
-  //         ))}
-  //       <Fade in={isFetching}>
-  //         <Box sx={{ bgcolor: 'white.main' }}>
-  //           <CircularProgress color='primary' size={25} />
-  //         </Box>
-  //       </Fade>
-  //     </Box>
-  //     <Box height={5} ref={ref} />
-  //   </Box>
-  // );
+  const ref = useIntersect(async (entry, observer) => {
+    observer.unobserve(entry.target);
+    if (hasNextPage && !isFetching) {
+      fetchNextPage();
+    }
+  });
 
   return (
-    <Box sx={{ justifyContent: 'center' }}>
-      <FilterButton />
-      {isLoading ? (
-        <div>loading...</div>
-      ) : (
-        <Box component='section'>
-          {travelogues &&
-            travelogues.map((travelogue) => (
-              <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
-            ))}
-        </Box>
-      )}
+    <Box component='section' margin='0 auto'>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {keywordTravelogues &&
+          keywordTravelogues.map((travelogue) => (
+            <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
+          ))}
+        <Fade in={isFetching}>
+          <Box sx={{ bgcolor: 'white.main' }}>
+            <CircularProgress color='primary' size={25} />
+          </Box>
+        </Fade>
+      </Box>
+      <Box height={5} ref={ref} />
     </Box>
   );
+
+  // return (
+  //   <Box sx={{ justifyContent: 'center' }}>
+  //     <FilterButton />
+  //     {isLoading ? (
+  //       <div>loading...</div>
+  //     ) : (
+  //       <Box component='section'>
+  //         {travelogues &&
+  //           travelogues.map((travelogue) => (
+  //             <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
+  //           ))}
+  //       </Box>
+  //     )}
+  //   </Box>
+  // );
 };
 
 export default TravelogueList;
