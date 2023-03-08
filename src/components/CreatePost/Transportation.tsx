@@ -22,12 +22,17 @@ const transportType = [
 
 interface TransportationProps {
   value: string[];
+  disabled: boolean;
   handleFormat: (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => void;
 }
 
-const Transportation = ({ value, handleFormat }: TransportationProps) => {
+const Transportation = ({ value, disabled, handleFormat }: TransportationProps) => {
   return (
-    <ToggleButtonGroup value={value} onChange={handleFormat} aria-label='text formatting'>
+    <ToggleButtonGroup
+      value={value}
+      onChange={handleFormat}
+      disabled={disabled}
+      aria-label='text formatting'>
       {transportType.map((transport, i) => (
         <ToggleIconButton key={transport.type} value={transport.type}>
           <SvgIcon component={transportType[i].icon} />

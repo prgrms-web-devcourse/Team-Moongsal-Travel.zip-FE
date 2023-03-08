@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -26,6 +26,15 @@ const SubTraveloguePage = () => {
         travelogueId={travelogueId}
         subTravelogueStep={subTravelogueStep}
       />
+      <Box sx={{ borderTop: '1px solid #bdbdbd', mt: '20px' }}>
+        <Button
+          type='button'
+          variant='contained'
+          fullWidth
+          sx={{ m: '20px 0' }}>
+          발행
+        </Button>
+      </Box>
     </Box>
   );
 };

@@ -6,8 +6,6 @@ import Stepper from '@mui/material/Stepper';
 import { useState } from 'react';
 
 import { SubTravelogue } from '@/components/CreatePost';
-import { ButtonEventType } from '@/types/common';
-import { StepType } from '@/types/post';
 
 interface VerticalStepperProps {
   travelogueId: string;
@@ -26,16 +24,6 @@ const VerticalStepper = ({ travelogueId, subTravelogueStep }: VerticalStepperPro
     }
   };
 
-  const handleStep = (e: ButtonEventType, type: StepType) => {
-    e.stopPropagation();
-    if (type === 'next') {
-      setCompleted((prev) => ({ ...prev, [activeStep]: true }));
-      setActiveStep((prev) => prev + 1);
-    } else {
-      setActiveStep((prev) => prev - 1);
-    }
-  };
-
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper nonLinear activeStep={activeStep} orientation='vertical'>
@@ -48,8 +36,6 @@ const VerticalStepper = ({ travelogueId, subTravelogueStep }: VerticalStepperPro
               <SubTravelogue
                 travelogueId={travelogueId}
                 index={index}
-                isLastStep={index === subTravelogueStep.length - 1}
-                handleStep={handleStep}
                 handleComplete={handleComplete}
               />
             </StepContent>

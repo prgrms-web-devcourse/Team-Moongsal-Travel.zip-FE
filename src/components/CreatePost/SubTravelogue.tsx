@@ -1,7 +1,7 @@
 import { AddCircle as AddCircleIcon } from '@mui/icons-material';
-import { Box, Button, IconButton, OutlinedInput, Stack } from '@mui/material';
+import { Alert, Box, Button, IconButton, OutlinedInput, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
@@ -9,27 +9,18 @@ import { usePostSubTravelogue } from '@/api/hooks/post';
 import { SubTitle } from '@/components/common';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
-import { ButtonEventType } from '@/types/common';
-import { StepType, SubTravelogueType } from '@/types/post';
+import { SubTravelogueType } from '@/types/post';
 import { getItem, setItem } from '@/utils/storage';
 
 import { Location, Transportation } from '.';
 
 interface SubTravelogueProps {
   travelogueId: string;
-  isLastStep: boolean;
   index: number;
-  handleStep: (e: ButtonEventType, type: StepType) => void;
   handleComplete: (isValid?: boolean) => void;
 }
 
-const SubTravelogue = ({
-  travelogueId,
-  isLastStep,
-  index,
-  handleStep,
-  handleComplete,
-}: SubTravelogueProps) => {
+const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTravelogueProps) => {
   const saveData = getItem<SubTravelogueType>(`save-${travelogueId}-${index}`);
   const {
     control,
@@ -37,7 +28,7 @@ const SubTravelogue = ({
     watch,
     setValue,
     reset,
-    formState: { isDirty },
+    formState: { isDirty, errors },
   } = useForm<SubTravelogueType>({
     defaultValues: saveData ?? subTravelogueFormDefault,
   });
@@ -51,11 +42,13 @@ const SubTravelogue = ({
   const fieldValue = watch();
   const isFormEmpty =
     JSON.stringify(fieldValue) === JSON.stringify(subTravelogueFormDefault);
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     if (!isFormEmpty) {
       handleComplete(isDirty);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDirty]);
 
   const onFormatChange = (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => {
@@ -63,12 +56,15 @@ const SubTravelogue = ({
   };
 
   const handlePostSubTravelogue = (data: SubTravelogueType) => {
+    console.log('data', data);
     mutate(
       { data, travelogueId },
       {
-        onSuccess: () => {
+        onSuccess: (response) => {
           reset(data);
           setItem(`save-${travelogueId}-${index}`, data);
+          console.log(response);
+          setSaved(true);
         },
       },
     );
@@ -84,6 +80,7 @@ const SubTravelogue = ({
             fullWidth
             placeholder='소제목을 입력하세요'
             type='text'
+            disabled={saved}
           />
         </Stack>
         <Stack sx={marginBottom} component='ul'>
@@ -99,10 +96,10 @@ const SubTravelogue = ({
           {fields.map((item, index) => (
             <Stack key={item.id} direction='row' spacing={2} component='li'>
               <Controller
-                render={({ field }) => <Location field={field} />}
+                render={({ field }) => <Location field={field} disabled={saved} />}
                 name={`addresses.${index}.region`}
                 control={control}
-                // rules={{ required: true }}
+                rules={{ required: true }}
               />
               <Button
                 type='button'
@@ -117,32 +114,26 @@ const SubTravelogue = ({
         </Stack>
         <Stack sx={marginBottom}>
           <SubTitle>이동수단</SubTitle>
-          <Transportation value={transportationSet.value} handleFormat={onFormatChange} />
+          <Transportation
+            value={transportationSet.value}
+            disabled={saved}
+            handleFormat={onFormatChange}
+          />
         </Stack>
         <Stack sx={marginBottom}>
           <SubTitle>글을 자유롭게 작성해보세요</SubTitle>
-          <Editor {...content}></Editor>
+          <Editor {...content} disabled={saved}></Editor>
         </Stack>
         <Box sx={{ mb: 2 }}>
-          <div>
-            <Button
-              type='submit'
-              variant='contained'
-              onClick={(e) => handleStep(e, 'next')}
-              sx={{ mt: 1, mr: 1 }}>
-              {isLastStep ? '완료' : '저장'}
-            </Button>
-            <Button
-              type='button'
-              disabled={index === 0}
-              onClick={(e) => handleStep(e, 'back')}
-              sx={{ mt: 1, mr: 1 }}>
-              이전
-            </Button>
-          </div>
+          {Object.keys(errors).length > 0 && (
+            <Alert severity='error'>모든 정보를 입력해주세요.</Alert>
+          )}
+          {isDirty && <Alert severity='info'>저장되지 않은 변경사항이 있습니다.</Alert>}
+          <Button type='submit' variant='outlined' fullWidth sx={{ mt: 1, mr: 1 }}>
+            저장
+          </Button>
         </Box>
       </form>
-      {isDirty && <p>저장되지 않은 변경사항이 있습니다.</p>}
     </>
   );
 };
