@@ -1,5 +1,5 @@
 import { Tune as TuneIcon } from '@mui/icons-material';
-import { Box, Button, Dialog, Popover } from '@mui/material';
+import { Box, Button, Dialog, Popover, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -60,24 +60,30 @@ const FilterButton = () => {
             vertical: 'top',
             horizontal: 'right',
           }}>
-          <Box width={250} height={300}>
+          <Box width={300} height={400} overflow='hidden'>
             <Box component='form' onSubmit={handleSubmit(handleApply)}>
               <Box>
                 <SubTitle>정렬</SubTitle>
-                <button type='button'>최신순</button>
-                <button type='button'>인기순</button>
+                <Button variant='outlined' type='button'>
+                  최신순
+                </Button>
+                <Button variant='outlined' type='button'>
+                  인기순
+                </Button>
               </Box>
-              <Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <SubTitle>여행 경비</SubTitle>
-                <input {...minCost} placeholder='최소금액' />
-                <input {...maxCost} placeholder='최대금액' />
+                <TextField {...minCost} placeholder='최소금액' />
+                <TextField {...maxCost} placeholder='최대금액' />
               </Box>
-              <Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <SubTitle>여행 기간</SubTitle>
-                <input {...minDays} placeholder='최소기간' />
-                <input {...maxDays} placeholder='최대기간' />
+                <TextField {...minDays} placeholder='최소기간' />
+                <TextField {...maxDays} placeholder='최대기간' />
               </Box>
-              <button type='submit'>적용</button>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Button type='submit'>적용</Button>
+              </Box>
             </Box>
           </Box>
         </Popover>
