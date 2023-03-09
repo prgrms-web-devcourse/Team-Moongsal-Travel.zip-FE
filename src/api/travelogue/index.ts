@@ -22,6 +22,7 @@ export const getPersonalTravelogues = async (params: TravelogueParams) => {
   });
 };
 
+// 현재 사용하지 않음: 리팩터링시 사용할 수 있을것같아서 남겨두겠습니다.
 export const getTravelogueListByKeyword = async (
   keyword = "''",
   page = 0,
