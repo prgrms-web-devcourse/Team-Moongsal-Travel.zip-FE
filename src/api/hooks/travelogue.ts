@@ -3,12 +3,11 @@ import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 
 import {
-  getPersonalTravelogues,
+  // getPersonalTravelogues,
   getRecentTravelogueList,
   getTravelogueListByKeyword,
   patchTravelogueDetailById,
 } from '@/api/travelogue';
-import { TravelogueParams } from '@/mocks/handlers/travelogue';
 import { TravelogueListType } from '@/types/travelogue';
 
 export const useGetRecentTravelogue = () => {
@@ -18,17 +17,17 @@ export const useGetRecentTravelogue = () => {
   });
 };
 
-export const useGetPersonalTravelogues = ({ size }: TravelogueParams) => {
-  return useInfiniteQuery(
-    ['PERSONAL_TRAVELOGUES'],
-    ({ pageParam = 0 }: QueryFunctionContext) =>
-      getPersonalTravelogues({ page: pageParam, size }),
-    {
-      getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
-        isLastPage ? undefined : pageNumber + 1,
-    },
-  );
-};
+// export const useGetPersonalTravelogues = ({ size }: TravelogueParams) => {
+//   return useInfiniteQuery(
+//     ['PERSONAL_TRAVELOGUES'],
+//     ({ pageParam = 0 }: QueryFunctionContext) =>
+//       getPersonalTravelogues({ page: pageParam, size }),
+//     {
+//       getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
+//         isLastPage ? undefined : pageNumber + 1,
+//     },
+//   );
+// };
 
 export const useGetTravelogueByKeyword = (
   keyword: string,
