@@ -8,5 +8,3 @@ export interface FormControlType<T extends FieldValues> {
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
 }
-
-export type ButtonEventType = React.MouseEvent<HTMLButtonElement, MouseEvent>;

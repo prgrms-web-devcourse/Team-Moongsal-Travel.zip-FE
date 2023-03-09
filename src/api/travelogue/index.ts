@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import { baseRequest } from '@/api/core';
 import { TravelogueParams, TravelogueResponse } from '@/mocks/handlers/travelogue';
-import { TravelogueFeedType } from '@/types/travelogue';
+import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
 
 export const getRecentTravelogueList = async (
   page = 1,
@@ -21,7 +21,11 @@ export const getPersonalTravelogues = async (params: TravelogueParams) => {
   });
 };
 
-export const getTravelogueListByKeyword = async (keyword = "''", page = 0, size = 5) => {
+export const getTravelogueListByKeyword = async (
+  keyword = "''",
+  page = 0,
+  size = 5,
+): Promise<AxiosResponse<TravelogueListType>> => {
   keyword === '' ? (keyword = "''") : keyword;
   const response = await baseRequest({
     method: 'GET',

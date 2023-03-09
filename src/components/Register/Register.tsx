@@ -11,7 +11,7 @@ import {
 import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
 
 import { postVerifyNickname } from '@/api/user';
-import useGetUserForms from '@/components/Register/useGetUserForms';
+import useGetUserForms from '@/hooks/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
 
 const ITEM_HEIGHT = 48;
