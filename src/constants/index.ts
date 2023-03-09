@@ -19,6 +19,8 @@ export const ACCESS_KEY_ID = process.env.NEXT_PUBLIC_ACCESS_KEY_ID;
 export const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_SECRET_ACCESS_KEY;
 export const REGION = 'ap-northeast-2';
 
+export const NO_IMAGE_URL = '1234567890qwertyuiop';
+
 interface CountryType {
   code: string;
   label: string;
