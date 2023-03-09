@@ -1,16 +1,13 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { baseRequest } from '@/api/core';
+import http from '@/api/core/axiosInstance';
 import { TravelogueParams, TravelogueResponse } from '@/mocks/handlers/travelogue';
 import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
 
 export const getRecentTravelogueList = async (
   page = 1,
 ): Promise<TravelogueFeedType[]> => {
-  const response = await baseRequest({
-    method: 'GET',
-    url: `api/travelogues?&page=${page}`,
-  });
+  const response = await http.get(`api/travelogues?&page=${page}`);
 
   return response.data.content;
 };

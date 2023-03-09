@@ -1,6 +1,6 @@
 import { UseInfiniteQueryResult, useQuery } from '@tanstack/react-query';
 import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import {
   getPersonalTravelogues,
@@ -8,10 +8,10 @@ import {
   getTravelogueListByKeyword,
 } from '@/api/travelogue';
 import { TravelogueParams } from '@/mocks/handlers/travelogue';
-import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
+import { TravelogueListType } from '@/types/travelogue';
 
 export const useGetRecentTravelogue = () => {
-  return useQuery<TravelogueFeedType[], AxiosError>({
+  return useQuery({
     queryKey: ['RECENT_TRAVELOGUES'],
     queryFn: () => getRecentTravelogueList(),
   });
