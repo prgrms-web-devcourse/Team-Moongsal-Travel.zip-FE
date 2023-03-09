@@ -1,10 +1,9 @@
 import { Global } from '@emotion/react';
 import { Tune as TuneIcon } from '@mui/icons-material';
 import { Box, Button, Stack, SwipeableDrawer, TextField } from '@mui/material';
-import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { getTravelogueListByFilter } from '@/api/travelogue';
@@ -12,28 +11,24 @@ import { SubTitle } from '@/components/common';
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/useFilterForm';
 import { FilterFormType } from '@/types/filter';
+import { TravelogueFeedType } from '@/types/travelogue';
 
-interface Props {
-  window?: () => Window;
+interface FilterButtonProps {
+  setTravelogues: Dispatch<SetStateAction<TravelogueFeedType[]>>;
 }
-
-// const StyledBox = styled(Box)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
-// }));
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 30,
   height: 6,
-  backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
+  backgroundColor: theme.palette.gray030.main,
   borderRadius: 3,
   position: 'absolute',
   top: 8,
   left: 'calc(50% - 15px)',
 }));
 
-const FilterButton = (props: Props) => {
+const FilterButton = ({ setTravelogues }: FilterButtonProps) => {
   const router = useRouter();
-  const { window } = props;
   const [open, setOpen] = useState(false);
   const { handleSubmit, control } = useForm<FilterFormType>(filterFormDefault);
   const { minDays, maxDays, minCost, maxCost, keyword } = useFilterForm(control);
@@ -45,12 +40,11 @@ const FilterButton = (props: Props) => {
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
-  const container = window !== undefined ? () => window().document.body : undefined;
-
   const handleApply = async (data: FilterFormType) => {
     const response = await getTravelogueListByFilter({ ...data });
     setOpen(false);
-    console.log(response.data);
+    console.log(response.data.content);
+    setTravelogues(response.data.content);
   };
   return (
     <Box
@@ -69,6 +63,8 @@ const FilterButton = (props: Props) => {
             maxWidth: '414px',
             margin: 'auto',
             overflow: 'visible',
+            borderTopRightRadius: 10,
+            borderTopLeftRadius: 10,
           },
         }}
       />
@@ -78,7 +74,7 @@ const FilterButton = (props: Props) => {
         </Button>
       </Box>
       <SwipeableDrawer
-        container={container}
+        container={() => document.body}
         anchor='bottom'
         open={open}
         onClose={toggleDrawer(false)}
