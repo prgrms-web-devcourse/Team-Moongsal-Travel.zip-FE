@@ -3,16 +3,15 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { usePatchTravelogueDetailById } from '@/api/hooks/travelogue';
-import { PostContents, PostInfo } from '@/components/PostDetail';
+import Spinner from '@/components/common/Spinner';
+import { TravelogueContent, TravelogueHeader } from '@/components/PostDetail';
 import { TravelogueDetailType } from '@/types/travelogue';
 
 const Detail = () => {
   const router = useRouter();
   const authority = 'writer'; // viewer
-  const { mutate } = usePatchTravelogueDetailById();
+  const { mutate, isLoading } = usePatchTravelogueDetailById();
   const [travelogueDetail, setTravelogueDetail] = useState<TravelogueDetailType>();
-
-  console.log('travelogueDetail', travelogueDetail);
 
   useEffect(() => {
     const { travelogueId } = router.query;
@@ -28,11 +27,15 @@ const Detail = () => {
     }
   }, [mutate, router.isReady, router.query]);
 
+  if (!travelogueDetail) return <Spinner isLoading={isLoading} />;
+
   return (
     <Box sx={{ px: '24px' }}>
       <Stack spacing={5}>
-        <PostInfo authority={authority} />
-        <PostContents />
+        <TravelogueHeader authority={authority} travelogueDetail={travelogueDetail} />
+        {travelogueDetail.subTravelogues.map((subTravelogue) => (
+          <TravelogueContent key={subTravelogue.day} subTravelogue={subTravelogue} />
+        ))}
       </Stack>
     </Box>
   );
