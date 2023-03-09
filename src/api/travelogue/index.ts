@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
+import { baseRequest } from '@/api/core';
 import http from '@/api/core/axiosInstance';
 import { TravelogueParams, TravelogueResponse } from '@/mocks/handlers/travelogue';
 import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
@@ -29,5 +30,14 @@ export const getTravelogueListByKeyword = async (
     url: `/api/travelogues/search?keyword=${keyword}&page=${page}&size=${size}`,
   });
 
+  return response;
+};
+
+export const patchTravelogueDetailById = async ({
+  travelogueId,
+}: {
+  travelogueId: string;
+}) => {
+  const response = await http.patch(`/api/travelogues/${travelogueId}`);
   return response;
 };
