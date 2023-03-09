@@ -26,6 +26,7 @@ export interface TravelogueResponseType {
 export interface SubTravelogueType {
   title: string;
   content: string;
+  day: number;
   addresses: { region: string }[];
   transportationSet: string[];
   travelPhotoCreateReqs: { url: string }[];

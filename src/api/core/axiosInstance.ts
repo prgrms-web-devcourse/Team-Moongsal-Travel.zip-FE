@@ -18,6 +18,7 @@ const setInterceptors = (instance: AxiosInstance) => {
 const http = setInterceptors(
   axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    withCredentials: true,
   }),
 );
 

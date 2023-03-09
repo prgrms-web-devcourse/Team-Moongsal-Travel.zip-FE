@@ -3,7 +3,7 @@ import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 
 import {
-  // getPersonalTravelogues,
+  getPersonalTravelogues,
   getRecentTravelogueList,
   getTravelogueListByKeyword,
   patchTravelogueDetailById,
@@ -17,17 +17,15 @@ export const useGetRecentTravelogue = () => {
   });
 };
 
-// export const useGetPersonalTravelogues = ({ size }: TravelogueParams) => {
-//   return useInfiniteQuery(
-//     ['PERSONAL_TRAVELOGUES'],
-//     ({ pageParam = 0 }: QueryFunctionContext) =>
-//       getPersonalTravelogues({ page: pageParam, size }),
-//     {
-//       getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
-//         isLastPage ? undefined : pageNumber + 1,
-//     },
-//   );
-// };
+export const useGetPersonalTravelogues = (size: number) => {
+  return useInfiniteQuery(
+    ['PERSONAL_TRAVELOGUES'],
+    ({ pageParam = 0 }: QueryFunctionContext) => getPersonalTravelogues(size, pageParam),
+    {
+      getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
+    },
+  );
+};
 
 export const useGetTravelogueByKeyword = (
   keyword: string,

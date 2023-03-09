@@ -35,12 +35,13 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
   const hasErrors = Object.keys(errors).length > 0;
 
   const handlePostSubTravelogue = (data: SubTravelogueType) => {
+    const subTravelogueData = { ...data, day: index + 1 };
     mutate(
-      { data, travelogueId },
+      { data: subTravelogueData, travelogueId },
       {
         onSuccess: () => {
-          reset(data);
-          setItem(`save-${travelogueId}-${index}`, data);
+          reset(subTravelogueData);
+          setItem(`save-${travelogueId}-${index}`, subTravelogueData);
           setSaved(true);
           handleComplete();
         },
