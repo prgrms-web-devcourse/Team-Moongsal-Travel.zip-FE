@@ -26,6 +26,7 @@ export const travelogueFormProps: UseFormProps = {
 export const subTravelogueFormDefault = {
   title: '',
   content: '',
+  day: 1,
   addresses: [{ region: '' }],
   transportationSet: [],
   travelPhotoCreateReqs: [{ url: 'https://temp.com' }],
