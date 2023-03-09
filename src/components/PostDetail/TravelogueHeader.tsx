@@ -25,7 +25,7 @@ const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
             <Button variant='text' sx={{ minWidth: 0 }}>
               수정
             </Button>
-            <Button variant='text' sx={{ minWidth: 0, p: 0 }}>
+            <Button variant='text' sx={{ minWidth: 0, ml: 0 }}>
               삭제
             </Button>
           </Stack>
