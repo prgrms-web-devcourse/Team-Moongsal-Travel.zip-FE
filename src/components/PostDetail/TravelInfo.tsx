@@ -18,7 +18,7 @@ const TravelInfo = ({ travelogueDetail }: PostCategoryProps) => {
   });
 
   return (
-    <Grid container rowSpacing={2} justifyContent='center'>
+    <Grid container>
       <List sx={ListStyle}>
         <TravelInfoItem title='여행지' value={country} icon={Public} />
         <TravelInfoItem

@@ -14,7 +14,7 @@ const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
   const { title } = travelogueDetail;
 
   return (
-    <Stack spacing={1}>
+    <Stack spacing={0.5}>
       <Title bold='bold' sx={{ mt: 2 }}>
         {title}
       </Title>
