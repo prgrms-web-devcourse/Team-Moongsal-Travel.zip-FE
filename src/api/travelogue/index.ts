@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import http from '@/api/core/instance';
+import http from '@/api/core/axiosInstance';
 import { TravelogueParams, TravelogueResponse } from '@/mocks/handlers/travelogue';
 import { TravelogueFeedType } from '@/types/travelogue';
 

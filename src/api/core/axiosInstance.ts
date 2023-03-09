@@ -1,11 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
 
-import { insertToken } from '@/utils/helper';
+import { insertAccessToken } from '@/api/core/helper';
 
 const setInterceptors = (instance: AxiosInstance) => {
   instance.interceptors.request.use(
     (config) => {
-      return insertToken(config);
+      return insertAccessToken(config);
     },
     (error) => Promise.reject(error),
   );
