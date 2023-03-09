@@ -1,65 +1,48 @@
-import {
-  DateRangeOutlined,
-  DirectionsBus,
-  DirectionsCar,
-  Flight,
-  Payment,
-  Public,
-} from '@mui/icons-material';
-import { Grid, Stack, SvgIcon } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { DateRangeOutlined, DirectionsCar, Payment, Public } from '@mui/icons-material';
+import { Grid, List } from '@mui/material';
 
-import { SubTitle } from '@/components/common';
+import TravelInfo from '@/components/PostDetail/TravelInfo';
+import { TRANSPORT_TYPE } from '@/constants';
+import { TravelogueDetailType } from '@/types/travelogue';
 
-const dummyData = [
-  {
-    title: '여행지',
-    subtitle: '일본',
-    icons: [Public],
-  },
-  {
-    title: '여행기간',
-    subtitle: '3박4일',
-    icons: [DateRangeOutlined],
-  },
-  {
-    title: '여행경비',
-    subtitle: '138만원',
-    icons: [Payment],
-  },
-  {
-    title: '이동수단',
-    icons: [Flight, DirectionsBus, DirectionsCar],
-  },
-];
+interface PostCategoryProps {
+  travelogueDetail: TravelogueDetailType;
+}
 
-const PostCategory = () => {
+const PostCategory = ({ travelogueDetail }: PostCategoryProps) => {
+  const { country, nights, days, totalCost, transportations } = travelogueDetail;
+
+  const transportationIcons = transportations.flatMap((transport) => {
+    const icon = TRANSPORT_TYPE.find(({ type }) => type === transport)?.icon;
+    return icon ? [icon] : [];
+  });
+
   return (
-    <Grid container rowSpacing={1}>
-      {dummyData.map(({ title, subtitle, icons }) => (
-        <Grid item xs={6} key={title}>
-          <Underline>{title}</Underline>
-          <Stack flexDirection='row' mt='0.3rem'>
-            {icons.map((icon, i) => (
-              <SvgIcon component={icon} color='gray030' key={i} />
-            ))}
-            <SubTitle color='gray030.main' bold='bold' fontSize='1rem'>
-              {subtitle}
-            </SubTitle>
-          </Stack>
-        </Grid>
-      ))}
+    <Grid container rowSpacing={2} justifyContent='center'>
+      <List sx={ListStyle}>
+        <TravelInfo title='여행지' value={country} icon={Public} />
+        <TravelInfo
+          title='여행기간'
+          value={`${nights}박 ${days}일`}
+          icon={DateRangeOutlined}
+        />
+      </List>
+      <List sx={ListStyle}>
+        <TravelInfo
+          title='여행경비'
+          value={`${totalCost.toLocaleString('ko-KR')}원`}
+          icon={Payment}
+        />
+        <TravelInfo title='이동수단' value={transportationIcons} icon={DirectionsCar} />
+      </List>
     </Grid>
   );
 };
 
 export default PostCategory;
 
-const Underline = styled('div')(({ theme }) => ({
-  '&:after': {
-    display: 'block',
-    width: '8rem',
-    borderBottom: `solid 1px ${theme.palette.gray020.main}`,
-    content: '""',
-  },
-}));
+const ListStyle = {
+  width: '50%',
+  maxWidth: 360,
+  bgcolor: 'background.paper',
+};
