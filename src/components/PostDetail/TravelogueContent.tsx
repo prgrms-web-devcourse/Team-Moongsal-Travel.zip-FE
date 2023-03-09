@@ -1,8 +1,9 @@
 import { ConnectingAirports as ConnectingAirportsIcon } from '@mui/icons-material';
-import { Box, Card, CardContent, Stack, Typography } from '@mui/material';
+import { Box, Card, CardContent, Divider, Stack, Typography } from '@mui/material';
 import Parser from 'html-react-parser';
 
 import { Title } from '@/components/common';
+import { VisitedRegionList } from '@/components/PostDetail';
 import { SubTravelogueType } from '@/types/post';
 
 interface PostContentsProps {
@@ -10,7 +11,7 @@ interface PostContentsProps {
 }
 
 const TravelogueContent = ({ subTravelogue }: PostContentsProps) => {
-  const { day, title, content } = subTravelogue;
+  const { day, title, content, addresses } = subTravelogue;
 
   return (
     <Card variant='outlined'>
@@ -20,8 +21,12 @@ const TravelogueContent = ({ subTravelogue }: PostContentsProps) => {
             <ConnectingAirportsIcon color={'blue050'} />
             <Typography variant='subtitle1' color='dark.main'>{`${day}일차`}</Typography>
           </Stack>
-          <Title>{title}</Title>
-          <Box>{Parser(content)}</Box>
+          <Title bold='bold' sx={{ mt: 0.5 }}>
+            {title}
+          </Title>
+          <Divider sx={{ my: 2 }} />
+          <Box sx={{ lineHeight: 1.5 }}>{Parser(content)}</Box>
+          <VisitedRegionList addresses={addresses} />
         </Stack>
       </CardContent>
     </Card>

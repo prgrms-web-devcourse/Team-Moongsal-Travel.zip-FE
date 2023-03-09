@@ -30,8 +30,8 @@ const Detail = () => {
   if (!travelogueDetail) return <Spinner isLoading={isLoading} />;
 
   return (
-    <Box sx={{ px: '24px' }}>
-      <Stack spacing={5}>
+    <Box sx={{ p: '0 15px 50px 15px' }}>
+      <Stack spacing={3}>
         <TravelogueHeader authority={authority} travelogueDetail={travelogueDetail} />
         {travelogueDetail.subTravelogues.map((subTravelogue) => (
           <TravelogueContent key={subTravelogue.day} subTravelogue={subTravelogue} />
