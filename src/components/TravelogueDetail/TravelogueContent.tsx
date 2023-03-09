@@ -3,7 +3,7 @@ import { Box, Card, CardContent, Divider, Stack, Typography } from '@mui/materia
 import Parser from 'html-react-parser';
 
 import { Title } from '@/components/common';
-import { VisitedRegionList } from '@/components/PostDetail';
+import { VisitedRegionList } from '@/components/TravelogueDetail';
 import { SubTravelogueType } from '@/types/post';
 
 interface PostContentsProps {
