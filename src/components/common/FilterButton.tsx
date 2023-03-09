@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Slider,
+  SliderThumb,
   Stack,
   SwipeableDrawer,
   TextField,
@@ -89,7 +90,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <SubTitle>여행 경비</SubTitle>
             <Stack flexDirection='column'>
-              <Slider
+              <StyledSlider
                 value={[parseInt(minCost.value || '0'), parseInt(maxCost.value || '30')]}
                 onChange={(_, newValue) => {
                   if (Array.isArray(newValue)) {
@@ -101,6 +102,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
                 step={100000}
                 min={0}
                 max={10000000}
+                slots={{ thumb: ThumbComponent }}
               />
               <Stack flexDirection='row'>
                 <TextField {...minCost} placeholder='최소금액' type='number' />
@@ -118,7 +120,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <SubTitle>여행 기간</SubTitle>
             <Stack flexDirection='column'>
-              <Slider
+              <StyledSlider
                 value={[parseInt(minDays.value || '0'), parseInt(maxDays.value || '30')]}
                 onChange={(_, newValue) => {
                   if (Array.isArray(newValue)) {
@@ -129,6 +131,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
                 valueLabelDisplay='auto'
                 min={0}
                 max={30}
+                slots={{ thumb: ThumbComponent }}
               />
               <Stack flexDirection='row'>
                 <TextField {...minDays} placeholder='최소기간' type='number' />
@@ -174,3 +177,46 @@ const swipeStyle = {
     borderTopLeftRadius: 10,
   },
 } as const;
+
+interface ThumbComponentProps extends React.HTMLAttributes<unknown> {}
+function ThumbComponent(props: ThumbComponentProps) {
+  const { children, ...other } = props;
+  return (
+    <SliderThumb {...other}>
+      {children}
+      <span className='bar' />
+      <span className='bar' />
+      <span className='bar' />
+    </SliderThumb>
+  );
+}
+
+const StyledSlider = styled(Slider)(({ theme }) => ({
+  color: theme.palette.blue070.main,
+  height: 3,
+  padding: '13px 0',
+  '& .MuiSlider-thumb': {
+    width: 27,
+    height: 27,
+    backgroundColor: theme.palette.white.main,
+    border: '1px solid currentColor',
+    '&:hover': {
+      boxShadow: `0 0 0 1px rgba(${theme.palette.blue070.main}, 0.16)`,
+    },
+    '& .bar': {
+      width: 1,
+      height: 9,
+      marginRight: 1,
+      marginLeft: 1,
+      backgroundColor: 'currentColor',
+    },
+  },
+  '& .MuiSlider-track': {
+    height: 3,
+  },
+  '& .MuiSlider-rail': {
+    height: 3,
+    color: theme.palette.gray010.main,
+    opacity: 1,
+  },
+}));
