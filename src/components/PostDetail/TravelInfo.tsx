@@ -1,50 +1,52 @@
-import {
-  Avatar,
-  Divider,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Stack,
-  SvgIcon,
-  SvgIconProps,
-} from '@mui/material';
-import { ElementType } from 'react';
+import { DateRangeOutlined, DirectionsCar, Payment, Public } from '@mui/icons-material';
+import { Grid, List } from '@mui/material';
 
-import { TravelInfoTitle } from '@/types/travelogue';
+import TravelInfoItem from '@/components/PostDetail/TravelInfoItem';
+import { TRANSPORT_TYPE } from '@/constants';
+import { TravelogueDetailType } from '@/types/travelogue';
 
-interface TravelInfoProps {
-  title: TravelInfoTitle;
-  value: string | ElementType<SvgIconProps>[];
-  icon: ElementType<SvgIconProps>;
+interface PostCategoryProps {
+  travelogueDetail: TravelogueDetailType;
 }
 
-const TravelInfo = ({ title, value, icon }: TravelInfoProps) => {
+const TravelInfo = ({ travelogueDetail }: PostCategoryProps) => {
+  const { country, nights, days, totalCost, transportations } = travelogueDetail;
+
+  const transportationIcons = transportations.flatMap((transport) => {
+    const icon = TRANSPORT_TYPE.find(({ type }) => type === transport)?.icon;
+    return icon ? [icon] : [];
+  });
+
   return (
-    <>
-      <ListItem sx={{ pl: '0' }}>
-        <ListItemAvatar>
-          <Avatar>
-            <SvgIcon component={icon} />
-          </Avatar>
-        </ListItemAvatar>
-        {title !== '이동수단' ? (
-          <ListItemText primary={title} secondary={value as string} />
-        ) : (
-          Array.isArray(value) && (
-            <Stack>
-              <ListItemText primary={title} />
-              <Stack direction='row'>
-                {value.map((icon, i) => (
-                  <SvgIcon key={i} component={icon} sx={{ color: '#bdbdbd' }} />
-                ))}
-              </Stack>
-            </Stack>
-          )
-        )}
-      </ListItem>
-      <Divider variant='inset' component='li' sx={{ ml: '55px' }} />
-    </>
+    <Grid container rowSpacing={2} justifyContent='center'>
+      <List sx={ListStyle}>
+        <TravelInfoItem title='여행지' value={country} icon={Public} />
+        <TravelInfoItem
+          title='여행기간'
+          value={`${nights}박 ${days}일`}
+          icon={DateRangeOutlined}
+        />
+      </List>
+      <List sx={ListStyle}>
+        <TravelInfoItem
+          title='여행경비'
+          value={`${totalCost.toLocaleString('ko-KR')}원`}
+          icon={Payment}
+        />
+        <TravelInfoItem
+          title='이동수단'
+          value={transportationIcons}
+          icon={DirectionsCar}
+        />
+      </List>
+    </Grid>
   );
 };
 
 export default TravelInfo;
+
+const ListStyle = {
+  width: '50%',
+  maxWidth: 360,
+  bgcolor: 'background.paper',
+};
