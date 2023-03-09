@@ -1,6 +1,13 @@
-import { Global } from '@emotion/react';
 import { Tune as TuneIcon } from '@mui/icons-material';
-import { Box, Button, Stack, SwipeableDrawer, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Slider,
+  Stack,
+  SwipeableDrawer,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
@@ -10,16 +17,6 @@ import { SubTitle } from '@/components/common';
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/useFilterForm';
 import { FilterFormType, FilterProps } from '@/types/filter';
-
-const Puller = styled(Box)(({ theme }) => ({
-  width: 30,
-  height: 6,
-  backgroundColor: theme.palette.gray030.main,
-  borderRadius: 3,
-  position: 'absolute',
-  top: 8,
-  left: 'calc(50% - 15px)',
-}));
 
 interface FilterButtonProps {
   setFilter: Dispatch<SetStateAction<FilterProps>>;
@@ -40,6 +37,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
   };
 
   const handleApply = async (data: FilterFormType) => {
+    console.log(data);
     setFilter({
       minDays: data.minDays,
       maxDays: data.maxDays,
@@ -58,19 +56,6 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
         maxWidth: '90%',
         margin: '2rem auto',
       }}>
-      <Global
-        styles={{
-          '.MuiDrawer-root > .MuiPaper-root': {
-            boxSizing: 'border-box',
-            minWidth: '390px',
-            maxWidth: '414px',
-            margin: 'auto',
-            overflow: 'visible',
-            borderTopRightRadius: 10,
-            borderTopLeftRadius: 10,
-          },
-        }}
-      />
       <Box>
         <Button variant='outlined' startIcon={<TuneIcon />} onClick={toggleDrawer(true)}>
           필터
@@ -83,6 +68,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
         disableScrollLock
+        sx={swipeStyle}
         ModalProps={{
           keepMounted: false,
         }}>
@@ -102,16 +88,57 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <SubTitle>여행 경비</SubTitle>
-            <Stack flexDirection='row'>
-              <TextField {...minCost} placeholder='최소금액' type='number' />
-              <TextField {...maxCost} placeholder='최대금액' type='number' />
+            <Stack flexDirection='column'>
+              <Slider
+                value={[parseInt(minCost.value || '0'), parseInt(maxCost.value || '30')]}
+                onChange={(_, newValue) => {
+                  if (Array.isArray(newValue)) {
+                    minCost.onChange(newValue[0].toString());
+                    maxCost.onChange(newValue[1].toString());
+                  }
+                }}
+                valueLabelDisplay='auto'
+                step={100000}
+                min={0}
+                max={10000000}
+              />
+              <Stack flexDirection='row'>
+                <TextField {...minCost} placeholder='최소금액' type='number' />
+                <TextField {...maxCost} placeholder='최대금액' type='number' />
+              </Stack>
+              <Typography variant='body1' component='span'>
+                {minCost.value &&
+                  maxCost.value &&
+                  `최소:${parseInt(minCost.value) / 10000}만원 - 최대:${
+                    parseInt(maxCost.value) / 10000
+                  }만원`}
+              </Typography>
             </Stack>
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <SubTitle>여행 기간</SubTitle>
-            <Stack flexDirection='row'>
-              <TextField {...minDays} placeholder='최소기간' type='number' />
-              <TextField {...maxDays} placeholder='최대기간' type='number' />
+            <Stack flexDirection='column'>
+              <Slider
+                value={[parseInt(minDays.value || '0'), parseInt(maxDays.value || '30')]}
+                onChange={(_, newValue) => {
+                  if (Array.isArray(newValue)) {
+                    minDays.onChange(newValue[0].toString());
+                    maxDays.onChange(newValue[1].toString());
+                  }
+                }}
+                valueLabelDisplay='auto'
+                min={0}
+                max={30}
+              />
+              <Stack flexDirection='row'>
+                <TextField {...minDays} placeholder='최소기간' type='number' />
+                <TextField {...maxDays} placeholder='최대기간' type='number' />
+              </Stack>
+              <Typography variant='body1' component='span'>
+                {minDays.value &&
+                  maxDays.value &&
+                  `최소:${minDays.value}일 - 최대:${maxDays.value}일`}
+              </Typography>
             </Stack>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -124,3 +151,26 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
 };
 
 export default FilterButton;
+
+const Puller = styled(Box)(({ theme }) => ({
+  width: 30,
+  height: 6,
+  backgroundColor: theme.palette.gray030.main,
+  borderRadius: 3,
+  position: 'absolute',
+  top: 8,
+  left: 'calc(50% - 15px)',
+}));
+
+const swipeStyle = {
+  '&.MuiDrawer-root > .MuiPaper-root': {
+    boxSizing: 'border-box',
+    minWidth: '390px',
+    maxWidth: '414px',
+    margin: 'auto',
+    padding: '1rem 2rem',
+    overflow: 'visible',
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+} as const;

@@ -15,7 +15,7 @@ const useFilterForm = (control: Control<FilterFormType>) => {
         if (maxDays.value && !value) {
           return '최소 기간을 입력하세요';
         }
-        if (maxDays.value && value && value > maxDays.value) {
+        if (maxDays.value && value && parseInt(value) > parseInt(maxDays.value)) {
           return '최소 기간은 최대 기간보다 클 수 없습니다.';
         }
         return true;
@@ -42,7 +42,7 @@ const useFilterForm = (control: Control<FilterFormType>) => {
         if (maxCost.value && !value) {
           return '최소 비용을 입력하세요';
         }
-        if (maxCost.value && value && value > maxCost.value) {
+        if (maxCost.value && value && parseInt(value) > parseInt(maxCost.value)) {
           return '최소 비용은 최대 비용보다 클 수 없습니다.';
         }
         return true;
