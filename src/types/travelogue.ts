@@ -22,3 +22,27 @@ export interface TravelogueListType {
   last: boolean;
   empty: boolean;
 }
+
+export interface TravelogueDetailType {
+  profileImageUrl: string;
+  nickname: string;
+  id: number;
+  title: string;
+  country: string;
+  nights: number;
+  days: number;
+  totalCost: number;
+  subTravelogues: {
+    title: string;
+    content: string;
+    day: number;
+    addresses: [{ region: string }];
+    transportationSet: string[];
+    travelPhotoCreateReqs: { url: string }[];
+  }[];
+  transportations: string[];
+  countLikes: number;
+  isLiked: boolean;
+  viewCount: number;
+  bookmarked: boolean;
+}
