@@ -1,18 +1,16 @@
-import { Box, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { usePatchTravelogueDetailById } from '@/api/hooks/travelogue';
-import { PostContents, PostInfo } from '@/components/PostDetail';
+import Spinner from '@/components/common/Spinner';
+import { TravelogueDetail } from '@/components/TravelogueDetail';
 import { TravelogueDetailType } from '@/types/travelogue';
 
 const Detail = () => {
   const router = useRouter();
-  const authority = 'writer'; // viewer
-  const { mutate } = usePatchTravelogueDetailById();
+  const { mutate, isLoading } = usePatchTravelogueDetailById();
   const [travelogueDetail, setTravelogueDetail] = useState<TravelogueDetailType>();
-
-  console.log('travelogueDetail', travelogueDetail);
 
   useEffect(() => {
     const { travelogueId } = router.query;
@@ -28,12 +26,11 @@ const Detail = () => {
     }
   }, [mutate, router.isReady, router.query]);
 
+  if (!travelogueDetail) return <Spinner isLoading={isLoading} />;
+
   return (
-    <Box sx={{ px: '24px' }}>
-      <Stack spacing={5}>
-        <PostInfo authority={authority} />
-        <PostContents />
-      </Stack>
+    <Box sx={{ p: '0 15px 50px 15px' }}>
+      <TravelogueDetail travelogueDetail={travelogueDetail} />
     </Box>
   );
 };

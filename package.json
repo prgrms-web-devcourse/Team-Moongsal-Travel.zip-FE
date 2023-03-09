@@ -21,6 +21,7 @@
     "@tanstack/react-query": "^4.24.9",
     "aws-sdk": "^2.1325.0",
     "dayjs": "^1.11.7",
+    "html-react-parser": "^3.0.12",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
