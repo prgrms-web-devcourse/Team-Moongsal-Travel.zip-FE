@@ -6,16 +6,10 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { getTravelogueListByFilter } from '@/api/travelogue';
 import { SubTitle } from '@/components/common';
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/useFilterForm';
-import { FilterFormType } from '@/types/filter';
-import { TravelogueFeedType } from '@/types/travelogue';
-
-interface FilterButtonProps {
-  setTravelogues: Dispatch<SetStateAction<TravelogueFeedType[]>>;
-}
+import { FilterFormType, FilterProps } from '@/types/filter';
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 30,
@@ -27,7 +21,11 @@ const Puller = styled(Box)(({ theme }) => ({
   left: 'calc(50% - 15px)',
 }));
 
-const FilterButton = ({ setTravelogues }: FilterButtonProps) => {
+interface FilterButtonProps {
+  setFilter: Dispatch<SetStateAction<FilterProps>>;
+}
+
+const FilterButton = ({ setFilter }: FilterButtonProps) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const { handleSubmit, control } = useForm<FilterFormType>(filterFormDefault);
@@ -40,12 +38,17 @@ const FilterButton = ({ setTravelogues }: FilterButtonProps) => {
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
+
   const handleApply = async (data: FilterFormType) => {
-    const response = await getTravelogueListByFilter({ ...data });
+    setFilter({
+      minDays: data.minDays,
+      maxDays: data.maxDays,
+      minCost: data.minCost,
+      maxCost: data.maxCost,
+    });
     setOpen(false);
-    console.log(response.data.content);
-    setTravelogues(response.data.content);
   };
+
   return (
     <Box
       sx={{

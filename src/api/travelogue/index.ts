@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 
 import { baseRequest } from '@/api/core';
 import { TravelogueParams, TravelogueResponse } from '@/mocks/handlers/travelogue';
+import { FilterAxiosProps } from '@/types/filter';
 import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
 
 export const getRecentTravelogueList = async (
@@ -35,28 +36,21 @@ export const getTravelogueListByKeyword = async (
   return response;
 };
 
-interface FilterProps {
-  keyword: string;
-  minDays?: string;
-  maxDays?: string;
-  minCost?: string;
-  maxCost?: string;
-}
-
 export const getTravelogueListByFilter = async ({
   keyword,
+  page = 0,
+  size = 5,
   minDays,
   maxDays,
   minCost,
   maxCost,
-}: FilterProps) => {
+}: FilterAxiosProps) => {
   const response = await baseRequest({
     method: 'GET',
-    url: `/api/travelogues/search/filters?keyword=${keyword}${
-      minDays && `&minDays=${minDays}`
-    }${maxDays && `&maxDays=${maxDays}`}${minCost && `&minCost=${minCost}`}${
-      maxCost && `&maxCost=${maxCost}`
-    }`,
+    url: `/api/travelogues/search/filters?keyword=${keyword}&page=${page}&size=${size}
+    ${minDays ? `&minDays=${minDays}` : ''} ${maxDays ? `&maxDays=${maxDays}` : ''}
+    ${minCost ? `&minCost=${minCost}` : ''} ${maxCost ? `&maxCost=${maxCost}` : ''}
+    `,
   });
 
   return response;
