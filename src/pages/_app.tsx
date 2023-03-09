@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
+import { RecoilRoot } from 'recoil';
 
 import { Header } from '@/components/Header';
 import GlobalStyle from '@/styles/GlobalStyle';
@@ -33,11 +34,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <MobileLayout>
-          <GlobalStyle />
-          <Header />
-          <Component {...pageProps} />
-        </MobileLayout>
+        <RecoilRoot>
+          <MobileLayout>
+            <GlobalStyle />
+            <Header />
+            <Component {...pageProps} />
+          </MobileLayout>
+        </RecoilRoot>
       </ThemeProvider>
     </QueryClientProvider>
   );
