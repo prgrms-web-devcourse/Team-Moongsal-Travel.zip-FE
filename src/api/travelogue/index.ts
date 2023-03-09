@@ -12,8 +12,8 @@ export const getRecentTravelogueList = async (
   return response.data.content;
 };
 
-export const getPersonalTravelogues = async () => {
-  return await http.get<TravelogueFeedType>('/travelogues');
+export const getPersonalTravelogues = async (size: number, page: number) => {
+  return await http.get<TravelogueListType>(`api/travelogues?&page=${page}&=${size}`);
 };
 
 export const getTravelogueListByKeyword = async (
