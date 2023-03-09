@@ -29,3 +29,12 @@ export const getTravelogueListByKeyword = async (
 
   return response;
 };
+
+export const patchTravelogueDetailById = async ({
+  travelogueId,
+}: {
+  travelogueId: string;
+}) => {
+  const response = await http.patch(`/api/travelogues/${travelogueId}`);
+  return response;
+};

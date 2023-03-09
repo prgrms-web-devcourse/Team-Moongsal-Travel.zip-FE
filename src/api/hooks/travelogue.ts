@@ -1,4 +1,4 @@
-import { UseInfiniteQueryResult, useQuery } from '@tanstack/react-query';
+import { UseInfiniteQueryResult, useMutation, useQuery } from '@tanstack/react-query';
 import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
 
@@ -6,6 +6,7 @@ import {
   // getPersonalTravelogues,
   getRecentTravelogueList,
   getTravelogueListByKeyword,
+  patchTravelogueDetailById,
 } from '@/api/travelogue';
 import { TravelogueListType } from '@/types/travelogue';
 
@@ -40,4 +41,14 @@ export const useGetTravelogueByKeyword = (
       getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
     },
   );
+};
+
+export const usePatchTravelogueDetailById = () => {
+  return useMutation({
+    mutationFn: async (data: { travelogueId: string }) =>
+      await patchTravelogueDetailById(data),
+    onError: (error: { message: string }) => {
+      console.error(error.message);
+    },
+  });
 };
