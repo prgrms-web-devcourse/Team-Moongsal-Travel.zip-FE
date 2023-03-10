@@ -94,7 +94,10 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
             <SubTitle>여행 경비</SubTitle>
             <Stack flexDirection='column'>
               <StyledSlider
-                value={[parseInt(minCost.value || '0'), parseInt(maxCost.value || '30')]}
+                value={[
+                  parseInt(minCost.value || '0'),
+                  parseInt(maxCost.value || '10000000'),
+                ]}
                 onChange={(_, newValue) => {
                   if (Array.isArray(newValue)) {
                     minCost.onChange(newValue[0].toString());
