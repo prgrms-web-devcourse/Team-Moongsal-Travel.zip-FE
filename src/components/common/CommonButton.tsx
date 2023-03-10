@@ -7,9 +7,13 @@ interface CommonButtonProps {
   handleClick?: () => void;
 }
 
-const CommonButton = ({ content, customStyle }: CommonButtonProps) => {
+const CommonButton = ({ content, customStyle, handleClick }: CommonButtonProps) => {
   return (
-    <Button type='button' variant='contained' sx={{ ...buttonStyle, ...customStyle }}>
+    <Button
+      onClick={handleClick && handleClick}
+      type='button'
+      variant='contained'
+      sx={{ ...buttonStyle, ...customStyle }}>
       {content}
     </Button>
   );
