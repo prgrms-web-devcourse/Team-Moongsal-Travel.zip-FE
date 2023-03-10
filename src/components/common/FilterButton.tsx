@@ -111,9 +111,9 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
               <Typography variant='body1' component='span'>
                 {minCost.value &&
                   maxCost.value &&
-                  `최소:${parseInt(minCost.value) / 10000}만원 - 최대:${
-                    parseInt(maxCost.value) / 10000
-                  }만원`}
+                  `최소:${parseInt(minCost.value).toLocaleString(
+                    'ko-KR',
+                  )}원 - 최대:${parseInt(maxCost.value).toLocaleString('ko-KR')}원`}
               </Typography>
             </Stack>
           </Box>
