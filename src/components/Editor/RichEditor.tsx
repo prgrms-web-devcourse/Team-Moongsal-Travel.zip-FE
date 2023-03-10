@@ -1,15 +1,19 @@
 import 'react-quill/dist/quill.snow.css';
 
 import dynamic from 'next/dynamic';
+import { ImageResize } from 'quill-image-resize';
 import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import React from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 
 import useImageUpload from '@/hooks/useImageUpload';
 import { SubTravelogueType } from '@/types/post';
 
 import { editorModules } from './index';
+
+// Quill.register('modules/ImageResize', ImageResize);
+Quill.register('modules/imageResize', ImageResize);
 
 const Reactquill = dynamic(
   async () => {
@@ -78,6 +82,10 @@ const RichEditor = ({ content, disabled }: RichEditorType) => {
         handlers: {
           image: imageHandler,
         },
+      },
+      ImageResize: {
+        parchment: Quill.import('parchment'),
+        modules: ['Resize', 'DisplaySize'],
       },
     }),
     [],

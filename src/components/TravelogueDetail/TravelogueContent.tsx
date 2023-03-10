@@ -13,6 +13,19 @@ interface PostContentsProps {
 const TravelogueContent = ({ subTravelogue }: PostContentsProps) => {
   const { day, title, content, addresses } = subTravelogue;
 
+  // const parser = new DOMParser();
+  // const doc = parser.parseFromString(content, 'text/html');
+  // console.log('doc', doc);
+  // const imgList = doc.getElementsByTagName('img');
+  // // console.log('imgList', imgList);
+  // const aaa = Array.from(imgList).map((img) => img.setAttribute('style', 'max-width: 350px'));
+  // console.log('aaa', aaa);
+  // console.log('ccc', content);
+  // console.log('parser', parser);
+  // console.log('doc2', doc);
+  // console.log('body', doc.body.innerHTML);
+  // const tttttt = doc.body.innerHTML;
+
   return (
     <Card variant='outlined'>
       <CardContent>
