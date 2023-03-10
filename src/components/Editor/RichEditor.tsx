@@ -1,35 +1,47 @@
 import 'react-quill/dist/quill.snow.css';
 
 import dynamic from 'next/dynamic';
+// import ImageResize from 'quill-image-resize';
 import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import React from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 
 import useImageUpload from '@/hooks/useImageUpload';
 import { SubTravelogueType } from '@/types/post';
 
 import { editorModules } from './index';
 
-const Reactquill = dynamic(
-  async () => {
-    const { default: RQ } = await import('react-quill');
-    const comp = ({
-      forwardedRef,
-      ...props
-    }: {
-      forwardedRef: RefObject<ReactQuill>;
-      [key: string]: any;
-    }) => {
-      return <RQ ref={forwardedRef} {...props} />;
-    };
-    return comp;
-  },
-  {
-    ssr: false,
-  },
-);
+// Quill.register('modules/ImageResize', ImageResize);
 
+// const { Quill } = await import('react-quill');
+
+const Reactquill =
+  typeof window === 'object'
+    ? dynamic(
+        async () => {
+          const { default: RQ } = await import('react-quill');
+          const { default: ImageResize } = await import('quill-image-resize');
+
+          const comp = ({
+            forwardedRef,
+            ...props
+          }: {
+            forwardedRef: RefObject<ReactQuill>;
+            [key: string]: any;
+          }) => {
+            const { Quill } = RQ;
+            // const { Quill } = await import('react-quill');
+            Quill.register('modules/imageResize', ImageResize);
+            return <RQ ref={forwardedRef} {...props} />;
+          };
+          return comp;
+        },
+        {
+          ssr: false,
+        },
+      )
+    : () => null;
 interface RichEditorType {
   content: ControllerRenderProps<SubTravelogueType, 'content'>;
   disabled: boolean;
@@ -78,6 +90,10 @@ const RichEditor = ({ content, disabled }: RichEditorType) => {
         handlers: {
           image: imageHandler,
         },
+      },
+      ImageResize: {
+        parchment: Quill.import('parchment'),
+        modules: ['Resize', 'DisplaySize'],
       },
     }),
     [],
