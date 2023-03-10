@@ -5,9 +5,11 @@ import { AxiosResponse } from 'axios';
 import {
   getPersonalTravelogues,
   getRecentTravelogueList,
+  getTravelogueListByFilter,
   getTravelogueListByKeyword,
   patchTravelogueDetailById,
 } from '@/api/travelogue';
+import { FilterAxiosProps } from '@/types/filter';
 import { TravelogueListType } from '@/types/travelogue';
 
 export const useGetRecentTravelogue = () => {
@@ -35,6 +37,37 @@ export const useGetTravelogueByKeyword = (
     ['KEYWORD_TRAVELOGUES', keyword],
     ({ pageParam = 0 }: QueryFunctionContext) =>
       getTravelogueListByKeyword(keyword, pageParam, size),
+    {
+      getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
+    },
+  );
+};
+
+export const useGetTravelogueByFilter = ({
+  keyword,
+  size,
+  minDays,
+  maxDays,
+  minCost,
+  maxCost,
+  sort,
+}: FilterAxiosProps): UseInfiniteQueryResult<
+  AxiosResponse<TravelogueListType>,
+  unknown
+> => {
+  return useInfiniteQuery(
+    ['FILTER_TRAVELOGUES', keyword, minDays, maxDays, minCost, maxCost, sort],
+    ({ pageParam = 0 }: QueryFunctionContext) =>
+      getTravelogueListByFilter({
+        keyword,
+        size,
+        page: pageParam,
+        minDays,
+        maxDays,
+        minCost,
+        maxCost,
+        sort,
+      }),
     {
       getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
     },

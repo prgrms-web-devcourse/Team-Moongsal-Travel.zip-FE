@@ -3,29 +3,28 @@ import { CircularProgress, Fade } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
-import { useGetTravelogueByKeyword } from '@/api/hooks/travelogue';
+import { useGetTravelogueByFilter } from '@/api/hooks/travelogue';
+import { FilterButton } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 import useIntersect from '@/hooks/useIntersect';
+import { FilterProps } from '@/types/filter';
 
 const TravelogueList = () => {
   const router = useRouter();
   const [keyword, setKeyword] = useState<string>("''");
+  const [filter, setFilter] = useState<FilterProps>({});
+
+  const { data, hasNextPage, isFetching, fetchNextPage } = useGetTravelogueByFilter({
+    keyword,
+    size: 5,
+    ...filter,
+  });
 
   useEffect(() => {
     if (router.isReady && typeof router.query.keyword === 'string') {
       setKeyword(router.query.keyword);
     }
-  }, [router.isReady, router.query.keyword]);
-
-  const { data, hasNextPage, isFetching, fetchNextPage } = useGetTravelogueByKeyword(
-    keyword,
-    5,
-  );
-
-  const keywordTravelogues = useMemo(
-    () => (data ? data.pages.flatMap(({ data }) => data.content) : []),
-    [data],
-  );
+  }, [data, router.isReady, router.query.keyword]);
 
   const ref = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);
@@ -34,11 +33,20 @@ const TravelogueList = () => {
     }
   });
 
+  const travelogues = useMemo(
+    () => (data ? data.pages.flatMap(({ data }) => data.content) : []),
+    [data],
+  );
+
   return (
     <Box component='section'>
-      {keywordTravelogues.map((travelogue) => (
-        <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
-      ))}
+      <FilterButton setFilter={setFilter} />
+      {travelogues.map(
+        (travelogue) =>
+          travelogue && (
+            <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
+          ),
+      )}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Fade in={isFetching}>
           <Box sx={{ bgcolor: 'white.main' }}>
