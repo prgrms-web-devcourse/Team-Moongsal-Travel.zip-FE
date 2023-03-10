@@ -62,6 +62,11 @@ const useFilterForm = (control: Control<FilterFormType>) => {
     },
   });
 
+  const { field: sort, fieldState: sortState } = useController({
+    name: 'sort',
+    control,
+  });
+
   return {
     keyword,
     keywordState,
@@ -73,6 +78,8 @@ const useFilterForm = (control: Control<FilterFormType>) => {
     minCostState,
     maxCost,
     maxCostState,
+    sort,
+    sortState,
   };
 };
 

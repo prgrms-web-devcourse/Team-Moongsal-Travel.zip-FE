@@ -40,5 +40,6 @@ export const filterFormDefault: UseFormProps = {
     maxDays: '',
     minCost: '',
     maxCost: '',
+    sort: 'recent',
   },
 };

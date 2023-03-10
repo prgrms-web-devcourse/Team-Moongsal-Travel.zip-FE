@@ -2,6 +2,10 @@ import { Tune as TuneIcon } from '@mui/icons-material';
 import {
   Box,
   Button,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
   Slider,
   SliderThumb,
   Stack,
@@ -27,7 +31,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const { handleSubmit, control } = useForm<FilterFormType>(filterFormDefault);
-  const { minDays, maxDays, minCost, maxCost, keyword } = useFilterForm(control);
+  const { minDays, maxDays, minCost, maxCost, keyword, sort } = useFilterForm(control);
 
   useEffect(() => {
     router.isReady && keyword.onChange(router.query.keyword);
@@ -44,6 +48,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
       maxDays: data.maxDays,
       minCost: data.minCost,
       maxCost: data.maxCost,
+      sort: data.sort,
     });
     setOpen(false);
   };
@@ -77,15 +82,13 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
         <Box sx={{ pb: 2 }} />
         <Box component='form' onSubmit={handleSubmit(handleApply)}>
           <Box>
-            <SubTitle>정렬</SubTitle>
-            <Stack flexDirection='row'>
-              <Button variant='outlined' type='button'>
-                최신순
-              </Button>
-              <Button variant='outlined' type='button'>
-                인기순
-              </Button>
-            </Stack>
+            <FormControl>
+              <SubTitle>정렬</SubTitle>
+              <RadioGroup row {...sort} defaultValue='recent' defaultChecked>
+                <FormControlLabel value='recent' control={<Radio />} label='최신순' />
+                <FormControlLabel value='popular' control={<Radio />} label='인기순' />
+              </RadioGroup>
+            </FormControl>
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <SubTitle>여행 경비</SubTitle>

@@ -50,12 +50,13 @@ export const useGetTravelogueByFilter = ({
   maxDays,
   minCost,
   maxCost,
+  sort,
 }: FilterAxiosProps): UseInfiniteQueryResult<
   AxiosResponse<TravelogueListType>,
   unknown
 > => {
   return useInfiniteQuery(
-    ['FILTER_TRAVELOGUES', keyword, minDays, maxDays, minCost, maxCost],
+    ['FILTER_TRAVELOGUES', keyword, minDays, maxDays, minCost, maxCost, sort],
     ({ pageParam = 0 }: QueryFunctionContext) =>
       getTravelogueListByFilter({
         keyword,
@@ -65,6 +66,7 @@ export const useGetTravelogueByFilter = ({
         maxDays,
         minCost,
         maxCost,
+        sort,
       }),
     {
       getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
