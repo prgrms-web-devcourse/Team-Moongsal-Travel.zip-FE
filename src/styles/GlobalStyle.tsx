@@ -174,4 +174,12 @@ const style = css`
   .ql-editor {
     word-spacing: 0;
   }
+
+  .readable-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
 `;
