@@ -1,25 +1,20 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import { baseRequest } from '@/api/core';
-import { TravelogueParams, TravelogueResponse } from '@/mocks/handlers/travelogue';
+import http from '@/api/core/axiosInstance';
 import { FilterAxiosProps } from '@/types/filter';
 import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
 
 export const getRecentTravelogueList = async (
   page = 1,
 ): Promise<TravelogueFeedType[]> => {
-  const response = await baseRequest({
-    method: 'GET',
-    url: `api/travelogues?&page=${page}`,
-  });
+  const response = await http.get(`api/travelogues?&page=${page}`);
 
   return response.data.content;
 };
 
-export const getPersonalTravelogues = async (params: TravelogueParams) => {
-  return await axios.get<TravelogueResponse<TravelogueFeedType>>('/travelogues', {
-    params,
-  });
+export const getPersonalTravelogues = async (size: number, page: number) => {
+  return await http.get<TravelogueListType>(`api/travelogues?&page=${page}&=${size}`);
 };
 
 // 현재 사용하지 않음: 리팩터링시 사용할 수 있을것같아서 남겨두겠습니다.
@@ -53,6 +48,14 @@ export const getTravelogueListByFilter = async ({
     ${minCost ? `&minCost=${minCost}` : ''} ${maxCost ? `&maxCost=${maxCost}` : ''}
     `,
   });
+  return response;
+};
 
+export const patchTravelogueDetailById = async ({
+  travelogueId,
+}: {
+  travelogueId: string;
+}) => {
+  const response = await http.patch(`/api/travelogues/${travelogueId}`);
   return response;
 };

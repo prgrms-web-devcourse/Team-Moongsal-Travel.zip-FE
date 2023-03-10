@@ -1,32 +1,30 @@
-import { UseInfiniteQueryResult, useQuery } from '@tanstack/react-query';
+import { UseInfiniteQueryResult, useMutation, useQuery } from '@tanstack/react-query';
 import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import {
   getPersonalTravelogues,
   getRecentTravelogueList,
   getTravelogueListByFilter,
   getTravelogueListByKeyword,
+  patchTravelogueDetailById,
 } from '@/api/travelogue';
-import { TravelogueParams } from '@/mocks/handlers/travelogue';
 import { FilterAxiosProps } from '@/types/filter';
-import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
+import { TravelogueListType } from '@/types/travelogue';
 
 export const useGetRecentTravelogue = () => {
-  return useQuery<TravelogueFeedType[], AxiosError>({
+  return useQuery({
     queryKey: ['RECENT_TRAVELOGUES'],
     queryFn: () => getRecentTravelogueList(),
   });
 };
 
-export const useGetPersonalTravelogues = ({ size }: TravelogueParams) => {
+export const useGetPersonalTravelogues = (size: number) => {
   return useInfiniteQuery(
     ['PERSONAL_TRAVELOGUES'],
-    ({ pageParam = 0 }: QueryFunctionContext) =>
-      getPersonalTravelogues({ page: pageParam, size }),
+    ({ pageParam = 0 }: QueryFunctionContext) => getPersonalTravelogues(size, pageParam),
     {
-      getNextPageParam: ({ data: { isLastPage, pageNumber } }) =>
-        isLastPage ? undefined : pageNumber + 1,
+      getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
     },
   );
 };
@@ -72,4 +70,14 @@ export const useGetTravelogueByFilter = ({
       getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
     },
   );
+};
+
+export const usePatchTravelogueDetailById = () => {
+  return useMutation({
+    mutationFn: async (data: { travelogueId: string }) =>
+      await patchTravelogueDetailById(data),
+    onError: (error: { message: string }) => {
+      console.error(error.message);
+    },
+  });
 };

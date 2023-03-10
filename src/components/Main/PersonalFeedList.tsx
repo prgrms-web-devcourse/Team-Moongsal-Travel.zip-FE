@@ -6,9 +6,7 @@ import { TravelogueFeed } from '@/components/Travelogue';
 import useIntersect from '@/hooks/useIntersect';
 
 const PersonalFeedList = () => {
-  const { data, hasNextPage, isFetching, fetchNextPage } = useGetPersonalTravelogues({
-    size: 5,
-  });
+  const { data, hasNextPage, isFetching, fetchNextPage } = useGetPersonalTravelogues(5);
 
   const personalTravelogues = useMemo(
     () => (data ? data.pages.flatMap(({ data }) => data.content) : []),
@@ -21,6 +19,10 @@ const PersonalFeedList = () => {
       fetchNextPage();
     }
   });
+
+  if (personalTravelogues.length === 0) {
+    return null;
+  }
 
   return (
     <Box component='section' margin='0 auto'>

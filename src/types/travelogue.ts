@@ -1,3 +1,5 @@
+import { SubTravelogueType } from '@/types/post';
+
 export interface TravelogueFeedType {
   travelogueId: number;
   title: string;
@@ -22,3 +24,22 @@ export interface TravelogueListType {
   last: boolean;
   empty: boolean;
 }
+
+export interface TravelogueDetailType {
+  profileImageUrl: string;
+  nickname: string;
+  id: number;
+  title: string;
+  country: string;
+  nights: number;
+  days: number;
+  totalCost: number;
+  subTravelogues: SubTravelogueType[];
+  transportations: string[];
+  countLikes: number;
+  isLiked: boolean;
+  viewCount: number;
+  bookmarked: boolean;
+}
+
+export type TravelInfoTitle = '여행지' | '여행기간' | '여행경비' | '이동수단';

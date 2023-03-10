@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { SxProps, Theme, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 
 interface TitleProps {
@@ -6,16 +6,18 @@ interface TitleProps {
   color?: string;
   bold?: string;
   fontSize?: string;
+  sx?: SxProps<Theme>;
 }
 
-const Title = ({ children, color, bold, fontSize }: TitleProps) => {
+const Title = ({ children, color, bold, fontSize, sx }: TitleProps) => {
   return (
     <Typography
       variant='body1'
       component='h2'
       fontSize={fontSize ? fontSize : '1.5rem'}
       color={color && color}
-      fontWeight={bold && bold}>
+      fontWeight={bold && bold}
+      sx={sx}>
       {children}
     </Typography>
   );
