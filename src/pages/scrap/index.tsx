@@ -38,11 +38,13 @@ const Scrap = () => {
   }, []);
 
   const createScrapDoc = async (data: ScrapDocsFormType) => {
-    createScrapDocument(data.title);
+    const { status } = await createScrapDocument(data.title);
     setOpen(false);
     reset();
-    const response = await getScrapDocument();
-    setScrapDocs(response.data.list);
+    if (status === 200) {
+      const response = await getScrapDocument();
+      setScrapDocs(response.data.list);
+    }
   };
 
   const deleteScrapDoc = (docId: string) => {
