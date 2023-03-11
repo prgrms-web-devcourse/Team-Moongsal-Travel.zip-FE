@@ -17,7 +17,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { deleteScarpDocument, getScrapDocument } from '@/api/scrap';
+import { createScrapDocument, deleteScrapDocument, getScrapDocument } from '@/api/scrap';
 import { SubTitle } from '@/components/common';
 import { scrapFormDefault } from '@/constants/defaultFormValue';
 import useScrapDocsForm from '@/hooks/useScrapDocsForm';
@@ -26,7 +26,7 @@ import { ScrapDocInfo, ScrapDocsFormType } from '@/types/scrap';
 const Scrap = () => {
   const [scrapDocs, setScrapDocs] = useState<ScrapDocInfo[]>();
   const [open, setOpen] = useState(false);
-  const { handleSubmit, control } = useForm<ScrapDocsFormType>(scrapFormDefault);
+  const { handleSubmit, control, reset } = useForm<ScrapDocsFormType>(scrapFormDefault);
   const { title, titleState } = useScrapDocsForm(control);
 
   useEffect(() => {
@@ -37,13 +37,16 @@ const Scrap = () => {
     fetchScrapDoc();
   }, []);
 
-  const createScrapDoc = (data: ScrapDocsFormType) => {
-    console.log(data);
-    // 스크랩 문서 생성 api호출
+  const createScrapDoc = async (data: ScrapDocsFormType) => {
+    createScrapDocument(data.title);
+    setOpen(false);
+    reset();
+    const response = await getScrapDocument();
+    setScrapDocs(response.data.list);
   };
 
   const deleteScrapDoc = (docId: string) => {
-    deleteScarpDocument(docId);
+    deleteScrapDocument(docId);
     setScrapDocs(
       (prevDocs) => prevDocs && prevDocs.filter((doc) => doc.storageObjectId !== docId),
     );
