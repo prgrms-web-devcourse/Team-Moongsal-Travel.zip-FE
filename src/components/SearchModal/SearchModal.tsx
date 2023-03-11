@@ -3,7 +3,7 @@ import { Box, Drawer, Stack, Typography } from '@mui/material';
 import { CenterStyle } from '@/styles/CenterStyle';
 import { theme } from '@/styles/MuiTheme';
 
-import { AutoComplete } from './';
+import { AutoComplete, PlacesAutocomplete } from './';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -16,7 +16,9 @@ const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
       <Box sx={WrapperStyle}>
         <Stack flexGrow={1} width='70%'>
           <Box sx={{ ...CenterStyle, my: '2rem' }}>
-            <AutoComplete />
+            <AutoComplete>
+              <PlacesAutocomplete />
+            </AutoComplete>
           </Box>
           <Box component='div' sx={CenterStyle}>
             <Typography component='div' sx={PopularSearchStyle}>

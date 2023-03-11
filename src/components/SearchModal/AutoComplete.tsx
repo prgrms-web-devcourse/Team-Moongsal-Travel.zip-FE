@@ -1,6 +1,5 @@
 import { useLoadScript } from '@react-google-maps/api';
-
-import { PlacesAutocomplete } from './';
+import { ReactNode } from 'react';
 
 const libraries: (
   | 'drawing'
@@ -10,14 +9,18 @@ const libraries: (
   | 'visualization'
 )[] = ['places'];
 
-const AutoComplete = () => {
+interface AutoCompleteProps {
+  children: ReactNode;
+}
+
+const AutoComplete = ({ children }: AutoCompleteProps) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_KEY as string,
     libraries,
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <PlacesAutocomplete />;
+  return <>{children}</>;
 };
 
 export default AutoComplete;
