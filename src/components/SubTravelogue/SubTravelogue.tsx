@@ -1,15 +1,19 @@
 import { Alert, Box, Button, OutlinedInput, Stack } from '@mui/material';
+import dynamic from 'next/dynamic';
 import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
 import { useSaveSubTravelogue } from '@/api/hooks/post';
 import { SubTitle } from '@/components/common';
-import { RichEditor } from '@/components/Editor';
 import { Transportation, VisitedRegion } from '@/components/SubTravelogue';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
 import { SubTravelogueType } from '@/types/post';
 import { getItem, setItem } from '@/utils/storage';
+
+const RichEditor = dynamic(() => import('@/components/Editor/RichEditor'), {
+  ssr: false,
+});
 
 type SavedInfo = {
   data: SubTravelogueType;

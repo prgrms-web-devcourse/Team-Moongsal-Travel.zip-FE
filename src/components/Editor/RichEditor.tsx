@@ -1,8 +1,7 @@
 import 'react-quill/dist/quill.snow.css';
 
-import dynamic from 'next/dynamic';
-// import ImageResize from 'quill-image-resize';
-import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import ImageResize from 'quill-image-resize';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import React from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 import ReactQuill, { Quill } from 'react-quill';
@@ -12,36 +11,8 @@ import { SubTravelogueType } from '@/types/post';
 
 import { editorModules } from './index';
 
-// Quill.register('modules/ImageResize', ImageResize);
+Quill.register('modules/imageResize', ImageResize);
 
-// const { Quill } = await import('react-quill');
-
-const Reactquill =
-  typeof window === 'object'
-    ? dynamic(
-        async () => {
-          const { default: RQ } = await import('react-quill');
-          const { default: ImageResize } = await import('quill-image-resize');
-
-          const comp = ({
-            forwardedRef,
-            ...props
-          }: {
-            forwardedRef: RefObject<ReactQuill>;
-            [key: string]: any;
-          }) => {
-            const { Quill } = RQ;
-            // const { Quill } = await import('react-quill');
-            Quill.register('modules/imageResize', ImageResize);
-            return <RQ ref={forwardedRef} {...props} />;
-          };
-          return comp;
-        },
-        {
-          ssr: false,
-        },
-      )
-    : () => null;
 interface RichEditorType {
   content: ControllerRenderProps<SubTravelogueType, 'content'>;
 }
@@ -90,7 +61,7 @@ const RichEditor = ({ content }: RichEditorType) => {
           image: imageHandler,
         },
       },
-      ImageResize: {
+      imageResize: {
         parchment: Quill.import('parchment'),
         modules: ['Resize', 'DisplaySize'],
       },
@@ -100,7 +71,13 @@ const RichEditor = ({ content }: RichEditorType) => {
 
   return (
     <div>
-      <Reactquill forwardedRef={quillRef} {...content} theme='snow' modules={modules} />
+      <ReactQuill
+        ref={quillRef}
+        onChange={content.onChange}
+        value={content.value}
+        theme='snow'
+        modules={modules}
+      />
     </div>
   );
 };
