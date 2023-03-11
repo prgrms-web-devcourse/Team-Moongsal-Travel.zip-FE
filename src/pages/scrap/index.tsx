@@ -15,21 +15,25 @@ import {
   Typography,
 } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
-import { createScrapDocument, deleteScrapDocument, getScrapDocument } from '@/api/scrap';
+import { getScrapDocument } from '@/api/scrap';
 import { SubTitle } from '@/components/common';
-import { scrapFormDefault } from '@/constants/defaultFormValue';
-import useScrapDocsForm from '@/hooks/useScrapDocsForm';
-import { ScrapDocInfoType, ScrapDocsFormType } from '@/types/scrap';
+import useScrapData from '@/hooks/useScrapData';
 
 const Scrap = () => {
   const router = useRouter();
-  const [scrapDocs, setScrapDocs] = useState<ScrapDocInfoType[]>();
-  const [open, setOpen] = useState(false);
-  const { handleSubmit, control, reset } = useForm<ScrapDocsFormType>(scrapFormDefault);
-  const { title, titleState } = useScrapDocsForm(control);
+  const {
+    scrapDocs,
+    setScrapDocs,
+    open,
+    setOpen,
+    title,
+    titleState,
+    createScrapDoc,
+    deleteScrapDoc,
+    handleSubmit,
+  } = useScrapData();
 
   useEffect(() => {
     const fetchScrapDoc = async () => {
@@ -38,23 +42,6 @@ const Scrap = () => {
     };
     fetchScrapDoc();
   }, []);
-
-  const createScrapDoc = async (data: ScrapDocsFormType) => {
-    const { status } = await createScrapDocument(data.title);
-    setOpen(false);
-    reset();
-    if (status === 200) {
-      const response = await getScrapDocument();
-      setScrapDocs(response.data.list);
-    }
-  };
-
-  const deleteScrapDoc = (docId: string) => {
-    deleteScrapDocument(docId);
-    setScrapDocs(
-      (prevDocs) => prevDocs && prevDocs.filter((doc) => doc.storageObjectId !== docId),
-    );
-  };
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -108,25 +95,27 @@ const Scrap = () => {
       <List sx={{ display: 'flex', flexDirection: 'column' }}>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
-            <ListItem
-              onClick={() => handleClick(storageObjectId)}
-              key={storageObjectId}
-              sx={{ cursor: 'pointer' }}
-              secondaryAction={
-                <IconButton
-                  edge='end'
-                  aria-label='delete'
-                  onClick={() => deleteScrapDoc(storageObjectId)}>
-                  <DeleteIcon />
-                </IconButton>
-              }>
-              <ListItemAvatar>
-                <Avatar>
-                  <FolderIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={title} />
-            </ListItem>
+            <Stack key={storageObjectId} flexDirection='row' p={2}>
+              <ListItem
+                onClick={() => handleClick(storageObjectId)}
+                sx={{
+                  cursor: 'pointer',
+                  width: '100%',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <FolderIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={title} />
+              </ListItem>
+              <IconButton onClick={() => deleteScrapDoc(storageObjectId)}>
+                <DeleteIcon />
+              </IconButton>
+            </Stack>
           ))}
       </List>
     </>
