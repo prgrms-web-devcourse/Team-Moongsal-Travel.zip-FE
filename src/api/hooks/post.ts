@@ -7,23 +7,15 @@ import {
 } from '@/api/post';
 import { SubTravelogueType } from '@/types/post';
 
-export const usePostSubTravelogue = () => {
-  return useMutation({
-    mutationFn: async (data: { data: SubTravelogueType; travelogueId: string }) =>
-      await postSubTravelogue(data),
-    onError: (error: { message: string }) => {
-      console.error(error.message);
-    },
-  });
-};
-
-export const usePatchSubTravelogue = () => {
+export const useSaveSubTravelogue = (isPatch: boolean) => {
   return useMutation({
     mutationFn: async (data: {
       data: SubTravelogueType;
       travelogueId: string;
       subTravelogueId: string;
-    }) => await patchSubTravelogue(data),
+    }) => {
+      return isPatch ? await patchSubTravelogue(data) : await postSubTravelogue(data);
+    },
     onError: (error: { message: string }) => {
       console.error(error.message);
     },
