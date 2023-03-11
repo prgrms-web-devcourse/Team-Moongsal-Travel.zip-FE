@@ -1,9 +1,8 @@
 import { Alert, Box, Button, OutlinedInput, Stack } from '@mui/material';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
-import { usePostSubTravelogue } from '@/api/hooks/post';
+import { useSaveSubTravelogue } from '@/api/hooks/post';
 import { SubTitle } from '@/components/common';
 import { RichEditor } from '@/components/Editor';
 import { Transportation, VisitedRegion } from '@/components/SubTravelogue';
@@ -12,6 +11,10 @@ import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
 import { SubTravelogueType } from '@/types/post';
 import { getItem, setItem } from '@/utils/storage';
 
+type SavedInfo = {
+  data: SubTravelogueType;
+  id: string;
+};
 interface SubTravelogueProps {
   travelogueId: string;
   index: number;
@@ -19,7 +22,7 @@ interface SubTravelogueProps {
 }
 
 const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTravelogueProps) => {
-  const saveData = getItem<SubTravelogueType>(`save-${travelogueId}-${index}`);
+  const savedInfo = getItem<SavedInfo>(`save-${travelogueId}-${index}`);
   const {
     control,
     handleSubmit,
@@ -27,23 +30,26 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
     setValue,
     reset,
     formState: { isDirty, errors },
-  } = useForm<SubTravelogueType>({ defaultValues: saveData ?? subTravelogueFormDefault });
+  } = useForm<SubTravelogueType>({
+    defaultValues: savedInfo?.data ?? subTravelogueFormDefault,
+  });
   const { title, content, transportationSet } = useSubTravelogueForm(control);
-  const { mutate } = usePostSubTravelogue();
   useFormPersist(`temp-${travelogueId}-${index}`, { watch, setValue });
-  const [saved, setSaved] = useState(saveData !== null);
+  const { mutate } = useSaveSubTravelogue(savedInfo !== null);
   const hasErrors = Object.keys(errors).length > 0;
 
-  const handlePostSubTravelogue = (data: SubTravelogueType) => {
+  const handleSaveSubTravelogue = (data: SubTravelogueType, isPatch: boolean) => {
     const subTravelogueData = { ...data, day: index + 1 };
     mutate(
-      { data: subTravelogueData, travelogueId },
+      { data: subTravelogueData, travelogueId, subTravelogueId: savedInfo?.id ?? '' },
       {
-        onSuccess: () => {
+        onSuccess: ({ data }) => {
           reset(subTravelogueData);
-          setItem(`save-${travelogueId}-${index}`, subTravelogueData);
-          setSaved(true);
           handleComplete();
+          setItem(`save-${travelogueId}-${index}`, {
+            data: subTravelogueData,
+            id: data[isPatch ? 'subTravelogueId' : 'id'],
+          });
         },
       },
     );
@@ -57,7 +63,10 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
   };
 
   return (
-    <form onSubmit={handleSubmit(handlePostSubTravelogue)}>
+    <form
+      onSubmit={handleSubmit((data) =>
+        handleSaveSubTravelogue(data, savedInfo !== null),
+      )}>
       <Stack sx={{ mb: '1rem' }}>
         <SubTitle>소제목</SubTitle>
         <OutlinedInput
@@ -65,30 +74,38 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
           fullWidth
           placeholder='소제목을 입력하세요'
           type='text'
-          disabled={saved}
         />
       </Stack>
-      <VisitedRegion control={control} saved={saved} />
+      <VisitedRegion control={control} />
       <Transportation
         value={transportationSet.value}
-        disabled={saved}
         onTransportSelect={handleTransportSelect}
       />
       <Stack sx={{ mb: '1rem' }}>
         <SubTitle>글을 자유롭게 작성해보세요</SubTitle>
-        <RichEditor content={content} disabled={saved} />
+        <RichEditor content={content} />
       </Stack>
       <Box sx={{ mb: 2 }}>
         {hasErrors && <Alert severity='error'>모든 정보를 입력해주세요.</Alert>}
         {isDirty && <Alert severity='info'>저장되지 않은 변경사항이 있습니다.</Alert>}
-        <Button
-          type='submit'
-          variant='outlined'
-          fullWidth
-          sx={{ mt: 1, mr: 1 }}
-          disabled={saved}>
-          저장
-        </Button>
+        <Stack direction='row'>
+          <Button
+            type='submit'
+            variant='outlined'
+            sx={{ mt: 1, mr: 1 }}
+            fullWidth
+            disabled={savedInfo !== null}>
+            저장
+          </Button>
+          <Button
+            type='submit'
+            variant='contained'
+            sx={{ mt: 1, mr: 1 }}
+            fullWidth
+            disabled={!(savedInfo !== null)}>
+            수정
+          </Button>
+        </Stack>
       </Box>
     </form>
   );

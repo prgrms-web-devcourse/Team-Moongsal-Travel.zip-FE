@@ -1,15 +1,12 @@
 import { AxiosResponse } from 'axios';
 
-import http from '@/api/core';
+import http from '@/api/core/axiosInstance';
 import { SubTravelogueType, TravelogueResponseType, TravelogueType } from '@/types/post';
 
 export const postTravelogue = async (
   data: TravelogueType,
 ): Promise<AxiosResponse<TravelogueResponseType>> => {
-  return await http.post({
-    url: `api/travelogues`,
-    data,
-  });
+  return await http.post(`api/travelogues`, data);
 };
 
 export const postSubTravelogue = async ({
@@ -19,10 +16,22 @@ export const postSubTravelogue = async ({
   data: SubTravelogueType;
   travelogueId: string;
 }) => {
-  return await http.post({
-    url: `api/travelogues/${travelogueId}/subTravelogues`,
+  return await http.post(`api/travelogues/${travelogueId}/subTravelogues`, data);
+};
+
+export const patchSubTravelogue = async ({
+  data,
+  travelogueId,
+  subTravelogueId,
+}: {
+  data: SubTravelogueType;
+  travelogueId: string;
+  subTravelogueId: string;
+}) => {
+  return await http.patch(
+    `api/members/my/travelogues/${travelogueId}/subTravelogues/${subTravelogueId}`,
     data,
-  });
+  );
 };
 
 export const patchTraveloguePublish = async ({
@@ -30,7 +39,5 @@ export const patchTraveloguePublish = async ({
 }: {
   travelogueId: number;
 }) => {
-  return await http.patch({
-    url: `api/travelogues/${travelogueId}/publish`,
-  });
+  return await http.patch(`api/travelogues/${travelogueId}/publish`);
 };
