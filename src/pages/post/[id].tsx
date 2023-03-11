@@ -4,20 +4,23 @@ import { useEffect, useState } from 'react';
 
 import { usePatchTraveloguePublish } from '@/api/hooks/post';
 import { VerticalStepper } from '@/components/Stepper';
-import { createPeriodArray } from '@/utils/helper';
+import { TravelogueInfoType } from '@/components/Stepper/VerticalStepper';
+import { getItem } from '@/utils/storage';
 
 const SubTraveloguePage = () => {
   const router = useRouter();
   const [travelogueId, setTravelogueId] = useState('');
   const [subTravelogueStep, setSubTravelogueStep] = useState<string[]>([]);
   const { mutate } = usePatchTraveloguePublish();
+  const isClient = typeof window !== 'undefined';
 
   useEffect(() => {
-    if (!router.isReady) return;
-    const { travelogueId, days } = router.query;
-    setSubTravelogueStep(createPeriodArray(days as string));
-    setTravelogueId(travelogueId as string);
-  }, [router.isReady, router.query]);
+    if (isClient) {
+      const travelogueInfo = getItem<TravelogueInfoType>(`travelogueInfo`);
+      setTravelogueId(travelogueInfo?.id ?? '');
+      setSubTravelogueStep(travelogueInfo?.step ?? []);
+    }
+  }, [isClient]);
 
   const handleTraveloguePublish = () => {
     mutate(

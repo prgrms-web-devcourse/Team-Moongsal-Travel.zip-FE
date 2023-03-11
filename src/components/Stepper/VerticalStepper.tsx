@@ -7,6 +7,11 @@ import { useState } from 'react';
 
 import { SubTravelogue } from '@/components/SubTravelogue';
 
+export type TravelogueInfoType = {
+  id: string;
+  step: string[];
+};
+
 interface VerticalStepperProps {
   travelogueId: string;
   subTravelogueStep: string[];
