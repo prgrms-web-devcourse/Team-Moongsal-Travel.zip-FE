@@ -9,20 +9,33 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-const FOLDERS = ['폴더1', '폴더2'];
+import { createScrap } from '@/api/scrap';
+import useScrapDocsData from '@/hooks/useScrapDocsData';
 
 export interface ScrapDialogProps {
   open: boolean;
   onClose: () => void;
+  content: string;
 }
 
-const ScrapDialog = ({ open, onClose }: ScrapDialogProps) => {
+const ScrapDialog = ({ open, onClose, content }: ScrapDialogProps) => {
+  const { fetchScrapDoc, scrapDocs } = useScrapDocsData();
+  const router = useRouter();
+  useEffect(() => {
+    fetchScrapDoc();
+  }, []);
+
   const handleClose = () => {
     onClose();
   };
 
-  const handleListItemClick = () => {
+  const handleListItemClick = (storageObjectId: string, content: string) => {
+    const postId = router.query.travelogueId;
+    if (postId && typeof postId === 'string')
+      createScrap({ storageObjectId, content, postId });
     onClose();
   };
 
@@ -30,20 +43,22 @@ const ScrapDialog = ({ open, onClose }: ScrapDialogProps) => {
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>스크랩할 폴더를 선택하세요</DialogTitle>
       <List sx={{ pt: 0 }}>
-        {FOLDERS.map((folder) => (
-          <ListItem disableGutters key={folder}>
-            <ListItemButton onClick={() => handleListItemClick()}>
-              <ListItemAvatar>
-                <Avatar sx={{ bgcolor: 'blue070.main', color: 'blue010.main' }}>
-                  <PersonIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={folder} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {scrapDocs &&
+          scrapDocs.map(({ title, storageObjectId }) => (
+            <ListItem disableGutters key={storageObjectId}>
+              <ListItemButton
+                onClick={() => handleListItemClick(storageObjectId, content)}>
+                <ListItemAvatar>
+                  <Avatar sx={{ bgcolor: 'blue070.main', color: 'blue010.main' }}>
+                    <PersonIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         <ListItem disableGutters>
-          <ListItemButton autoFocus onClick={() => handleListItemClick()}>
+          <ListItemButton autoFocus>
             <ListItemAvatar>
               <Avatar>
                 <AddIcon />
@@ -58,3 +73,7 @@ const ScrapDialog = ({ open, onClose }: ScrapDialogProps) => {
 };
 
 export default ScrapDialog;
+
+{
+  /* onClick={() => handleListItemClick()} */
+}

@@ -6,7 +6,6 @@ import { Chip, Divider, Stack, Typography } from '@mui/material';
 import { Fragment, useState } from 'react';
 
 import { ScrapDialog } from '@/components/Scrap';
-// import useScrapDocsData from '@/hooks/useScrapDocsData';
 
 interface VisitedRegionProps {
   addresses: { region: string }[];
@@ -14,7 +13,6 @@ interface VisitedRegionProps {
 
 const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
   const [open, setOpen] = useState(false);
-  // const {} = useScrapDocsData();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,7 +41,7 @@ const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
               label={region}
               onClick={handleClickOpen}
             />
-            <ScrapDialog open={open} onClose={onClose} />
+            <ScrapDialog open={open} onClose={onClose} content={region} />
           </Fragment>
         ))}
       </Stack>
