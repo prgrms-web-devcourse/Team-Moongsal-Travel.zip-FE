@@ -7,7 +7,7 @@ import { ScrapDocInfoType, ScrapDocsFormType } from '@/types/scrap';
 
 import useScrapDocsForm from './useScrapDocsForm';
 
-const useScrapData = () => {
+const useScrapDocsData = () => {
   const [scrapDocs, setScrapDocs] = useState<ScrapDocInfoType[]>();
   const [open, setOpen] = useState(false);
   const { handleSubmit, control, reset } = useForm<ScrapDocsFormType>(scrapFormDefault);
@@ -43,4 +43,4 @@ const useScrapData = () => {
   };
 };
 
-export default useScrapData;
+export default useScrapDocsData;

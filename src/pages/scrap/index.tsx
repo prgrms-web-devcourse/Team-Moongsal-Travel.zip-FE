@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 
 import { getScrapDocument } from '@/api/scrap';
 import { SubTitle } from '@/components/common';
-import useScrapData from '@/hooks/useScrapData';
+import useScrapDocsData from '@/hooks/useScrapDocsData';
 
 const Scrap = () => {
   const router = useRouter();
@@ -33,7 +33,7 @@ const Scrap = () => {
     createScrapDoc,
     deleteScrapDoc,
     handleSubmit,
-  } = useScrapData();
+  } = useScrapDocsData();
 
   useEffect(() => {
     const fetchScrapDoc = async () => {
@@ -41,7 +41,7 @@ const Scrap = () => {
       setScrapDocs(response.data.list);
     };
     fetchScrapDoc();
-  }, []);
+  }, [setScrapDocs]);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
