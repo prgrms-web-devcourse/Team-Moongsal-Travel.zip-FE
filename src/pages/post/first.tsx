@@ -7,6 +7,8 @@ import { PostBasic } from '@/components/CreatePost';
 import { travelogueFormProps } from '@/constants/defaultFormValue';
 import useImageUpload from '@/hooks/useImageUpload';
 import { TravelogueFormType, TravelogueResponseType } from '@/types/post';
+import { createPeriodArray } from '@/utils/helper';
+import { setItem } from '@/utils/storage';
 
 const First = () => {
   const router = useRouter();
@@ -25,6 +27,10 @@ const First = () => {
 
   const goToSubTravelogue = (data: TravelogueResponseType) => {
     const { id: travelogueId, days } = data;
+    setItem(`travelogueInfo`, {
+      id: travelogueId,
+      step: createPeriodArray(days),
+    });
     router.push(
       { pathname: '/post/[id]', query: { travelogueId, days } },
       '/post/detail',

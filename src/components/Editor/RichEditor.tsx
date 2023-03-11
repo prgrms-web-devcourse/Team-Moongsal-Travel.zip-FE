@@ -1,34 +1,17 @@
 import 'react-quill/dist/quill.snow.css';
 
-import dynamic from 'next/dynamic';
-import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import ImageResize from 'quill-image-resize';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import React from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 
 import useImageUpload from '@/hooks/useImageUpload';
 import { SubTravelogueType } from '@/types/post';
 
 import { editorModules } from './index';
 
-const Reactquill = dynamic(
-  async () => {
-    const { default: RQ } = await import('react-quill');
-    const comp = ({
-      forwardedRef,
-      ...props
-    }: {
-      forwardedRef: RefObject<ReactQuill>;
-      [key: string]: any;
-    }) => {
-      return <RQ ref={forwardedRef} {...props} />;
-    };
-    return comp;
-  },
-  {
-    ssr: false,
-  },
-);
+Quill.register('modules/imageResize', ImageResize);
 
 interface RichEditorType {
   content: ControllerRenderProps<SubTravelogueType, 'content'>;
@@ -78,13 +61,24 @@ const RichEditor = ({ content }: RichEditorType) => {
           image: imageHandler,
         },
       },
+      imageResize: {
+        parchment: Quill.import('parchment'),
+        modules: ['Resize', 'DisplaySize'],
+        maxWidth: 293,
+      },
     }),
     [],
   );
 
   return (
     <div>
-      <Reactquill forwardedRef={quillRef} {...content} theme='snow' modules={modules} />
+      <ReactQuill
+        ref={quillRef}
+        onChange={content.onChange}
+        value={content.value}
+        theme='snow'
+        modules={modules}
+      />
     </div>
   );
 };
