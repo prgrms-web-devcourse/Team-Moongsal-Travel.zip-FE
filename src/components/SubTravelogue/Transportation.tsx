@@ -6,18 +6,16 @@ import { TRANSPORT_TYPE } from '@/constants';
 
 interface TransportationProps {
   value: string[];
-  disabled: boolean;
   onTransportSelect: (event: React.MouseEvent<HTMLElement>, newFormats: string[]) => void;
 }
 
-const Transportation = ({ value, disabled, onTransportSelect }: TransportationProps) => {
+const Transportation = ({ value, onTransportSelect }: TransportationProps) => {
   return (
     <Stack sx={{ mb: '1rem' }}>
       <SubTitle>이동수단</SubTitle>
       <ToggleButtonGroup
         value={value}
         onChange={onTransportSelect}
-        disabled={disabled}
         aria-label='text formatting'>
         {TRANSPORT_TYPE.map(({ icon, type }, i) => (
           <ToggleIconButton key={i} value={type}>
