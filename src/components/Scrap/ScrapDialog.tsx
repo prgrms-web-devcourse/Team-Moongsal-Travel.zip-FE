@@ -1,4 +1,4 @@
-import { Add as AddIcon, Person as PersonIcon } from '@mui/icons-material';
+import { Add as AddIcon, Folder as FolderIcon } from '@mui/icons-material';
 import {
   Avatar,
   Box,
@@ -52,16 +52,16 @@ const ScrapDialog = ({ open, onClose, content }: ScrapDialogProps) => {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>스크랩할 폴더를 선택하세요</DialogTitle>
-      <List sx={{ pt: 0 }}>
+      <DialogTitle>저장할 폴더를 선택하세요</DialogTitle>
+      <List sx={{ padding: 2, pt: 0 }}>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
             <ListItem disableGutters key={storageObjectId}>
               <ListItemButton
                 onClick={() => handleListItemClick(storageObjectId, content)}>
                 <ListItemAvatar>
-                  <Avatar sx={{ bgcolor: 'blue070.main', color: 'blue010.main' }}>
-                    <PersonIcon />
+                  <Avatar sx={{ bgcolor: 'blue040.main', color: 'blue010.main' }}>
+                    <FolderIcon />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={title} />
@@ -84,7 +84,7 @@ const ScrapDialog = ({ open, onClose, content }: ScrapDialogProps) => {
               <TextField
                 {...title}
                 placeholder='생성할 폴더를 입력하세요'
-                sx={{ mt: 2, width: '80%' }}
+                sx={{ mt: 2, width: '100%' }}
                 error={titleState.error && true}
                 helperText={titleState.error && titleState.error.message}
               />

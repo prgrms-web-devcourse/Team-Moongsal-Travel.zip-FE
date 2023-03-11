@@ -101,13 +101,15 @@ const Scrap = () => {
                   whiteSpace: 'nowrap',
                 }}>
                 <ListItemAvatar>
-                  <Avatar>
+                  <Avatar sx={{ bgcolor: 'blue040.main', color: 'blue010.main' }}>
                     <FolderIcon />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={title} />
               </ListItem>
-              <IconButton onClick={() => deleteScrapDoc(storageObjectId)}>
+              <IconButton
+                onClick={() => deleteScrapDoc(storageObjectId)}
+                sx={{ color: 'red.main' }}>
                 <DeleteIcon />
               </IconButton>
             </Stack>

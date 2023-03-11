@@ -106,7 +106,9 @@ const ScrapDetail = () => {
       </Stack>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem onClick={handleRouter}>게시글 이동</MenuItem>
-        <MenuItem onClick={deleteScrapItem}>삭제</MenuItem>
+        <MenuItem onClick={deleteScrapItem} sx={{ color: 'red.main' }}>
+          삭제
+        </MenuItem>
       </Menu>
     </>
   );
