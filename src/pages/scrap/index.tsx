@@ -15,9 +15,13 @@ import {
   Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { getScrapDocument } from '@/api/scrap';
 import { SubTitle } from '@/components/common';
+import { scrapFormDefault } from '@/constants/defaultFormValue';
+import useScrapDocsForm from '@/hooks/useScrapDocsForm';
+import { ScrapDocsFormType } from '@/types/scrap';
 
 const DUMMY_DATA = {
   list: [
@@ -30,8 +34,11 @@ const DUMMY_DATA = {
 const Scrap = () => {
   // const [scrapDocs, setScrapDocs] = useState([]);
   const [open, setOpen] = useState(false);
+  const { handleSubmit, control } = useForm<ScrapDocsFormType>(scrapFormDefault);
+  const { title, titleState } = useScrapDocsForm(control);
 
   useEffect(() => {
+    // 스크랩 문서 목록 조회 api호출
     const fetchScrapDoc = async () => {
       const response = await getScrapDocument();
       console.log(response);
@@ -41,6 +48,16 @@ const Scrap = () => {
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const createScrapDoc = (data: ScrapDocsFormType) => {
+    console.log(data);
+    // 스크랩 문서 생성 api호출
+  };
+
+  const deleteScrapDoc = (docId: string) => {
+    console.log(docId);
+    // 스크랩 문서 삭제 api호출
   };
 
   return (
@@ -64,12 +81,19 @@ const Scrap = () => {
           <Puller />
           <Box sx={{ pb: 2 }} />
           <Box>
-            <Box component='form'>
+            <Box component='form' onSubmit={handleSubmit(createScrapDoc)}>
               <SubTitle>나만의 장소 추가</SubTitle>
-              <TextField fullWidth placeholder='폴더 이름을 적어주세요' sx={{ mt: 2 }} />
+              <TextField
+                {...title}
+                fullWidth
+                placeholder='폴더 이름을 입력해주세요'
+                sx={{ mt: 2 }}
+                error={titleState.error && true}
+                helperText={titleState.error && titleState.error.message}
+              />
               <Stack flexDirection='row' justifyContent='flex-end' mt={2}>
-                <Button>취소</Button>
-                <Button>생성</Button>
+                <Button onClick={toggleDrawer(false)}>취소</Button>
+                <Button type='submit'>생성</Button>
               </Stack>
             </Box>
           </Box>
@@ -80,7 +104,10 @@ const Scrap = () => {
           <ListItem
             key={storageObjectId}
             secondaryAction={
-              <IconButton edge='end' aria-label='delete'>
+              <IconButton
+                edge='end'
+                aria-label='delete'
+                onClick={() => deleteScrapDoc(storageObjectId)}>
                 <DeleteIcon />
               </IconButton>
             }>
