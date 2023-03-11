@@ -64,6 +64,7 @@ const RichEditor = ({ content }: RichEditorType) => {
       imageResize: {
         parchment: Quill.import('parchment'),
         modules: ['Resize', 'DisplaySize'],
+        maxWidth: 293,
       },
     }),
     [],
