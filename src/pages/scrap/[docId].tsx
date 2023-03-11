@@ -11,8 +11,8 @@ const ScrapDetail = () => {
 
   useEffect(() => {
     const fetchScrapDoc = async () => {
-      if (router.isReady && typeof router.query.id === 'string') {
-        const { data } = await getScrapDetail(router.query.id);
+      if (router.isReady && typeof router.query.docId === 'string') {
+        const { data } = await getScrapDetail(router.query.docId);
         setScrapTitle(data.title);
         setScrapContents(data.contents);
       }
