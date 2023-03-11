@@ -14,6 +14,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -21,10 +22,11 @@ import { createScrapDocument, deleteScrapDocument, getScrapDocument } from '@/ap
 import { SubTitle } from '@/components/common';
 import { scrapFormDefault } from '@/constants/defaultFormValue';
 import useScrapDocsForm from '@/hooks/useScrapDocsForm';
-import { ScrapDocInfo, ScrapDocsFormType } from '@/types/scrap';
+import { ScrapDocInfoType, ScrapDocsFormType } from '@/types/scrap';
 
 const Scrap = () => {
-  const [scrapDocs, setScrapDocs] = useState<ScrapDocInfo[]>();
+  const router = useRouter();
+  const [scrapDocs, setScrapDocs] = useState<ScrapDocInfoType[]>();
   const [open, setOpen] = useState(false);
   const { handleSubmit, control, reset } = useForm<ScrapDocsFormType>(scrapFormDefault);
   const { title, titleState } = useScrapDocsForm(control);
@@ -56,6 +58,12 @@ const Scrap = () => {
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const handleClick = (docId: string) => {
+    router.push({
+      pathname: `/scrap/${docId}`,
+    });
   };
 
   return (
@@ -97,11 +105,13 @@ const Scrap = () => {
           </Box>
         </SwipeableDrawer>
       </Stack>
-      <List dense={false}>
+      <List dense={false} sx={{ display: 'flex', flexDirection: 'column' }}>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
             <ListItem
+              onClick={() => handleClick(storageObjectId)}
               key={storageObjectId}
+              sx={{ cursor: 'pointer' }}
               secondaryAction={
                 <IconButton
                   edge='end'
