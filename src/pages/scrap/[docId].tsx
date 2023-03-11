@@ -21,6 +21,7 @@ const ScrapDetail = () => {
   const [scrapId, setScrapId] = useState<string>('');
   const [scrapTitle, setScrapTitle] = useState();
   const [scrapContents, setScrapContents] = useState<ScrapDetailType[]>();
+  const [postId, setPostId] = useState<string>('');
   const router = useRouter();
   const open = Boolean(anchorEl);
 
@@ -35,8 +36,13 @@ const ScrapDetail = () => {
     fetchScrapDoc();
   }, [router]);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, scrapId: string) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    scrapId: string,
+    postId: string,
+  ) => {
     setScrapId(scrapId);
+    setPostId(postId);
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -55,6 +61,13 @@ const ScrapDetail = () => {
     }
   };
 
+  const handleRouter = () => {
+    router.push({
+      pathname: '/detail',
+      query: { travelogueId: postId },
+    });
+  };
+
   return (
     <>
       <Stack>
@@ -63,7 +76,7 @@ const ScrapDetail = () => {
         </Typography>
         <Grid container spacing={2}>
           {scrapContents &&
-            scrapContents.map(({ scrapObjectId, placeName }) => (
+            scrapContents.map(({ scrapObjectId, placeName, postId }) => (
               <Grid item key={scrapObjectId} xs={6}>
                 <Paper elevation={3}>
                   <ListItem
@@ -81,7 +94,7 @@ const ScrapDetail = () => {
                       }}
                     />
                     <Button
-                      onClick={(e) => handleClick(e, scrapObjectId)}
+                      onClick={(e) => handleClick(e, scrapObjectId, postId)}
                       sx={{ minWidth: 0 }}>
                       <MoreVertIcon />
                     </Button>
@@ -92,7 +105,7 @@ const ScrapDetail = () => {
         </Grid>
       </Stack>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem>게시글 이동</MenuItem>
+        <MenuItem onClick={handleRouter}>게시글 이동</MenuItem>
         <MenuItem onClick={deleteScrapItem}>삭제</MenuItem>
       </Menu>
     </>
