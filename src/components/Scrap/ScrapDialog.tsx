@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { createScrap } from '@/api/scrap';
+import { Transition } from '@/components/common';
 import useScrapDocsData from '@/hooks/useScrapDocsData';
 
 export interface ScrapDialogProps {
@@ -51,7 +52,7 @@ const ScrapDialog = ({ open, onClose, content }: ScrapDialogProps) => {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
+    <Dialog onClose={handleClose} open={open} TransitionComponent={Transition}>
       <DialogTitle>저장할 폴더를 선택하세요</DialogTitle>
       <List sx={{ padding: 2, pt: 0 }}>
         {scrapDocs &&
