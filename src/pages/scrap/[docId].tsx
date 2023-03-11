@@ -13,21 +13,16 @@ import {
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { getScrapDetail } from '@/api/scrap';
+import { deleteScrap, getScrapDetail } from '@/api/scrap';
 import { ScrapDetailType } from '@/types/scrap';
 
 const ScrapDetail = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [scrapId, setScrapId] = useState<string>('');
   const [scrapTitle, setScrapTitle] = useState();
   const [scrapContents, setScrapContents] = useState<ScrapDetailType[]>();
   const router = useRouter();
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     const fetchScrapDoc = async () => {
@@ -39,6 +34,26 @@ const ScrapDetail = () => {
     };
     fetchScrapDoc();
   }, [router]);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, scrapId: string) => {
+    setScrapId(scrapId);
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const deleteScrapItem = async () => {
+    handleClose();
+    if (router.isReady && typeof router.query.docId === 'string') {
+      deleteScrap(router.query.docId, scrapId);
+      setScrapContents(
+        (prevContents) =>
+          prevContents &&
+          prevContents.filter((content) => content.scrapObjectId !== scrapId),
+      );
+    }
+  };
 
   return (
     <>
@@ -55,8 +70,7 @@ const ScrapDetail = () => {
                     sx={{
                       display: 'flex',
                       px: 1,
-                    }}
-                    key={scrapObjectId}>
+                    }}>
                     <ListItemText
                       primary={placeName}
                       sx={{
@@ -66,7 +80,9 @@ const ScrapDetail = () => {
                         whiteSpace: 'nowrap',
                       }}
                     />
-                    <Button onClick={handleClick} sx={{ minWidth: 0 }}>
+                    <Button
+                      onClick={(e) => handleClick(e, scrapObjectId)}
+                      sx={{ minWidth: 0 }}>
                       <MoreVertIcon />
                     </Button>
                   </ListItem>
@@ -77,7 +93,7 @@ const ScrapDetail = () => {
       </Stack>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem>게시글 이동</MenuItem>
-        <MenuItem>삭제</MenuItem>
+        <MenuItem onClick={deleteScrapItem}>삭제</MenuItem>
       </Menu>
     </>
   );

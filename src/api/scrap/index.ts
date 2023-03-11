@@ -17,7 +17,13 @@ export const createScrapDocument = async (title: string) => {
 };
 
 export const getScrapDetail = async (docId: string) => {
-  const response = http.get(`/api/storage/${docId}`);
+  const response = await http.get(`/api/storage/${docId}`);
+
+  return response;
+};
+
+export const deleteScrap = async (docId: string, scrapId: string) => {
+  const response = await http.delete(`api/storage/${docId}/scrap/${scrapId}`);
 
   return response;
 };
