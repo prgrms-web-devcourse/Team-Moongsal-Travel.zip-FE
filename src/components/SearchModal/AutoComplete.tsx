@@ -1,6 +1,8 @@
 import { useLoadScript } from '@react-google-maps/api';
 import { ReactNode } from 'react';
 
+import Spinner from '@/components/common/Spinner';
+
 const libraries: (
   | 'drawing'
   | 'geometry'
@@ -19,7 +21,7 @@ const AutoComplete = ({ children }: AutoCompleteProps) => {
     libraries,
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <Spinner isLoading={isLoaded} />;
   return <>{children}</>;
 };
 
