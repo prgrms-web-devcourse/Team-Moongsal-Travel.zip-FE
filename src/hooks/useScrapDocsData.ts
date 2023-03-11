@@ -13,6 +13,11 @@ const useScrapDocsData = () => {
   const { handleSubmit, control, reset } = useForm<ScrapDocsFormType>(scrapFormDefault);
   const { title, titleState } = useScrapDocsForm(control);
 
+  const fetchScrapDoc = async () => {
+    const response = await getScrapDocument();
+    setScrapDocs(response.data.list);
+  };
+
   const createScrapDoc = async (data: ScrapDocsFormType) => {
     const { status } = await createScrapDocument(data.title);
     setOpen(false);
@@ -37,6 +42,7 @@ const useScrapDocsData = () => {
     setOpen,
     title,
     titleState,
+    fetchScrapDoc,
     createScrapDoc,
     deleteScrapDoc,
     handleSubmit,

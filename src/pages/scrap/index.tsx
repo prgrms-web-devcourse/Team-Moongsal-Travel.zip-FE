@@ -17,7 +17,6 @@ import {
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { getScrapDocument } from '@/api/scrap';
 import { SubTitle } from '@/components/common';
 import useScrapDocsData from '@/hooks/useScrapDocsData';
 
@@ -25,23 +24,19 @@ const Scrap = () => {
   const router = useRouter();
   const {
     scrapDocs,
-    setScrapDocs,
     open,
     setOpen,
     title,
     titleState,
+    fetchScrapDoc,
     createScrapDoc,
     deleteScrapDoc,
     handleSubmit,
   } = useScrapDocsData();
 
   useEffect(() => {
-    const fetchScrapDoc = async () => {
-      const response = await getScrapDocument();
-      setScrapDocs(response.data.list);
-    };
     fetchScrapDoc();
-  }, [setScrapDocs]);
+  }, []);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);

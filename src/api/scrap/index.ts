@@ -1,4 +1,5 @@
 import http from '@/api/core/axiosInstance';
+import { ScrapInfoType } from '@/types/scrap';
 
 export const getScrapDocument = () => {
   const response = http.get(`api/storage`);
@@ -24,6 +25,20 @@ export const getScrapDetail = async (docId: string) => {
 
 export const deleteScrap = async (docId: string, scrapId: string) => {
   const response = await http.delete(`api/storage/${docId}/scrap/${scrapId}`);
+
+  return response;
+};
+
+export const createScrap = async ({
+  storageObjectId: docId,
+  content,
+  postId,
+}: ScrapInfoType) => {
+  const response = await http.post(`api/storage/scrap`, {
+    storageObjectId: docId,
+    content,
+    postId,
+  });
 
   return response;
 };

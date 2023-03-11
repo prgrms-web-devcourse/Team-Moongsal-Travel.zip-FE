@@ -19,3 +19,9 @@ export interface ScrapListType {
   title: string;
   contents: ScrapDetailType[];
 }
+
+export interface ScrapInfoType {
+  storageObjectId: string;
+  content: string;
+  postId: string;
+}
