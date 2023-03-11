@@ -5,9 +5,10 @@ import { CommonButton, ProfileAvatar } from '@/components/common';
 interface ManagementProps {
   nickname: string;
   profileImage: string;
+  isLoading: boolean;
 }
 
-const Management = ({ nickname, profileImage }: ManagementProps) => {
+const Management = ({ nickname, profileImage, isLoading }: ManagementProps) => {
   return (
     <Stack
       spacing={2}
@@ -15,7 +16,7 @@ const Management = ({ nickname, profileImage }: ManagementProps) => {
       alignItems='center'
       justifyContent='center'
       bgcolor='gray005.main'>
-      <ProfileAvatar url={profileImage} size={100} iconSize={5} />
+      <ProfileAvatar url={profileImage} size={100} iconSize={5} isLoading={isLoading} />
       <Typography
         variant='h2'
         component='h2'

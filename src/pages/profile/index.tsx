@@ -1,20 +1,21 @@
 import { Stack } from '@mui/material';
 
+import { useUserInformation } from '@/api/hooks/profile';
 import { ContentLink, Management } from '@/components/Profile';
 
-const DUMMY_DATA = {
-  email: 'dodnjs1241@naver.com',
-  nickname: '예오닝',
-  birthYear: '1996',
-  profileImageUrl: 'default',
-};
-
 const Profile = () => {
+  const { userInformation, isLoading } = useUserInformation();
+
+  if (!userInformation) {
+    return null;
+  }
+
   return (
     <Stack>
       <Management
-        profileImage={DUMMY_DATA.profileImageUrl}
-        nickname={DUMMY_DATA.nickname}
+        profileImage={userInformation.profileImageUrl}
+        nickname={userInformation.nickname}
+        isLoading={isLoading}
       />
       <Stack alignItems='center'>
         <ContentLink contentName='내가 작성한 게시물' route='/' iconName='edit' />
