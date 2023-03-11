@@ -1,4 +1,5 @@
 import { Button, Stack } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import { Title } from '@/components/common';
 import { TravelogueDetailType } from '@/types/travelogue';
@@ -12,6 +13,14 @@ interface PostInfoProps {
 
 const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
   const { title } = travelogueDetail;
+  const router = useRouter();
+
+  const handleEditClick = () => {
+    router.push({
+      pathname: '/post/first',
+      query: { travelogueId: router.query.travelogueId, edit: true },
+    });
+  };
 
   return (
     <Stack spacing={0.5}>
@@ -22,7 +31,7 @@ const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
         <TravelogueInfo travelogueDetail={travelogueDetail} />
         {authority === 'writer' && (
           <Stack direction='row' spacing={1}>
-            <Button variant='text' sx={{ minWidth: 0 }}>
+            <Button variant='text' sx={{ minWidth: 0 }} onClick={handleEditClick}>
               수정
             </Button>
             <Button variant='text' sx={{ minWidth: 0, ml: 0 }}>
