@@ -41,7 +41,7 @@ export const TRANSPORT_TYPE = [
   { icon: DirectionsRun, type: 'WALK' },
 ];
 
-interface CountryType {
+export interface CountryType {
   code: string;
   label: string;
   phone: string;

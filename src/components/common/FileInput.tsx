@@ -11,9 +11,10 @@ import { SubTitle } from './';
 
 interface FileInputProps {
   thumbnail: ControllerRenderProps<TravelogueFormType, 'thumbnail'>;
+  imageUrl?: string;
 }
 
-const FileInput = ({ thumbnail }: FileInputProps) => {
+const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
   const { handleFileInput } = useImageUpload();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
@@ -36,7 +37,7 @@ const FileInput = ({ thumbnail }: FileInputProps) => {
           <SubTitle>Upload Image</SubTitle>
         </IconButton>
       </label>
-      {selectedImage && (
+      {selectedImage ? (
         <Box
           mt={2}
           textAlign='center'
@@ -44,10 +45,19 @@ const FileInput = ({ thumbnail }: FileInputProps) => {
           <Image
             fill
             src={URL.createObjectURL(selectedImage)}
-            alt={selectedImage.name}
+            alt='thumbnail'
             style={{ objectFit: 'contain' }}
           />
         </Box>
+      ) : (
+        imageUrl && (
+          <Box
+            mt={2}
+            textAlign='center'
+            sx={{ position: 'relative', height: '100px', minWidth: '200px' }}>
+            <Image fill src={imageUrl} alt='thumbnail' style={{ objectFit: 'contain' }} />
+          </Box>
+        )
       )}
     </>
   );

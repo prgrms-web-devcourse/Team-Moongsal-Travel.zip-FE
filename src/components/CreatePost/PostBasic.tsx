@@ -1,26 +1,23 @@
 import { Box, FormHelperText, OutlinedInput, Stack } from '@mui/material';
 import dayjs from 'dayjs';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { Control } from 'react-hook-form';
 
 import { FileInput, SubTitle, Title } from '@/components/common';
 import { CountrySelect } from '@/components/common';
 import useTravelogueForm from '@/hooks/useTravelogueForm';
-import { TravelogueFormType } from '@/types/post';
+import { TravelogueFormType, TravelogueResponseType } from '@/types/post';
 
 import { ComplexButton, DatePicker } from './';
 
-interface ControlProps {
+interface PostBasicProps {
   control: Control<TravelogueFormType>;
+  data?: TravelogueResponseType;
+  isEditPage: boolean;
 }
 
-const PostBasic = ({ control }: ControlProps) => {
+const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
   const [toggleValue, setToggleValue] = useState('');
-
-  const onChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
-    setToggleValue(selectedValue);
-  };
-
   const {
     countryName,
     countryNameState,
@@ -36,6 +33,18 @@ const PostBasic = ({ control }: ControlProps) => {
     thumbnailState,
   } = useTravelogueForm(control);
 
+  const onChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
+    setToggleValue(selectedValue);
+  };
+
+  useEffect(() => {
+    if (data) {
+      setToggleValue(data.country.name === '대한민국' ? '국내' : '해외');
+    }
+  }, [data]);
+
+  if (isEditPage && !data) return <></>;
+
   return (
     <>
       <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
@@ -45,7 +54,11 @@ const PostBasic = ({ control }: ControlProps) => {
         {toggleValue && (
           <>
             <SubTitle>방문한 나라</SubTitle>
-            <CountrySelect name={countryName} isKorea={toggleValue === '국내'} />
+            <CountrySelect
+              name={countryName}
+              isKorea={toggleValue === '국내'}
+              selectedCountry={data?.country.name}
+            />
           </>
         )}
         {countryNameState.error && (
@@ -54,7 +67,6 @@ const PostBasic = ({ control }: ControlProps) => {
           </FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>여행 기간</SubTitle>
         <Box sx={{ display: 'flex', gap: 1 }}>
@@ -62,8 +74,13 @@ const PostBasic = ({ control }: ControlProps) => {
             control={startDate}
             maxDate={dayjs(endDate.value)}
             text='시작날짜'
+            selectedDate={data?.period.startDate}
           />
-          <DatePicker control={endDate} text='종료날짜' />
+          <DatePicker
+            control={endDate}
+            text='종료날짜'
+            selectedDate={data?.period.endDate}
+          />
         </Box>
         {(startDateState.error || endDateState.error) && (
           <FormHelperText sx={HelperTextColor}>
@@ -72,15 +89,16 @@ const PostBasic = ({ control }: ControlProps) => {
           </FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>총 경비</SubTitle>
         <Box>
           <OutlinedInput
-            {...costTotal}
+            ref={costTotal.ref}
+            onChange={costTotal.onChange}
             fullWidth
             placeholder='이번 여행의 총 경비를 입력하세요'
             type='text'
+            defaultValue={data?.cost.total}
           />
           {costTotalState.error && (
             <FormHelperText sx={HelperTextColor}>
@@ -89,19 +107,24 @@ const PostBasic = ({ control }: ControlProps) => {
           )}
         </Box>
       </Stack>
-
       <Title bold='bold'>여행 일기를 작성하세요 </Title>
       <Stack sx={marginBottom}>
         <SubTitle>제목</SubTitle>
-        <OutlinedInput {...title} fullWidth placeholder='제목을 입력하세요' type='text' />
+        <OutlinedInput
+          ref={title.ref}
+          onChange={title.onChange}
+          fullWidth
+          placeholder='제목을 입력하세요'
+          type='text'
+          defaultValue={data?.title}
+        />
         {titleState.error && (
           <FormHelperText sx={HelperTextColor}>{titleState.error.message}</FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
-        <FileInput thumbnail={thumbnail} />
+        <FileInput thumbnail={thumbnail} imageUrl={data?.thumbnail} />
         {thumbnailState.error && (
           <FormHelperText sx={HelperTextColor}>
             {thumbnailState.error.message}
