@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 
+import { GNB } from '@/components/GNB';
 import { Header } from '@/components/Header';
 import GlobalStyle from '@/styles/GlobalStyle';
 import MobileLayout from '@/styles/MobileLayout';
@@ -27,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <GlobalStyle />
             <Header />
             <Component {...pageProps} />
+            <GNB />
           </MobileLayout>
         </RecoilRoot>
       </ThemeProvider>
