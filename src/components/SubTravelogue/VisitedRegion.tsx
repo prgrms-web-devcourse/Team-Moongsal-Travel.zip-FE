@@ -3,6 +3,7 @@ import { Button, IconButton, Stack } from '@mui/material';
 import { Control, Controller, useFieldArray } from 'react-hook-form';
 
 import { SubTitle } from '@/components/common';
+import { AutoComplete } from '@/components/SearchModal';
 import { SubTravelogueType } from '@/types/post';
 
 import { Location } from '.';
@@ -28,7 +29,11 @@ const VisitedRegion = ({ control }: VisitedRegionProps) => {
       {fields.map((item, index) => (
         <Stack key={item.id} direction='row' spacing={2} component='li'>
           <Controller
-            render={({ field }) => <Location field={field} />}
+            render={({ field }) => (
+              <AutoComplete>
+                <Location field={field} />
+              </AutoComplete>
+            )}
             name={`addresses.${index}.region`}
             control={control}
             rules={{ required: true }}

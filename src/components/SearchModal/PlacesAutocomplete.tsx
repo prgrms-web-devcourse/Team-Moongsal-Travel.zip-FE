@@ -1,18 +1,12 @@
-import { LocationOn } from '@mui/icons-material';
 import { Search as SearchIcon } from '@mui/icons-material';
-import { Box, IconButton, Stack, styled, Typography } from '@mui/material';
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxList,
-  ComboboxOption,
-  ComboboxPopover,
-} from '@reach/combobox';
+import { IconButton, Stack, styled } from '@mui/material';
+import { Combobox, ComboboxInput } from '@reach/combobox';
 import { useRouter } from 'next/router';
 import { KeyboardEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
-import usePlacesAutocomplete from 'use-places-autocomplete';
 
+import AutoCompleteList from '@/components/SearchModal/AutoCompleteList';
+import useAutoComplete from '@/hooks/useAutoComplete';
 import { isHeaderOpenState } from '@/recoil';
 
 const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요';
@@ -20,18 +14,7 @@ const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요';
 const PlacesAutocomplete = () => {
   const setIsOpen = useSetRecoilState(isHeaderOpenState);
   const router = useRouter();
-  const {
-    ready,
-    value,
-    setValue,
-    suggestions: { status, data },
-    clearSuggestions,
-  } = usePlacesAutocomplete();
-
-  const handleSelect = async (address: string) => {
-    setValue(address, false);
-    clearSuggestions();
-  };
+  const { ready, value, setValue, suggestions, handleSelect } = useAutoComplete();
 
   const handleSubmit = () => {
     setIsOpen(false);
@@ -62,30 +45,7 @@ const PlacesAutocomplete = () => {
           <SearchIcon color='white' />
         </IconButton>
       </Stack>
-      <PopOver>
-        <ComboboxList
-          style={{ listStyle: 'none', margin: 0, padding: 0, userSelect: 'none' }}>
-          <Box
-            sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-            {status === 'OK' &&
-              data.map(({ place_id, structured_formatting }) => (
-                <Options key={place_id} value={structured_formatting.main_text}>
-                  <Box key={place_id} sx={{ display: 'flex', mt: '1rem' }}>
-                    <LocationOn />
-                    <Stack sx={{ wordWrap: 'break-word' }}>
-                      <Typography variant='body2' color='black.main' fontSize='1rem'>
-                        {structured_formatting.main_text}
-                      </Typography>
-                      <Typography variant='body2' color='primary' fontSize='0.8rem'>
-                        {structured_formatting.secondary_text}
-                      </Typography>
-                    </Stack>
-                  </Box>
-                </Options>
-              ))}
-          </Box>
-        </ComboboxList>
-      </PopOver>
+      <AutoCompleteList suggestions={suggestions} />
     </Combobox>
   );
 };
@@ -107,24 +67,5 @@ const SearchInput = styled(ComboboxInput)(({ theme }) => ({
   '&:focus': {
     borderBottom: `2px solid ${theme.palette.blue050.main}`,
     outline: 'none',
-  },
-}));
-
-const PopOver = styled(ComboboxPopover)(({ theme }) => ({
-  borderRadius: '0 0 10px 10px',
-  background: theme.palette.blue010.main,
-  zIndex: 5000,
-}));
-
-const Options = styled(ComboboxOption)(({ theme }) => ({
-  cursor: 'pointer',
-  margin: 0,
-  padding: '0 0.25rem',
-
-  '&:hover': {
-    background: theme.palette.gray030.main,
-    '&:last-child': {
-      borderRadius: '0 0 10px 10px',
-    },
   },
 }));
