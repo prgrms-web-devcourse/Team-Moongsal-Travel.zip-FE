@@ -1,6 +1,9 @@
-export interface UserInformationType {
-  email: string;
+export interface UserInformationPatchType {
   nickname: string;
-  birthYear: string;
   profileImageUrl: string;
 }
+
+export type UserInformationType = {
+  email: string;
+  birthYear: string;
+} & UserInformationPatchType;
