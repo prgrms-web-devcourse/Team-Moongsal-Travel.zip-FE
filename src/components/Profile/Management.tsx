@@ -6,9 +6,15 @@ interface ManagementProps {
   nickname: string;
   profileImage: string;
   isLoading: boolean;
+  handleChangeUserInformation: () => void;
 }
 
-const Management = ({ nickname, profileImage, isLoading }: ManagementProps) => {
+const Management = ({
+  nickname,
+  profileImage,
+  isLoading,
+  handleChangeUserInformation,
+}: ManagementProps) => {
   return (
     <Stack
       spacing={2}
@@ -23,7 +29,11 @@ const Management = ({ nickname, profileImage, isLoading }: ManagementProps) => {
         sx={{ font: '1.25rem bold', color: 'dark.main' }}>
         {nickname}
       </Typography>
-      <CommonButton content='프로필 수정' customStyle={{ height: 40 }} />
+      <CommonButton
+        content='프로필 수정'
+        customStyle={{ height: 40 }}
+        handleClick={handleChangeUserInformation}
+      />
     </Stack>
   );
 };

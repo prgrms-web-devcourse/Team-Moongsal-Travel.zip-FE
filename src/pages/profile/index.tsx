@@ -4,7 +4,8 @@ import { useUserInformation } from '@/api/hooks/profile';
 import { ContentLink, Management } from '@/components/Profile';
 
 const Profile = () => {
-  const { userInformation, isLoading } = useUserInformation();
+  const { userInformation, isLoading, handleChangeUserInformation } =
+    useUserInformation();
 
   if (!userInformation) {
     return null;
@@ -16,6 +17,7 @@ const Profile = () => {
         profileImage={userInformation.profileImageUrl}
         nickname={userInformation.nickname}
         isLoading={isLoading}
+        handleChangeUserInformation={handleChangeUserInformation}
       />
       <Stack alignItems='center'>
         <ContentLink contentName='내가 작성한 게시물' route='/' iconName='edit' />
