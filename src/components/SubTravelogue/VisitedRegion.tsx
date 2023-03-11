@@ -9,10 +9,9 @@ import { Location } from '.';
 
 interface VisitedRegionProps {
   control: Control<SubTravelogueType>;
-  saved: boolean;
 }
 
-const VisitedRegion = ({ control, saved }: VisitedRegionProps) => {
+const VisitedRegion = ({ control }: VisitedRegionProps) => {
   const { fields, append, remove } = useFieldArray({ control, name: 'addresses' });
 
   return (
@@ -29,7 +28,7 @@ const VisitedRegion = ({ control, saved }: VisitedRegionProps) => {
       {fields.map((item, index) => (
         <Stack key={item.id} direction='row' spacing={2} component='li'>
           <Controller
-            render={({ field }) => <Location field={field} disabled={saved} />}
+            render={({ field }) => <Location field={field} />}
             name={`addresses.${index}.region`}
             control={control}
             rules={{ required: true }}

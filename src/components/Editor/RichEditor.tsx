@@ -44,10 +44,9 @@ const Reactquill =
     : () => null;
 interface RichEditorType {
   content: ControllerRenderProps<SubTravelogueType, 'content'>;
-  disabled: boolean;
 }
 
-const RichEditor = ({ content, disabled }: RichEditorType) => {
+const RichEditor = ({ content }: RichEditorType) => {
   const [imageList, setImageList] = useState<string[]>([]);
   const quillRef = useRef<ReactQuill>(null);
   const { getImageUrlFromS3, deleteFile } = useImageUpload();
@@ -101,13 +100,7 @@ const RichEditor = ({ content, disabled }: RichEditorType) => {
 
   return (
     <div>
-      <Reactquill
-        forwardedRef={quillRef}
-        {...content}
-        disabled={disabled}
-        theme='snow'
-        modules={modules}
-      />
+      <Reactquill forwardedRef={quillRef} {...content} theme='snow' modules={modules} />
     </div>
   );
 };
