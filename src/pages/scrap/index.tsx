@@ -105,7 +105,7 @@ const Scrap = () => {
           </Box>
         </SwipeableDrawer>
       </Stack>
-      <List dense={false} sx={{ display: 'flex', flexDirection: 'column' }}>
+      <List sx={{ display: 'flex', flexDirection: 'column' }}>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
             <ListItem
