@@ -5,3 +5,7 @@ export const getScrapDocument = async () => {
 
   return response;
 };
+
+export const deleteScarpDocument = async (docId: string) => {
+  http.delete(`api/storage/${docId}`);
+};

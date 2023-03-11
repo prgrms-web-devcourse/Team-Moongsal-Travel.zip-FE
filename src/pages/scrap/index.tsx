@@ -17,38 +17,25 @@ import {
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { getScrapDocument } from '@/api/scrap';
+import { deleteScarpDocument, getScrapDocument } from '@/api/scrap';
 import { SubTitle } from '@/components/common';
 import { scrapFormDefault } from '@/constants/defaultFormValue';
 import useScrapDocsForm from '@/hooks/useScrapDocsForm';
-import { ScrapDocsFormType } from '@/types/scrap';
-
-const DUMMY_DATA = {
-  list: [
-    { storageObjectId: '640abc577baac103361ac6e1', title: '일본 여행' },
-    { storageObjectId: '640abc577baac103361ac6e', title: '제주도 여행' },
-    { storageObjectId: '640abc577baac103361ac1', title: '유럽 여행' },
-  ],
-};
+import { ScrapDocInfo, ScrapDocsFormType } from '@/types/scrap';
 
 const Scrap = () => {
-  // const [scrapDocs, setScrapDocs] = useState([]);
+  const [scrapDocs, setScrapDocs] = useState<ScrapDocInfo[]>();
   const [open, setOpen] = useState(false);
   const { handleSubmit, control } = useForm<ScrapDocsFormType>(scrapFormDefault);
   const { title, titleState } = useScrapDocsForm(control);
 
   useEffect(() => {
-    // 스크랩 문서 목록 조회 api호출
     const fetchScrapDoc = async () => {
       const response = await getScrapDocument();
-      console.log(response);
+      setScrapDocs(response.data.list);
     };
     fetchScrapDoc();
   }, []);
-
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
-  };
 
   const createScrapDoc = (data: ScrapDocsFormType) => {
     console.log(data);
@@ -56,8 +43,14 @@ const Scrap = () => {
   };
 
   const deleteScrapDoc = (docId: string) => {
-    console.log(docId);
-    // 스크랩 문서 삭제 api호출
+    deleteScarpDocument(docId);
+    setScrapDocs(
+      (prevDocs) => prevDocs && prevDocs.filter((doc) => doc.storageObjectId !== docId),
+    );
+  };
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
   };
 
   return (
@@ -100,25 +93,26 @@ const Scrap = () => {
         </SwipeableDrawer>
       </Stack>
       <List dense={false}>
-        {DUMMY_DATA.list.map(({ title, storageObjectId }) => (
-          <ListItem
-            key={storageObjectId}
-            secondaryAction={
-              <IconButton
-                edge='end'
-                aria-label='delete'
-                onClick={() => deleteScrapDoc(storageObjectId)}>
-                <DeleteIcon />
-              </IconButton>
-            }>
-            <ListItemAvatar>
-              <Avatar>
-                <FolderIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={title} />
-          </ListItem>
-        ))}
+        {scrapDocs &&
+          scrapDocs.map(({ title, storageObjectId }) => (
+            <ListItem
+              key={storageObjectId}
+              secondaryAction={
+                <IconButton
+                  edge='end'
+                  aria-label='delete'
+                  onClick={() => deleteScrapDoc(storageObjectId)}>
+                  <DeleteIcon />
+                </IconButton>
+              }>
+              <ListItemAvatar>
+                <Avatar>
+                  <FolderIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={title} />
+            </ListItem>
+          ))}
       </List>
     </>
   );
