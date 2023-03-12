@@ -17,7 +17,8 @@ import { setItem } from '@/utils/storage';
 
 const First = () => {
   const router = useRouter();
-  const { handleSubmit, control } = useForm<TravelogueFormType>(travelogueFormProps);
+  const { handleSubmit, control, setValue } =
+    useForm<TravelogueFormType>(travelogueFormProps);
   const { getImageUrlFromS3, deleteFile } = useImageUpload();
   const [travelogueId, setTravelogueId] = useState('');
   const [isEditPage, setIsEditPage] = useState(false);
@@ -37,10 +38,30 @@ const First = () => {
     if (travelogueId) {
       refetch();
     }
-  }, [travelogueId]);
+  }, [travelogueId, refetch]);
+
+  useEffect(() => {
+    if (isEditPage && travelogue) {
+      const { cost, title, period, country } = travelogue.data;
+      setValue('country.name', country.name);
+      setValue('period.startDate', period.startDate.join('-'));
+      setValue('period.endDate', period.endDate.join('-'));
+      setValue('cost.total', String(cost.total));
+      setValue('title', title);
+    }
+  }, [isEditPage, travelogue, setValue]);
+
+  const getImageUrlAndKey = async (thumbnail: File | null) => {
+    if (isEditPage && thumbnail === null) {
+      const url = travelogue?.data.thumbnail as string;
+      return { url, key: '' };
+    }
+    const { key, url } = await getImageUrlFromS3(thumbnail as File);
+    return { key, url };
+  };
 
   const handleComplete = async (data: TravelogueFormType) => {
-    const { key, url } = await getImageUrlFromS3(data.thumbnail as File);
+    const { key, url } = await getImageUrlAndKey(data.thumbnail);
     saveMutate(
       { data: { ...data, thumbnail: url }, travelogueId },
       {
@@ -48,7 +69,7 @@ const First = () => {
           isEditPage ? publishTravelogue(data.travelogueId) : goToSubTravelogue(data);
         },
         onError: () => {
-          deleteFile(key);
+          key && deleteFile(key);
         },
       },
     );

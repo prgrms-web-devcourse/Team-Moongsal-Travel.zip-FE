@@ -15,10 +15,9 @@ interface DatePickerProps {
     | ControllerRenderProps<TravelogueType, 'period.startDate'>
     | ControllerRenderProps<TravelogueType, 'period.endDate'>;
   maxDate?: Dayjs;
-  selectedDate?: number[];
 }
 
-const DatePicker = ({ text, control, maxDate, selectedDate }: DatePickerProps) => {
+const DatePicker = ({ text, control, maxDate }: DatePickerProps) => {
   const handleDateChange = (newValue: Dayjs | null) => {
     if (newValue) control.onChange(getDateInfo(newValue));
   };
@@ -30,7 +29,7 @@ const DatePicker = ({ text, control, maxDate, selectedDate }: DatePickerProps) =
       localeText={koKR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <MobileDatePicker
         {...control}
-        value={control.value ? control.value : selectedDate?.join('-')}
+        value={control.value}
         inputFormat='YYYY년 MM월 DD일'
         showToolbar={false}
         label={text}

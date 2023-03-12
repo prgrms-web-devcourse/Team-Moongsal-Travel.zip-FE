@@ -9,18 +9,11 @@ import { TravelogueFormType } from '@/types/post';
 interface LocationProps {
   isKorea: boolean;
   name: ControllerRenderProps<TravelogueFormType, 'country.name'>;
-  selectedCountry?: string;
 }
 
-const CountrySelect = ({ isKorea, name, selectedCountry }: LocationProps) => {
+const CountrySelect = ({ isKorea, name }: LocationProps) => {
   useEffect(() => {
-    if (selectedCountry) {
-      name.onChange(selectedCountry);
-      return;
-    }
-    if (name) {
-      isKorea ? name.onChange('대한민국') : name.onChange('');
-    }
+    isKorea && name.onChange('대한민국');
   }, []);
 
   return (
@@ -31,11 +24,7 @@ const CountrySelect = ({ isKorea, name, selectedCountry }: LocationProps) => {
         <Autocomplete
           sx={{ width: '100%' }}
           options={COUNTRIES}
-          value={
-            name.value
-              ? COUNTRIES.find((c) => c.label === name.value)
-              : COUNTRIES.find((c) => c.label === selectedCountry)
-          }
+          value={COUNTRIES.find((c) => c.label === name.value)}
           autoHighlight
           getOptionLabel={(option) => option.label}
           popupIcon={<LocationOnOutlinedIcon />}
