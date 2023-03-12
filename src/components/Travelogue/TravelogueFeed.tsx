@@ -28,7 +28,7 @@ const TravelogueFeed = ({ data, isBottomPadding = false }: TravelogueFeedProps) 
   return (
     <Stack
       spacing={0.25}
-      sx={{ maxWidth: '100%', cursor: 'pointer', pb: isBottomPadding ? 3 : 0 }}
+      sx={{ maxWidth: '100%', cursor: 'pointer', pb: isBottomPadding ? 3 : 1.5 }}
       onClick={onClickFeed}>
       <FeedHeader
         profileImageUrl={data.member.profileImageUrl}
