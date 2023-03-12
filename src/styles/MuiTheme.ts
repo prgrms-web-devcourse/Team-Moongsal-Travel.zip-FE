@@ -13,6 +13,17 @@ declare module '@mui/material' {
   interface InputBasePropsColorOverrides extends PaletteOverrides<typeof palette, true> {}
 }
 
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: true; // removes the `xs` breakpoint
+    sm: true;
+    md: true;
+    lg: true;
+    xl: true;
+    mobile: true; // adds the `mobile` breakpoint
+  }
+}
+
 type PaletteOverrides<T extends object, X> = { [key in keyof T]: X };
 
 const palette = {
@@ -36,5 +47,16 @@ export const theme = createTheme({
   palette,
   typography: {
     fontFamily: 'KOHINanumOTFL',
+  },
+  breakpoints: {
+    values: {
+      mobile: 390,
+
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
   },
 });
