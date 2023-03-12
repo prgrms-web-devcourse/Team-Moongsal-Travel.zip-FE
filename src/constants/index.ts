@@ -295,3 +295,5 @@ export const COUNTRIES: readonly CountryType[] = [
   { code: 'ZM', label: '잠비아', phone: '260' },
   { code: 'ZW', label: '짐바브웨', phone: '263' },
 ];
+
+export const ACCESS_TOKEN = 'ACCESS_TOKEN';

@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 
+import { SigninLeadModal } from '@/components/common';
 import { GNB } from '@/components/GNB';
 import { Header } from '@/components/Header';
 import { AutoComplete } from '@/components/SearchModal';
@@ -32,6 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </AutoComplete>
             <Component {...pageProps} />
             <GNB />
+            <SigninLeadModal />
           </MobileLayout>
         </RecoilRoot>
       </ThemeProvider>

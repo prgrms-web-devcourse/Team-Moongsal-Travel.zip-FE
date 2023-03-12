@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { PATH_ROUTER } from '@/constants/path';
+import useAuth from '@/hooks/useAuth';
 import { PathRouterType } from '@/types/common';
 import { getInitialPathName } from '@/utils/helper';
 
@@ -17,8 +18,13 @@ const GNB = () => {
   const [value, setValue] = useState<PathRouterType>(
     getInitialPathName(router.pathname as PathRouterType),
   );
+  const { handleOpenAuthConfirmModal } = useAuth();
 
   const onChangeNavigationRoute = (_: unknown, newValue: PathRouterType) => {
+    if ((newValue === 'add' || newValue === 'profile') && handleOpenAuthConfirmModal()) {
+      return;
+    }
+
     if (value === newValue) {
       return;
     }
