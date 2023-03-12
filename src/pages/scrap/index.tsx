@@ -15,7 +15,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { scrapBg } from 'public/images';
 import { useEffect } from 'react';
 
 import { SubTitle } from '@/components/common';
@@ -51,7 +53,61 @@ const Scrap = () => {
 
   return (
     <>
-      <Stack>
+      <SwipeableDrawer
+        container={() => document.body}
+        anchor='bottom'
+        open={open}
+        onClose={toggleDrawer(false)}
+        onOpen={toggleDrawer(true)}
+        disableScrollLock
+        sx={swipeStyle}
+        ModalProps={{
+          keepMounted: false,
+        }}>
+        <Puller />
+        <Box sx={{ pb: 2 }} />
+        <Box>
+          <Box component='form' onSubmit={handleSubmit(createScrapDoc)}>
+            <SubTitle>나만의 장소 추가</SubTitle>
+            <TextField
+              {...title}
+              fullWidth
+              placeholder='폴더 이름을 입력해주세요'
+              sx={{ mt: 2 }}
+              error={titleState.error && true}
+              helperText={titleState.error && titleState.error.message}
+            />
+            <Stack flexDirection='row' justifyContent='flex-end' mt={2}>
+              <Button onClick={toggleDrawer(false)}>취소</Button>
+              <Button type='submit'>생성</Button>
+            </Stack>
+          </Box>
+        </Box>
+      </SwipeableDrawer>
+      <Image
+        src={scrapBg}
+        alt={scrapBg}
+        width={414}
+        height={350}
+        style={{
+          position: 'absolute',
+          top: '60px',
+          paddingBottom: '3.5rem',
+          boxSizing: 'border-box',
+          backgroundColor: '#c4e2f5',
+        }}
+      />
+      <List
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          borderTopLeftRadius: '2rem',
+          borderTopRightRadius: '2rem',
+          mt: '18rem',
+          '&.MuiList-root': {
+            backgroundColor: 'blue010.main',
+          },
+        }}>
         <Typography
           sx={{
             mt: 4,
@@ -69,39 +125,6 @@ const Scrap = () => {
           sx={{ fontSize: '1rem', color: 'blue040.main' }}>
           모음집 추가
         </Button>
-        <SwipeableDrawer
-          container={() => document.body}
-          anchor='bottom'
-          open={open}
-          onClose={toggleDrawer(false)}
-          onOpen={toggleDrawer(true)}
-          disableScrollLock
-          sx={swipeStyle}
-          ModalProps={{
-            keepMounted: false,
-          }}>
-          <Puller />
-          <Box sx={{ pb: 2 }} />
-          <Box>
-            <Box component='form' onSubmit={handleSubmit(createScrapDoc)}>
-              <SubTitle>나만의 장소 추가</SubTitle>
-              <TextField
-                {...title}
-                fullWidth
-                placeholder='폴더 이름을 입력해주세요'
-                sx={{ mt: 2 }}
-                error={titleState.error && true}
-                helperText={titleState.error && titleState.error.message}
-              />
-              <Stack flexDirection='row' justifyContent='flex-end' mt={2}>
-                <Button onClick={toggleDrawer(false)}>취소</Button>
-                <Button type='submit'>생성</Button>
-              </Stack>
-            </Box>
-          </Box>
-        </SwipeableDrawer>
-      </Stack>
-      <List sx={{ display: 'flex', flexDirection: 'column' }}>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
             <Stack key={storageObjectId} flexDirection='row' p={2}>
@@ -112,6 +135,7 @@ const Scrap = () => {
                   width: '100%',
                   padding: '0.5rem',
                   boxSizing: 'border-box',
+                  borderRadius: '0.5rem',
                 }}>
                 <ListItem
                   onClick={() => handleClick(storageObjectId)}
