@@ -1,7 +1,8 @@
-import { Box, CircularProgress, Fade } from '@mui/material';
+import { Box, CircularProgress, Fade, Stack } from '@mui/material';
 import { useMemo } from 'react';
 
 import { useGetPersonalTravelogues } from '@/api/hooks/travelogue';
+import { Title } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 import useIntersect from '@/hooks/useIntersect';
 
@@ -25,7 +26,10 @@ const PersonalFeedList = () => {
   }
 
   return (
-    <Box component='section' margin='0 auto'>
+    <Stack component='section' sx={{ p: 5 }}>
+      <Title bold='bold' fontSize='1.2rem' color='dark.main'>
+        추천 여행 일지
+      </Title>
       {personalTravelogues.map((travelogue, index) => (
         <TravelogueFeed key={String(travelogue.travelogueId + index)} data={travelogue} />
       ))}
@@ -37,7 +41,7 @@ const PersonalFeedList = () => {
         </Fade>
       </Box>
       <Box height={5} ref={ref} />
-    </Box>
+    </Stack>
   );
 };
 
