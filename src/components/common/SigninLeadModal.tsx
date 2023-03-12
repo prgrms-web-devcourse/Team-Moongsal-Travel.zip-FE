@@ -2,22 +2,26 @@ import { Error as ErrorIcon } from '@mui/icons-material';
 import { DialogActions, DialogContentText, Typography } from '@mui/material';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
 
 import { CommonButton } from '@/components/common';
+import { isAuthConfirmModalState } from '@/recoil';
 import { flexCenterStyle } from '@/styles/commonStyle';
 
-interface SigninLeadModalProps {
-  open: boolean;
-  handleClickClose: () => void;
-}
-
-const SigninLeadModal = ({ open, handleClickClose }: SigninLeadModalProps) => {
+const SigninLeadModal = () => {
+  const [isAuthConfirmModal, setIsAuthConfirmModal] = useRecoilState(
+    isAuthConfirmModalState,
+  );
   const router = useRouter();
+
+  const onClickClose = () => {
+    setIsAuthConfirmModal(false);
+  };
 
   return (
     <Dialog
-      open={open}
-      onClose={handleClickClose}
+      open={isAuthConfirmModal}
+      onClose={onClickClose}
       PaperProps={{ style: { borderRadius: 12 } }}>
       <DialogTitle className='readable-hidden'>로그인 유도 모달</DialogTitle>
 
@@ -50,12 +54,15 @@ const SigninLeadModal = ({ open, handleClickClose }: SigninLeadModalProps) => {
         <CommonButton
           content='로그인'
           customStyle={buttonStyle}
-          handleClick={() => router.push('/auth/login')}
+          handleClick={() => {
+            router.push('/auth/login');
+            onClickClose();
+          }}
         />
         <CommonButton
           content='취소'
           customStyle={{ ...buttonStyle, bgcolor: 'gray010.main', color: 'dark.main' }}
-          handleClick={() => handleClickClose()}
+          handleClick={onClickClose}
         />
       </DialogActions>
     </Dialog>
