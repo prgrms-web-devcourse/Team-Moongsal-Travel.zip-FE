@@ -1,4 +1,5 @@
-import { Button, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { Title } from '@/components/common';
@@ -12,7 +13,7 @@ interface PostInfoProps {
 }
 
 const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
-  const { title } = travelogueDetail;
+  const { title, thumbnail } = travelogueDetail;
   const router = useRouter();
 
   const handleEditClick = () => {
@@ -40,6 +41,9 @@ const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
           </Stack>
         )}
       </Stack>
+      <Box sx={{ position: 'relative', width: '100%', height: '220px' }}>
+        <Image src={thumbnail} fill alt='thumbnail' style={{ borderRadius: '10px' }} />
+      </Box>
       <TravelInfo travelogueDetail={travelogueDetail} />
     </Stack>
   );

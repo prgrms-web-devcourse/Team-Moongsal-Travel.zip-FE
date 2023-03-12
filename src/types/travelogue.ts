@@ -40,6 +40,7 @@ export interface TravelogueDetailType {
   isLiked: boolean;
   viewCount: number;
   bookmarked: boolean;
+  thumbnail: string;
 }
 
 export type TravelInfoTitle = '여행지' | '여행기간' | '여행경비' | '이동수단';
