@@ -8,3 +8,10 @@ export const flexCenterStyle = {
   justifyContent: 'center',
   alignItems: 'center',
 };
+
+export const mobileModalLayoutStyle = {
+  minWidth: 390,
+  maxWidth: 414,
+  transform: 'translateX(-50%)',
+  left: '50%',
+};

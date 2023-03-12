@@ -1,6 +1,6 @@
 import { Box, Drawer, Stack, Typography } from '@mui/material';
 
-import { CenterStyle } from '@/styles/CenterStyle';
+import { CenterStyle } from '@/styles/commonStyle';
 import { theme } from '@/styles/MuiTheme';
 
 import { AutoComplete, PlacesAutocomplete } from './';
