@@ -1,5 +1,6 @@
 import 'react-quill/dist/quill.snow.css';
 
+import ImageCompress from 'quill-image-compress';
 import ImageResize from 'quill-image-resize';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import React from 'react';
@@ -12,6 +13,7 @@ import { SubTravelogueType } from '@/types/post';
 import { editorModules } from './index';
 
 Quill.register('modules/imageResize', ImageResize);
+Quill.register('modules/imageCompress', ImageCompress);
 
 interface RichEditorType {
   content: ControllerRenderProps<SubTravelogueType, 'content'>;
@@ -64,7 +66,10 @@ const RichEditor = ({ content }: RichEditorType) => {
       imageResize: {
         parchment: Quill.import('parchment'),
         modules: ['Resize', 'DisplaySize'],
-        maxWidth: 293,
+      },
+      imageCompress: {
+        quality: 1,
+        maxWidth: 330,
       },
     }),
     [],
