@@ -15,11 +15,11 @@ declare module '@mui/material' {
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
-    xs: false; // removes the `xs` breakpoint
+    xs: true; // removes the `xs` breakpoint
     sm: true;
-    md: false;
-    lg: false;
-    xl: false;
+    md: true;
+    lg: true;
+    xl: true;
     mobile: true; // adds the `mobile` breakpoint
   }
 }
@@ -51,7 +51,12 @@ export const theme = createTheme({
   breakpoints: {
     values: {
       mobile: 390,
+
+      xs: 0,
       sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
     },
   },
 });
