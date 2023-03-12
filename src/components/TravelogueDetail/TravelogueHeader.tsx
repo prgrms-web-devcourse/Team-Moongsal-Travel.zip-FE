@@ -8,12 +8,11 @@ import { TravelogueDetailType } from '@/types/travelogue';
 import { TravelInfo, TravelogueInfo } from '.';
 
 interface PostInfoProps {
-  authority: string;
   travelogueDetail: TravelogueDetailType;
 }
 
-const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
-  const { title, thumbnail } = travelogueDetail;
+const TravelogueHeader = ({ travelogueDetail }: PostInfoProps) => {
+  const { title, thumbnail, isWriter } = travelogueDetail;
   const router = useRouter();
 
   const handleEditClick = () => {
@@ -30,7 +29,7 @@ const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
       </Title>
       <Stack direction='row' justifyContent={'space-between'} alignItems={'center'}>
         <TravelogueInfo travelogueDetail={travelogueDetail} />
-        {authority === 'writer' && (
+        {isWriter && (
           <Stack direction='row' spacing={1}>
             <Button variant='text' sx={{ minWidth: 0 }} onClick={handleEditClick}>
               수정
@@ -42,7 +41,14 @@ const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
         )}
       </Stack>
       <Box sx={{ position: 'relative', width: '100%', height: '220px' }}>
-        <Image src={thumbnail} fill alt='thumbnail' style={{ borderRadius: '10px' }} />
+        <Image
+          src={thumbnail}
+          fill
+          alt='thumbnail'
+          style={{ borderRadius: '10px' }}
+          sizes='300px'
+          priority
+        />
       </Box>
       <TravelInfo travelogueDetail={travelogueDetail} />
     </Stack>

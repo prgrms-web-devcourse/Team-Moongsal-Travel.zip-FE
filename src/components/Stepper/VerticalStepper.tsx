@@ -37,6 +37,7 @@ const VerticalStepper = ({ travelogueId, subTravelogueStep }: VerticalStepperPro
               <SubTravelogue
                 travelogueId={travelogueId}
                 index={index}
+                isEditPage={false}
                 handleComplete={handleComplete}
               />
             </StepContent>

@@ -65,13 +65,10 @@ export const getTravelogueForEdit = async (
   return await http.get(`api/members/my/travelogues/${travelogueId}`);
 };
 
-export const getSubTravelogueForEdit = async ({
-  travelogueId,
-  subTravelogueId,
-}: {
-  travelogueId: string;
-  subTravelogueId: string;
-}) => {
+export const getSubTravelogueForEdit = async (
+  travelogueId: string,
+  subTravelogueId: string,
+) => {
   return await http.get(
     `api/members/my/travelogues/${travelogueId}/subTravelogues/${subTravelogueId}`,
   );

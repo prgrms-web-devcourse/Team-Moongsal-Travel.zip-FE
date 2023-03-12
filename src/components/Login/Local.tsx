@@ -6,7 +6,10 @@ import { useForm } from 'react-hook-form';
 
 import { usePostUserSignIn } from '@/api/hooks/user';
 import { CommonInput } from '@/components/common';
+import { ACCESS_TOKEN } from '@/constants';
+import useAuth from '@/hooks/useAuth';
 import { User } from '@/types/auth';
+import { setItem } from '@/utils/storage';
 
 interface FormState {
   email: string;
@@ -23,11 +26,13 @@ const Local = () => {
   });
   const { mutate, error } = usePostUserSignIn();
   const router = useRouter();
+  const { setIsSignin } = useAuth();
 
   const onSubmit = (formData: FormState) => {
     mutate(formData, {
       onSuccess: ({ data }) => {
-        localStorage.setItem('accessToken', JSON.stringify(data.accessToken));
+        setItem(ACCESS_TOKEN, data.accessToken);
+        setIsSignin(true);
         router.push('/');
       },
     });
