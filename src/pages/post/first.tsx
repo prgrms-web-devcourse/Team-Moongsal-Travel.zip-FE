@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useGetTravelogueForEdit } from '@/api/hooks/post';
-import { postTravelogue } from '@/api/post';
+import { patchTravelogueForEdit, postTravelogue } from '@/api/post';
 import { PostBasic } from '@/components/CreatePost';
 import { travelogueFormProps } from '@/constants/defaultFormValue';
 import useImageUpload from '@/hooks/useImageUpload';
@@ -20,7 +20,6 @@ const First = () => {
   const [travelogueId, setTravelogueId] = useState('');
   const [isEditPage, setIsEditPage] = useState(false);
   const { data: travelogue, refetch } = useGetTravelogueForEdit(travelogueId);
-
 
   useEffect(() => {
     const { travelogueId, edit } = router.query;
@@ -38,7 +37,13 @@ const First = () => {
 
   const handleComplete = async (data: TravelogueFormType) => {
     const { key, url } = await getImageUrlFromS3(data.thumbnail as File);
-    const response = await postTravelogue({ ...data, thumbnail: url });
+    console.log('isEditPage', isEditPage);
+    const response = isEditPage
+      ? await patchTravelogueForEdit({
+          data: { ...data, thumbnail: url },
+          travelogueId,
+        })
+      : await postTravelogue({ ...data, thumbnail: url });
     if (response.status !== 200) {
       deleteFile(key);
       return;

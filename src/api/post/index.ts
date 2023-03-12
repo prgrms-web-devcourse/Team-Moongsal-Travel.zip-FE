@@ -23,7 +23,7 @@ export const patchTravelogueForEdit = async ({
   data,
   travelogueId,
 }: {
-  data: SubTravelogueType;
+  data: TravelogueType;
   travelogueId: string;
 }) => {
   return await http.patch(`api/members/my/travelogues/${travelogueId}`, data);
