@@ -42,7 +42,14 @@ const TravelogueHeader = ({ authority, travelogueDetail }: PostInfoProps) => {
         )}
       </Stack>
       <Box sx={{ position: 'relative', width: '100%', height: '220px' }}>
-        <Image src={thumbnail} fill alt='thumbnail' style={{ borderRadius: '10px' }} />
+        <Image
+          src={thumbnail}
+          fill
+          alt='thumbnail'
+          style={{ borderRadius: '10px' }}
+          sizes='300px'
+          priority
+        />
       </Box>
       <TravelInfo travelogueDetail={travelogueDetail} />
     </Stack>
