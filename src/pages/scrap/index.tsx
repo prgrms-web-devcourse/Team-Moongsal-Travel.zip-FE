@@ -1,14 +1,11 @@
-import { Delete as DeleteIcon, Folder as FolderIcon } from '@mui/icons-material';
+import { Delete as DeleteIcon } from '@mui/icons-material';
 import {
-  Avatar,
   Box,
   Button,
+  Grid,
   IconButton,
-  List,
   ListItem,
-  ListItemAvatar,
   ListItemText,
-  Paper,
   Stack,
   styled,
   SwipeableDrawer,
@@ -19,6 +16,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { SubTitle } from '@/components/common';
+import { SCRAP_DOCS_IMAGE } from '@/constants';
 import useScrapDocsData from '@/hooks/useScrapDocsData';
 
 const Scrap = () => {
@@ -52,10 +50,23 @@ const Scrap = () => {
   return (
     <>
       <Stack>
-        <Typography sx={{ mt: 4, mb: 2 }} variant='h6' component='div'>
-          나만의 장소
+        <Typography
+          sx={{
+            mt: 4,
+            mb: 2,
+            fontWeight: 900,
+            fontSize: '1.5rem',
+            color: 'blue040.main',
+          }}
+          variant='h6'
+          component='div'>
+          나만의 장소 모음집
         </Typography>
-        <Button onClick={toggleDrawer(true)}>폴더 추가</Button>
+        <Button
+          onClick={toggleDrawer(true)}
+          sx={{ fontSize: '1rem', color: 'blue070.main' }}>
+          모음집 추가
+        </Button>
         <SwipeableDrawer
           container={() => document.body}
           anchor='bottom'
@@ -88,49 +99,30 @@ const Scrap = () => {
           </Box>
         </SwipeableDrawer>
       </Stack>
-      <List sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Grid container>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
-            <Stack key={storageObjectId} flexDirection='row' p={2}>
-              <Paper
-                key={storageObjectId}
-                sx={{
-                  display: 'flex',
-                  width: '100%',
-                  padding: '0.5rem',
-                  boxSizing: 'border-box',
-                }}>
+            <Grid item xs={6} key={storageObjectId} flexDirection='row' p={2}>
+              <Box sx={BookImage}>
                 <ListItem
                   onClick={() => handleClick(storageObjectId)}
                   sx={{
                     cursor: 'pointer',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
+                    pt: '2rem',
+                    pl: '2rem',
+                    width: '9rem',
                   }}>
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: 'blue040.main', color: 'blue010.main' }}>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={title}
-                    sx={{
-                      '.MuiTypography-root': {
-                        fontWeight: 700,
-                      },
-                    }}
-                  />
+                  <ListItemText primary={title} sx={TextStyle} />
                 </ListItem>
                 <IconButton
                   onClick={() => deleteScrapDoc(storageObjectId)}
-                  sx={{ color: 'red.main' }}>
+                  sx={{ color: 'red.main', p: 0, pl: 2 }}>
                   <DeleteIcon />
                 </IconButton>
-              </Paper>
-            </Stack>
+              </Box>
+            </Grid>
           ))}
-      </List>
+      </Grid>
     </>
   );
 };
@@ -159,3 +151,26 @@ const swipeStyle = {
     borderTopLeftRadius: 10,
   },
 } as const;
+
+const BookImage = {
+  width: '10rem',
+  height: '10rem',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  backgroundImage: `url(${SCRAP_DOCS_IMAGE.url})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+} as const;
+
+const TextStyle = {
+  '.MuiTypography-root': {
+    fontWeight: 700,
+    color: 'gray030.main',
+    textAlign: 'center',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+};

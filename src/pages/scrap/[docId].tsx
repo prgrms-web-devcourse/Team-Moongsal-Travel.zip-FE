@@ -71,14 +71,23 @@ const ScrapDetail = () => {
   return (
     <>
       <Stack>
-        <Typography sx={{ mt: 4, mb: 2 }} variant='h6' component='div'>
+        <Typography
+          sx={{
+            mt: 4,
+            mb: 2,
+            fontWeight: 900,
+            fontSize: '1.5rem',
+            color: 'blue040.main',
+          }}
+          variant='h6'
+          component='div'>
           {scrapTitle}
         </Typography>
         <Grid container spacing={2}>
           {scrapContents &&
             scrapContents.map(({ scrapObjectId, placeName, postId }) => (
               <Grid item key={scrapObjectId} xs={6}>
-                <Paper elevation={3}>
+                <Paper elevation={1}>
                   <ListItem
                     sx={{
                       display: 'flex',
