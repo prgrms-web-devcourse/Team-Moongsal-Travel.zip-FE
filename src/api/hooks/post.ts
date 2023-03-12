@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
+  getSubTravelogueForEdit,
   getTravelogueForEdit,
   patchSubTravelogue,
   patchTravelogue,
@@ -51,5 +52,15 @@ export const useGetTravelogueForEdit = (travelogueId: string) => {
     queryKey: ['TRAVELOGUE', travelogueId],
     queryFn: () => getTravelogueForEdit(travelogueId),
     enabled: false,
+  });
+};
+
+export const useGetSubTravelogueForEdit = (
+  travelogueId: string,
+  subTravelogueId: string,
+) => {
+  return useQuery({
+    queryKey: ['SUB_TRAVELOGUE', travelogueId, subTravelogueId],
+    queryFn: () => getSubTravelogueForEdit(travelogueId, subTravelogueId),
   });
 };

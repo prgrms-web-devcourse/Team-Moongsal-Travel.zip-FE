@@ -11,12 +11,11 @@ interface PostProfileProps {
 const TravelogueInfo = ({ travelogueDetail }: PostProfileProps) => {
   const { nickname, viewCount, profileImageUrl } = travelogueDetail;
 
-  console.log(profileImageUrl);
   return (
     <Stack direction='row' spacing={2} my={1}>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={nickname}>
         <Avatar
-          src={profileImageUrl}
+          src={profileImageUrl !== 'default' ? profileImageUrl : undefined}
           sx={{ ...InfoStyle, backgroundColor: 'gray020.main' }}
         />
         <SubTitle fontSize='0.9rem' color='gray030.main'>

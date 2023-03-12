@@ -10,13 +10,17 @@ interface TravelogueDetailProps {
 
 const TravelogueDetail = ({ travelogueDetail }: TravelogueDetailProps) => {
   const authority = 'writer'; // viewer
-  const { subTravelogues,  } = travelogueDetail;
+  const { id, subTravelogues } = travelogueDetail;
 
   return (
     <Stack spacing={3}>
       <TravelogueHeader authority={authority} travelogueDetail={travelogueDetail} />
       {subTravelogues.map((subTravelogue) => (
-        <TravelogueContent key={subTravelogue.day} subTravelogue={subTravelogue} />
+        <TravelogueContent
+          key={subTravelogue.subTravelogueId}
+          travelogueId={id}
+          subTravelogue={subTravelogue}
+        />
       ))}
     </Stack>
   );

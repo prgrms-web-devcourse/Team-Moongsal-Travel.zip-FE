@@ -48,4 +48,8 @@ export interface SubTravelogueType {
   travelPhotoCreateReqs: { url: string }[];
 }
 
+export interface SubTravelogueDetailType extends SubTravelogueType {
+  subTravelogueId: number;
+}
+
 export type StepType = 'next' | 'back';

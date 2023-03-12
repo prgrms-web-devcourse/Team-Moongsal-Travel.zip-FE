@@ -1,12 +1,15 @@
 import { Alert, Box, Button, OutlinedInput, Stack } from '@mui/material';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
-import { useSaveSubTravelogue } from '@/api/hooks/post';
+import { useGetSubTravelogueForEdit, useSaveSubTravelogue } from '@/api/hooks/post';
 import { SubTitle } from '@/components/common';
 import { Transportation, VisitedRegion } from '@/components/SubTravelogue';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
+import useHandleTraveloguePublish from '@/hooks/useHandleTraveloguePublish';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
 import { SubTravelogueType } from '@/types/post';
 import { getItem, setItem } from '@/utils/storage';
@@ -19,13 +22,21 @@ type SavedInfo = {
   data: SubTravelogueType;
   id: string;
 };
+
 interface SubTravelogueProps {
   travelogueId: string;
   index: number;
-  handleComplete: () => void;
+  isEditPage: boolean;
+  handleComplete?: () => void;
 }
 
-const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTravelogueProps) => {
+const SubTravelogue = ({
+  travelogueId,
+  index,
+  isEditPage,
+  handleComplete,
+}: SubTravelogueProps) => {
+  const router = useRouter();
   const savedInfo = getItem<SavedInfo>(`save-${travelogueId}-${index}`);
   const {
     control,
@@ -39,21 +50,37 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
   });
   const { title, content, transportationSet } = useSubTravelogueForm(control);
   useFormPersist(`temp-${travelogueId}-${index}`, { watch, setValue });
-  const { mutate } = useSaveSubTravelogue(savedInfo !== null);
+  const { mutate } = useSaveSubTravelogue(savedInfo !== null || isEditPage);
+  const { handleTraveloguePublish } = useHandleTraveloguePublish(travelogueId);
+  const subId = router.query.id as string;
+  const { data: subTravelogue } = useGetSubTravelogueForEdit(travelogueId, subId);
   const hasErrors = Object.keys(errors).length > 0;
+  const unsaved = savedInfo !== null;
+
+  useEffect(() => {
+    if (isEditPage && subTravelogue) {
+      const { title, content, addresses, transportationSet } = subTravelogue.data;
+      setValue('title', title);
+      setValue('content', content);
+      setValue('addresses', addresses);
+      setValue('transportationSet', transportationSet);
+    }
+  }, [isEditPage, subTravelogue, setValue]);
 
   const handleSaveSubTravelogue = (data: SubTravelogueType, isPatch: boolean) => {
     const subTravelogueData = { ...data, day: index + 1 };
+    const subTravelogueId = isEditPage ? subId : savedInfo?.id ?? '';
     mutate(
-      { data: subTravelogueData, travelogueId, subTravelogueId: savedInfo?.id ?? '' },
+      { data: subTravelogueData, travelogueId, subTravelogueId },
       {
         onSuccess: ({ data }) => {
           reset(subTravelogueData);
-          handleComplete();
           setItem(`save-${travelogueId}-${index}`, {
             data: subTravelogueData,
             id: data[isPatch ? 'subTravelogueId' : 'id'],
           });
+          handleComplete && handleComplete();
+          isEditPage && handleTraveloguePublish();
         },
       },
     );
@@ -69,7 +96,7 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
   return (
     <form
       onSubmit={handleSubmit((data) =>
-        handleSaveSubTravelogue(data, savedInfo !== null),
+        handleSaveSubTravelogue(data, unsaved || isEditPage),
       )}>
       <Stack sx={{ mb: '1rem' }}>
         <SubTitle>소제목</SubTitle>
@@ -93,20 +120,22 @@ const SubTravelogue = ({ travelogueId, index, handleComplete }: SubTraveloguePro
         {hasErrors && <Alert severity='error'>모든 정보를 입력해주세요.</Alert>}
         {isDirty && <Alert severity='info'>저장되지 않은 변경사항이 있습니다.</Alert>}
         <Stack direction='row'>
-          <Button
-            type='submit'
-            variant='outlined'
-            sx={{ mt: 1, mr: 1 }}
-            fullWidth
-            disabled={savedInfo !== null}>
-            저장
-          </Button>
+          {!isEditPage && (
+            <Button
+              type='submit'
+              variant='outlined'
+              sx={{ mt: 1, mr: 1 }}
+              fullWidth
+              disabled={unsaved}>
+              저장
+            </Button>
+          )}
           <Button
             type='submit'
             variant='contained'
             sx={{ mt: 1, mr: 1 }}
             fullWidth
-            disabled={!(savedInfo !== null)}>
+            disabled={isEditPage ? false : !unsaved}>
             수정
           </Button>
         </Stack>
