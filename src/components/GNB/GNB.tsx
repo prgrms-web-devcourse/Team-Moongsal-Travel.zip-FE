@@ -9,12 +9,20 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { PATH_ROUTER } from '@/constants/path';
+import { PathRouterType } from '@/types/common';
+import { getInitialPathName } from '@/utils/helper';
 
 const GNB = () => {
   const router = useRouter();
+  const [value, setValue] = useState<PathRouterType>(
+    getInitialPathName(router.pathname as PathRouterType),
+  );
 
-  const [value, setValue] = useState<keyof typeof PATH_ROUTER>('home');
-  const onChangeNavigationRoute = (_: unknown, newValue: keyof typeof PATH_ROUTER) => {
+  const onChangeNavigationRoute = (_: unknown, newValue: PathRouterType) => {
+    if (value === newValue) {
+      return;
+    }
+
     setValue(newValue);
     router.push(PATH_ROUTER[newValue]);
   };
