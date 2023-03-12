@@ -88,7 +88,7 @@ const Search = styled('div')(({ theme }) => ({
   },
   marginLeft: 0,
   width: '100%',
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up('xs')]: {
     width: 'auto',
     marginLeft: theme.spacing(0.5),
   },
@@ -111,7 +111,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('xs')]: {
       width: '0ch',
       '&:focus': {
         width: '15ch',
@@ -133,8 +133,8 @@ const BoxStyle = {
 } as const;
 
 const LogoStyle = {
-  display: { xs: 'none', sm: 'block' },
-  fontSize: '1rem',
-  fontFamily: 'KOHIBaeum',
+  fontSize: '1.2rem',
+  fontFamily: 'Noto Sans KR',
+  fontWeight: '900',
   cursor: 'pointer',
 } as const;

@@ -46,12 +46,11 @@ const palette = {
 export const theme = createTheme({
   palette,
   typography: {
-    fontFamily: 'KOHINanumOTFL',
+    fontFamily: 'Noto Sans KR',
   },
   breakpoints: {
     values: {
       mobile: 390,
-
       xs: 0,
       sm: 600,
       md: 900,

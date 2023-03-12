@@ -54,6 +54,7 @@ const Local = () => {
         />
         <CommonInput
           id='password'
+          type='password'
           label='비밀번호'
           variant='outlined'
           control={control}

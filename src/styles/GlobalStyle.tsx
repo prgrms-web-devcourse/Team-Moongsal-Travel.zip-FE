@@ -7,27 +7,12 @@ const GlobalStyle = () => {
 export default GlobalStyle;
 
 const style = css`
-  @font-face {
-    font-weight: normal;
-    font-family: 'KOHINanumOTFL';
-    font-style: normal;
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/KOHINanumOTFL.woff')
-      format('woff');
-  }
-
-  @font-face {
-    font-weight: normal;
-    font-family: 'KOHIBaeumOTF';
-    font-style: normal;
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/KOHIBaeumOTF.woff')
-      format('woff');
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
   body {
     margin: 0;
-    font-family: 'KOHINanumOTFL', serif;
+    font-family: 'Noto Sans KR', sans-serif;
     line-height: 1;
-    word-spacing: -5px;
   }
 
   div,

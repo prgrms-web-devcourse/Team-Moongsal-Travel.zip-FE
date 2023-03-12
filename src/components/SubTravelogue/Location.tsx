@@ -56,7 +56,7 @@ const SearchInput = styled(ComboboxInput)(() => ({
   padding: '16.5px 14px',
   border: '1px solid rgba(0, 0, 0, 0.23)',
   borderRadius: '4px',
-  font: 'normal 400 1rem/1.4375em KOHINanumOTFL, sans-serif',
+  font: 'normal 400 1rem/1.4375em Noto Sans KR, sans-serif',
   color: 'rgba(0, 0, 0, 0.87)',
   '&:focus': {
     border: `2px solid #1976d2`,
