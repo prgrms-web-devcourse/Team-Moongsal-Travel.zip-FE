@@ -8,10 +8,13 @@
   "overrides": [
     {
       "files": ["**/*.tsx"],
-      "customSyntax": "@stylelint/postcss-css-in-js"
+      "customSyntax": "@stylelint/postcss-css-in-js",
+      "rules": {
+        "function-no-unknown": [
+          true,
+          { "ignoreFunctions": ["/\\${/", "alpha", "/^theme/"] }
+        ]
+      }
     }
-  ],
-  "rules": {
-    "function-no-unknown": [true, { "ignoreFunctions": ["/\\${/"] }]
-  }
+  ]
 }
