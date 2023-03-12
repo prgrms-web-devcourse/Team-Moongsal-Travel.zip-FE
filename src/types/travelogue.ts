@@ -1,4 +1,4 @@
-import { SubTravelogueType } from '@/types/post';
+import { SubTravelogueDetailType } from '@/types/post';
 
 export interface TravelogueFeedType {
   travelogueId: number;
@@ -34,7 +34,7 @@ export interface TravelogueDetailType {
   nights: number;
   days: number;
   totalCost: number;
-  subTravelogues: SubTravelogueType[];
+  subTravelogues: SubTravelogueDetailType[];
   transportations: string[];
   countLikes: number;
   isLiked: boolean;
