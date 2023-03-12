@@ -15,6 +15,7 @@ const useAutoComplete = () => {
     setValue,
     suggestions,
     handleSelect,
+    clearSuggestions,
   };
 };
 

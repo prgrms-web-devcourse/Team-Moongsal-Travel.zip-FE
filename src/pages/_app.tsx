@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil';
 
 import { GNB } from '@/components/GNB';
 import { Header } from '@/components/Header';
+import { AutoComplete } from '@/components/SearchModal';
 import GlobalStyle from '@/styles/GlobalStyle';
 import MobileLayout from '@/styles/MobileLayout';
 import { theme } from '@/styles/MuiTheme';
@@ -26,7 +27,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <RecoilRoot>
           <MobileLayout>
             <GlobalStyle />
-            <Header />
+            <AutoComplete>
+              <Header />
+            </AutoComplete>
             <Component {...pageProps} />
             <GNB />
           </MobileLayout>
