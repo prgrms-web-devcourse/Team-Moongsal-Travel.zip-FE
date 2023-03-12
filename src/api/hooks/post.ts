@@ -3,10 +3,12 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getTravelogueForEdit,
   patchSubTravelogue,
+  patchTravelogue,
   patchTraveloguePublish,
   postSubTravelogue,
+  postTravelogue,
 } from '@/api/post';
-import { SubTravelogueType } from '@/types/post';
+import { SubTravelogueType, TravelogueType } from '@/types/post';
 
 export const useSaveSubTravelogue = (isPatch: boolean) => {
   return useMutation({
@@ -23,9 +25,20 @@ export const useSaveSubTravelogue = (isPatch: boolean) => {
   });
 };
 
+export const useSaveTravelogue = (isPatch: boolean) => {
+  return useMutation({
+    mutationFn: async (data: { data: TravelogueType; travelogueId: string }) => {
+      return isPatch ? await patchTravelogue(data) : await postTravelogue(data);
+    },
+    onError: (error: { message: string }) => {
+      console.error(error.message);
+    },
+  });
+};
+
 export const usePatchTraveloguePublish = () => {
   return useMutation({
-    mutationFn: async (data: { travelogueId: number }) =>
+    mutationFn: async (data: { travelogueId: string }) =>
       await patchTraveloguePublish(data),
     onError: (error: { message: string }) => {
       console.error(error.message);
