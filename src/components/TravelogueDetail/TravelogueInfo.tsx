@@ -9,11 +9,11 @@ interface PostProfileProps {
 }
 
 const TravelogueInfo = ({ travelogueDetail }: PostProfileProps) => {
-  const { nickname, viewCount } = travelogueDetail;
+  const { nickname, viewCount, profileImageUrl } = travelogueDetail;
   return (
     <Stack direction='row' spacing={2} my={1}>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={nickname}>
-        <Avatar sx={InfoStyle} />
+        <Avatar sx={InfoStyle} src={profileImageUrl} />
         <SubTitle fontSize='0.9rem' color='gray030.main'>
           {nickname}
         </SubTitle>
