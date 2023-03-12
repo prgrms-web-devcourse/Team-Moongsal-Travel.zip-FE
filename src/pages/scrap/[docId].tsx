@@ -1,4 +1,5 @@
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
+import { PushPin as PushPinIcon } from '@mui/icons-material';
 import {
   Button,
   Grid,
@@ -93,6 +94,7 @@ const ScrapDetail = () => {
                       display: 'flex',
                       px: 1,
                     }}>
+                    <PushPinIcon sx={{ color: 'blue050.main', mr: 1 }} />
                     <ListItemText
                       primary={placeName}
                       sx={{
