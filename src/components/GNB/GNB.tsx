@@ -5,13 +5,22 @@ import {
 } from '@mui/icons-material';
 import { styled } from '@mui/material';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import { PATH_ROUTER } from '@/constants/path';
+
 const GNB = () => {
-  const [value, setValue] = useState<'home' | 'add' | 'profile'>('home');
+  const router = useRouter();
+
+  const [value, setValue] = useState<keyof typeof PATH_ROUTER>('home');
+  const onChangeNavigationRoute = (_: unknown, newValue: keyof typeof PATH_ROUTER) => {
+    setValue(newValue);
+    router.push(PATH_ROUTER[newValue]);
+  };
 
   return (
-    <StyledBottomNavigation value={value} onChange={(_, newValue) => setValue(newValue)}>
+    <StyledBottomNavigation value={value} onChange={onChangeNavigationRoute}>
       <BottomNavigationAction
         label='Home'
         value='home'
