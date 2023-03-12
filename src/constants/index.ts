@@ -299,3 +299,7 @@ export const COUNTRIES: readonly CountryType[] = [
 export const SCRAP_DOCS_IMAGE = {
   url: '/images/scrap/iconmonstr-book-2.svg',
 };
+
+export const TRAVEL_LOGO = {
+  url: '/images/logo/travel.svg',
+};
