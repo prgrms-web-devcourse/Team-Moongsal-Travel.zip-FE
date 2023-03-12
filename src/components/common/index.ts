@@ -10,3 +10,4 @@ export { default as SigninLeadModal } from './SigninLeadModal';
 export { default as SubTitle } from './SubTitle';
 export { default as TemporaryButton } from './TemporaryButton';
 export { default as Title } from './Titlte';
+export { default as Transition } from './Transition';

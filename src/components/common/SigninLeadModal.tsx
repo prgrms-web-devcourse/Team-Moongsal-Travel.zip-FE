@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { useRouter } from 'next/router';
 
 import { CommonButton } from '@/components/common';
-import { flexCenterStyle } from '@/styles/CenterStyle';
+import { flexCenterStyle } from '@/styles/commonStyle';
 
 interface SigninLeadModalProps {
   open: boolean;

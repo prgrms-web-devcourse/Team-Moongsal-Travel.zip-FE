@@ -14,33 +14,38 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-import { getScrapDocument } from '@/api/scrap';
 import { SubTitle } from '@/components/common';
-
-const DUMMY_DATA = {
-  list: [
-    { storageObjectId: '640abc577baac103361ac6e1', title: '일본 여행' },
-    { storageObjectId: '640abc577baac103361ac6e', title: '제주도 여행' },
-    { storageObjectId: '640abc577baac103361ac1', title: '유럽 여행' },
-  ],
-};
+import useScrapDocsData from '@/hooks/useScrapDocsData';
 
 const Scrap = () => {
-  // const [scrapDocs, setScrapDocs] = useState([]);
-  const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const {
+    scrapDocs,
+    open,
+    setOpen,
+    title,
+    titleState,
+    fetchScrapDoc,
+    createScrapDoc,
+    deleteScrapDoc,
+    handleSubmit,
+  } = useScrapDocsData();
 
   useEffect(() => {
-    const fetchScrapDoc = async () => {
-      const response = await getScrapDocument();
-      console.log(response);
-    };
     fetchScrapDoc();
   }, []);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const handleClick = (docId: string) => {
+    router.push({
+      pathname: `/scrap/${docId}`,
+    });
   };
 
   return (
@@ -64,34 +69,51 @@ const Scrap = () => {
           <Puller />
           <Box sx={{ pb: 2 }} />
           <Box>
-            <Box component='form'>
+            <Box component='form' onSubmit={handleSubmit(createScrapDoc)}>
               <SubTitle>나만의 장소 추가</SubTitle>
-              <TextField fullWidth placeholder='폴더 이름을 적어주세요' sx={{ mt: 2 }} />
+              <TextField
+                {...title}
+                fullWidth
+                placeholder='폴더 이름을 입력해주세요'
+                sx={{ mt: 2 }}
+                error={titleState.error && true}
+                helperText={titleState.error && titleState.error.message}
+              />
               <Stack flexDirection='row' justifyContent='flex-end' mt={2}>
-                <Button>취소</Button>
-                <Button>생성</Button>
+                <Button onClick={toggleDrawer(false)}>취소</Button>
+                <Button type='submit'>생성</Button>
               </Stack>
             </Box>
           </Box>
         </SwipeableDrawer>
       </Stack>
-      <List dense={false}>
-        {DUMMY_DATA.list.map(({ title, storageObjectId }) => (
-          <ListItem
-            key={storageObjectId}
-            secondaryAction={
-              <IconButton edge='end' aria-label='delete'>
+      <List sx={{ display: 'flex', flexDirection: 'column' }}>
+        {scrapDocs &&
+          scrapDocs.map(({ title, storageObjectId }) => (
+            <Stack key={storageObjectId} flexDirection='row' p={2}>
+              <ListItem
+                onClick={() => handleClick(storageObjectId)}
+                sx={{
+                  cursor: 'pointer',
+                  width: '100%',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}>
+                <ListItemAvatar>
+                  <Avatar sx={{ bgcolor: 'blue040.main', color: 'blue010.main' }}>
+                    <FolderIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={title} />
+              </ListItem>
+              <IconButton
+                onClick={() => deleteScrapDoc(storageObjectId)}
+                sx={{ color: 'red.main' }}>
                 <DeleteIcon />
               </IconButton>
-            }>
-            <ListItemAvatar>
-              <Avatar>
-                <FolderIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={title} />
-          </ListItem>
-        ))}
+            </Stack>
+          ))}
       </List>
     </>
   );

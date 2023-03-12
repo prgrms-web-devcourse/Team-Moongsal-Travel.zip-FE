@@ -3,12 +3,25 @@ import {
   PushPin as PushPinIcon,
 } from '@mui/icons-material';
 import { Chip, Divider, Stack, Typography } from '@mui/material';
+import { Fragment, useState } from 'react';
+
+import { ScrapDialog } from '@/components/Scrap';
 
 interface VisitedRegionProps {
   addresses: { region: string }[];
 }
 
 const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <Divider sx={{ my: 2 }} />
@@ -20,13 +33,16 @@ const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
       </Stack>
       <Stack spacing={2}>
         {addresses.map(({ region }, i) => (
-          <Chip
-            key={i}
-            variant='outlined'
-            color='primary'
-            icon={<LocationOnIcon sx={{ width: '17px' }} />}
-            label={region}
-          />
+          <Fragment key={i}>
+            <Chip
+              variant='outlined'
+              color='primary'
+              icon={<LocationOnIcon sx={{ width: '17px' }} />}
+              label={region}
+              onClick={handleClickOpen}
+            />
+            <ScrapDialog open={open} onClose={onClose} content={region} />
+          </Fragment>
         ))}
       </Stack>
     </>

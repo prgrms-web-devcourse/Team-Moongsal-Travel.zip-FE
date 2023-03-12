@@ -43,3 +43,10 @@ export const filterFormDefault: UseFormProps = {
     sort: 'recent',
   },
 };
+
+export const scrapFormDefault: UseFormProps = {
+  mode: 'onChange',
+  defaultValues: {
+    title: '',
+  },
+};

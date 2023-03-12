@@ -5,9 +5,16 @@ import { CommonButton, ProfileAvatar } from '@/components/common';
 interface ManagementProps {
   nickname: string;
   profileImage: string;
+  isLoading: boolean;
+  handleChangeUserInformation: () => void;
 }
 
-const Management = ({ nickname, profileImage }: ManagementProps) => {
+const Management = ({
+  nickname,
+  profileImage,
+  isLoading,
+  handleChangeUserInformation,
+}: ManagementProps) => {
   return (
     <Stack
       spacing={2}
@@ -15,14 +22,18 @@ const Management = ({ nickname, profileImage }: ManagementProps) => {
       alignItems='center'
       justifyContent='center'
       bgcolor='gray005.main'>
-      <ProfileAvatar url={profileImage} size={100} iconSize={5} />
+      <ProfileAvatar url={profileImage} size={100} iconSize={5} isLoading={isLoading} />
       <Typography
         variant='h2'
         component='h2'
         sx={{ font: '1.25rem bold', color: 'dark.main' }}>
         {nickname}
       </Typography>
-      <CommonButton content='프로필 수정' customStyle={{ height: 40 }} />
+      <CommonButton
+        content='프로필 수정'
+        customStyle={{ height: 40 }}
+        handleClick={handleChangeUserInformation}
+      />
     </Stack>
   );
 };
