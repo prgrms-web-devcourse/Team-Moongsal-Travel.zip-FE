@@ -1,15 +1,9 @@
 import { Search as SearchIcon } from '@mui/icons-material';
-import {
-  alpha,
-  AppBar,
-  Box,
-  InputBase,
-  styled,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { alpha, AppBar, Box, InputBase, styled, Toolbar } from '@mui/material';
 import { Combobox, ComboboxInput } from '@reach/combobox';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { logo } from 'public/images';
 import { KeyboardEvent } from 'react';
 
 import { AutoCompleteList } from '@/components/SearchModal';
@@ -45,14 +39,9 @@ const Header = () => {
     <Box sx={BoxStyle}>
       <AppBar sx={AppBarStyle}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography
-            variant='h1'
-            noWrap
-            component='h1'
-            sx={LogoStyle}
-            onClick={() => router.push('/')}>
-            🛫travel.zip
-          </Typography>
+          <Box onClick={() => router.push('/')} sx={{ cursor: 'pointer' }}>
+            <Image src={logo} alt='logo' width={120} />
+          </Box>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -130,11 +119,4 @@ const BoxStyle = {
   position: 'sticky',
   top: 0,
   zIndex: '1201',
-} as const;
-
-const LogoStyle = {
-  fontSize: '1.2rem',
-  fontFamily: 'Noto Sans KR',
-  fontWeight: '900',
-  cursor: 'pointer',
 } as const;
