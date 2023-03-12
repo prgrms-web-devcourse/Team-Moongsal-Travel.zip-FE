@@ -33,7 +33,7 @@ export type TravelogueFormType = Omit<TravelogueType, 'thumbnail'> & {
   thumbnail: File | null;
 };
 
-export interface TravelogueResponseType {
+export interface TravelogueSaveResponseType {
   id: number;
   days: number;
   nights: number;
