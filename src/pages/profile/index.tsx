@@ -1,11 +1,12 @@
 import { Stack } from '@mui/material';
+import { useState } from 'react';
 
 import { useUserInformation } from '@/api/hooks/profile';
-import { ContentLink, Management } from '@/components/Profile';
+import { ContentLink, EditDrawer, Management } from '@/components/Profile';
 
 const Profile = () => {
-  const { userInformation, isLoading, handleChangeUserInformation } =
-    useUserInformation();
+  const [isOpen, setIsOpen] = useState(false);
+  const { userInformation, isLoading } = useUserInformation();
 
   if (!userInformation) {
     return null;
@@ -17,7 +18,7 @@ const Profile = () => {
         profileImage={userInformation.profileImageUrl}
         nickname={userInformation.nickname}
         isLoading={isLoading}
-        handleChangeUserInformation={handleChangeUserInformation}
+        handleChangeUserInformation={() => setIsOpen(true)}
       />
       <Stack alignItems='center'>
         <ContentLink contentName='내가 작성한 게시물' route='/' iconName='edit' />
@@ -28,6 +29,13 @@ const Profile = () => {
           iconName='temporarySave'
         />
       </Stack>
+      <EditDrawer
+        isOpen={isOpen}
+        profileImageUrl={userInformation.profileImageUrl}
+        nickname={userInformation.nickname}
+        isLoading={isLoading}
+        handleClose={() => setIsOpen(false)}
+      />
     </Stack>
   );
 };
