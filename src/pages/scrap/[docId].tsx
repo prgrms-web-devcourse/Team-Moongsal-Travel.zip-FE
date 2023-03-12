@@ -88,7 +88,7 @@ const ScrapDetail = () => {
           {scrapContents &&
             scrapContents.map(({ scrapObjectId, placeName, postId }) => (
               <Grid item key={scrapObjectId} xs={6}>
-                <Paper elevation={1}>
+                <Paper elevation={1} sx={{ bgcolor: 'blue010.main' }}>
                   <ListItem
                     sx={{
                       display: 'flex',

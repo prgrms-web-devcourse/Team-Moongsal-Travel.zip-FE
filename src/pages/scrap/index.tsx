@@ -1,11 +1,14 @@
-import { Delete as DeleteIcon } from '@mui/icons-material';
+import { Delete as DeleteIcon, Folder as FolderIcon } from '@mui/icons-material';
 import {
+  Avatar,
   Box,
   Button,
-  Grid,
   IconButton,
+  List,
   ListItem,
+  ListItemAvatar,
   ListItemText,
+  Paper,
   Stack,
   styled,
   SwipeableDrawer,
@@ -16,7 +19,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { SubTitle } from '@/components/common';
-import { SCRAP_DOCS_IMAGE } from '@/constants';
 import useScrapDocsData from '@/hooks/useScrapDocsData';
 
 const Scrap = () => {
@@ -64,7 +66,7 @@ const Scrap = () => {
         </Typography>
         <Button
           onClick={toggleDrawer(true)}
-          sx={{ fontSize: '1rem', color: 'blue070.main' }}>
+          sx={{ fontSize: '1rem', color: 'blue040.main' }}>
           모음집 추가
         </Button>
         <SwipeableDrawer
@@ -99,30 +101,49 @@ const Scrap = () => {
           </Box>
         </SwipeableDrawer>
       </Stack>
-      <Grid container>
+      <List sx={{ display: 'flex', flexDirection: 'column' }}>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
-            <Grid item xs={6} key={storageObjectId} flexDirection='row' p={2}>
-              <Box sx={BookImage}>
+            <Stack key={storageObjectId} flexDirection='row' p={2}>
+              <Paper
+                key={storageObjectId}
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  padding: '0.5rem',
+                  boxSizing: 'border-box',
+                }}>
                 <ListItem
                   onClick={() => handleClick(storageObjectId)}
                   sx={{
                     cursor: 'pointer',
-                    pt: '2rem',
-                    pl: '2rem',
-                    width: '9rem',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
                   }}>
-                  <ListItemText primary={title} sx={TextStyle} />
+                  <ListItemAvatar>
+                    <Avatar sx={{ bgcolor: 'blue040.main', color: 'blue010.main' }}>
+                      <FolderIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={title}
+                    sx={{
+                      '.MuiTypography-root': {
+                        fontWeight: 700,
+                      },
+                    }}
+                  />
                 </ListItem>
                 <IconButton
                   onClick={() => deleteScrapDoc(storageObjectId)}
-                  sx={{ color: 'red.main', p: 0, pl: 2 }}>
+                  sx={{ color: 'red.main' }}>
                   <DeleteIcon />
                 </IconButton>
-              </Box>
-            </Grid>
+              </Paper>
+            </Stack>
           ))}
-      </Grid>
+      </List>
     </>
   );
 };
@@ -151,26 +172,3 @@ const swipeStyle = {
     borderTopLeftRadius: 10,
   },
 } as const;
-
-const BookImage = {
-  width: '10rem',
-  height: '10rem',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  alignItems: 'center',
-  backgroundImage: `url(${SCRAP_DOCS_IMAGE.url})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-} as const;
-
-const TextStyle = {
-  '.MuiTypography-root': {
-    fontWeight: 700,
-    color: 'gray030.main',
-    textAlign: 'center',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-  },
-};
