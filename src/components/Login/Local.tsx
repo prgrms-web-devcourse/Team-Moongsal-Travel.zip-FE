@@ -3,12 +3,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState } from 'recoil';
 
 import { usePostUserSignIn } from '@/api/hooks/user';
 import { CommonInput } from '@/components/common';
 import { ACCESS_TOKEN } from '@/constants';
-import { isAuthConfirmModalState } from '@/recoil';
+import useAuth from '@/hooks/useAuth';
 import { User } from '@/types/auth';
 import { setItem } from '@/utils/storage';
 
@@ -27,7 +26,7 @@ const Local = () => {
   });
   const { mutate, error } = usePostUserSignIn();
   const router = useRouter();
-  const setIsSignin = useSetRecoilState(isAuthConfirmModalState);
+  const { setIsSignin } = useAuth();
 
   const onSubmit = (formData: FormState) => {
     mutate(formData, {

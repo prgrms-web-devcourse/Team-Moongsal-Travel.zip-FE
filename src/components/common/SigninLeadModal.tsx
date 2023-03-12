@@ -2,16 +2,14 @@ import { Error as ErrorIcon } from '@mui/icons-material';
 import { DialogActions, DialogContentText, Typography } from '@mui/material';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
 
 import { CommonButton } from '@/components/common';
-import { isAuthConfirmModalState } from '@/recoil';
+import useAuth from '@/hooks/useAuth';
 import { flexCenterStyle } from '@/styles/commonStyle';
 
 const SigninLeadModal = () => {
-  const [isAuthConfirmModal, setIsAuthConfirmModal] = useRecoilState(
-    isAuthConfirmModalState,
-  );
+  const { isAuthConfirmModal, setIsAuthConfirmModal } = useAuth();
+
   const router = useRouter();
 
   const onClickClose = () => {
