@@ -44,8 +44,8 @@ const First = () => {
     if (isEditPage && travelogue) {
       const { cost, title, period, country } = travelogue.data;
       setValue('country.name', country.name);
-      setValue('period.startDate', period.startDate.join('-'));
-      setValue('period.endDate', period.endDate.join('-'));
+      setValue('period.startDate', period.startDate);
+      setValue('period.endDate', period.endDate);
       setValue('cost.total', String(cost.total));
       setValue('title', title);
     }

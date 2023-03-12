@@ -17,7 +17,7 @@ export interface TravelogueResponseType {
   country: {
     name: string;
   };
-  period: { startDate: number[]; endDate: number[]; nights: number };
+  period: { startDate: string; endDate: string; nights: number };
   cost: {
     transportation: number;
     lodge: number;
