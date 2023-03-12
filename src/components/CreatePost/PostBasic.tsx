@@ -1,7 +1,7 @@
 import { Box, FormHelperText, OutlinedInput, Stack } from '@mui/material';
 import dayjs from 'dayjs';
 import { MouseEvent, useEffect, useState } from 'react';
-import { Control } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 
 import { FileInput, SubTitle, Title } from '@/components/common';
 import { CountrySelect } from '@/components/common';
@@ -29,8 +29,6 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
     endDateState,
     title,
     titleState,
-    thumbnail,
-    thumbnailState,
   } = useTravelogueForm(control);
 
   const onChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
@@ -54,11 +52,7 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
         {toggleValue && (
           <>
             <SubTitle>방문한 나라</SubTitle>
-            <CountrySelect
-              name={countryName}
-              isKorea={toggleValue === '국내'}
-              selectedCountry={data?.country.name}
-            />
+            <CountrySelect name={countryName} isKorea={toggleValue === '국내'} />
           </>
         )}
         {countryNameState.error && (
@@ -74,13 +68,8 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
             control={startDate}
             maxDate={dayjs(endDate.value)}
             text='시작날짜'
-            selectedDate={data?.period.startDate}
           />
-          <DatePicker
-            control={endDate}
-            text='종료날짜'
-            selectedDate={data?.period.endDate}
-          />
+          <DatePicker control={endDate} text='종료날짜' />
         </Box>
         {(startDateState.error || endDateState.error) && (
           <FormHelperText sx={HelperTextColor}>
@@ -93,12 +82,10 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
         <SubTitle>총 경비</SubTitle>
         <Box>
           <OutlinedInput
-            ref={costTotal.ref}
-            onChange={costTotal.onChange}
+            {...costTotal}
             fullWidth
             placeholder='이번 여행의 총 경비를 입력하세요'
             type='text'
-            defaultValue={data?.cost.total}
           />
           {costTotalState.error && (
             <FormHelperText sx={HelperTextColor}>
@@ -110,26 +97,28 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
       <Title bold='bold'>여행 일기를 작성하세요 </Title>
       <Stack sx={marginBottom}>
         <SubTitle>제목</SubTitle>
-        <OutlinedInput
-          ref={title.ref}
-          onChange={title.onChange}
-          fullWidth
-          placeholder='제목을 입력하세요'
-          type='text'
-          defaultValue={data?.title}
-        />
+        <OutlinedInput {...title} fullWidth placeholder='제목을 입력하세요' type='text' />
         {titleState.error && (
           <FormHelperText sx={HelperTextColor}>{titleState.error.message}</FormHelperText>
         )}
       </Stack>
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
-        <FileInput thumbnail={thumbnail} imageUrl={data?.thumbnail} />
-        {thumbnailState.error && (
-          <FormHelperText sx={HelperTextColor}>
-            {thumbnailState.error.message}
-          </FormHelperText>
-        )}
+        <Controller
+          render={({ field: thumbnail, fieldState: thumbnailState }) => (
+            <>
+              <FileInput thumbnail={thumbnail} imageUrl={data?.thumbnail} />
+              {thumbnailState.error && (
+                <FormHelperText sx={HelperTextColor}>
+                  {thumbnailState.error.message}
+                </FormHelperText>
+              )}
+            </>
+          )}
+          name={`thumbnail`}
+          control={control}
+          rules={{ required: isEditPage ? false : '썸네일은 필수 입력 사항입니다.' }}
+        />
       </Stack>
     </>
   );

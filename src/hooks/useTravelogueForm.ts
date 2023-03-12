@@ -51,14 +51,6 @@ const useTravelogueForm = (control: Control<TravelogueFormType>) => {
     },
   });
 
-  const { field: thumbnail, fieldState: thumbnailState } = useController({
-    name: 'thumbnail',
-    control,
-    rules: {
-      required: '썸네일은 필수 입력 사항입니다.',
-    },
-  });
-
   return {
     countryName,
     countryNameState,
@@ -70,8 +62,6 @@ const useTravelogueForm = (control: Control<TravelogueFormType>) => {
     endDateState,
     title,
     titleState,
-    thumbnail,
-    thumbnailState,
   };
 };
 
