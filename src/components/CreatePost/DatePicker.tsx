@@ -29,6 +29,7 @@ const DatePicker = ({ text, control, maxDate }: DatePickerProps) => {
       localeText={koKR.components.MuiLocalizationProvider.defaultProps.localeText}>
       <MobileDatePicker
         {...control}
+        value={control.value}
         inputFormat='YYYY년 MM월 DD일'
         showToolbar={false}
         label={text}

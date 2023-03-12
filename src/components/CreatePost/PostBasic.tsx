@@ -1,26 +1,23 @@
 import { Box, FormHelperText, OutlinedInput, Stack } from '@mui/material';
 import dayjs from 'dayjs';
-import { MouseEvent, useState } from 'react';
-import { Control } from 'react-hook-form';
+import { MouseEvent, useEffect, useState } from 'react';
+import { Control, Controller } from 'react-hook-form';
 
 import { FileInput, SubTitle, Title } from '@/components/common';
 import { CountrySelect } from '@/components/common';
 import useTravelogueForm from '@/hooks/useTravelogueForm';
-import { TravelogueFormType } from '@/types/post';
+import { TravelogueFormType, TravelogueResponseType } from '@/types/post';
 
 import { ComplexButton, DatePicker } from './';
 
-interface ControlProps {
+interface PostBasicProps {
   control: Control<TravelogueFormType>;
+  data?: TravelogueResponseType;
+  isEditPage: boolean;
 }
 
-const PostBasic = ({ control }: ControlProps) => {
+const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
   const [toggleValue, setToggleValue] = useState('');
-
-  const onChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
-    setToggleValue(selectedValue);
-  };
-
   const {
     countryName,
     countryNameState,
@@ -32,9 +29,19 @@ const PostBasic = ({ control }: ControlProps) => {
     endDateState,
     title,
     titleState,
-    thumbnail,
-    thumbnailState,
   } = useTravelogueForm(control);
+
+  const onChange = (e: MouseEvent<HTMLElement>, selectedValue: string) => {
+    setToggleValue(selectedValue);
+  };
+
+  useEffect(() => {
+    if (data) {
+      setToggleValue(data.country.name === '대한민국' ? '국내' : '해외');
+    }
+  }, [data]);
+
+  if (isEditPage && !data) return <></>;
 
   return (
     <>
@@ -54,7 +61,6 @@ const PostBasic = ({ control }: ControlProps) => {
           </FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>여행 기간</SubTitle>
         <Box sx={{ display: 'flex', gap: 1 }}>
@@ -72,7 +78,6 @@ const PostBasic = ({ control }: ControlProps) => {
           </FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>총 경비</SubTitle>
         <Box>
@@ -89,7 +94,6 @@ const PostBasic = ({ control }: ControlProps) => {
           )}
         </Box>
       </Stack>
-
       <Title bold='bold'>여행 일기를 작성하세요 </Title>
       <Stack sx={marginBottom}>
         <SubTitle>제목</SubTitle>
@@ -98,15 +102,23 @@ const PostBasic = ({ control }: ControlProps) => {
           <FormHelperText sx={HelperTextColor}>{titleState.error.message}</FormHelperText>
         )}
       </Stack>
-
       <Stack sx={marginBottom}>
         <SubTitle>썸네일</SubTitle>
-        <FileInput thumbnail={thumbnail} />
-        {thumbnailState.error && (
-          <FormHelperText sx={HelperTextColor}>
-            {thumbnailState.error.message}
-          </FormHelperText>
-        )}
+        <Controller
+          render={({ field: thumbnail, fieldState: thumbnailState }) => (
+            <>
+              <FileInput thumbnail={thumbnail} imageUrl={data?.thumbnail} />
+              {thumbnailState.error && (
+                <FormHelperText sx={HelperTextColor}>
+                  {thumbnailState.error.message}
+                </FormHelperText>
+              )}
+            </>
+          )}
+          name={`thumbnail`}
+          control={control}
+          rules={{ required: isEditPage ? false : '썸네일은 필수 입력 사항입니다.' }}
+        />
       </Stack>
     </>
   );

@@ -24,7 +24,7 @@ const SubTraveloguePage = () => {
 
   const handleTraveloguePublish = () => {
     mutate(
-      { travelogueId: parseInt(travelogueId) },
+      { travelogueId },
       {
         onSuccess: ({ data }) => {
           router.push({

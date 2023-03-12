@@ -13,10 +13,8 @@ interface LocationProps {
 
 const CountrySelect = ({ isKorea, name }: LocationProps) => {
   useEffect(() => {
-    if (name) {
-      isKorea ? name.onChange('대한민국') : name.onChange('');
-    }
-  }, [isKorea]);
+    isKorea && name.onChange('대한민국');
+  }, []);
 
   return (
     <>
@@ -26,6 +24,7 @@ const CountrySelect = ({ isKorea, name }: LocationProps) => {
         <Autocomplete
           sx={{ width: '100%' }}
           options={COUNTRIES}
+          value={COUNTRIES.find((c) => c.label === name.value)}
           autoHighlight
           getOptionLabel={(option) => option.label}
           popupIcon={<LocationOnOutlinedIcon />}

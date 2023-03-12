@@ -13,11 +13,27 @@ export interface TravelogueType {
   thumbnail: string;
 }
 
+export interface TravelogueResponseType {
+  country: {
+    name: string;
+  };
+  period: { startDate: number[]; endDate: number[]; nights: number };
+  cost: {
+    transportation: number;
+    lodge: number;
+    etc: number;
+    total: number;
+  };
+  title: string;
+  thumbnail: string;
+  subTravelogueIds: number[];
+}
+
 export type TravelogueFormType = Omit<TravelogueType, 'thumbnail'> & {
   thumbnail: File | null;
 };
 
-export interface TravelogueResponseType {
+export interface TravelogueSaveResponseType {
   id: number;
   days: number;
   nights: number;
