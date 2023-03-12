@@ -9,17 +9,22 @@ interface PostProfileProps {
 }
 
 const TravelogueInfo = ({ travelogueDetail }: PostProfileProps) => {
-  const { nickname, viewCount } = travelogueDetail;
+  const { nickname, viewCount, profileImageUrl } = travelogueDetail;
+
+  console.log(profileImageUrl);
   return (
     <Stack direction='row' spacing={2} my={1}>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={nickname}>
-        <Avatar sx={InfoStyle} />
+        <Avatar
+          src={profileImageUrl}
+          sx={{ ...InfoStyle, backgroundColor: 'gray020.main' }}
+        />
         <SubTitle fontSize='0.9rem' color='gray030.main'>
           {nickname}
         </SubTitle>
       </Stack>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={viewCount}>
-        <VisibilityIcon sx={InfoStyle} />
+        <VisibilityIcon sx={{ ...InfoStyle, color: 'gray020.main' }} />
         <SubTitle fontSize='0.9rem' color='gray030.main'>
           {viewCount}
         </SubTitle>
@@ -30,9 +35,4 @@ const TravelogueInfo = ({ travelogueDetail }: PostProfileProps) => {
 
 export default TravelogueInfo;
 
-const InfoStyle = {
-  width: '1.5rem',
-  height: '1.5rem',
-  color: 'gray030.main',
-  src: 'default',
-};
+const InfoStyle = { width: 20, height: 20 };
