@@ -15,9 +15,10 @@ interface DatePickerProps {
     | ControllerRenderProps<TravelogueType, 'period.startDate'>
     | ControllerRenderProps<TravelogueType, 'period.endDate'>;
   maxDate?: Dayjs;
+  isEditPage: boolean;
 }
 
-const DatePicker = ({ text, control, maxDate }: DatePickerProps) => {
+const DatePicker = ({ text, control, maxDate, isEditPage }: DatePickerProps) => {
   const handleDateChange = (newValue: Dayjs | null) => {
     if (newValue) control.onChange(getDateInfo(newValue));
   };
@@ -35,6 +36,7 @@ const DatePicker = ({ text, control, maxDate }: DatePickerProps) => {
         label={text}
         onChange={handleDateChange}
         disableFuture
+        disabled={isEditPage}
         maxDate={maxDate}
         onError={(reason) => {
           control.name === 'period.startDate' &&

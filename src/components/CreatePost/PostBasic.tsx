@@ -68,8 +68,9 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
             control={startDate}
             maxDate={dayjs(endDate.value)}
             text='시작날짜'
+            isEditPage={isEditPage}
           />
-          <DatePicker control={endDate} text='종료날짜' />
+          <DatePicker control={endDate} text='종료날짜' isEditPage={isEditPage} />
         </Box>
         {(startDateState.error || endDateState.error) && (
           <FormHelperText sx={HelperTextColor}>
