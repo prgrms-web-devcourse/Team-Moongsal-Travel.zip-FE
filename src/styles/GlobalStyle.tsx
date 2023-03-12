@@ -13,7 +13,6 @@ const style = css`
     margin: 0;
     font-family: 'Noto Sans KR', sans-serif;
     line-height: 1;
-    word-spacing: -5px;
   }
 
   div,
