@@ -5,7 +5,12 @@ import { FeedContent, FeedHeader, FeedImage } from '@/components/Travelogue';
 import useAuth from '@/hooks/useAuth';
 import { TravelogueFeedType } from '@/types/travelogue';
 
-const TravelogueFeed = ({ data }: { data: TravelogueFeedType }) => {
+interface TravelogueFeedProps {
+  data: TravelogueFeedType;
+  isBottomPadding?: boolean;
+}
+
+const TravelogueFeed = ({ data, isBottomPadding = false }: TravelogueFeedProps) => {
   const router = useRouter();
   const { handleOpenAuthConfirmModal } = useAuth();
 
@@ -22,8 +27,8 @@ const TravelogueFeed = ({ data }: { data: TravelogueFeedType }) => {
 
   return (
     <Stack
-      spacing={1.5}
-      sx={{ maxWidth: '90%', height: 300, margin: '0 auto', pb: 3, cursor: 'pointer' }}
+      spacing={0.25}
+      sx={{ maxWidth: '100%', cursor: 'pointer', pb: isBottomPadding ? 3 : 0 }}
       onClick={onClickFeed}>
       <FeedHeader
         profileImageUrl={data.member.profileImageUrl}

@@ -14,9 +14,10 @@ const PopularFeed = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    fade: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
   };
 
   if (!popularTravelogues || popularTravelogues.length === 0) {

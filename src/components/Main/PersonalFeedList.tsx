@@ -5,6 +5,7 @@ import { useGetPersonalTravelogues } from '@/api/hooks/travelogue';
 import { Title } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 import useIntersect from '@/hooks/useIntersect';
+import { flexCenterStyle } from '@/styles/commonStyle';
 
 const PersonalFeedList = () => {
   const { data, hasNextPage, isFetching, fetchNextPage } = useGetPersonalTravelogues(5);
@@ -31,9 +32,13 @@ const PersonalFeedList = () => {
         추천 여행 일지
       </Title>
       {personalTravelogues.map((travelogue, index) => (
-        <TravelogueFeed key={String(travelogue.travelogueId + index)} data={travelogue} />
+        <TravelogueFeed
+          key={String(travelogue.travelogueId + index)}
+          data={travelogue}
+          isBottomPadding
+        />
       ))}
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box sx={flexCenterStyle}>
         <Fade in={isFetching}>
           <Box sx={{ bgcolor: 'white.main' }}>
             <CircularProgress color='primary' size={25} />
