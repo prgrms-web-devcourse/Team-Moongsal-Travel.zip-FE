@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Paper,
   Stack,
   styled,
   SwipeableDrawer,
@@ -91,27 +92,42 @@ const Scrap = () => {
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
             <Stack key={storageObjectId} flexDirection='row' p={2}>
-              <ListItem
-                onClick={() => handleClick(storageObjectId)}
+              <Paper
+                key={storageObjectId}
                 sx={{
-                  cursor: 'pointer',
+                  display: 'flex',
                   width: '100%',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
+                  padding: '0.5rem',
+                  boxSizing: 'border-box',
                 }}>
-                <ListItemAvatar>
-                  <Avatar sx={{ bgcolor: 'blue040.main', color: 'blue010.main' }}>
-                    <FolderIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={title} />
-              </ListItem>
-              <IconButton
-                onClick={() => deleteScrapDoc(storageObjectId)}
-                sx={{ color: 'red.main' }}>
-                <DeleteIcon />
-              </IconButton>
+                <ListItem
+                  onClick={() => handleClick(storageObjectId)}
+                  sx={{
+                    cursor: 'pointer',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }}>
+                  <ListItemAvatar>
+                    <Avatar sx={{ bgcolor: 'blue040.main', color: 'blue010.main' }}>
+                      <FolderIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={title}
+                    sx={{
+                      '.MuiTypography-root': {
+                        fontWeight: 700,
+                      },
+                    }}
+                  />
+                </ListItem>
+                <IconButton
+                  onClick={() => deleteScrapDoc(storageObjectId)}
+                  sx={{ color: 'red.main' }}>
+                  <DeleteIcon />
+                </IconButton>
+              </Paper>
             </Stack>
           ))}
       </List>
