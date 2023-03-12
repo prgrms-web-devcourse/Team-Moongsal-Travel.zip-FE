@@ -23,7 +23,7 @@ const TravelInfoItem = ({ title, value, icon }: TravelInfoProps) => {
     <>
       <ListItem sx={{ pl: '0' }}>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar sx={{ backgroundColor: 'blue040.main' }}>
             <SvgIcon component={icon} />
           </Avatar>
         </ListItemAvatar>
