@@ -100,7 +100,7 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
         placeholder='비밀번호 최소 8자 영문/숫자/특수문자'
         label='비밀번호'
         variant='outlined'
-        // type='password'
+        type='password'
         helperText={passwordState.error && passwordState.error.message}
       />
       <TextField
@@ -108,7 +108,7 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
         id='outlined-basic'
         label='비밀번호 확인'
         variant='outlined'
-        // type='password'
+        type='password'
         helperText={passwordConfirmState.error && passwordConfirmState.error.message}
       />
       <FormControl fullWidth>
