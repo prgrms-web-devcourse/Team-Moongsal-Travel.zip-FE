@@ -27,7 +27,7 @@ const PersonalFeedList = () => {
   }
 
   return (
-    <Stack component='section' sx={{ p: 5 }}>
+    <Stack component='section' sx={{ p: '15px' }}>
       <Title bold='bold' fontSize='1.2rem' color='dark.main'>
         추천 여행 일지
       </Title>

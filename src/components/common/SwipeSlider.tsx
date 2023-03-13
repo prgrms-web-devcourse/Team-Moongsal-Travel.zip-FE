@@ -24,7 +24,7 @@ const SwipeSlider = ({ travelogues, fade = false }: SwipeSliderProps) => {
   };
 
   return (
-    <Stack component='section' sx={{ p: 5 }}>
+    <Stack component='section' sx={{ p: '1rem 15px 4rem 15px' }}>
       <Title bold='bold' fontSize='1.2rem' color='dark.main'>
         인기 여행 일지
       </Title>
