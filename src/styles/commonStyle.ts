@@ -35,7 +35,7 @@ export const fontStyle = {
   color: 'dark.main',
   fontSize: '16px',
   fontWeight: '500',
-  pb: '3px',
+  pb: '2px',
 };
 
 export const stepStyle = {
