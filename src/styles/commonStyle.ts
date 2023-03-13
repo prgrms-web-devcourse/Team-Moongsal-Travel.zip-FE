@@ -24,3 +24,10 @@ export const InputStyle = {
     fontWeight: '300',
   },
 };
+
+export const fontStyle = {
+  color: 'dark.main',
+  fontSize: '16px',
+  fontWeight: '500',
+  pb: '3px',
+};

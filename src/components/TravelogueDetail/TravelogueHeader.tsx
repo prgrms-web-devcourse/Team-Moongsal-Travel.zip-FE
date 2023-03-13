@@ -24,7 +24,7 @@ const TravelogueHeader = ({ travelogueDetail }: PostInfoProps) => {
 
   return (
     <Stack>
-      <Title bold='bold' sx={{ mt: 2 }}>
+      <Title bold='bold' color='dark.main' sx={{ mt: 2 }}>
         {title}
       </Title>
       <Stack
