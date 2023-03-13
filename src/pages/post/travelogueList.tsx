@@ -39,7 +39,7 @@ const TravelogueList = () => {
   );
 
   return (
-    <Box component='section' sx={{ px: '15px', mt: '1rem' }}>
+    <Box component='section' sx={{ mt: '1rem' }}>
       <FilterButton setFilter={setFilter} />
       {travelogues.map(
         (travelogue) =>
