@@ -104,6 +104,7 @@ const Scrap = () => {
           borderTopLeftRadius: '2rem',
           borderTopRightRadius: '2rem',
           mt: '18rem',
+          p: 2,
           '&.MuiList-root': {
             backgroundColor: 'blue010.main',
           },
@@ -127,7 +128,7 @@ const Scrap = () => {
         </Button>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
-            <Stack key={storageObjectId} flexDirection='row' px={2} pb={1.5}>
+            <Stack key={storageObjectId} flexDirection='row' pb={1.5}>
               <Paper
                 key={storageObjectId}
                 sx={{
