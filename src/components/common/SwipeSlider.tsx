@@ -34,8 +34,8 @@ const SwipeSlider = ({
   };
 
   return (
-    <Stack component='section' sx={{ p: '1rem 15px 4rem 15px', ...customSx }}>
-      <Title bold='bold' fontSize='1.2rem' color='dark.main'>
+    <Stack component='section' sx={{ p: '1rem 0 3rem 0', ...customSx }}>
+      <Title bold='bold' fontSize='1.4rem' color='dark.main' sx={{ ml: '15px' }}>
         {title}
       </Title>
       <Slider {...settings}>
