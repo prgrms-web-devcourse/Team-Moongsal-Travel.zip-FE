@@ -38,7 +38,7 @@ const GNB = () => {
   };
 
   return (
-    <StyledBottomNavigation value={value} onChange={onChangeNavigationRoute}>
+    <StyledBottomNavigation showLabels onChange={onChangeNavigationRoute}>
       <BottomNavigationAction
         label='Home'
         value='home'
