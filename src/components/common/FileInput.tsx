@@ -32,7 +32,7 @@ const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
         }}
       />
       <label htmlFor='select-image'>
-        <IconButton aria-label='delete' component='span'>
+        <IconButton aria-label='delete' component='span' disableRipple>
           <PhotoCamera />
           <SubTitle>Upload Image</SubTitle>
         </IconButton>

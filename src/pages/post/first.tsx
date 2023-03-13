@@ -1,4 +1,4 @@
-import { Button, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -102,7 +102,10 @@ const First = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleComplete)}>
+    <Box
+      component='form'
+      onSubmit={handleSubmit(handleComplete)}
+      sx={{ px: '15px', mt: '1rem' }}>
       <PostBasic control={control} isEditPage={isEditPage} data={travelogue?.data} />
       <Stack direction='row' justifyContent='flex-end' sx={{ mt: 3, mb: 6 }}>
         {isEditPage ? (
@@ -113,7 +116,7 @@ const First = () => {
           <Button type='submit'>다음</Button>
         )}
       </Stack>
-    </form>
+    </Box>
   );
 };
 
