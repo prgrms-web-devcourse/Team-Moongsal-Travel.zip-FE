@@ -16,7 +16,7 @@ const VisitedRegion = ({ control }: VisitedRegionProps) => {
   const { fields, append, remove } = useFieldArray({ control, name: 'addresses' });
 
   return (
-    <Stack sx={{ mb: '1rem' }} component='ul'>
+    <Stack sx={{ mb: '1rem', p: ' 0' }} component='ul'>
       <Stack direction='row' alignItems='center'>
         <SubTitle>방문한 장소</SubTitle>
         <IconButton
@@ -27,7 +27,12 @@ const VisitedRegion = ({ control }: VisitedRegionProps) => {
         </IconButton>
       </Stack>
       {fields.map((item, index) => (
-        <Stack key={item.id} direction='row' spacing={2} component='li'>
+        <Stack
+          key={item.id}
+          direction='row'
+          spacing={2}
+          component='li'
+          justifyContent={'space-between'}>
           <Controller
             render={({ field }) => (
               <AutoComplete>

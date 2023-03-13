@@ -140,13 +140,13 @@ const style = css`
 
   /* quill editor */
   .ql-toolbar {
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
   }
   .ql-container {
     min-height: 15rem;
-    border-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
   }
   strong,
   .ql-editor strong {

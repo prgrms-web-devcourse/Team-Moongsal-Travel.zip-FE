@@ -20,7 +20,7 @@ const Location = ({ field }: LocationProps) => {
   };
 
   return (
-    <Combobox onSelect={handleRegionSelect} style={{ width: '70%' }}>
+    <Combobox onSelect={handleRegionSelect} style={{ width: '100%' }}>
       <Box sx={locationBoxStyle}>
         <SearchInput
           {...field}
