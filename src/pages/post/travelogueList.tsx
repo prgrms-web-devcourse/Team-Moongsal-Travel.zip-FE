@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { CircularProgress, Fade } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
@@ -7,6 +7,7 @@ import { useGetTravelogueByFilter } from '@/api/hooks/travelogue';
 import { FilterButton } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 import useIntersect from '@/hooks/useIntersect';
+import { fontStyle } from '@/styles/commonStyle';
 import { FilterProps } from '@/types/filter';
 
 const TravelogueList = () => {
@@ -40,13 +41,30 @@ const TravelogueList = () => {
 
   return (
     <Box component='section' sx={{ mt: '1rem' }}>
-      <FilterButton setFilter={setFilter} />
-      {travelogues.map(
-        (travelogue) =>
-          travelogue && (
-            <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
-          ),
-      )}
+      <Stack
+        direction='row'
+        justifyContent='space-between'
+        alignItems='flex-start'
+        sx={{ p: '16px 15px 10px 15px' }}>
+        <Typography component='p' sx={{ ...fontStyle }}>
+          <Typography
+            color='blue070.main'
+            component='span'
+            sx={{ fontWeight: 600, wordBreak: 'break-all' }}>
+            {keyword}
+          </Typography>
+          에 대한 검색 결과입니다.
+        </Typography>
+        <FilterButton setFilter={setFilter} />
+      </Stack>
+      <Stack>
+        {travelogues.map(
+          (travelogue) =>
+            travelogue && (
+              <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
+            ),
+        )}
+      </Stack>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Fade in={isFetching}>
           <Box sx={{ bgcolor: 'white.main' }}>
