@@ -104,14 +104,13 @@ const Scrap = () => {
           borderTopLeftRadius: '2rem',
           borderTopRightRadius: '2rem',
           mt: '18rem',
-          p: 2,
+          p: 3,
           '&.MuiList-root': {
             backgroundColor: 'blue010.main',
           },
         }}>
         <Typography
           sx={{
-            mt: 4,
             mb: 2,
             fontWeight: 900,
             fontSize: '1.5rem',
