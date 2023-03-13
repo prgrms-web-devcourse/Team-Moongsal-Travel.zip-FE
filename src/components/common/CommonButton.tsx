@@ -4,15 +4,21 @@ import { SxProps, Theme } from '@mui/system';
 interface CommonButtonProps {
   content: string;
   customStyle?: SxProps<Theme>;
+  isVariant?: boolean;
   handleClick?: () => void;
 }
 
-const CommonButton = ({ content, customStyle, handleClick }: CommonButtonProps) => {
+const CommonButton = ({
+  content,
+  customStyle,
+  isVariant = true,
+  handleClick,
+}: CommonButtonProps) => {
   return (
     <Button
       onClick={handleClick && handleClick}
       type='button'
-      variant='contained'
+      variant={isVariant ? 'contained' : undefined}
       sx={{ ...buttonStyle, ...customStyle }}>
       {content}
     </Button>
