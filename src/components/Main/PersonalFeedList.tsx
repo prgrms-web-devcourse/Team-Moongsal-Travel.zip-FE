@@ -1,9 +1,11 @@
-import { Box, CircularProgress, Fade } from '@mui/material';
+import { Box, CircularProgress, Fade, Stack } from '@mui/material';
 import { useMemo } from 'react';
 
 import { useGetPersonalTravelogues } from '@/api/hooks/travelogue';
+import { Title } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 import useIntersect from '@/hooks/useIntersect';
+import { flexCenterStyle } from '@/styles/commonStyle';
 
 const PersonalFeedList = () => {
   const { data, hasNextPage, isFetching, fetchNextPage } = useGetPersonalTravelogues(5);
@@ -25,11 +27,18 @@ const PersonalFeedList = () => {
   }
 
   return (
-    <Box component='section' margin='0 auto'>
+    <Stack component='section' sx={{ p: 5 }}>
+      <Title bold='bold' fontSize='1.2rem' color='dark.main'>
+        추천 여행 일지
+      </Title>
       {personalTravelogues.map((travelogue, index) => (
-        <TravelogueFeed key={String(travelogue.travelogueId + index)} data={travelogue} />
+        <TravelogueFeed
+          key={String(travelogue.travelogueId + index)}
+          data={travelogue}
+          isBottomPadding
+        />
       ))}
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box sx={flexCenterStyle}>
         <Fade in={isFetching}>
           <Box sx={{ bgcolor: 'white.main' }}>
             <CircularProgress color='primary' size={25} />
@@ -37,7 +46,7 @@ const PersonalFeedList = () => {
         </Fade>
       </Box>
       <Box height={5} ref={ref} />
-    </Box>
+    </Stack>
   );
 };
 

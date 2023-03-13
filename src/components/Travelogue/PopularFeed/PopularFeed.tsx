@@ -1,9 +1,11 @@
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { Stack } from '@mui/material';
 import Slider from 'react-slick';
 
 import { useGetRecentTravelogue } from '@/api/hooks/travelogue';
+import { Title } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 
 const PopularFeed = () => {
@@ -12,9 +14,10 @@ const PopularFeed = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    fade: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
   };
 
   if (!popularTravelogues || popularTravelogues.length === 0) {
@@ -22,11 +25,18 @@ const PopularFeed = () => {
   }
 
   return (
-    <Slider {...settings}>
-      {popularTravelogues.map((travelogue) => {
-        return <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />;
-      })}
-    </Slider>
+    <Stack component='section' sx={{ p: 5 }}>
+      <Title bold='bold' fontSize='1.2rem' color='dark.main'>
+        인기 여행 일지
+      </Title>
+      <Slider {...settings}>
+        {popularTravelogues.map((travelogue) => {
+          return (
+            <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
+          );
+        })}
+      </Slider>
+    </Stack>
   );
 };
 
