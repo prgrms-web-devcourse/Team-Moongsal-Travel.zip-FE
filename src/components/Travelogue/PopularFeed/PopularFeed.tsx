@@ -4,12 +4,12 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Stack } from '@mui/material';
 import Slider from 'react-slick';
 
-import { useGetRecentTravelogue } from '@/api/hooks/travelogue';
+import { useGetRecentTravelogues } from '@/api/hooks/travelogue';
 import { Title } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
 
 const PopularFeed = () => {
-  const { data: popularTravelogues } = useGetRecentTravelogue();
+  const { data: popularTravelogues } = useGetRecentTravelogues();
 
   const settings = {
     dots: true,
