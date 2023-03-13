@@ -20,7 +20,7 @@ const Profile = () => {
   return (
     <Stack>
       <Management handleOpenEditModal={() => setIsOpen(true)} />
-      <Stack alignItems='center' width={414}>
+      <Stack alignItems='center'>
         <WrittenByMeTravelogues />
         <TemporarySaveTravelogues />
       </Stack>
