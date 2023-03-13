@@ -30,6 +30,7 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
           sx={{
             ...textEllipsis('75%'),
             fontWeight: 'bold',
+            my: 1.2,
           }}>
           {title}
         </Typography>
@@ -49,13 +50,13 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
           </Typography>
         </Row> */}
       </Row>
-      <Row justifyContentType='start'>
+      <Stack direction='row' spacing={1.8} alignItems={'center'}>
         <FeedChip chipTitle='기간' chipContent={`${nights}박 ${days}일`} />
         <FeedChip
           chipTitle='총 경비'
           chipContent={`${totalCost.toLocaleString('ko-KR')}원`}
         />
-      </Row>
+      </Stack>
     </Stack>
   );
 };
