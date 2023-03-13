@@ -1,4 +1,4 @@
-import { Delete as DeleteIcon, Folder as FolderIcon } from '@mui/icons-material';
+import { Delete as DeleteIcon } from '@mui/icons-material';
 import {
   Avatar,
   Box,
@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { scrapBg } from 'public/images';
+import { folder, scrapBg } from 'public/images';
 import { useEffect } from 'react';
 
 import { SubTitle } from '@/components/common';
@@ -127,7 +127,7 @@ const Scrap = () => {
         </Button>
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
-            <Stack key={storageObjectId} flexDirection='row' p={2}>
+            <Stack key={storageObjectId} flexDirection='row' px={2} pb={1.5}>
               <Paper
                 key={storageObjectId}
                 sx={{
@@ -141,13 +141,17 @@ const Scrap = () => {
                   onClick={() => handleClick(storageObjectId)}
                   sx={{
                     cursor: 'pointer',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
+                    width: '90%',
                   }}>
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: 'blue040.main', color: 'blue010.main' }}>
-                      <FolderIcon />
+                  <ListItemAvatar sx={{ mr: 1 }}>
+                    <Avatar
+                      sx={{
+                        bgcolor: 'transparent',
+                        borderRadius: 0,
+                        width: '3rem',
+                        height: '3rem',
+                      }}>
+                      <Image src={folder} alt='document' fill />
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -155,6 +159,9 @@ const Scrap = () => {
                     sx={{
                       '.MuiTypography-root': {
                         fontWeight: 700,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
                       },
                     }}
                   />
