@@ -3,6 +3,7 @@ import { AxiosError } from 'axios';
 import { useRecoilState } from 'recoil';
 
 import { getUserInformation, patchUserInformation } from '@/api/profile';
+import { NICKNAME_PATTERN } from '@/constants/pattern';
 import useImageUpload from '@/hooks/useImageUpload';
 import { userInformationState } from '@/recoil';
 import { UserInformationPatchType } from '@/types/profile';
@@ -35,22 +36,26 @@ export const useUserInformation = () => {
     if (files && files[0]) {
       const { url } = await getImageUrlFromS3(files[0]);
       setUserInformation((state) => ({ ...state, profileImageUrl: url }));
-
-      console.log(userInformation);
     }
   };
 
   const handleChangeNickname = (nickname: string) => {
-    setUserInformation((state) => ({ ...state, nickname }));
+    if (!NICKNAME_PATTERN.value.test(nickname)) {
+      setUserInformation((state) => ({
+        ...state,
+        errorMessage: NICKNAME_PATTERN.message,
+      }));
+
+      return;
+    }
+
+    setUserInformation((state) => ({ ...state, nickname, errorMessage: null }));
   };
 
   const handleChangeUserInformation = () => {
     const { nickname, profileImageUrl } = userInformation;
 
-    mutate({
-      nickname,
-      profileImageUrl,
-    });
+    mutate({ nickname, profileImageUrl });
   };
 
   return {

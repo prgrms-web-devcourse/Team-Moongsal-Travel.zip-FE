@@ -10,7 +10,10 @@ interface MobileAppBarLayoutProps {
 }
 
 const MobileAppBarLayout = ({ handleClose }: MobileAppBarLayoutProps) => {
-  const { handleChangeUserInformation } = useUserInformation();
+  const {
+    userInformation: { errorMessage },
+    handleChangeUserInformation,
+  } = useUserInformation();
 
   return (
     <MobileSizeAppBar>
@@ -25,6 +28,7 @@ const MobileAppBarLayout = ({ handleClose }: MobileAppBarLayoutProps) => {
         <Button
           autoFocus
           color='inherit'
+          disabled={!!errorMessage}
           onClick={() => {
             handleClose && handleClose();
             handleChangeUserInformation();

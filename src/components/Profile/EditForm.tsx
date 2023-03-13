@@ -5,10 +5,9 @@ import { useUserInformation } from '@/api/hooks/profile';
 import { ProfileAvatar } from '@/components/common';
 import { flexCenterStyle } from '@/styles/commonStyle';
 
-
 const EditForm = () => {
   const {
-    userInformation: { nickname, profileImageUrl },
+    userInformation: { nickname, profileImageUrl, errorMessage },
     isLoading,
     handleChangeNickname,
     handleChangeSelectedImage,
@@ -55,7 +54,9 @@ const EditForm = () => {
         variant='outlined'
         defaultValue={nickname}
         autoFocus
+        autoComplete='off'
         fullWidth
+        helperText={errorMessage && errorMessage}
         onChange={({ target }) => handleChangeNickname(target.value)}
       />
     </Stack>

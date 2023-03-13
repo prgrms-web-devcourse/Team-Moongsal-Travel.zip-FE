@@ -6,4 +6,5 @@ export interface UserInformationPatchType {
 export type UserInformationType = {
   email: string;
   birthYear: string;
+  errorMessage?: string | null;
 } & UserInformationPatchType;
