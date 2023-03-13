@@ -2,6 +2,7 @@ import { Close as CloseIcon } from '@mui/icons-material';
 import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
+import { useUserInformation } from '@/api/hooks/profile';
 import { flexCenterStyle, mobileModalLayoutStyle } from '@/styles/commonStyle';
 
 interface MobileAppBarLayoutProps {
@@ -9,12 +10,17 @@ interface MobileAppBarLayoutProps {
 }
 
 const MobileAppBarLayout = ({ handleClose }: MobileAppBarLayoutProps) => {
+  const {
+    userInformation: { errorMessage },
+    handleChangeUserInformation,
+  } = useUserInformation();
+
   return (
     <MobileSizeAppBar>
       <Toolbar sx={{ ...flexCenterStyle, px: 0 }}>
         <IconButton
           edge='start'
-          onClick={handleClose}
+          onClick={handleClose && handleClose}
           sx={{ flex: 1, borderRadius: '4px' }}>
           <CloseIcon />
         </IconButton>
@@ -22,7 +28,11 @@ const MobileAppBarLayout = ({ handleClose }: MobileAppBarLayoutProps) => {
         <Button
           autoFocus
           color='inherit'
-          onClick={handleClose && handleClose}
+          disabled={!!errorMessage}
+          onClick={() => {
+            handleClose && handleClose();
+            handleChangeUserInformation();
+          }}
           sx={{ flex: 1 }}>
           완료
         </Button>

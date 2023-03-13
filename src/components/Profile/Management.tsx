@@ -1,20 +1,18 @@
 import { Stack, Typography } from '@mui/material';
 
+import { useUserInformation } from '@/api/hooks/profile';
 import { CommonButton, ProfileAvatar } from '@/components/common';
 
 interface ManagementProps {
-  nickname: string;
-  profileImage: string;
-  isLoading: boolean;
-  handleChangeUserInformation: () => void;
+  handleOpenEditModal: () => void;
 }
 
-const Management = ({
-  nickname,
-  profileImage,
-  isLoading,
-  handleChangeUserInformation,
-}: ManagementProps) => {
+const Management = ({ handleOpenEditModal }: ManagementProps) => {
+  const {
+    userInformation: { nickname, profileImageUrl },
+    isLoading,
+  } = useUserInformation();
+
   return (
     <Stack
       spacing={2}
@@ -22,7 +20,12 @@ const Management = ({
       alignItems='center'
       justifyContent='center'
       bgcolor='gray005.main'>
-      <ProfileAvatar url={profileImage} size={100} iconSize={5} isLoading={isLoading} />
+      <ProfileAvatar
+        url={profileImageUrl}
+        size={100}
+        iconSize={5}
+        isLoading={isLoading}
+      />
       <Typography
         variant='h2'
         component='h2'
@@ -32,7 +35,7 @@ const Management = ({
       <CommonButton
         content='프로필 수정'
         customStyle={{ height: 40 }}
-        handleClick={handleChangeUserInformation}
+        handleClick={handleOpenEditModal}
       />
     </Stack>
   );

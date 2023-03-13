@@ -6,20 +6,15 @@ import { ContentLink, EditDrawer, Management } from '@/components/Profile';
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { userInformation, isLoading } = useUserInformation();
+  const { isLoading } = useUserInformation();
 
-  if (!userInformation) {
+  if (isLoading) {
     return null;
   }
 
   return (
     <Stack>
-      <Management
-        profileImage={userInformation.profileImageUrl}
-        nickname={userInformation.nickname}
-        isLoading={isLoading}
-        handleChangeUserInformation={() => setIsOpen(true)}
-      />
+      <Management handleOpenEditModal={() => setIsOpen(true)} />
       <Stack alignItems='center'>
         <ContentLink contentName='내가 작성한 게시물' route='/' iconName='edit' />
         <ContentLink contentName='내가 북마크한 게시물' route='/' iconName='bookmark' />
@@ -29,13 +24,7 @@ const Profile = () => {
           iconName='temporarySave'
         />
       </Stack>
-      <EditDrawer
-        isOpen={isOpen}
-        profileImageUrl={userInformation.profileImageUrl}
-        nickname={userInformation.nickname}
-        isLoading={isLoading}
-        handleClose={() => setIsOpen(false)}
-      />
+      <EditDrawer isOpen={isOpen} handleCloseEditModal={() => setIsOpen(false)} />
     </Stack>
   );
 };

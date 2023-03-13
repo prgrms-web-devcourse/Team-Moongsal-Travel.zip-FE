@@ -1,17 +1,17 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { getUserInformation, patchUserInformation } from '@/api/profile';
-import { UserInformationPatchType, UserInformationType } from '@/types/profile';
+import { NICKNAME_PATTERN } from '@/constants/pattern';
+import useImageUpload from '@/hooks/useImageUpload';
+import { userInformationState } from '@/recoil';
+import { UserInformationPatchType } from '@/types/profile';
 
 export const useUserInformation = () => {
-  const [userInformation, setUserInformation] = useState<UserInformationType>({
-    email: '',
-    nickname: '',
-    profileImageUrl: '',
-    birthYear: '',
-  });
+  const [userInformation, setUserInformation] = useRecoilState(userInformationState);
+
+  const { getImageUrlFromS3 } = useImageUpload();
 
   const { isLoading } = useQuery({
     queryKey: ['USER_INFORMATION'],
@@ -32,14 +32,37 @@ export const useUserInformation = () => {
     },
   });
 
-  // Patch Method Test
-  const handleChangeUserInformation = () => {
-    mutate({
-      nickname: 'moom',
-      profileImageUrl:
-        'https://travel-zip-bucket.s3.ap-northeast-2.amazonaws.com/upload/4ad6520e-7498-4d19-b022-67701a6599e1EfW549HUMAEGALk.jpeg',
-    });
+  const handleChangeSelectedImage = async (files: FileList | null) => {
+    if (files && files[0]) {
+      const { url } = await getImageUrlFromS3(files[0]);
+      setUserInformation((state) => ({ ...state, profileImageUrl: url }));
+    }
   };
 
-  return { userInformation, isLoading, handleChangeUserInformation } as const;
+  const handleChangeNickname = (nickname: string) => {
+    if (!NICKNAME_PATTERN.value.test(nickname)) {
+      setUserInformation((state) => ({
+        ...state,
+        errorMessage: NICKNAME_PATTERN.message,
+      }));
+
+      return;
+    }
+
+    setUserInformation((state) => ({ ...state, nickname, errorMessage: null }));
+  };
+
+  const handleChangeUserInformation = () => {
+    const { nickname, profileImageUrl } = userInformation;
+
+    mutate({ nickname, profileImageUrl });
+  };
+
+  return {
+    userInformation,
+    isLoading,
+    handleChangeSelectedImage,
+    handleChangeNickname,
+    handleChangeUserInformation,
+  } as const;
 };
