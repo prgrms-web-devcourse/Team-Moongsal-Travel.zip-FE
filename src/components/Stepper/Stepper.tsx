@@ -26,10 +26,10 @@ const HorizontalLinearStepper = ({
   }, [lastStep]);
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ padding: '0 15px' }}>
       <Stepper activeStep={activeStep} sx={{ height: '80px' }}>
         {steps.map((label) => (
-          <Step key={label}>
+          <Step key={label} sx={StepStyle}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
@@ -46,7 +46,8 @@ const HorizontalLinearStepper = ({
               onClick={!lastStep ? () => setActiveStep((prev) => prev + 1) : undefined}
               disabled={!lastStep ? !authSuccess : !validNickname}
               variant='contained'
-              fullWidth>
+              fullWidth
+              sx={{ backgroundColor: 'blue070.main', mt: 1.5, height: '40px' }}>
               {lastStep ? '완료' : '다음'}
             </Button>
           </Box>
@@ -57,3 +58,14 @@ const HorizontalLinearStepper = ({
 };
 
 export default HorizontalLinearStepper;
+
+const StepStyle = {
+  '.MuiStepIcon-text': {
+    fontFamily: 'Pretendard-Regular',
+  },
+  '.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root': {
+    '&.Mui-active, &.Mui-completed': {
+      color: 'blue070.main',
+    },
+  },
+};

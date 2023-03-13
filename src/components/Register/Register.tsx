@@ -19,7 +19,7 @@ const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      maxHeight: ITEM_HEIGHT * 3 + ITEM_PADDING_TOP,
       width: 250,
     },
   },
@@ -86,11 +86,9 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
             setValidNickname(false);
           }}
           helperText={nicknameState.error && nicknameState.error.message}
+          sx={InputStyle}
         />
-        <Button
-          variant='contained'
-          sx={{ width: '150px', height: '56px' }}
-          onClick={handleVerifyNickname}>
+        <Button variant='contained' sx={ButtonStyle} onClick={handleVerifyNickname}>
           중복확인
         </Button>
       </Stack>
@@ -102,6 +100,7 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
         variant='outlined'
         type='password'
         helperText={passwordState.error && passwordState.error.message}
+        sx={InputStyle}
       />
       <TextField
         {...passwordConfirm}
@@ -110,6 +109,7 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
         variant='outlined'
         type='password'
         helperText={passwordConfirmState.error && passwordConfirmState.error.message}
+        sx={InputStyle}
       />
       <FormControl fullWidth>
         <InputLabel id='demo-simple-select-label'>출생연도</InputLabel>
@@ -125,3 +125,19 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
 };
 
 export default Register;
+
+const ButtonStyle = {
+  width: '150px',
+  height: '56px',
+  backgroundColor: 'blue070.main',
+  fontWeight: '400',
+} as const;
+
+const InputStyle = {
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: 'blue070.main',
+    },
+    fontWeight: '300',
+  },
+};
