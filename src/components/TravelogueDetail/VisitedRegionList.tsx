@@ -60,6 +60,9 @@ const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
                     width: '16px',
                     position: 'absolute',
                     right: '10px',
+                    '&.MuiSvgIcon-root:hover': {
+                      color: 'blue050.main',
+                    },
                   }}
                 />
               }
