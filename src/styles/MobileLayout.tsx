@@ -7,10 +7,15 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
 export default MobileLayout;
 
 const Container = styled('div')(({ theme }) => ({
+  height: '100%',
   boxSizing: 'border-box',
-  width: '414px',
   margin: 'auto',
   [theme.breakpoints.up('sm')]: {
-    minWidth: '414px',
+    minWidth: '390px',
+    maxWidth: '414px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    minWidth: '340px',
+    maxWidth: '600px',
   },
 }));

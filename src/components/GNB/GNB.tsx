@@ -50,24 +50,28 @@ const GNB = () => {
       <BottomNavigationAction
         label='홈'
         value='home'
+        disableRipple
         icon={<HomeIcon fontSize='medium' />}
         sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='작성'
         value='add'
+        disableRipple
         icon={<CreateOutlinedIcon fontSize='medium' />}
         sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='스크랩'
         value='scrap'
+        disableRipple
         icon={<FolderIcon fontSize='medium' />}
         sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='마이페이지'
         value='profile'
+        disableRipple
         icon={<PersonIcon fontSize='medium' />}
         sx={GNBActionStyle}
       />
@@ -78,18 +82,20 @@ const GNB = () => {
 export default GNB;
 
 const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
-  // [theme.breakpoints.down('mobile')]: {
-  //   width: 390,
-  // },
-  // [theme.breakpoints.up('mobile')]: {
-  //   width: 414,
-  // },
-  width: '414px',
+  width: '100%',
   position: 'fixed',
   bottom: 0,
   backgroundColor: theme.palette.white.main,
-  minHeight: 65,
+  height: 65,
   boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.2)',
+  [theme.breakpoints.up('sm')]: {
+    minWidth: '390px',
+    maxWidth: '414px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    minWidth: '340px',
+    maxWidth: '600px',
+  },
 }));
 
 const GNBActionStyle = {
