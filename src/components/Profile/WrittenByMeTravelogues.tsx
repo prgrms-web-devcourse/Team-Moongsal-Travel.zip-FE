@@ -12,7 +12,11 @@ const WrittenByMeTravelogues = () => {
 
   return (
     <Box sx={{ width: 414 }}>
-      <SwipeSlider travelogues={travelogues} title='내가 작성한 여행 일지' />
+      <SwipeSlider
+        travelogues={travelogues}
+        title='내가 작성한 여행 일지'
+        customSx={{ py: 2.5 }}
+      />
     </Box>
   );
 };

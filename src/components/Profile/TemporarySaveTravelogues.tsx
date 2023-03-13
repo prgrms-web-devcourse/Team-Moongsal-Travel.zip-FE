@@ -12,7 +12,11 @@ const TemporarySaveTravelogues = () => {
 
   return (
     <Box sx={{ width: 414 }}>
-      <SwipeSlider travelogues={travelogues} title='임시 저장 여행 일지' />
+      <SwipeSlider
+        travelogues={travelogues}
+        title='임시 저장 여행 일지'
+        customSx={{ py: 2.5, mb: 5 }}
+      />
     </Box>
   );
 };

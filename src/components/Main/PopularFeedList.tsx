@@ -8,7 +8,9 @@ const PopularFeedList = () => {
     return null;
   }
 
-  return <SwipeSlider travelogues={popularTravelogues} fade />;
+  return (
+    <SwipeSlider travelogues={popularTravelogues} title='인기 여행 일지' fade autoplay />
+  );
 };
 
 export default PopularFeedList;
