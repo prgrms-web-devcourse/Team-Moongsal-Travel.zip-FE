@@ -84,32 +84,35 @@ const Scrap = () => {
           </Box>
         </Box>
       </SwipeableDrawer>
-      <Image
-        src={scrapBg}
-        alt={scrapBg}
-        width={414}
-        height={355}
-        style={{
-          position: 'absolute',
-          top: '55px',
-          paddingBottom: '4rem',
-          boxSizing: 'border-box',
-          backgroundColor: '#c4e2f5',
-        }}
-      />
       <List
         sx={{
-          minHeight: '51vh',
+          minHeight: 'calc(100vh - 18rem - 65px)',
           display: 'flex',
           flexDirection: 'column',
           borderTopLeftRadius: '2rem',
           borderTopRightRadius: '2rem',
           mt: '18rem',
           p: 3,
+          boxSizing: 'border-box',
           '&.MuiList-root': {
             backgroundColor: 'blue010.main',
           },
         }}>
+        <Image
+          src={scrapBg}
+          alt={scrapBg}
+          width={414}
+          height={355}
+          style={{
+            position: 'absolute',
+            top: '-295px',
+            left: 0,
+            paddingBottom: '3.5rem',
+            boxSizing: 'border-box',
+            backgroundColor: '#c4e2f5',
+            zIndex: -1,
+          }}
+        />
         <Typography
           sx={{
             mb: 2,
