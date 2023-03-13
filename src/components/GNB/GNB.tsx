@@ -61,7 +61,7 @@ const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   //   width: 414,
   // },
   width: '414px',
-  position: 'sticky',
+  position: 'fixed',
   bottom: 0,
   backgroundColor: theme.palette.blue010.main,
   minHeight: 65,
