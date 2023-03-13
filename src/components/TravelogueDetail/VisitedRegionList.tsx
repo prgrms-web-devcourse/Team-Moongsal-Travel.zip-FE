@@ -14,9 +14,12 @@ interface VisitedRegionProps {
 
 const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
   const [open, setOpen] = useState(false);
+  const [content, setContent] = useState<string>('');
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (value: string) => {
     setOpen(true);
+    console.log(value);
+    setContent(value);
   };
 
   const onClose = () => {
@@ -45,7 +48,7 @@ const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
                   color: 'white.main',
                 },
               }}
-              onDelete={handleClickOpen}
+              onDelete={() => handleClickOpen(region)}
               deleteIcon={
                 <AddIcon
                   sx={{
@@ -56,7 +59,7 @@ const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
                 />
               }
             />
-            <ScrapDialog open={open} onClose={onClose} content={region} />
+            <ScrapDialog open={open} onClose={onClose} content={content} />
           </Fragment>
         ))}
       </Stack>
