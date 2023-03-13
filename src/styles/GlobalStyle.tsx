@@ -34,7 +34,6 @@ const style = css`
   h5,
   h6,
   p,
-  blockquote,
   pre,
   a,
   abbr,
@@ -66,9 +65,6 @@ const style = css`
   dl,
   dt,
   dd,
-  ol,
-  ul,
-  li,
   fieldset,
   form,
   label,
@@ -122,21 +118,6 @@ const style = css`
   section {
     display: block;
   }
-  ol,
-  ul {
-    list-style: none;
-  }
-  blockquote,
-  q {
-    quotes: none;
-  }
-  blockquote:before,
-  blockquote:after,
-  q:before,
-  q:after {
-    content: '';
-    content: none;
-  }
   table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -157,14 +138,61 @@ const style = css`
   }
 
   /* quill editor */
+  .ql-toolbar {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+  .ql-container {
+    min-height: 15rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+  }
+  strong,
   .ql-editor strong {
     font-weight: bold;
   }
+  em,
   .ql-editor em {
     font-style: italic;
   }
   .ql-editor {
     word-spacing: 0;
+  }
+  .ql-align-center {
+    text-align: center;
+  }
+  .ql-align-right {
+    text-align: right;
+  }
+  .ql-align-justify {
+    text-align: justify;
+  }
+  blockquote {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #e3edf7;
+    border-left: 6px solid #66b2f5;
+  }
+  blockquote p {
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.7em;
+  }
+  h3 {
+    font-size: 1.35em;
+  }
+  h4 {
+    font-size: 1em;
+  }
+  h5 {
+    font-size: 0.83em;
+  }
+  h6 {
+    font-size: 0.67em;
   }
 
   .readable-hidden {
