@@ -7,13 +7,12 @@ interface FeedSubContent {
 
 const FeedChip = ({ chipTitle, chipContent }: FeedSubContent) => {
   return (
-    <Stack direction='row' alignItems={'center'} spacing={0.6}>
+    <Stack direction='row' alignItems={'center'} spacing={0.5}>
       <Typography
         component='div'
         sx={{
           fontSize: '14px',
           color: 'gray030.main',
-          fontFamily: 'Pretendard-Regular',
         }}>
         {chipTitle}
       </Typography>

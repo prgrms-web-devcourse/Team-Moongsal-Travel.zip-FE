@@ -59,5 +59,5 @@ export default FeedHeader;
 
 const fontStyle = {
   fontWeight: '500',
-  fontFamily: 'Pretendard-Regular',
+  pb: '3px',
 };
