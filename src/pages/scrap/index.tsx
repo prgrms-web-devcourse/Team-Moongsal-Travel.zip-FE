@@ -101,9 +101,9 @@ const Scrap = () => {
         <Image
           src={scrapBg}
           alt={scrapBg}
-          width={414}
           height={355}
           style={{
+            width: '100%',
             position: 'absolute',
             top: '-295px',
             left: 0,

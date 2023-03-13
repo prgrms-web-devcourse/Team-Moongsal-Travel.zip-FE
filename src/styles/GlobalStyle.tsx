@@ -16,6 +16,7 @@ const style = css`
   }
 
   body {
+    height: 100%;
     margin: 0;
     padding-bottom: 65px;
     font-family: 'Noto Sans KR', sans-serif;
