@@ -9,6 +9,7 @@ export { default as ProfileAvatar } from './ProfileAvatar';
 export { default as Row } from './Row';
 export { default as SigninLeadModal } from './SigninLeadModal';
 export { default as SubTitle } from './SubTitle';
+export { default as SwipeSlider } from './SwipeSlider';
 export { default as TemporaryButton } from './TemporaryButton';
 export { default as Title } from './Titlte';
 export { default as Transition } from './Transition';

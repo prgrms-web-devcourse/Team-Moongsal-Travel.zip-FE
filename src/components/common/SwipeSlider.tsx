@@ -1,7 +1,7 @@
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { Stack } from '@mui/material';
+import { Stack, SxProps, Theme } from '@mui/material';
 import Slider from 'react-slick';
 
 import { Title } from '@/components/common';
@@ -10,23 +10,33 @@ import { TravelogueFeedType } from '@/types/travelogue';
 
 interface SwipeSliderProps {
   travelogues: TravelogueFeedType[];
+
+  title: string;
+  customSx?: SxProps<Theme>;
   fade?: boolean;
+  autoplay?: boolean;
 }
 
-const SwipeSlider = ({ travelogues, fade = false }: SwipeSliderProps) => {
+const SwipeSlider = ({
+  travelogues,
+  title,
+  customSx,
+  fade = false,
+  autoplay = false,
+}: SwipeSliderProps) => {
   const settings = {
     dots: true,
     infinite: true,
-    fade,
-    autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
+    fade,
+    autoplay,
   };
 
   return (
-    <Stack component='section' sx={{ p: '1rem 15px 4rem 15px' }}>
+    <Stack component='section' sx={{ p: '1rem 15px 4rem 15px', ...customSx }}>
       <Title bold='bold' fontSize='1.2rem' color='dark.main'>
-        인기 여행 일지
+        {title}
       </Title>
       <Slider {...settings}>
         {travelogues.map((travelogue) => {
