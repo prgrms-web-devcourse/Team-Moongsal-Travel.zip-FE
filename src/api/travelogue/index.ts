@@ -6,7 +6,7 @@ import { FilterAxiosProps } from '@/types/filter';
 import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
 
 export const getRecentTravelogueList = async (
-  page = 1,
+  page = 0,
 ): Promise<TravelogueFeedType[]> => {
   const response = await http.get(`api/travelogues?&page=${page}`);
 
