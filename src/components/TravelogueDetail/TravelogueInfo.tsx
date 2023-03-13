@@ -1,7 +1,8 @@
 import { Visibility as VisibilityIcon } from '@mui/icons-material';
-import { Avatar, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import { SubTitle } from '@/components/common';
+import UserProfile from '@/components/common/UserProfile';
 import { TravelogueDetailType } from '@/types/travelogue';
 
 interface PostProfileProps {
@@ -14,13 +15,7 @@ const TravelogueInfo = ({ travelogueDetail }: PostProfileProps) => {
   return (
     <Stack direction='row' spacing={2}>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={nickname}>
-        <Avatar
-          src={profileImageUrl !== 'default' ? profileImageUrl : undefined}
-          sx={{ ...InfoStyle, backgroundColor: 'gray020.main' }}
-        />
-        <SubTitle fontSize='0.9rem' color='gray030.main'>
-          {nickname}
-        </SubTitle>
+        <UserProfile profileImageUrl={profileImageUrl} nickname={nickname} />
       </Stack>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={viewCount}>
         <VisibilityIcon sx={{ ...InfoStyle, color: 'gray020.main' }} />

@@ -1,5 +1,6 @@
-import { Person as PersonIcon } from '@mui/icons-material';
 import { Avatar, Skeleton } from '@mui/material';
+import Image from 'next/image';
+import { avatar } from 'public/images';
 
 interface ProfileAvatarProps {
   url: string;
@@ -16,8 +17,8 @@ const ProfileAvatar = ({ url, size, iconSize, isLoading }: ProfileAvatarProps) =
   return (
     <Avatar
       src={url !== 'default' ? url : undefined}
-      sx={{ bgcolor: 'gray020.main', width: size, height: size }}>
-      {url === 'default' && <PersonIcon sx={{ fontSize: `${iconSize}rem` }} />}
+      sx={{ bgcolor: 'gray020.main', width: size, height: size, textAlign: 'center' }}>
+      {url === 'default' && <Image src={avatar} width={iconSize} alt='' />}
     </Avatar>
   );
 };
