@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 import { useUserInformation } from '@/api/hooks/profile';
 import { CommonButton, ProfileAvatar } from '@/components/common';
@@ -16,25 +16,37 @@ const Management = ({ handleOpenEditModal }: ManagementProps) => {
   return (
     <Stack
       spacing={2}
-      minHeight={350}
+      minHeight={175}
       alignItems='center'
       justifyContent='center'
-      bgcolor='gray005.main'>
-      <ProfileAvatar
-        url={profileImageUrl}
-        size={100}
-        iconSize={5}
-        isLoading={isLoading}
-      />
-      <Typography
-        variant='h2'
-        component='h2'
-        sx={{ font: '1.25rem bold', color: 'dark.main' }}>
-        {nickname}
-      </Typography>
+      bgcolor='white.main'>
+      <Box
+        sx={{
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'start',
+          alignItems: 'center',
+          px: 5,
+          boxSizing: 'border-box',
+          gap: 2.5,
+        }}>
+        <ProfileAvatar
+          url={profileImageUrl}
+          size={75}
+          iconSize={5}
+          isLoading={isLoading}
+        />
+        <Typography
+          variant='h2'
+          component='h2'
+          sx={{ font: '1.25rem bold', color: 'dark.main' }}>
+          {nickname}
+        </Typography>
+      </Box>
+
       <CommonButton
         content='프로필 수정'
-        customStyle={{ height: 40 }}
+        customStyle={{ height: 40, bgcolor: 'blue050.main' }}
         handleClick={handleOpenEditModal}
       />
     </Stack>

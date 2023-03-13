@@ -2,7 +2,12 @@ import { Stack } from '@mui/material';
 import { useState } from 'react';
 
 import { useUserInformation } from '@/api/hooks/profile';
-import { ContentLink, EditDrawer, Management } from '@/components/Profile';
+import {
+  EditDrawer,
+  Management,
+  TemporarySaveTravelogues,
+  WrittenByMeTravelogues,
+} from '@/components/Profile';
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,14 +20,9 @@ const Profile = () => {
   return (
     <Stack>
       <Management handleOpenEditModal={() => setIsOpen(true)} />
-      <Stack alignItems='center'>
-        <ContentLink contentName='내가 작성한 게시물' route='/' iconName='edit' />
-        <ContentLink contentName='내가 북마크한 게시물' route='/' iconName='bookmark' />
-        <ContentLink
-          contentName='임시 저장한 게시글'
-          route='/'
-          iconName='temporarySave'
-        />
+      <Stack alignItems='center' width={414}>
+        <WrittenByMeTravelogues />
+        <TemporarySaveTravelogues />
       </Stack>
       <EditDrawer isOpen={isOpen} handleCloseEditModal={() => setIsOpen(false)} />
     </Stack>
