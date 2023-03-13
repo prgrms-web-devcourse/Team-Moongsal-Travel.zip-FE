@@ -54,12 +54,13 @@ const GNB = () => {
 export default GNB;
 
 const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
-  [theme.breakpoints.down('mobile')]: {
-    width: 390,
-  },
-  [theme.breakpoints.up('mobile')]: {
-    width: 414,
-  },
+  // [theme.breakpoints.down('mobile')]: {
+  //   width: 390,
+  // },
+  // [theme.breakpoints.up('mobile')]: {
+  //   width: 414,
+  // },
+  width: '414px',
   position: 'fixed',
   bottom: 0,
   backgroundColor: theme.palette.blue010.main,

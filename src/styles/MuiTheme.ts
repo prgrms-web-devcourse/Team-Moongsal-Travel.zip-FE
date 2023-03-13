@@ -20,7 +20,6 @@ declare module '@mui/material/styles' {
     md: true;
     lg: true;
     xl: true;
-    mobile: true; // adds the `mobile` breakpoint
   }
 }
 
@@ -50,7 +49,6 @@ export const theme = createTheme({
   },
   breakpoints: {
     values: {
-      mobile: 390,
       xs: 0,
       sm: 600,
       md: 900,

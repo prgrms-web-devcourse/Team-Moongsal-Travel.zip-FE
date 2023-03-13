@@ -1,4 +1,5 @@
 import {
+  Add as AddIcon,
   LocationOn as LocationOnIcon,
   PushPin as PushPinIcon,
 } from '@mui/icons-material';
@@ -13,9 +14,11 @@ interface VisitedRegionProps {
 
 const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
   const [open, setOpen] = useState(false);
+  const [content, setContent] = useState<string>('');
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (value: string) => {
     setOpen(true);
+    setContent(value);
   };
 
   const onClose = () => {
@@ -35,13 +38,27 @@ const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
         {addresses.map(({ region }, i) => (
           <Fragment key={i}>
             <Chip
-              variant='outlined'
-              color='primary'
-              icon={<LocationOnIcon sx={{ width: '17px' }} />}
+              variant='filled'
+              icon={<LocationOnIcon sx={{ width: '17px' }} color='white' />}
               label={region}
-              onClick={handleClickOpen}
+              sx={{
+                backgroundColor: 'blue040.main',
+                '.MuiChip-deleteIcon': {
+                  color: 'white.main',
+                },
+              }}
+              onDelete={() => handleClickOpen(region)}
+              deleteIcon={
+                <AddIcon
+                  sx={{
+                    width: '16px',
+                    position: 'absolute',
+                    right: '10px',
+                  }}
+                />
+              }
             />
-            <ScrapDialog open={open} onClose={onClose} content={region} />
+            <ScrapDialog open={open} onClose={onClose} content={content} />
           </Fragment>
         ))}
       </Stack>

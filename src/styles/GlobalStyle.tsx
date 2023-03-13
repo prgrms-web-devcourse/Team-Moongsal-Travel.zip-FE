@@ -11,6 +11,7 @@ const style = css`
 
   body {
     margin: 0;
+    padding-bottom: 65px;
     font-family: 'Noto Sans KR', sans-serif;
     line-height: 1;
   }

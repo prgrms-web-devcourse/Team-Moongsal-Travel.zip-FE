@@ -45,8 +45,4 @@ const TravelInfo = ({ travelogueDetail }: PostCategoryProps) => {
 
 export default TravelInfo;
 
-const ListStyle = {
-  width: '50%',
-  maxWidth: 360,
-  bgcolor: 'background.paper',
-};
+const ListStyle = { width: '50%', maxWidth: 360 };

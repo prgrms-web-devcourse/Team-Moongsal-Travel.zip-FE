@@ -1,4 +1,5 @@
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
+import { PushPin as PushPinIcon } from '@mui/icons-material';
 import {
   Button,
   Grid,
@@ -10,7 +11,9 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { scrapBg } from 'public/images';
 import { useEffect, useState } from 'react';
 
 import { deleteScrap, getScrapDetail } from '@/api/scrap';
@@ -70,27 +73,71 @@ const ScrapDetail = () => {
 
   return (
     <>
-      <Stack>
-        <Typography sx={{ mt: 4, mb: 2 }} variant='h6' component='div'>
+      <Stack
+        sx={{
+          minHeight: 'calc(100vh - 18rem - 65px)',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          borderTopLeftRadius: '2rem',
+          borderTopRightRadius: '2rem',
+          mt: '18rem',
+          p: 3,
+          backgroundColor: 'blue010.main',
+          boxSizing: 'border-box',
+        }}>
+        <Image
+          src={scrapBg}
+          alt={scrapBg}
+          width={414}
+          height={355}
+          style={{
+            position: 'absolute',
+            top: '-295px',
+            left: 0,
+            paddingBottom: '3.5rem',
+            boxSizing: 'border-box',
+            backgroundColor: '#c4e2f5',
+            zIndex: -1,
+          }}
+        />
+        <Typography
+          sx={{
+            mt: 4,
+            mb: 2,
+            fontWeight: 900,
+            fontSize: '1.5rem',
+            color: 'blue040.main',
+          }}
+          variant='h6'
+          component='div'>
           {scrapTitle}
         </Typography>
         <Grid container spacing={2}>
           {scrapContents &&
             scrapContents.map(({ scrapObjectId, placeName, postId }) => (
               <Grid item key={scrapObjectId} xs={6}>
-                <Paper elevation={3}>
-                  <ListItem
-                    sx={{
-                      display: 'flex',
-                      px: 1,
-                    }}>
+                <Paper
+                  elevation={1}
+                  sx={{
+                    display: 'flex',
+                    width: '100%',
+                    padding: '0.5rem 0',
+                    boxSizing: 'border-box',
+                    borderRadius: '0.5rem',
+                  }}>
+                  <ListItem>
+                    <PushPinIcon sx={{ color: 'blue050.main', mr: 1 }} />
                     <ListItemText
                       primary={placeName}
                       sx={{
-                        width: '80%',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
+                        width: '100%',
+                        '.MuiTypography-root': {
+                          fontWeight: 700,
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        },
                       }}
                     />
                     <Button

@@ -23,24 +23,38 @@ const TravelogueHeader = ({ travelogueDetail }: PostInfoProps) => {
   };
 
   return (
-    <Stack spacing={0.5}>
+    <Stack>
       <Title bold='bold' sx={{ mt: 2 }}>
         {title}
       </Title>
-      <Stack direction='row' justifyContent={'space-between'} alignItems={'center'}>
+      <Stack
+        direction='row'
+        justifyContent={'space-between'}
+        alignItems={'center'}
+        mt={0.5}>
         <TravelogueInfo travelogueDetail={travelogueDetail} />
         {isWriter && (
           <Stack direction='row' spacing={1}>
-            <Button variant='text' sx={{ minWidth: 0 }} onClick={handleEditClick}>
+            <Button
+              variant='text'
+              sx={{ minWidth: 0 }}
+              color='blue050'
+              onClick={handleEditClick}>
               수정
             </Button>
-            <Button variant='text' sx={{ minWidth: 0, ml: 0 }}>
+            <Button variant='text' sx={{ minWidth: 0, ml: 0 }} color='blue050'>
               삭제
             </Button>
           </Stack>
         )}
       </Stack>
-      <Box sx={{ position: 'relative', width: '100%', height: '220px' }}>
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: '230px',
+          mt: 1,
+        }}>
         <Image
           src={thumbnail}
           fill
