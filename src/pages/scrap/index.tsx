@@ -141,7 +141,7 @@ const Scrap = () => {
                   onClick={() => handleClick(storageObjectId)}
                   sx={{
                     cursor: 'pointer',
-                    width: '90%',
+                    width: '85%',
                   }}>
                   <ListItemAvatar sx={{ mr: 1 }}>
                     <Avatar
