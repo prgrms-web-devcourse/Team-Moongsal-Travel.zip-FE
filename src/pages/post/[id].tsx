@@ -66,4 +66,4 @@ const SubTraveloguePage = () => {
 
 export default SubTraveloguePage;
 
-const layout = { padding: '0 24px' };
+const layout = { padding: '16px 24px' };

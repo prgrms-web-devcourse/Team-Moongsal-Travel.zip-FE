@@ -113,7 +113,9 @@ const First = () => {
             완료
           </Button>
         ) : (
-          <Button type='submit'>다음</Button>
+          <Button type='submit' sx={{ color: 'blue050.main' }}>
+            다음
+          </Button>
         )}
       </Stack>
     </Box>
