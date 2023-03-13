@@ -4,25 +4,24 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Stack } from '@mui/material';
 import Slider from 'react-slick';
 
-import { useGetRecentTravelogues } from '@/api/hooks/travelogue';
 import { Title } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
+import { TravelogueFeedType } from '@/types/travelogue';
 
-const PopularFeed = () => {
-  const { data: popularTravelogues } = useGetRecentTravelogues();
+interface SwipeSliderProps {
+  travelogues: TravelogueFeedType[];
+  fade?: boolean;
+}
 
+const SwipeSlider = ({ travelogues, fade = false }: SwipeSliderProps) => {
   const settings = {
     dots: true,
     infinite: true,
-    fade: true,
+    fade,
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
   };
-
-  if (!popularTravelogues || popularTravelogues.length === 0) {
-    return null;
-  }
 
   return (
     <Stack component='section' sx={{ p: 5 }}>
@@ -30,7 +29,7 @@ const PopularFeed = () => {
         인기 여행 일지
       </Title>
       <Slider {...settings}>
-        {popularTravelogues.map((travelogue) => {
+        {travelogues.map((travelogue) => {
           return (
             <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
           );
@@ -40,4 +39,4 @@ const PopularFeed = () => {
   );
 };
 
-export default PopularFeed;
+export default SwipeSlider;
