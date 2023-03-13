@@ -1,7 +1,6 @@
-import { Person } from '@mui/icons-material';
 import { Avatar, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
-import { location } from 'public/images';
+import { avatar, location } from 'public/images';
 
 import { TravelogueFeedType } from '@/types/travelogue';
 
@@ -20,13 +19,15 @@ const FeedHeader = ({
       justifyContent='space-between'
       my={0.8}
       sx={{ height: '30px' }}>
-      <Stack direction='row' alignItems='center' spacing={1}>
+      <Stack direction='row' alignItems='center' spacing={0.8}>
         <Avatar
           src={profileImageUrl !== 'default' ? profileImageUrl : undefined}
-          sx={{ bgcolor: 'gray020.main', width: 25, height: 25, textAlign: 'center' }}>
-          {profileImageUrl === 'default' && <Person sx={{ fontSize: '1.1rem' }} />}
+          sx={{ bgcolor: 'gray020.main', width: 28, height: 28, textAlign: 'center' }}>
+          {profileImageUrl === 'default' && <Image src={avatar} width={28} alt='' />}
         </Avatar>
-        <Typography component='span' sx={{ color: 'dark.main', ...fontStyle }}>
+        <Typography
+          component='span'
+          sx={{ color: 'dark.main', fontSize: '16px', ...fontStyle }}>
           {nickname}
         </Typography>
       </Stack>
@@ -44,7 +45,9 @@ const FeedHeader = ({
           px: '10px',
         }}>
         <Image src={location} width={12} alt='' />
-        <Typography component='span' sx={{ ...fontStyle, color: 'blue050.main' }}>
+        <Typography
+          component='span'
+          sx={{ ...fontStyle, color: 'blue050.main', fontSize: '14px' }}>
           {country}
         </Typography>
       </Stack>
@@ -55,6 +58,6 @@ const FeedHeader = ({
 export default FeedHeader;
 
 const fontStyle = {
-  fontSize: '14px',
   fontWeight: '500',
+  fontFamily: 'Pretendard-Regular',
 };
