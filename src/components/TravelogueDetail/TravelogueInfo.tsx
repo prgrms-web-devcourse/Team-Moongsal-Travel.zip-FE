@@ -12,7 +12,7 @@ const TravelogueInfo = ({ travelogueDetail }: PostProfileProps) => {
   const { nickname, viewCount, profileImageUrl } = travelogueDetail;
 
   return (
-    <Stack direction='row' spacing={2} my={1}>
+    <Stack direction='row' spacing={2} my={1} mb={2}>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={nickname}>
         <Avatar
           src={profileImageUrl !== 'default' ? profileImageUrl : undefined}

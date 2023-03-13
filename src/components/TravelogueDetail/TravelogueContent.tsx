@@ -24,7 +24,7 @@ const TravelogueContent = ({ travelogueId, subTravelogue }: TravelogueContentPro
   };
 
   return (
-    <Card variant='outlined'>
+    <Card variant='outlined' sx={{ borderRadius: '10px' }}>
       <CardContent>
         <Stack>
           <Stack direction='row' alignItems={'center'} justifyContent={'space-between'}>
