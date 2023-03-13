@@ -50,24 +50,28 @@ const GNB = () => {
       <BottomNavigationAction
         label='홈'
         value='home'
+        disableRipple
         icon={<HomeIcon fontSize='medium' />}
         sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='작성'
         value='add'
+        disableRipple
         icon={<CreateOutlinedIcon fontSize='medium' />}
         sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='스크랩'
         value='scrap'
+        disableRipple
         icon={<FolderIcon fontSize='medium' />}
         sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='마이페이지'
         value='profile'
+        disableRipple
         icon={<PersonIcon fontSize='medium' />}
         sx={GNBActionStyle}
       />
