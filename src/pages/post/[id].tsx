@@ -54,7 +54,7 @@ const SubTraveloguePage = () => {
             type='button'
             variant='contained'
             fullWidth
-            sx={{ m: '20px 0' }}
+            sx={{ m: '20px 0', backgroundColor: 'blue070.main' }}
             onClick={handleTraveloguePublish}>
             발행
           </Button>
@@ -66,4 +66,4 @@ const SubTraveloguePage = () => {
 
 export default SubTraveloguePage;
 
-const layout = { padding: '0 24px' };
+const layout = { padding: '16px 24px' };

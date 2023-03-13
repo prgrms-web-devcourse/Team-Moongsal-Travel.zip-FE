@@ -56,10 +56,9 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
   return (
     <Box
       sx={{
-        width: '100%',
         display: 'flex',
-        justifyContent: 'flex-end',
-        py: '1rem',
+        justifyContent: 'center',
+        minWidth: '100px'
       }}>
       <Box>
         <Button variant='outlined' startIcon={<TuneIcon />} onClick={toggleDrawer(true)}>

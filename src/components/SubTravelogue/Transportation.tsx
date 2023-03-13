@@ -18,7 +18,7 @@ const Transportation = ({ value, onTransportSelect }: TransportationProps) => {
         onChange={onTransportSelect}
         aria-label='text formatting'>
         {TRANSPORT_TYPE.map(({ icon, type }, i) => (
-          <ToggleIconButton key={i} value={type}>
+          <ToggleIconButton key={i} value={type} sx={{ width: '47.5px' }}>
             <SvgIcon component={icon} />
           </ToggleIconButton>
         ))}

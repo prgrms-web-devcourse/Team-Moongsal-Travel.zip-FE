@@ -20,7 +20,7 @@ const Location = ({ field }: LocationProps) => {
   };
 
   return (
-    <Combobox onSelect={handleRegionSelect} style={{ width: '70%' }}>
+    <Combobox onSelect={handleRegionSelect} style={{ width: '100%' }}>
       <Box sx={locationBoxStyle}>
         <SearchInput
           {...field}
@@ -59,7 +59,7 @@ const SearchInput = styled(ComboboxInput)(() => ({
   font: 'normal 400 1rem/1.4375em Noto Sans KR, sans-serif',
   color: 'rgba(0, 0, 0, 0.87)',
   '&:focus': {
-    border: `2px solid #1976d2`,
+    border: `2px solid #0080FF`,
     outline: 'none',
   },
 }));

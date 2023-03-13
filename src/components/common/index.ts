@@ -13,3 +13,4 @@ export { default as SwipeSlider } from './SwipeSlider';
 export { default as TemporaryButton } from './TemporaryButton';
 export { default as Title } from './Titlte';
 export { default as Transition } from './Transition';
+export { default as UserProfile } from './UserProfile';

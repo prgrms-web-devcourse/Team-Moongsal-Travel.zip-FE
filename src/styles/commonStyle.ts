@@ -16,11 +16,35 @@ export const mobileModalLayoutStyle = {
   left: '50%',
 };
 
-export const InputStyle = {
+export const inputStyle = {
   '& .MuiOutlinedInput-root': {
     '&.Mui-focused fieldset': {
-      borderColor: 'blue070.main',
+      borderColor: 'blue050.main',
     },
     fontWeight: '300',
+  },
+  '&.MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: 'blue050.main',
+    },
+    fontWeight: '300',
+  },
+};
+
+export const fontStyle = {
+  color: 'dark.main',
+  fontSize: '16px',
+  fontWeight: '500',
+  pb: '2px',
+};
+
+export const stepStyle = {
+  '.MuiStepIcon-text': {
+    fontFamily: 'Pretendard-Regular',
+  },
+  '.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root': {
+    '&.Mui-active, &.Mui-completed': {
+      color: 'blue070.main',
+    },
   },
 };
