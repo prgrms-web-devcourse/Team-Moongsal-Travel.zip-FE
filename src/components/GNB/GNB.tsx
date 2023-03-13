@@ -69,7 +69,7 @@ const GNB = () => {
         sx={GNBActionStyle}
       />
       <BottomNavigationAction
-        label='마이페이지'
+        label='나의 여행'
         value='profile'
         disableRipple
         icon={<PersonIcon fontSize='medium' />}
