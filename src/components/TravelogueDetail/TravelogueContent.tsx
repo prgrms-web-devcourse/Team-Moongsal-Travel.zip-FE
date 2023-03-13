@@ -28,13 +28,17 @@ const TravelogueContent = ({ travelogueId, subTravelogue }: TravelogueContentPro
       <CardContent>
         <Stack>
           <Stack direction='row' alignItems={'center'} justifyContent={'space-between'}>
-            <Stack direction='row' spacing={0.7}>
+            <Stack direction='row' spacing={0.7} alignItems={'center'}>
               <ConnectingAirportsIcon color={'blue050'} />
               <Typography
                 variant='subtitle1'
                 color='dark.main'>{`${day}일차`}</Typography>
             </Stack>
-            <Button variant='text' sx={{ minWidth: 0 }} onClick={handleEditClick}>
+            <Button
+              variant='text'
+              sx={{ minWidth: 0 }}
+              color='blue050'
+              onClick={handleEditClick}>
               수정
             </Button>
           </Stack>
