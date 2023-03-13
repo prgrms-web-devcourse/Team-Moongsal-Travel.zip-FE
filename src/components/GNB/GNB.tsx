@@ -1,5 +1,5 @@
 import {
-  ConnectingAirportsOutlined as ConnectingAirportsIcon,
+  CreateOutlined as CreateOutlinedIcon,
   FolderOutlined as FolderIcon,
   HomeOutlined as HomeIcon,
   PersonOutlined as PersonIcon,
@@ -50,26 +50,26 @@ const GNB = () => {
       <BottomNavigationAction
         label='홈'
         value='home'
-        icon={<HomeIcon fontSize='large' />}
-        sx={{ color: 'gray030.main' }}
+        icon={<HomeIcon fontSize='medium' />}
+        sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='작성'
         value='add'
-        icon={<ConnectingAirportsIcon fontSize='large' />}
-        sx={{ color: 'gray030.main' }}
+        icon={<CreateOutlinedIcon fontSize='medium' />}
+        sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='스크랩'
         value='scrap'
-        icon={<FolderIcon fontSize='large' />}
-        sx={{ color: 'gray030.main' }}
+        icon={<FolderIcon fontSize='medium' />}
+        sx={GNBActionStyle}
       />
       <BottomNavigationAction
         label='마이페이지'
         value='profile'
-        icon={<PersonIcon fontSize='large' />}
-        sx={{ color: 'gray030.main' }}
+        icon={<PersonIcon fontSize='medium' />}
+        sx={GNBActionStyle}
       />
     </StyledBottomNavigation>
   );
@@ -87,7 +87,14 @@ const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   width: '414px',
   position: 'fixed',
   bottom: 0,
-  backgroundColor: theme.palette.blue010.main,
+  backgroundColor: theme.palette.white.main,
   minHeight: 65,
   boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.2)',
 }));
+
+const GNBActionStyle = {
+  color: 'gray030.main',
+  '&.Mui-selected': {
+    color: 'blue070.main',
+  },
+} as const;
