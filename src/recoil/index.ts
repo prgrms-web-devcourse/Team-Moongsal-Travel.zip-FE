@@ -18,3 +18,13 @@ export const isAuthConfirmModalState = atom({
   key: 'IS_AUTH_CONFIRM_MODAL',
   default: false,
 });
+
+export const userInformationState = atom({
+  key: 'USER_INFORMATION',
+  default: {
+    email: '',
+    nickname: '',
+    profileImageUrl: '',
+    birthYear: '',
+  },
+});

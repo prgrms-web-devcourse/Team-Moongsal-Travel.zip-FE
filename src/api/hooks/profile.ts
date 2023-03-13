@@ -1,17 +1,16 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { getUserInformation, patchUserInformation } from '@/api/profile';
-import { UserInformationPatchType, UserInformationType } from '@/types/profile';
+import useImageUpload from '@/hooks/useImageUpload';
+import { userInformationState } from '@/recoil';
+import { UserInformationPatchType } from '@/types/profile';
 
 export const useUserInformation = () => {
-  const [userInformation, setUserInformation] = useState<UserInformationType>({
-    email: '',
-    nickname: '',
-    profileImageUrl: '',
-    birthYear: '',
-  });
+  const [userInformation, setUserInformation] = useRecoilState(userInformationState);
+
+  const { getImageUrlFromS3 } = useImageUpload();
 
   const { isLoading } = useQuery({
     queryKey: ['USER_INFORMATION'],
@@ -32,14 +31,34 @@ export const useUserInformation = () => {
     },
   });
 
-  // Patch Method Test
-  const handleChangeUserInformation = () => {
+  const handleChangeSelectedImage = async (files: FileList | null) => {
+    if (files && files[0]) {
+      const { url } = await getImageUrlFromS3(files[0]);
+      setUserInformation((state) => ({ ...state, profileImageUrl: url }));
+
+      console.log(userInformation);
+    }
+  };
+
+  const handleChangeNickname = (nickname: string) => {
+    setUserInformation((state) => ({ ...state, nickname }));
+  };
+
+  const handleChangeUserInformation = ({
+    nickname,
+    profileImageUrl,
+  }: UserInformationPatchType) => {
     mutate({
-      nickname: 'moom',
-      profileImageUrl:
-        'https://travel-zip-bucket.s3.ap-northeast-2.amazonaws.com/upload/4ad6520e-7498-4d19-b022-67701a6599e1EfW549HUMAEGALk.jpeg',
+      nickname,
+      profileImageUrl,
     });
   };
 
-  return { userInformation, isLoading, handleChangeUserInformation } as const;
+  return {
+    userInformation,
+    isLoading,
+    handleChangeSelectedImage,
+    handleChangeNickname,
+    handleChangeUserInformation,
+  } as const;
 };
