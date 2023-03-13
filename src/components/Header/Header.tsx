@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <BoxStyle>
       <AppBar sx={AppBarStyle}>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar sx={{ justifyContent: 'space-between', height: '64px' }}>
           <Box onClick={() => router.push('/')} sx={{ cursor: 'pointer' }}>
             <Image src={logo} alt='logo' width={120} />
           </Box>
