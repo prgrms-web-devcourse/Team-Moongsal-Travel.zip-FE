@@ -1,13 +1,13 @@
 import {
-  AddCircle as AddCircleIcon,
-  AddLocationAlt as AddLocationAltIcon,
-  ConnectingAirports as ConnectingAirportsIcon,
-  Person as PersonIcon,
+  ConnectingAirportsOutlined as ConnectingAirportsIcon,
+  FolderOutlined as FolderIcon,
+  HomeOutlined as HomeIcon,
+  PersonOutlined as PersonIcon,
 } from '@mui/icons-material';
 import { styled } from '@mui/material';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PATH_ROUTER } from '@/constants/path';
 import useAuth from '@/hooks/useAuth';
@@ -21,9 +21,18 @@ const GNB = () => {
   );
   const { handleOpenAuthConfirmModal } = useAuth();
 
+  useEffect(() => {
+    if (router.isReady) {
+      const newValue = Object.keys(PATH_ROUTER).find(
+        (key) => PATH_ROUTER[key as PathRouterType] === router.route,
+      ) as PathRouterType;
+      setValue(newValue);
+    }
+  }, [router]);
+
   const onChangeNavigationRoute = (_: unknown, newValue: PathRouterType) => {
     if (
-      (newValue === 'add' || newValue === 'profile' || newValue === 'place') &&
+      (newValue === 'add' || newValue === 'profile' || newValue === 'scrap') &&
       handleOpenAuthConfirmModal()
     ) {
       return;
@@ -33,20 +42,35 @@ const GNB = () => {
       return;
     }
 
-    setValue(newValue);
     router.push(PATH_ROUTER[newValue]);
   };
 
   return (
-    <StyledBottomNavigation showLabels onChange={onChangeNavigationRoute}>
+    <StyledBottomNavigation value={value} showLabels onChange={onChangeNavigationRoute}>
       <BottomNavigationAction
-        label='Home'
+        label='홈'
         value='home'
-        icon={<ConnectingAirportsIcon />}
+        icon={<HomeIcon fontSize='large' />}
+        sx={{ color: 'gray030.main' }}
       />
-      <BottomNavigationAction label='Add' value='add' icon={<AddCircleIcon />} />
-      <BottomNavigationAction label='Place' value='place' icon={<AddLocationAltIcon />} />
-      <BottomNavigationAction label='Profile' value='profile' icon={<PersonIcon />} />
+      <BottomNavigationAction
+        label='작성'
+        value='add'
+        icon={<ConnectingAirportsIcon fontSize='large' />}
+        sx={{ color: 'gray030.main' }}
+      />
+      <BottomNavigationAction
+        label='스크랩'
+        value='scrap'
+        icon={<FolderIcon fontSize='large' />}
+        sx={{ color: 'gray030.main' }}
+      />
+      <BottomNavigationAction
+        label='마이페이지'
+        value='profile'
+        icon={<PersonIcon fontSize='large' />}
+        sx={{ color: 'gray030.main' }}
+      />
     </StyledBottomNavigation>
   );
 };
