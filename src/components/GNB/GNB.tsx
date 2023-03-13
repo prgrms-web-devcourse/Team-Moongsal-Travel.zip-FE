@@ -88,6 +88,14 @@ const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   backgroundColor: theme.palette.white.main,
   height: 65,
   boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.2)',
+  [theme.breakpoints.up('sm')]: {
+    minWidth: '390px',
+    maxWidth: '414px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    minWidth: '340px',
+    maxWidth: '600px',
+  },
 }));
 
 const GNBActionStyle = {
