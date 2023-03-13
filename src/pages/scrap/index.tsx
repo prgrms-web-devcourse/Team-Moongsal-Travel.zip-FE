@@ -88,11 +88,11 @@ const Scrap = () => {
         src={scrapBg}
         alt={scrapBg}
         width={414}
-        height={350}
+        height={355}
         style={{
           position: 'absolute',
-          top: '60px',
-          paddingBottom: '3.5rem',
+          top: '55px',
+          paddingBottom: '4rem',
           boxSizing: 'border-box',
           backgroundColor: '#c4e2f5',
         }}
@@ -123,7 +123,7 @@ const Scrap = () => {
         </Typography>
         <Button
           onClick={toggleDrawer(true)}
-          sx={{ fontSize: '1rem', color: 'blue040.main' }}>
+          sx={{ fontSize: '1rem', fontWeight: 700, color: 'blue040.main' }}>
           모음집 추가
         </Button>
         {scrapDocs &&
