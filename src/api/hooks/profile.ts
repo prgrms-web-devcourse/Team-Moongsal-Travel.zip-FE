@@ -44,10 +44,9 @@ export const useUserInformation = () => {
     setUserInformation((state) => ({ ...state, nickname }));
   };
 
-  const handleChangeUserInformation = ({
-    nickname,
-    profileImageUrl,
-  }: UserInformationPatchType) => {
+  const handleChangeUserInformation = () => {
+    const { nickname, profileImageUrl } = userInformation;
+
     mutate({
       nickname,
       profileImageUrl,

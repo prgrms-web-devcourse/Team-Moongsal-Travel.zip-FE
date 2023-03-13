@@ -5,13 +5,11 @@ import { forwardRef, ReactElement, Ref } from 'react';
 
 import { EditForm, MobileAppBarLayout } from '@/components/Profile';
 import { mobileModalLayoutStyle } from '@/styles/commonStyle';
-import { UserInformationPatchType } from '@/types/profile';
 
 type EditDrawerProps = {
   isOpen: boolean;
-  isLoading: boolean;
-  handleClose: () => void;
-} & UserInformationPatchType;
+  handleCloseEditModal: () => void;
+};
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -22,25 +20,15 @@ const Transition = forwardRef(function Transition(
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-const EditDrawer = ({
-  isOpen,
-  handleClose,
-  profileImageUrl,
-  nickname,
-  isLoading,
-}: EditDrawerProps) => {
+const EditDrawer = ({ isOpen, handleCloseEditModal }: EditDrawerProps) => {
   return (
     <MobileSizeDrawer
       open={isOpen}
       fullScreen
-      onClose={handleClose}
+      onClose={handleCloseEditModal}
       TransitionComponent={Transition}>
-      <MobileAppBarLayout handleClose={handleClose} />
-      <EditForm
-        profileImageUrl={profileImageUrl}
-        isLoading={isLoading}
-        nickname={nickname}
-      />
+      <MobileAppBarLayout handleClose={handleCloseEditModal} />
+      <EditForm />
     </MobileSizeDrawer>
   );
 };
