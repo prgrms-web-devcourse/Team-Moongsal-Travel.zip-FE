@@ -18,7 +18,6 @@ const VisitedRegionList = ({ addresses }: VisitedRegionProps) => {
 
   const handleClickOpen = (value: string) => {
     setOpen(true);
-    console.log(value);
     setContent(value);
   };
 

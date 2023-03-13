@@ -38,6 +38,7 @@ const ScrapDialog = ({ open, onClose, content }: ScrapDialogProps) => {
 
   const handleClose = () => {
     onClose();
+    fetchScrapDoc();
   };
 
   const handleDisplayForm = () => {
