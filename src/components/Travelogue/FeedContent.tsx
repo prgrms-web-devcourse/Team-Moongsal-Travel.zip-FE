@@ -1,10 +1,14 @@
+// import {
+//   Favorite as FavoriteIcon,
+//   FavoriteBorder as FavoriteBorderIcon,
+// } from '@mui/icons-material';
 import {
-  Favorite as FavoriteIcon,
-  FavoriteBorder as FavoriteBorderIcon,
-} from '@mui/icons-material';
-import { IconButton, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
+  // IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 
+// import { useState } from 'react';
 import { Row } from '@/components/common';
 import { FeedChip } from '@/components/Travelogue';
 import { TravelogueFeedType } from '@/types/travelogue';
@@ -15,9 +19,9 @@ type FeedContentProps = Pick<
 >;
 
 const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const CurrentFavoriteIcon = () =>
-    isFavorite ? <FavoriteIcon sx={iconStyle} /> : <FavoriteBorderIcon sx={iconStyle} />;
+  // const [isFavorite, setIsFavorite] = useState(false);
+  // const CurrentFavoriteIcon = () =>
+  //   isFavorite ? <FavoriteIcon sx={iconStyle} /> : <FavoriteBorderIcon sx={iconStyle} />;
 
   return (
     <Stack>
@@ -29,7 +33,7 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
           }}>
           {title}
         </Typography>
-        <Row justifyContentType='space-between'>
+        {/* <Row justifyContentType='space-between'>
           <IconButton size='small' onClick={() => setIsFavorite(!isFavorite)}>
             <CurrentFavoriteIcon />
           </IconButton>
@@ -43,7 +47,7 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
             }}>
             임시
           </Typography>
-        </Row>
+        </Row> */}
       </Row>
       <Row justifyContentType='start'>
         <FeedChip chipTitle='기간' chipContent={`${nights}박 ${days}일`} />
@@ -56,6 +60,10 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
   );
 };
 
+export default FeedContent;
+
+// const iconStyle = { fontSize: '1rem', color: 'blue050.main' };
+
 const textEllipsis = (width: string | number) => {
   return {
     width,
@@ -64,7 +72,3 @@ const textEllipsis = (width: string | number) => {
     whiteSpace: 'nowrap',
   };
 };
-
-const iconStyle = { fontSize: '1rem', color: 'blue050.main' };
-
-export default FeedContent;
