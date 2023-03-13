@@ -1,7 +1,6 @@
 import Head from 'next/head';
 
-import { PersonalFeedList } from '@/components/Main';
-import { PopularFeed } from '@/components/Travelogue/PopularFeed';
+import { PersonalFeedList, PopularFeedList } from '@/components/Main';
 
 export default function Home() {
   return (
@@ -13,7 +12,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <PopularFeed />
+        <PopularFeedList />
         <PersonalFeedList />
       </main>
     </>
