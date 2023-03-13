@@ -11,6 +11,7 @@ import { Transportation, VisitedRegion } from '@/components/SubTravelogue';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
 import useHandleTraveloguePublish from '@/hooks/useHandleTraveloguePublish';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
+import { inputStyle } from '@/styles/commonStyle';
 import { SubTravelogueType } from '@/types/post';
 import { getItem, setItem } from '@/utils/storage';
 
@@ -105,6 +106,7 @@ const SubTravelogue = ({
           fullWidth
           placeholder='소제목을 입력하세요'
           type='text'
+          sx={inputStyle}
         />
       </Stack>
       <VisitedRegion control={control} />
@@ -133,7 +135,7 @@ const SubTravelogue = ({
           <Button
             type='submit'
             variant='contained'
-            sx={{ mt: 1, mr: 1 }}
+            sx={{ mt: 1, mr: 1, backgroundColor: 'blue070.main' }}
             fullWidth
             disabled={isEditPage ? false : !unsaved}>
             수정

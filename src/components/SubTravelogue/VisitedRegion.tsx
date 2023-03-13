@@ -22,7 +22,8 @@ const VisitedRegion = ({ control }: VisitedRegionProps) => {
         <IconButton
           color='primary'
           component='label'
-          onClick={() => append({ region: '' })}>
+          onClick={() => append({ region: '' })}
+          sx={{ color: 'blue050.main' }}>
           <AddCircleIcon />
         </IconButton>
       </Stack>

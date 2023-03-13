@@ -8,7 +8,7 @@ import { usePostUserSignIn } from '@/api/hooks/user';
 import { CommonInput } from '@/components/common';
 import { ACCESS_TOKEN } from '@/constants';
 import useAuth from '@/hooks/useAuth';
-import { InputStyle } from '@/styles/commonStyle';
+import { inputStyle } from '@/styles/commonStyle';
 import { User } from '@/types/auth';
 import { setItem } from '@/utils/storage';
 
@@ -56,7 +56,7 @@ const Local = () => {
               message: '이메일 형식에 맞지 않습니다.',
             },
           }}
-          sx={InputStyle}
+          sx={inputStyle}
         />
         <CommonInput
           id='password'
@@ -72,7 +72,7 @@ const Local = () => {
               message: '비밀번호 형식에 맞지 않습니다.',
             },
           }}
-          sx={InputStyle}
+          sx={inputStyle}
         />
         <Box width='100%'>
           <Button type='submit' variant='contained' sx={buttonStyle}>
