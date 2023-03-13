@@ -13,6 +13,7 @@ import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
 import { postVerifyNickname } from '@/api/user';
 import useGetUserForms from '@/hooks/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
+import { InputStyle } from '@/styles/commonStyle';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -132,12 +133,3 @@ const ButtonStyle = {
   backgroundColor: 'blue070.main',
   fontWeight: '400',
 } as const;
-
-const InputStyle = {
-  '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
-      borderColor: 'blue070.main',
-    },
-    fontWeight: '300',
-  },
-};

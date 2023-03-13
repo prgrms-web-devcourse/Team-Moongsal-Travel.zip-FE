@@ -15,3 +15,12 @@ export const mobileModalLayoutStyle = {
   transform: 'translateX(-50%)',
   left: '50%',
 };
+
+export const InputStyle = {
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: 'blue070.main',
+    },
+    fontWeight: '300',
+  },
+};
