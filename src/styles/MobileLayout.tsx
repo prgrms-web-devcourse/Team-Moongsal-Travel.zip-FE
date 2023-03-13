@@ -14,4 +14,8 @@ const Container = styled('div')(({ theme }) => ({
     minWidth: '390px',
     maxWidth: '414px',
   },
+  [theme.breakpoints.down('sm')]: {
+    minWidth: '340px',
+    maxWidth: '600px',
+  },
 }));
