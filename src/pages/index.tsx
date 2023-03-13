@@ -14,6 +14,9 @@ export default function Home() {
         <meta property='og:title' content='travel.zip' />
         <meta property='og:description' content='내가 가진 여행 기억의 모음집' />
         <meta property='og:site_name' content='travel.zip' />
+        <meta property='og:image' content='/ogImage.png' />
+        <meta property='og:image:width' content='1200' />
+        <meta property='og:image:height' content='630' />
         <meta property='og:locale' content='ko' />
         <meta
           name='viewport'
