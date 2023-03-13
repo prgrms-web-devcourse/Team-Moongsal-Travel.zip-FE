@@ -4,18 +4,18 @@ import { AxiosResponse } from 'axios';
 
 import {
   getPersonalTravelogues,
-  getRecentTravelogueList,
   getTravelogueListByFilter,
   getTravelogueListByKeyword,
+  getTypeOfTravelogues,
   patchTravelogueDetailById,
 } from '@/api/travelogue';
 import { FilterAxiosProps } from '@/types/filter';
 import { TravelogueListType } from '@/types/travelogue';
 
-export const useGetRecentTravelogue = () => {
+export const useGetRecentTravelogues = () => {
   return useQuery({
     queryKey: ['RECENT_TRAVELOGUES'],
-    queryFn: () => getRecentTravelogueList(),
+    queryFn: () => getTypeOfTravelogues({ type: 'recent', page: 0, size: 5 }),
   });
 };
 
@@ -81,5 +81,19 @@ export const usePatchTravelogueDetailById = () => {
     onError: (error: { message: string }) => {
       console.error(error.message);
     },
+  });
+};
+
+export const useGetWrittenByMeTravelogues = () => {
+  return useQuery({
+    queryKey: ['WRITTEN_BY_ME_TRAVELOGUES'],
+    queryFn: () => getTypeOfTravelogues({ type: 'writtenByMe', page: 0, size: 5 }),
+  });
+};
+
+export const useGetTemporarySaveTravelogues = () => {
+  return useQuery({
+    queryKey: ['TEMPORARY_SAVE_TRAVELOGUES'],
+    queryFn: () => getTypeOfTravelogues({ type: 'temporarySave', page: 0, size: 5 }),
   });
 };

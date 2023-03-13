@@ -2,13 +2,22 @@ import { AxiosResponse } from 'axios';
 
 import { baseRequest } from '@/api/core';
 import http from '@/api/core/axiosInstance';
+import { TRAVELOGUE_API_ROUTER } from '@/constants/path';
 import { FilterAxiosProps } from '@/types/filter';
 import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
 
-export const getRecentTravelogueList = async (
+export const getTypeOfTravelogues = async ({
+  type,
   page = 0,
-): Promise<TravelogueFeedType[]> => {
-  const response = await http.get(`api/travelogues?&page=${page}`);
+  size = 0,
+}: {
+  page: number;
+  size: number;
+  type: keyof typeof TRAVELOGUE_API_ROUTER;
+}): Promise<TravelogueFeedType[]> => {
+  const response = await http.get<TravelogueListType>(
+    `${TRAVELOGUE_API_ROUTER[type]}?page=${page}&size=${size}`,
+  );
 
   return response.data.content;
 };
