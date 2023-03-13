@@ -49,11 +49,11 @@ const TravelogueContent = ({
               </Button>
             )}
           </Stack>
-          <Title bold='bold' sx={{ mt: 0.5 }}>
+          <Title bold='bold' sx={{ mt: 1, fontSize: '1.3rem' }}>
             {title}
           </Title>
           <Divider sx={{ my: 2 }} />
-          <Stack sx={{ lineHeight: 1.5 }}>{Parser(content)}</Stack>
+          <Stack sx={{ lineHeight: 1.7, fontSize: '15px' }}>{Parser(content)}</Stack>
           <VisitedRegionList addresses={addresses} />
         </Stack>
       </CardContent>
