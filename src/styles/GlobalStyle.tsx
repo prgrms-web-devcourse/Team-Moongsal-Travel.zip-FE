@@ -132,6 +132,15 @@ const style = css`
   }
 
   /* quill editor */
+  .ql-toolbar {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+  .ql-container {
+    min-height: 15rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+  }
   strong,
   .ql-editor strong {
     font-weight: bold;

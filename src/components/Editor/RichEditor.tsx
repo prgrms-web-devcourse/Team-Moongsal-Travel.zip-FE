@@ -75,8 +75,6 @@ const RichEditor = ({ content }: RichEditorType) => {
     [],
   );
 
-  console.log(content);
-
   return (
     <div>
       <ReactQuill
