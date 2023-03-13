@@ -9,10 +9,15 @@ import { SubTravelogueDetailType } from '@/types/post';
 
 interface TravelogueContentProps {
   travelogueId: number;
+  isWriter: boolean;
   subTravelogue: SubTravelogueDetailType;
 }
 
-const TravelogueContent = ({ travelogueId, subTravelogue }: TravelogueContentProps) => {
+const TravelogueContent = ({
+  travelogueId,
+  isWriter,
+  subTravelogue,
+}: TravelogueContentProps) => {
   const { subTravelogueId: id, day, title, content, addresses } = subTravelogue;
   const router = useRouter();
 
@@ -34,13 +39,15 @@ const TravelogueContent = ({ travelogueId, subTravelogue }: TravelogueContentPro
                 variant='subtitle1'
                 color='dark.main'>{`${day}일차`}</Typography>
             </Stack>
-            <Button
-              variant='text'
-              sx={{ minWidth: 0 }}
-              color='blue050'
-              onClick={handleEditClick}>
-              수정
-            </Button>
+            {isWriter && (
+              <Button
+                variant='text'
+                sx={{ minWidth: 0 }}
+                color='blue050'
+                onClick={handleEditClick}>
+                수정
+              </Button>
+            )}
           </Stack>
           <Title bold='bold' sx={{ mt: 0.5 }}>
             {title}
