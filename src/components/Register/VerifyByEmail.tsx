@@ -55,6 +55,7 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
           variant='outlined'
           fullWidth
           helperText={emailState.error && emailState.error.message}
+          sx={InputStyle}
         />
         <Button
           variant='contained'
@@ -74,6 +75,7 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
             variant='outlined'
             fullWidth
             helperText={codeState.error ? codeState.error.message : failText()}
+            sx={InputStyle}
           />
           <Button
             variant='contained'
@@ -90,4 +92,18 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
 
 export default VerifyByEmail;
 
-const ButtonStyle = { width: '150px', height: '56px' } as const;
+const ButtonStyle = {
+  width: '150px',
+  height: '56px',
+  backgroundColor: 'blue070.main',
+  fontWeight: '400',
+} as const;
+
+const InputStyle = {
+  '& .MuiOutlinedInput-root': {
+    '&.Mui-focused fieldset': {
+      borderColor: 'blue070.main',
+    },
+    fontWeight: '300',
+  },
+};
