@@ -1,3 +1,4 @@
+export { default as avatar } from './avatar.svg';
 export { default as bigLogo } from './bigLogo.svg';
 export { default as folder } from './folder.svg';
 export { default as location } from './location.svg';
