@@ -59,6 +59,7 @@ const SigninLeadModal = () => {
         />
         <CommonButton
           content='취소'
+          isVariant={false}
           customStyle={{ ...buttonStyle, bgcolor: 'gray010.main', color: 'dark.main' }}
           handleClick={onClickClose}
         />
