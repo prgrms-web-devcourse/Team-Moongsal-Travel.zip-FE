@@ -99,6 +99,7 @@ const Scrap = () => {
       />
       <List
         sx={{
+          minHeight: '51vh',
           display: 'flex',
           flexDirection: 'column',
           borderTopLeftRadius: '2rem',
