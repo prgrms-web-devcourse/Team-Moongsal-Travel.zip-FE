@@ -24,10 +24,10 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
       <Row justifyContentType='space-between'>
         <Typography
           sx={{
-            ...textEllipsis('85%'),
+            ...textEllipsis('75%'),
             fontWeight: 'bold',
           }}>
-          {`${title + title + title}`}
+          {title}
         </Typography>
         <Row justifyContentType='space-between'>
           <IconButton size='small' onClick={() => setIsFavorite(!isFavorite)}>
@@ -47,7 +47,10 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
       </Row>
       <Row justifyContentType='start'>
         <FeedChip chipTitle='기간' chipContent={`${nights}박 ${days}일`} />
-        <FeedChip chipTitle='총 경비' chipContent={String(totalCost)} />
+        <FeedChip
+          chipTitle='총 경비'
+          chipContent={`${totalCost.toLocaleString('ko-KR')}원`}
+        />
       </Row>
     </Stack>
   );

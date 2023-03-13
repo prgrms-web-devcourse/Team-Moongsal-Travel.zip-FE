@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Chip, Typography } from '@mui/material';
 
 interface FeedSubContent {
   chipTitle: '기간' | '총 경비';
@@ -10,23 +10,22 @@ const FeedChip = ({ chipTitle, chipContent }: FeedSubContent) => {
     <>
       <Typography
         component='div'
-        sx={{ fontSize: 0.75, fontWeight: 'bold', color: 'gray030.main', pr: 0.5 }}>
+        sx={{ fontSize: '0.7rem', fontWeight: 'bold', color: 'gray030.main', pr: 0.5 }}>
         {chipTitle}
       </Typography>
-      <Box
+      <Chip
+        label={chipContent}
+        size='small'
         sx={{
-          py: 0.15,
-          px: 0.5,
-          borderRadius: 7,
-          bgcolor: 'gray020.main',
-          display: 'flex',
-          alignItems: 'center',
+          bgcolor: 'gray005.main',
+          fontSize: '0.5rem',
+          fontWeight: 'bold',
+          color: 'blue050.main',
+          boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.2)',
           mr: 0.5,
-        }}>
-        <Typography component='span' fontSize={0.75} color='blue050.main'>
-          {chipContent}
-        </Typography>
-      </Box>
+          p: 0.1,
+        }}
+      />
     </>
   );
 };

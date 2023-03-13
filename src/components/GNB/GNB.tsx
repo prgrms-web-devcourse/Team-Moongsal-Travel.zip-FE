@@ -1,5 +1,6 @@
 import {
   AddCircle as AddCircleIcon,
+  AddLocationAlt as AddLocationAltIcon,
   ConnectingAirports as ConnectingAirportsIcon,
   Person as PersonIcon,
 } from '@mui/icons-material';
@@ -21,7 +22,10 @@ const GNB = () => {
   const { handleOpenAuthConfirmModal } = useAuth();
 
   const onChangeNavigationRoute = (_: unknown, newValue: PathRouterType) => {
-    if ((newValue === 'add' || newValue === 'profile') && handleOpenAuthConfirmModal()) {
+    if (
+      (newValue === 'add' || newValue === 'profile' || newValue === 'place') &&
+      handleOpenAuthConfirmModal()
+    ) {
       return;
     }
 
@@ -41,6 +45,7 @@ const GNB = () => {
         icon={<ConnectingAirportsIcon />}
       />
       <BottomNavigationAction label='Add' value='add' icon={<AddCircleIcon />} />
+      <BottomNavigationAction label='Place' value='place' icon={<AddLocationAltIcon />} />
       <BottomNavigationAction label='Profile' value='profile' icon={<PersonIcon />} />
     </StyledBottomNavigation>
   );
