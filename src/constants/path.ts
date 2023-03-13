@@ -1,7 +1,7 @@
 export const PATH_ROUTER = {
   home: '/',
   add: '/post/first',
-  place: '/scrap',
+  scrap: '/scrap',
   profile: '/profile',
 };
 

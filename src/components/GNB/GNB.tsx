@@ -1,13 +1,13 @@
 import {
-  AddCircle as AddCircleIcon,
-  AddLocationAlt as AddLocationAltIcon,
-  ConnectingAirports as ConnectingAirportsIcon,
-  Person as PersonIcon,
+  CreateOutlined as CreateOutlinedIcon,
+  FolderOutlined as FolderIcon,
+  HomeOutlined as HomeIcon,
+  PersonOutlined as PersonIcon,
 } from '@mui/icons-material';
 import { styled } from '@mui/material';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PATH_ROUTER } from '@/constants/path';
 import useAuth from '@/hooks/useAuth';
@@ -21,9 +21,18 @@ const GNB = () => {
   );
   const { handleOpenAuthConfirmModal } = useAuth();
 
+  useEffect(() => {
+    if (router.isReady) {
+      const newValue = Object.keys(PATH_ROUTER).find(
+        (key) => PATH_ROUTER[key as PathRouterType] === router.route,
+      ) as PathRouterType;
+      setValue(newValue);
+    }
+  }, [router]);
+
   const onChangeNavigationRoute = (_: unknown, newValue: PathRouterType) => {
     if (
-      (newValue === 'add' || newValue === 'profile' || newValue === 'place') &&
+      (newValue === 'add' || newValue === 'profile' || newValue === 'scrap') &&
       handleOpenAuthConfirmModal()
     ) {
       return;
@@ -33,20 +42,35 @@ const GNB = () => {
       return;
     }
 
-    setValue(newValue);
     router.push(PATH_ROUTER[newValue]);
   };
 
   return (
-    <StyledBottomNavigation value={value} onChange={onChangeNavigationRoute}>
+    <StyledBottomNavigation value={value} showLabels onChange={onChangeNavigationRoute}>
       <BottomNavigationAction
-        label='Home'
+        label='홈'
         value='home'
-        icon={<ConnectingAirportsIcon />}
+        icon={<HomeIcon fontSize='medium' />}
+        sx={GNBActionStyle}
       />
-      <BottomNavigationAction label='Add' value='add' icon={<AddCircleIcon />} />
-      <BottomNavigationAction label='Place' value='place' icon={<AddLocationAltIcon />} />
-      <BottomNavigationAction label='Profile' value='profile' icon={<PersonIcon />} />
+      <BottomNavigationAction
+        label='작성'
+        value='add'
+        icon={<CreateOutlinedIcon fontSize='medium' />}
+        sx={GNBActionStyle}
+      />
+      <BottomNavigationAction
+        label='스크랩'
+        value='scrap'
+        icon={<FolderIcon fontSize='medium' />}
+        sx={GNBActionStyle}
+      />
+      <BottomNavigationAction
+        label='마이페이지'
+        value='profile'
+        icon={<PersonIcon fontSize='medium' />}
+        sx={GNBActionStyle}
+      />
     </StyledBottomNavigation>
   );
 };
@@ -63,7 +87,14 @@ const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   width: '414px',
   position: 'fixed',
   bottom: 0,
-  backgroundColor: theme.palette.blue010.main,
+  backgroundColor: theme.palette.white.main,
   minHeight: 65,
   boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.2)',
 }));
+
+const GNBActionStyle = {
+  color: 'gray030.main',
+  '&.Mui-selected': {
+    color: 'blue070.main',
+  },
+} as const;
