@@ -1,4 +1,5 @@
 export { default as AlertMessage } from './AlertMessage';
+export { default as AuthHeader } from './AuthHeader';
 export { default as CommonButton } from './CommonButton';
 export { default as CommonInput } from './CommonInput';
 export { default as CountrySelect } from './CountrySelect';

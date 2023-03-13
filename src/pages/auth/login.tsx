@@ -1,15 +1,13 @@
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 
-import { Local, Social } from '@/components/Login';
+import { AuthHeader } from '@/components/common';
+import { Local } from '@/components/Login';
 
 const LoginPage = () => {
   return (
-    <Stack>
-      <Typography component='h1' variant='h4' my={10} align='center' color='primary'>
-        ✈️ travel.zip
-      </Typography>
+    <Stack spacing={5} sx={{ paddingBottom: '50px' }}>
+      <AuthHeader text='Log In' />
       <Local />
-      <Social />
     </Stack>
   );
 };
