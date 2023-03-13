@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Stack } from '@mui/material';
+import { Alert, Box, Button, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -8,6 +8,7 @@ import { usePostUserSignIn } from '@/api/hooks/user';
 import { CommonInput } from '@/components/common';
 import { ACCESS_TOKEN } from '@/constants';
 import useAuth from '@/hooks/useAuth';
+import { InputStyle } from '@/styles/commonStyle';
 import { User } from '@/types/auth';
 import { setItem } from '@/utils/storage';
 
@@ -39,10 +40,9 @@ const Local = () => {
   };
 
   return (
-    <>
+    <Stack spacing={3} sx={{ padding: '0 15px' }}>
       <Stack spacing={2} component='form' onSubmit={handleSubmit(onSubmit)}>
         {error && <Alert severity='error'>이메일 또는 비밀번호가 잘못되었습니다.</Alert>}
-
         <CommonInput
           id='email'
           label='이메일'
@@ -56,6 +56,7 @@ const Local = () => {
               message: '이메일 형식에 맞지 않습니다.',
             },
           }}
+          sx={InputStyle}
         />
         <CommonInput
           id='password'
@@ -71,6 +72,7 @@ const Local = () => {
               message: '비밀번호 형식에 맞지 않습니다.',
             },
           }}
+          sx={InputStyle}
         />
         <Box width='100%'>
           <Button type='submit' variant='contained' sx={buttonStyle}>
@@ -78,21 +80,24 @@ const Local = () => {
           </Button>
         </Box>
       </Stack>
-
-      <Stack spacing={6} direction='row' justifyContent='center'>
-        <Link href='/'>비밀번호 찾기</Link>
-        <Link href='/auth/register'>회원가입</Link>
+      <Stack spacing={1} direction='row' justifyContent='flex-end'>
+        <Typography variant='body2'>계정이 없으신가요?</Typography>
+        <Link href='/auth/register'>
+          <Typography variant='body2' color={'blue070.main'} sx={{ fontWeight: 500 }}>
+            회원가입
+          </Typography>
+        </Link>
       </Stack>
-    </>
+    </Stack>
   );
 };
 
 export default Local;
 
 const buttonStyle = {
-  marginY: 4,
-  fontSize: '1rem',
-  paddingY: 0,
-  height: 56,
   width: '100%',
+  height: '40px',
+  mt: 1.5,
+  backgroundColor: 'blue070.main',
+  fontWeight: '400',
 } as const;
