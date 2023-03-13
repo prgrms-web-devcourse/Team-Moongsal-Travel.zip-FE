@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/material';
 
 const MobileLayout = ({ children }: { children: React.ReactNode }) => {
   return <Container>{children}</Container>;
@@ -6,9 +6,11 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
 
 export default MobileLayout;
 
-const Container = styled.div`
-  box-sizing: border-box;
-  min-width: 390px;
-  max-width: 414px;
-  margin: auto;
-`;
+const Container = styled('div')(({ theme }) => ({
+  boxSizing: 'border-box',
+  width: '414px',
+  margin: 'auto',
+  [theme.breakpoints.up('sm')]: {
+    minWidth: '414px',
+  },
+}));

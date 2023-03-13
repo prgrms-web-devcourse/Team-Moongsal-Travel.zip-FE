@@ -36,7 +36,7 @@ const Header = () => {
   };
 
   return (
-    <Box sx={BoxStyle}>
+    <BoxStyle>
       <AppBar sx={AppBarStyle}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Box onClick={() => router.push('/')} sx={{ cursor: 'pointer' }}>
@@ -62,7 +62,7 @@ const Header = () => {
           </Search>
         </Toolbar>
       </AppBar>
-    </Box>
+    </BoxStyle>
   );
 };
 
@@ -115,8 +115,11 @@ const AppBarStyle = {
   boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.2)',
 } as const;
 
-const BoxStyle = {
+const BoxStyle = styled(Box)(({ theme }) => ({
   position: 'sticky',
   top: 0,
   zIndex: '1201',
-} as const;
+  [theme.breakpoints.up('xs')]: {
+    width: '100%',
+  },
+}));
