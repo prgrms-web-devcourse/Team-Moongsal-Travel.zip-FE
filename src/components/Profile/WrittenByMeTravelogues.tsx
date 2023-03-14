@@ -6,7 +6,7 @@ import { EmptyData, SwipeSlider } from '@/components/common';
 
 const WrittenByMeTravelogues = () => {
   const { data: travelogues } = useGetWrittenByMeTravelogues();
-  const title = '내가 작성한 여행일지';
+  const title = '내가 작성한 여행 일지';
   if (!travelogues || travelogues.length === 0) {
     return (
       <EmptyData
