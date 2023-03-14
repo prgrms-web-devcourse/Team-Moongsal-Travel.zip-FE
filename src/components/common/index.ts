@@ -3,6 +3,7 @@ export { default as AuthHeader } from './AuthHeader';
 export { default as CommonButton } from './CommonButton';
 export { default as CommonInput } from './CommonInput';
 export { default as CountrySelect } from './CountrySelect';
+export { default as EmptyData } from './EmptyData';
 export { default as FileInput } from './FileInput';
 export { default as FilterButton } from './FilterButton';
 export { default as ProfileAvatar } from './ProfileAvatar';
