@@ -1,3 +1,4 @@
+import { TRAVELOGUE_API_ROUTER } from '@/constants/path';
 import { SubTravelogueDetailType } from '@/types/post';
 
 export interface TravelogueFeedType {
@@ -45,3 +46,10 @@ export interface TravelogueDetailType {
 }
 
 export type TravelInfoTitle = '여행지' | '여행기간' | '여행경비' | '이동수단';
+
+export interface BaseTravelogueParamsType {
+  page: number;
+  size: number;
+  sortedType?: 'viewCount,desc';
+  type: keyof typeof TRAVELOGUE_API_ROUTER;
+}

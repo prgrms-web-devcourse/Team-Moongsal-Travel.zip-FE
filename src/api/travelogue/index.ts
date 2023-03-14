@@ -4,19 +4,22 @@ import { baseRequest } from '@/api/core';
 import http from '@/api/core/axiosInstance';
 import { TRAVELOGUE_API_ROUTER } from '@/constants/path';
 import { FilterAxiosProps } from '@/types/filter';
-import { TravelogueFeedType, TravelogueListType } from '@/types/travelogue';
+import {
+  BaseTravelogueParamsType,
+  TravelogueFeedType,
+  TravelogueListType,
+} from '@/types/travelogue';
 
 export const getTypeOfTravelogues = async ({
+  page,
+  size,
   type,
-  page = 0,
-  size = 0,
-}: {
-  page: number;
-  size: number;
-  type: keyof typeof TRAVELOGUE_API_ROUTER;
-}): Promise<TravelogueFeedType[]> => {
+  sortedType,
+}: BaseTravelogueParamsType): Promise<TravelogueFeedType[]> => {
   const response = await http.get<TravelogueListType>(
-    `${TRAVELOGUE_API_ROUTER[type]}?page=${page}&size=${size}`,
+    `${TRAVELOGUE_API_ROUTER[type]}?page=${page}&size=${size}${
+      sortedType ? `&sort=${sortedType}` : ''
+    }`,
   );
 
   return response.data.content;
