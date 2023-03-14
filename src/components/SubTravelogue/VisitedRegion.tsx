@@ -27,33 +27,36 @@ const VisitedRegion = ({ control }: VisitedRegionProps) => {
           <AddCircleIcon />
         </IconButton>
       </Stack>
-      {fields.map((item, index) => (
-        <Stack
-          key={item.id}
-          direction='row'
-          spacing={2}
-          component='li'
-          justifyContent={'space-between'}>
-          <Controller
-            render={({ field }) => (
-              <AutoComplete>
-                <Location field={field} />
-              </AutoComplete>
-            )}
-            name={`addresses.${index}.region`}
-            control={control}
-            rules={{ required: true }}
-          />
-          <Button
-            type='button'
-            variant='outlined'
-            sx={{ width: '60px', height: '56px' }}
-            onClick={() => remove(index)}
-            disabled={fields.length === 1}>
-            삭제
-          </Button>
-        </Stack>
-      ))}
+      <Stack sx={{ gap: '0.5rem' }}>
+        {fields.map((item, index) => (
+          <Stack
+            key={item.id}
+            direction='row'
+            spacing={2}
+            component='li'
+            justifyContent={'space-between'}
+            alignItems='center'>
+            <Controller
+              render={({ field }) => (
+                <AutoComplete>
+                  <Location field={field} />
+                </AutoComplete>
+              )}
+              name={`addresses.${index}.region`}
+              control={control}
+              rules={{ required: true }}
+            />
+            <Button
+              type='button'
+              variant='outlined'
+              sx={{ width: '60px', height: '56px' }}
+              onClick={() => remove(index)}
+              disabled={fields.length === 1}>
+              삭제
+            </Button>
+          </Stack>
+        ))}
+      </Stack>
     </Stack>
   );
 };
