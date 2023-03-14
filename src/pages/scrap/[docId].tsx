@@ -2,7 +2,7 @@ import { MoreVert as MoreVertIcon } from '@mui/icons-material';
 import { PushPin as PushPinIcon } from '@mui/icons-material';
 import {
   Button,
-  Grid,
+  List,
   ListItem,
   ListItemText,
   Menu,
@@ -113,43 +113,43 @@ const ScrapDetail = () => {
           component='div'>
           {scrapTitle}
         </Typography>
-        <Grid container spacing={2}>
+        <List>
           {scrapContents &&
             scrapContents.map(({ scrapObjectId, placeName, postId }) => (
-              <Grid item key={scrapObjectId} xs={6}>
-                <Paper
-                  elevation={1}
-                  sx={{
-                    display: 'flex',
-                    width: '100%',
-                    padding: '0.5rem 0',
-                    boxSizing: 'border-box',
-                    borderRadius: '0.5rem',
-                  }}>
-                  <ListItem>
-                    <PushPinIcon sx={{ color: 'blue050.main', mr: 1 }} />
-                    <ListItemText
-                      primary={placeName}
-                      sx={{
-                        width: '100%',
-                        '.MuiTypography-root': {
-                          fontWeight: 700,
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                        },
-                      }}
-                    />
-                    <Button
-                      onClick={(e) => handleClick(e, scrapObjectId, postId)}
-                      sx={{ minWidth: 0 }}>
-                      <MoreVertIcon />
-                    </Button>
-                  </ListItem>
-                </Paper>
-              </Grid>
+              <Paper
+                key={scrapObjectId}
+                elevation={1}
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  padding: '0.5rem 0',
+                  boxSizing: 'border-box',
+                  borderRadius: '0.5rem',
+                  mb: 1,
+                }}>
+                <ListItem>
+                  <PushPinIcon sx={{ color: 'blue050.main', mr: 1 }} />
+                  <ListItemText
+                    primary={placeName}
+                    sx={{
+                      width: '100%',
+                      '.MuiTypography-root': {
+                        fontWeight: 700,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      },
+                    }}
+                  />
+                  <Button
+                    onClick={(e) => handleClick(e, scrapObjectId, postId)}
+                    sx={{ minWidth: 0 }}>
+                    <MoreVertIcon />
+                  </Button>
+                </ListItem>
+              </Paper>
             ))}
-        </Grid>
+        </List>
       </Stack>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem onClick={handleRouter}>게시글 이동</MenuItem>
