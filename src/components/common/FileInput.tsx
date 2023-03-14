@@ -1,6 +1,5 @@
 import { PhotoCamera } from '@mui/icons-material';
 import { Box, IconButton } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
@@ -33,10 +32,14 @@ const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
         }}
       />
       <label htmlFor='select-image'>
-        <StyledIconButton aria-label='delete' disableRipple sx={iconStyle}>
-          <PhotoCamera sx={{ mr: '10px' }} />
-          <SubTitle fontSize='16px'>Upload Image</SubTitle>
-        </StyledIconButton>
+        <IconButton
+          aria-label='delete'
+          component='span'
+          disableRipple
+          sx={iconButtonStyle}>
+          <PhotoCamera />
+          <SubTitle>Upload Image</SubTitle>
+        </IconButton>
       </label>
       {selectedImage ? (
         <Box
@@ -66,14 +69,8 @@ const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
 
 export default FileInput;
 
-const iconStyle = {
+const iconButtonStyle = {
   '&:hover': {
-    color: '#',
+    color: 'blue070.main',
   },
 };
-
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
-  '&:hover': {
-    color: theme.palette.blue070.main,
-  },
-}));
