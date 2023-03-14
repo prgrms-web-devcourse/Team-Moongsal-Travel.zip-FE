@@ -14,6 +14,7 @@ interface SwipeSliderProps {
   customSx?: SxProps<Theme>;
   fade?: boolean;
   autoplay?: boolean;
+  isTemp?: boolean;
 }
 
 const SwipeSlider = ({
@@ -22,6 +23,7 @@ const SwipeSlider = ({
   customSx,
   fade = false,
   autoplay = false,
+  isTemp = false,
 }: SwipeSliderProps) => {
   const settings = {
     dots: true,
@@ -39,7 +41,7 @@ const SwipeSlider = ({
       </Title>
       <Slider {...settings}>
         {travelogues.map((travelogue) => (
-          <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
+          <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} isTemp={isTemp} />
         ))}
       </Slider>
     </Stack>

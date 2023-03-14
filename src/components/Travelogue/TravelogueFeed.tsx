@@ -4,19 +4,35 @@ import { useRouter } from 'next/router';
 import { FeedContent, FeedHeader, FeedImage } from '@/components/Travelogue';
 import useAuth from '@/hooks/useAuth';
 import { TravelogueFeedType } from '@/types/travelogue';
+import { setItem } from '@/utils/storage';
 
 interface TravelogueFeedProps {
   data: TravelogueFeedType;
   isBottomPadding?: boolean;
+  isTemp?: boolean;
 }
 
-const TravelogueFeed = ({ data, isBottomPadding = false }: TravelogueFeedProps) => {
+const TravelogueFeed = ({
+  data,
+  isBottomPadding = false,
+  isTemp = false,
+}: TravelogueFeedProps) => {
   const router = useRouter();
   const { handleOpenAuthConfirmModal } = useAuth();
 
   const onClickFeed = () => {
     if (handleOpenAuthConfirmModal()) {
       return;
+    }
+
+    if (isTemp) {
+      const { days, travelogueId } = data;
+      const subsId = ['1', '2'];
+      setItem(`temp-data-${travelogueId}`, { days, subsId });
+      router.push({
+        pathname: '/post/first',
+        query: { travelogueId, temp: true },
+      });
     }
 
     router.push({

@@ -13,7 +13,7 @@ import { travelogueFormProps } from '@/constants/defaultFormValue';
 import useImageUpload from '@/hooks/useImageUpload';
 import { TravelogueFormType, TravelogueSaveResponseType } from '@/types/post';
 import { createPeriodArray } from '@/utils/helper';
-import { setItem } from '@/utils/storage';
+import { getItem, setItem } from '@/utils/storage';
 
 const First = () => {
   const router = useRouter();
@@ -22,15 +22,20 @@ const First = () => {
   const { getImageUrlFromS3, deleteFile } = useImageUpload();
   const [travelogueId, setTravelogueId] = useState('');
   const [isEditPage, setIsEditPage] = useState(false);
+  const [isTempPage, setIsTempPage] = useState(false);
   const { data: travelogue, refetch } = useGetTravelogueForEdit(travelogueId);
   const { mutate: saveMutate } = useSaveTravelogue(isEditPage);
   const { mutate: publishMutate } = usePatchTraveloguePublish();
 
+  console.log('travelogue', travelogue);
+
   useEffect(() => {
-    const { travelogueId, edit } = router.query;
-    if (travelogueId && edit) {
+    const { travelogueId, edit, temp } = router.query;
+    edit && setIsEditPage(true);
+    travelogueId && setTravelogueId(travelogueId as string);
+    if (temp) {
+      setIsTempPage(true);
       setIsEditPage(true);
-      setTravelogueId(travelogueId as string);
     }
   }, [router.isReady, router.query]);
 
@@ -66,7 +71,11 @@ const First = () => {
       { data: { ...data, thumbnail: url }, travelogueId },
       {
         onSuccess: ({ data }) => {
-          isEditPage ? publishTravelogue(data.travelogueId) : goToSubTravelogue(data);
+          isTempPage
+            ? goToTempSubTravelogue(data.travelogueId)
+            : isEditPage
+            ? publishTravelogue(data.travelogueId)
+            : goToSubTravelogue(data);
         },
         onError: () => {
           key && deleteFile(key);
@@ -89,6 +98,25 @@ const First = () => {
     );
   };
 
+  const goToTempSubTravelogue = (travelogueId: string) => {
+    if (isTempPage) {
+      const tempData = getItem<{ days: string; subsId: string[] }>(
+        `temp-data-${travelogueId}`,
+      );
+      if (tempData) {
+        const { days } = tempData;
+        setItem(`travelogueInfo`, {
+          id: travelogueId,
+          step: createPeriodArray(parseInt(days)),
+        });
+        router.push(
+          { pathname: '/post/[id]', query: { travelogueId, days } },
+          '/post/detail',
+        );
+      }
+    }
+  };
+
   const goToSubTravelogue = (data: TravelogueSaveResponseType) => {
     const { id: travelogueId, days } = data;
     setItem(`travelogueInfo`, {
@@ -109,9 +137,15 @@ const First = () => {
       <PostBasic control={control} isEditPage={isEditPage} data={travelogue?.data} />
       <Stack direction='row' justifyContent='flex-end' sx={{ mt: 3, mb: 6 }}>
         {isEditPage ? (
-          <Button type='submit' fullWidth variant='contained'>
-            완료
-          </Button>
+          isTempPage ? (
+            <Button type='submit' sx={{ color: 'blue050.main' }}>
+              다음
+            </Button>
+          ) : (
+            <Button type='submit' fullWidth variant='contained'>
+              완료
+            </Button>
+          )
         ) : (
           <Button type='submit' sx={{ color: 'blue050.main' }}>
             다음

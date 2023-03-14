@@ -21,6 +21,7 @@ const TemporarySaveTravelogues = () => {
         travelogues={travelogues}
         title={title}
         customSx={{ py: 2.5, mb: 5 }}
+        isTemp={true}
       />
     </Box>
   );
