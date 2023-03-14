@@ -11,7 +11,7 @@ const TemporarySaveTravelogues = () => {
   }
 
   return (
-    <Box sx={{ width: 414 }}>
+    <Box sx={{ width: '100%' }}>
       <SwipeSlider
         travelogues={travelogues}
         title='임시 저장 여행 일지'

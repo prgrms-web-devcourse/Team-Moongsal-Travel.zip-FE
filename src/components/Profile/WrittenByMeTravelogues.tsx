@@ -11,7 +11,7 @@ const WrittenByMeTravelogues = () => {
   }
 
   return (
-    <Box sx={{ width: 414 }}>
+    <Box sx={{ width: '100%' }}>
       <SwipeSlider
         travelogues={travelogues}
         title='내가 작성한 여행 일지'

@@ -11,17 +11,17 @@ export const isHeaderOpenState = atom({
 });
 
 export const isSigninState = atom({
-  key: 'IS_SIGNIN',
+  key: `IS_SIGNIN${v4()}`,
   default: Boolean(getItem(ACCESS_TOKEN)),
 });
 
 export const isAuthConfirmModalState = atom({
-  key: 'IS_AUTH_CONFIRM_MODAL',
+  key: `IS_AUTH_CONFIRM_MODAL${v4()}`,
   default: false,
 });
 
 export const userInformationState = atom<UserInformationType>({
-  key: 'USER_INFORMATION',
+  key: `USER_INFORMATION${v4()}`,
   default: {
     email: '',
     nickname: '',
