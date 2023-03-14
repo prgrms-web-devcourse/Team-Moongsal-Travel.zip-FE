@@ -23,6 +23,7 @@ const Transition = forwardRef(function Transition(
 const EditDrawer = ({ isOpen, handleCloseEditModal }: EditDrawerProps) => {
   return (
     <MobileSizeDrawer
+      disableScrollLock
       open={isOpen}
       fullScreen
       onClose={handleCloseEditModal}

@@ -20,14 +20,20 @@ const AuthHeader = ({ text }: AuthHeaderProps) => {
       <Box
         sx={{
           position: 'absolute',
-          width: '400px',
+          width: '100%',
           top: '10px',
           left: '0',
           opacity: '0.4',
         }}>
-        <Image src={worldMap} width={414} height={220} alt='logo' priority />
+        <Image
+          src={worldMap}
+          height={220}
+          alt='logo'
+          style={{ width: '100%' }}
+          priority
+        />
       </Box>
-      <Image src={bigLogo} width={350} height={170} alt='logo' priority/>
+      <Image src={bigLogo} height={170} alt='logo' style={{ width: '100%' }} priority />
       <Typography
         component='h1'
         variant='h6'
