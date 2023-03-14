@@ -31,9 +31,9 @@ const PersonalFeedList = () => {
       <Title bold='bold' fontSize='1.4rem' color='dark.main' sx={{ ml: '15px' }}>
         추천 여행 일지
       </Title>
-      {personalTravelogues.map((travelogue, index) => (
+      {personalTravelogues.map((travelogue) => (
         <TravelogueFeed
-          key={String(travelogue.travelogueId + index)}
+          key={String(travelogue.travelogueId)}
           data={travelogue}
           isBottomPadding
         />

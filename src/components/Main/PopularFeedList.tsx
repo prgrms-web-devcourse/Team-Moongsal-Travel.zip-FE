@@ -1,8 +1,13 @@
-import { useGetRecentTravelogues } from '@/api/hooks/travelogue';
+import { useGetBaseTravelogueList } from '@/api/hooks/travelogue';
 import SwipeSlider from '@/components/common/SwipeSlider';
 
 const PopularFeedList = () => {
-  const { data: popularTravelogues } = useGetRecentTravelogues();
+  const { data: popularTravelogues } = useGetBaseTravelogueList({
+    page: 0,
+    size: 5,
+    sortedType: 'viewCount,desc',
+    type: 'recent',
+  });
 
   if (!popularTravelogues || popularTravelogues.length === 0) {
     return null;

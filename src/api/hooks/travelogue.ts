@@ -10,12 +10,17 @@ import {
   patchTravelogueDetailById,
 } from '@/api/travelogue';
 import { FilterAxiosProps } from '@/types/filter';
-import { TravelogueListType } from '@/types/travelogue';
+import { BaseTravelogueParamsType, TravelogueListType } from '@/types/travelogue';
 
-export const useGetRecentTravelogues = () => {
+export const useGetBaseTravelogueList = ({
+  page = 0,
+  size = 5,
+  sortedType,
+  type,
+}: BaseTravelogueParamsType) => {
   return useQuery({
-    queryKey: ['RECENT_TRAVELOGUES'],
-    queryFn: () => getTypeOfTravelogues({ type: 'recent', page: 0, size: 5 }),
+    queryKey: ['RECENT_TRAVELOGUES', page, size, sortedType, type],
+    queryFn: () => getTypeOfTravelogues({ type, page, size, sortedType }),
   });
 };
 
