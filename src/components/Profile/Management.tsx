@@ -34,7 +34,7 @@ const Management = ({ handleOpenEditModal }: ManagementProps) => {
         <ProfileAvatar
           url={profileImageUrl}
           size={75}
-          iconSize={5}
+          iconSize={75}
           isLoading={isLoading}
         />
         <Stack>
