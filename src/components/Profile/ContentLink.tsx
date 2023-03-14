@@ -13,8 +13,12 @@ interface ContentLinkProps {
   iconName: 'edit' | 'bookmark' | 'temporarySave';
 }
 
-const ContentLink = ({ contentName, route, iconName }: ContentLinkProps) => {
-  console.log(route); // route 이동 경로 확인 test 용도
+const ContentLink = ({
+  contentName,
+  // route,
+  iconName,
+}: ContentLinkProps) => {
+  // console.log(route); // route 이동 경로 확인 test 용도
 
   let IconComponent: ReactNode;
 

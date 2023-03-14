@@ -42,7 +42,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
   };
 
   const handleApply = async (data: FilterFormType) => {
-    console.log(data);
+    // console.log(data);
     setFilter({
       minDays: data.minDays,
       maxDays: data.maxDays,
