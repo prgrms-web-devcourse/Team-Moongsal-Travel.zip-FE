@@ -22,15 +22,11 @@ const useImageUpload = () => {
   const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
-      if (file.size >= 1 * 1024 * 1024) {
-        alert('1mb 이하의 파일만 업로드 가능합니다.');
-        return;
-      }
       const fileExtension = file.name.split('.').pop() ?? '';
       if (!IMAGE_TYPE.includes(file.type) || !IMAGE_EXTENSION.includes(fileExtension)) {
-        alert('jpeg/png 파일만 Upload 가능합니다.');
-        return;
+        return false;
       }
+      return true;
     }
   };
 
