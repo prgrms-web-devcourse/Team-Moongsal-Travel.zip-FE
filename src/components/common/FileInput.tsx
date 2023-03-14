@@ -1,5 +1,5 @@
 import { PhotoCamera } from '@mui/icons-material';
-import { Box, IconButton } from '@mui/material';
+import { Alert, Box, IconButton } from '@mui/material';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
@@ -17,6 +17,18 @@ interface FileInputProps {
 const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
   const { handleFileInput } = useImageUpload();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [isInvalidType, setIsInvalidType] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!handleFileInput(e)) {
+      setIsInvalidType(true);
+      setSelectedImage(null);
+      return;
+    }
+    setIsInvalidType(false);
+    setSelectedImage(e.target.files && e.target.files[0]);
+    thumbnail.onChange(e.target.files && e.target.files[0]);
+  };
 
   return (
     <>
@@ -25,27 +37,23 @@ const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
         type='file'
         id='select-image'
         style={{ display: 'none' }}
-        onChange={(e) => {
-          handleFileInput(e);
-          setSelectedImage(e.target.files && e.target.files[0]);
-          thumbnail.onChange(e.target.files && e.target.files[0]);
-        }}
+        onChange={handleChange}
       />
       <label htmlFor='select-image'>
         <IconButton
           aria-label='delete'
           component='span'
           disableRipple
-          sx={iconButtonStyle}>
-          <PhotoCamera />
-          <SubTitle>Upload Image</SubTitle>
+          sx={{ ...iconButtonStyle, p: 0 }}>
+          <PhotoCamera sx={{ pr: 1 }} />
+          <SubTitle fontSize='17px'>Upload Image</SubTitle>
         </IconButton>
       </label>
       {selectedImage ? (
         <Box
-          mt={2}
+          mt={1}
           textAlign='center'
-          sx={{ position: 'relative', height: '100px', minWidth: '200px' }}>
+          sx={{ position: 'relative', height: '150px', minWidth: '300px' }}>
           <Image
             fill
             src={URL.createObjectURL(selectedImage)}
@@ -53,6 +61,8 @@ const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
             style={{ objectFit: 'contain' }}
           />
         </Box>
+      ) : isInvalidType ? (
+        <Alert severity='error'>jpeg/png 파일만 Upload 가능합니다.</Alert>
       ) : (
         imageUrl && (
           <Box

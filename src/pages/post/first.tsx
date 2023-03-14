@@ -27,8 +27,6 @@ const First = () => {
   const { mutate: saveMutate } = useSaveTravelogue(isEditPage);
   const { mutate: publishMutate } = usePatchTraveloguePublish();
 
-  console.log('travelogue', travelogue);
-
   useEffect(() => {
     const { travelogueId, edit, temp } = router.query;
     edit && setIsEditPage(true);

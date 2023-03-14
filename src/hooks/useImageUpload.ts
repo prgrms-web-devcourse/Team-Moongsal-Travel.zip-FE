@@ -24,9 +24,9 @@ const useImageUpload = () => {
       const file = e.target.files[0];
       const fileExtension = file.name.split('.').pop() ?? '';
       if (!IMAGE_TYPE.includes(file.type) || !IMAGE_EXTENSION.includes(fileExtension)) {
-        alert('jpeg/png 파일만 Upload 가능합니다.');
-        return;
+        return false;
       }
+      return true;
     }
   };
 
