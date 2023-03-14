@@ -33,8 +33,8 @@ const TravelogueFeed = ({
         pathname: '/post/first',
         query: { travelogueId, temp: true },
       });
+      return;
     }
-
     router.push({
       pathname: '/detail',
       query: { travelogueId: data.travelogueId },
