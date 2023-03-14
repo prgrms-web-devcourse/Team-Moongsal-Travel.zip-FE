@@ -10,7 +10,6 @@ import { TravelogueFeedType } from '@/types/travelogue';
 
 interface SwipeSliderProps {
   travelogues: TravelogueFeedType[];
-
   title: string;
   customSx?: SxProps<Theme>;
   fade?: boolean;
@@ -39,11 +38,9 @@ const SwipeSlider = ({
         {title}
       </Title>
       <Slider {...settings}>
-        {travelogues.map((travelogue) => {
-          return (
-            <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
-          );
-        })}
+        {travelogues.map((travelogue) => (
+          <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} />
+        ))}
       </Slider>
     </Stack>
   );
