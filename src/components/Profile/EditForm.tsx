@@ -3,7 +3,7 @@ import { Box, Stack, TextField } from '@mui/material';
 
 import { useUserInformation } from '@/api/hooks/profile';
 import { ProfileAvatar } from '@/components/common';
-import { flexCenterStyle } from '@/styles/commonStyle';
+import { flexCenterStyle, inputStyle } from '@/styles/commonStyle';
 
 const EditForm = () => {
   const {
@@ -23,11 +23,11 @@ const EditForm = () => {
         onChange={({ target }) => handleChangeSelectedImage(target.files)}
       />
       <label htmlFor='select-profile-image'>
-        <Box sx={{ position: 'relative' }}>
+        <Box sx={{ position: 'relative', cursor: 'pointer' }}>
           <ProfileAvatar
             url={profileImageUrl}
             size={100}
-            iconSize={5}
+            iconSize={100}
             isLoading={isLoading}
           />
           <Box
@@ -58,6 +58,7 @@ const EditForm = () => {
         fullWidth
         helperText={errorMessage && errorMessage}
         onChange={({ target }) => handleChangeNickname(target.value)}
+        sx={inputStyle}
       />
     </Stack>
   );

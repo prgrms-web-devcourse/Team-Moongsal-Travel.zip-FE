@@ -17,7 +17,7 @@ const ProfileAvatar = ({ url, size, iconSize, isLoading }: ProfileAvatarProps) =
   return (
     <Avatar
       src={url !== 'default' ? url : undefined}
-      sx={{ bgcolor: 'gray020.main', width: size, height: size, textAlign: 'center' }}>
+      sx={{ bgcolor: 'blue010.main', width: size, height: size, textAlign: 'center' }}>
       {url === 'default' && <Image src={avatar} width={iconSize} alt='' />}
     </Avatar>
   );
