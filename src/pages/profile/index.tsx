@@ -18,10 +18,10 @@ const Profile = () => {
   }
 
   return (
-    <Stack>
+    <Stack sx={{ mb: '50px' }}>
       <Management handleOpenEditModal={() => setIsOpen(true)} />
       <Divider sx={{ px: '15px' }} />
-      <Stack spacing={3} alignItems='center' width={414}>
+      <Stack spacing={3} width={414}>
         <WrittenByMeTravelogues />
         <TemporarySaveTravelogues />
       </Stack>
