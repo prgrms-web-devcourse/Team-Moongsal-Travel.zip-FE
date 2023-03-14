@@ -28,6 +28,13 @@ const TravelogueContent = ({
     });
   };
 
+  const limitImageMaxSize = () => {
+    const doc = new DOMParser().parseFromString(content, 'text/html');
+    const imageList = doc.getElementsByTagName('img');
+    Array.from(imageList).map((img) => img.setAttribute('style', 'max-width: 350px'));
+    return doc.body.innerHTML;
+  };
+
   return (
     <Card variant='outlined' sx={{ borderRadius: '10px' }}>
       <CardContent>
@@ -54,7 +61,7 @@ const TravelogueContent = ({
           </Title>
           <Divider sx={{ my: 2 }} />
           <Stack sx={{ lineHeight: 1.7, fontSize: '15px', color: 'dark.main' }}>
-            {Parser(content)}
+            {Parser(limitImageMaxSize())}
           </Stack>
           <VisitedRegionList addresses={addresses} />
         </Stack>
