@@ -23,7 +23,7 @@ const ComplexButton = ({ value, onChange }: ComplexButtonProps) => {
         exclusive
         onChange={onChange}
         aria-label='Platform'
-        sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: '1rem' }}>
+        sx={{ display: 'flex', justifyContent: 'center', gap: 2}}>
         {COMPLEX_BUTTON_IMAGE.map((image) => (
           <ImageButton
             key={image.url}

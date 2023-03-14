@@ -6,6 +6,7 @@ import { Control, Controller } from 'react-hook-form';
 import { FileInput, SubTitle, Title } from '@/components/common';
 import { CountrySelect } from '@/components/common';
 import useTravelogueForm from '@/hooks/useTravelogueForm';
+import { inputStyle } from '@/styles/commonStyle';
 import { TravelogueFormType, TravelogueResponseType } from '@/types/post';
 
 import { ComplexButton, DatePicker } from './';
@@ -45,9 +46,11 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
 
   return (
     <>
-      <Title bold='bold'>여행 기본 정보를 입력하세요</Title>
+      <Title bold='bold' sx={{ mb: '5px' }}>
+        여행 기본 정보를 입력하세요
+      </Title>
       <Stack sx={marginBottom}>
-        <SubTitle>여행 유형</SubTitle>
+        <SubTitle sx={{ mb: '5px' }}>여행 유형</SubTitle>
         <ComplexButton value={toggleValue} onChange={onChange} />
         {toggleValue && (
           <>
@@ -62,7 +65,7 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
         )}
       </Stack>
       <Stack sx={marginBottom}>
-        <SubTitle>여행 기간</SubTitle>
+        <SubTitle sx={{ mb: '5px' }}>여행 기간</SubTitle>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <DatePicker
             control={startDate}
@@ -79,14 +82,15 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
           </FormHelperText>
         )}
       </Stack>
-      <Stack sx={marginBottom}>
-        <SubTitle>총 경비</SubTitle>
+      <Stack sx={{ mb: '1.5rem' }}>
+        <SubTitle sx={{ mb: '5px' }}>총 경비</SubTitle>
         <Box>
           <OutlinedInput
             {...costTotal}
             fullWidth
             placeholder='이번 여행의 총 경비를 입력하세요'
             type='text'
+            sx={inputStyle}
           />
           {costTotalState.error && (
             <FormHelperText sx={HelperTextColor}>
@@ -95,16 +99,24 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
           )}
         </Box>
       </Stack>
-      <Title bold='bold'>여행 일기를 작성하세요 </Title>
+      <Title bold='bold' sx={{ mb: '5px' }}>
+        여행 일기를 작성하세요{' '}
+      </Title>
       <Stack sx={marginBottom}>
-        <SubTitle>제목</SubTitle>
-        <OutlinedInput {...title} fullWidth placeholder='제목을 입력하세요' type='text' />
+        <SubTitle sx={{ mb: '5px' }}>제목</SubTitle>
+        <OutlinedInput
+          {...title}
+          fullWidth
+          placeholder='제목을 입력하세요'
+          type='text'
+          sx={inputStyle}
+        />
         {titleState.error && (
           <FormHelperText sx={HelperTextColor}>{titleState.error.message}</FormHelperText>
         )}
       </Stack>
       <Stack sx={marginBottom}>
-        <SubTitle>썸네일</SubTitle>
+        <SubTitle sx={{ mb: '5px' }}>썸네일</SubTitle>
         <Controller
           render={({ field: thumbnail, fieldState: thumbnailState }) => (
             <>

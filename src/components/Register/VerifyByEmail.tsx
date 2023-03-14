@@ -6,7 +6,7 @@ import { Control, UseFormSetError } from 'react-hook-form';
 import { usePostSendEmail, usePostVerifyCode } from '@/api/hooks/user';
 import useGetUserForms from '@/hooks/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
-import { InputStyle } from '@/styles/commonStyle';
+import { inputStyle } from '@/styles/commonStyle';
 
 interface VerifyEmailProps {
   control: Control<UserRegisterForm>;
@@ -56,7 +56,7 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
           variant='outlined'
           fullWidth
           helperText={emailState.error && emailState.error.message}
-          sx={InputStyle}
+          sx={inputStyle}
         />
         <Button
           variant='contained'
@@ -76,7 +76,7 @@ const VerifyByEmail = ({ control, setAuthSuccess, setError }: VerifyEmailProps) 
             variant='outlined'
             fullWidth
             helperText={codeState.error ? codeState.error.message : failText()}
-            sx={InputStyle}
+            sx={inputStyle}
           />
           <Button
             variant='contained'

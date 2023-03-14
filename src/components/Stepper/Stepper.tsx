@@ -1,6 +1,8 @@
 import { Box, Button, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 
+import { stepStyle } from '@/styles/commonStyle';
+
 interface StepperProps {
   children: ReactNode;
   steps: string[];
@@ -29,7 +31,7 @@ const HorizontalLinearStepper = ({
     <Box sx={{ padding: '0 15px' }}>
       <Stepper activeStep={activeStep} sx={{ height: '80px' }}>
         {steps.map((label) => (
-          <Step key={label} sx={StepStyle}>
+          <Step key={label} sx={stepStyle}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
@@ -58,14 +60,3 @@ const HorizontalLinearStepper = ({
 };
 
 export default HorizontalLinearStepper;
-
-const StepStyle = {
-  '.MuiStepIcon-text': {
-    fontFamily: 'Pretendard-Regular',
-  },
-  '.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root': {
-    '&.Mui-active, &.Mui-completed': {
-      color: 'blue070.main',
-    },
-  },
-};

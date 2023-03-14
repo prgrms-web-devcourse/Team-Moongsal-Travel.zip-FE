@@ -50,7 +50,7 @@ const FeedContent = ({ title, nights, days, totalCost }: FeedContentProps) => {
           </Typography>
         </Row> */}
       </Row>
-      <Stack direction='row' spacing={1.8} alignItems={'center'}>
+      <Stack direction='row' spacing={1.5} alignItems={'center'}>
         <FeedChip chipTitle='기간' chipContent={`${nights}박 ${days}일`} />
         <FeedChip
           chipTitle='총 경비'

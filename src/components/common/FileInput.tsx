@@ -32,7 +32,11 @@ const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
         }}
       />
       <label htmlFor='select-image'>
-        <IconButton aria-label='delete' component='span' disableRipple>
+        <IconButton
+          aria-label='delete'
+          component='span'
+          disableRipple
+          sx={iconButtonStyle}>
           <PhotoCamera />
           <SubTitle>Upload Image</SubTitle>
         </IconButton>
@@ -64,3 +68,9 @@ const FileInput = ({ thumbnail, imageUrl }: FileInputProps) => {
 };
 
 export default FileInput;
+
+const iconButtonStyle = {
+  '&:hover': {
+    color: 'blue070.main',
+  },
+};

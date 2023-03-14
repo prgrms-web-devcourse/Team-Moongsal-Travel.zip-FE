@@ -13,7 +13,7 @@ import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
 import { postVerifyNickname } from '@/api/user';
 import useGetUserForms from '@/hooks/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
-import { InputStyle } from '@/styles/commonStyle';
+import { inputStyle } from '@/styles/commonStyle';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -87,7 +87,7 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
             setValidNickname(false);
           }}
           helperText={nicknameState.error && nicknameState.error.message}
-          sx={InputStyle}
+          sx={inputStyle}
         />
         <Button variant='contained' sx={ButtonStyle} onClick={handleVerifyNickname}>
           중복확인
@@ -101,7 +101,7 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
         variant='outlined'
         type='password'
         helperText={passwordState.error && passwordState.error.message}
-        sx={InputStyle}
+        sx={inputStyle}
       />
       <TextField
         {...passwordConfirm}
@@ -110,7 +110,7 @@ const Register = ({ control, setValidNickname, setError, trigger }: RegisterProp
         variant='outlined'
         type='password'
         helperText={passwordConfirmState.error && passwordConfirmState.error.message}
-        sx={InputStyle}
+        sx={inputStyle}
       />
       <FormControl fullWidth>
         <InputLabel id='demo-simple-select-label'>출생연도</InputLabel>

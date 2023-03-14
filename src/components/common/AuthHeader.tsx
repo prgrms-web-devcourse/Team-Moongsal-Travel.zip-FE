@@ -25,9 +25,9 @@ const AuthHeader = ({ text }: AuthHeaderProps) => {
           left: '0',
           opacity: '0.4',
         }}>
-        <Image src={worldMap} width={414} height={220} alt='logo' />
+        <Image src={worldMap} width={414} height={220} alt='logo' priority />
       </Box>
-      <Image src={bigLogo} width={350} height={170} alt='logo' />
+      <Image src={bigLogo} width={350} height={170} alt='logo' priority/>
       <Typography
         component='h1'
         variant='h6'

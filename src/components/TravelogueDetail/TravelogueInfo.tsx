@@ -1,7 +1,7 @@
 import { Visibility as VisibilityIcon } from '@mui/icons-material';
-import { Avatar, Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
-import { SubTitle } from '@/components/common';
+import UserProfile from '@/components/common/UserProfile';
 import { TravelogueDetailType } from '@/types/travelogue';
 
 interface PostProfileProps {
@@ -12,21 +12,20 @@ const TravelogueInfo = ({ travelogueDetail }: PostProfileProps) => {
   const { nickname, viewCount, profileImageUrl } = travelogueDetail;
 
   return (
-    <Stack direction='row' spacing={2}>
+    <Stack direction='row' spacing={2} my={1}>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={nickname}>
-        <Avatar
-          src={profileImageUrl !== 'default' ? profileImageUrl : undefined}
-          sx={{ ...InfoStyle, backgroundColor: 'gray020.main' }}
+        <UserProfile
+          profileImageUrl={profileImageUrl}
+          nickname={nickname}
+          color={'gray030.main'}
+          fontSize={'15px'}
         />
-        <SubTitle fontSize='0.9rem' color='gray030.main'>
-          {nickname}
-        </SubTitle>
       </Stack>
       <Stack direction='row' spacing={0.5} alignItems={'center'} key={viewCount}>
-        <VisibilityIcon sx={{ ...InfoStyle, color: 'gray020.main' }} />
-        <SubTitle fontSize='0.9rem' color='gray030.main'>
+        <VisibilityIcon sx={{ width: 22, height: 22, color: 'gray030.main' }} />
+        <Typography component='span' sx={fontStyle}>
           {viewCount}
-        </SubTitle>
+        </Typography>
       </Stack>
     </Stack>
   );
@@ -34,4 +33,9 @@ const TravelogueInfo = ({ travelogueDetail }: PostProfileProps) => {
 
 export default TravelogueInfo;
 
-const InfoStyle = { width: 20, height: 20 };
+const fontStyle = {
+  color: 'gray030.main',
+  fontSize: '15px',
+  fontWeight: '400',
+  pb: '2px',
+};

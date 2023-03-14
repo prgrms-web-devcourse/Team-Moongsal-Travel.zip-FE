@@ -9,7 +9,7 @@ interface TravelogueDetailProps {
 }
 
 const TravelogueDetail = ({ travelogueDetail }: TravelogueDetailProps) => {
-  const { id, subTravelogues } = travelogueDetail;
+  const { id, isWriter, subTravelogues } = travelogueDetail;
 
   return (
     <Stack spacing={3}>
@@ -18,6 +18,7 @@ const TravelogueDetail = ({ travelogueDetail }: TravelogueDetailProps) => {
         <TravelogueContent
           key={subTravelogue.subTravelogueId}
           travelogueId={id}
+          isWriter={isWriter}
           subTravelogue={subTravelogue}
         />
       ))}

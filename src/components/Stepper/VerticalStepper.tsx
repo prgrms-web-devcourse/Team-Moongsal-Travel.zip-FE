@@ -6,6 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import { useState } from 'react';
 
 import { SubTravelogue } from '@/components/SubTravelogue';
+import { stepStyle } from '@/styles/commonStyle';
 
 export type TravelogueInfoType = {
   id: string;
@@ -29,7 +30,7 @@ const VerticalStepper = ({ travelogueId, subTravelogueStep }: VerticalStepperPro
     <Box sx={{ maxWidth: 400 }}>
       <Stepper nonLinear activeStep={activeStep} orientation='vertical'>
         {subTravelogueStep.map((step, index) => (
-          <Step key={index} completed={completed[index]}>
+          <Step key={index} completed={completed[index]} sx={stepStyle}>
             <StepButton color='inherit' onClick={() => setActiveStep(index)}>
               {`${step} ${completed[index] ? '(저장)' : ''}`}
             </StepButton>

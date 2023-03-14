@@ -1,7 +1,8 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
 import { useUserInformation } from '@/api/hooks/profile';
-import { CommonButton, ProfileAvatar } from '@/components/common';
+import { ProfileAvatar } from '@/components/common';
+import { fontStyle } from '@/styles/commonStyle';
 
 interface ManagementProps {
   handleOpenEditModal: () => void;
@@ -9,14 +10,14 @@ interface ManagementProps {
 
 const Management = ({ handleOpenEditModal }: ManagementProps) => {
   const {
-    userInformation: { nickname, profileImageUrl },
+    userInformation: { nickname, profileImageUrl, email },
     isLoading,
   } = useUserInformation();
 
   return (
     <Stack
       spacing={2}
-      minHeight={175}
+      minHeight={150}
       alignItems='center'
       justifyContent='center'
       bgcolor='white.main'>
@@ -26,31 +27,41 @@ const Management = ({ handleOpenEditModal }: ManagementProps) => {
           width: '100%',
           justifyContent: 'start',
           alignItems: 'center',
-          px: 5,
+          px: '15px',  
           boxSizing: 'border-box',
           gap: 2.5,
         }}>
         <ProfileAvatar
           url={profileImageUrl}
           size={75}
-          iconSize={5}
+          iconSize={75}
           isLoading={isLoading}
         />
-        <Typography
-          variant='h2'
-          component='h2'
-          sx={{ font: '1.25rem bold', color: 'dark.main' }}>
-          {nickname}
-        </Typography>
+        <Stack>
+          <Typography variant='h2' component='h2' sx={{ ...fontStyle, fontSize: '16px' }}>
+            {nickname}
+          </Typography>
+          <Typography
+            component='span'
+            sx={{ mt: '5px', fontSize: '13px', color: 'gray030.main' }}>
+            {email}
+          </Typography>
+          <Button variant='outlined' sx={buttonStyle} onClick={handleOpenEditModal}>
+            프로필 수정
+          </Button>
+        </Stack>
       </Box>
-
-      <CommonButton
-        content='프로필 수정'
-        customStyle={{ height: 40, bgcolor: 'blue050.main' }}
-        handleClick={handleOpenEditModal}
-      />
     </Stack>
   );
 };
 
 export default Management;
+
+const buttonStyle = {
+  width: '105px',
+  height: '30px',
+  mt: '8px',
+  borderRadius: '4px',
+  borderColor: 'blue070.main',
+  fontWeight: '400',
+} as const;

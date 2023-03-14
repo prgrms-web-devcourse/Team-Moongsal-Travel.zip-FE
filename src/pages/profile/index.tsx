@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Divider, Stack } from '@mui/material';
 import { useState } from 'react';
 
 import { useUserInformation } from '@/api/hooks/profile';
@@ -20,7 +20,8 @@ const Profile = () => {
   return (
     <Stack>
       <Management handleOpenEditModal={() => setIsOpen(true)} />
-      <Stack alignItems='center'>
+      <Divider sx={{ px: '15px' }} />
+      <Stack spacing={3} alignItems='center' width={414}>
         <WrittenByMeTravelogues />
         <TemporarySaveTravelogues />
       </Stack>

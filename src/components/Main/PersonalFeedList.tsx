@@ -27,8 +27,8 @@ const PersonalFeedList = () => {
   }
 
   return (
-    <Stack spacing={'15px'} component='section' sx={{ p: '15px' }}>
-      <Title bold='bold' fontSize='1.4rem' color='dark.main'>
+    <Stack component='section'>
+      <Title bold='bold' fontSize='1.4rem' color='dark.main' sx={{ ml: '15px' }}>
         추천 여행 일지
       </Title>
       {personalTravelogues.map((travelogue, index) => (
