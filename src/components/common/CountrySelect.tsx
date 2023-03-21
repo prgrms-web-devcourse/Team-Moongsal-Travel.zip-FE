@@ -3,7 +3,7 @@ import { Autocomplete, Box, FormHelperText, TextField } from '@mui/material';
 import { useEffect } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { COUNTRIES } from '@/constants';
+import { COUNTRIES } from '@/constants/autoComplete';
 import { TravelogueFormType } from '@/types/post';
 
 interface LocationProps {
