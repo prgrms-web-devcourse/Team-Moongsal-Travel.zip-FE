@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { AuthHeader } from '@/components/common';
 import { Register, VerifyByEmail } from '@/components/Register';
 import { Stepper } from '@/components/Stepper';
-import { usePostUserRegister } from '@/hooks/api/user';
+import { usePostUserRegister } from '@/hooks/query/auth';
 import { UserRegister } from '@/types/auth';
 
 const REGISTER_STEP = ['이메일 인증', '회원가입'];

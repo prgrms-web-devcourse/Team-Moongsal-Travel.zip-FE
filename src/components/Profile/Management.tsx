@@ -1,7 +1,7 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 
 import { ProfileAvatar } from '@/components/common';
-import { useUserInformation } from '@/hooks/api/profile';
+import { useUserInformation } from '@/hooks/query/member';
 import { fontStyle } from '@/styles/commonStyle';
 
 interface ManagementProps {

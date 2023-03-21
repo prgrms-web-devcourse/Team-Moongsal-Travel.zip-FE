@@ -8,7 +8,10 @@ import useFormPersist from 'react-hook-form-persist';
 import { SubTitle } from '@/components/common';
 import { Transportation, VisitedRegion } from '@/components/SubTravelogue';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
-import { useGetSubTravelogueForEdit, useSaveSubTravelogue } from '@/hooks/api/post';
+import {
+  useGetSubTravelogueForEdit,
+  useSaveSubTravelogue,
+} from '@/hooks/query/travelogue';
 import useHandleTraveloguePublish from '@/hooks/travelogue/useHandleTraveloguePublish';
 import useSubTravelogueForm from '@/hooks/travelogue/useSubTravelogueForm';
 import { inputStyle } from '@/styles/commonStyle';

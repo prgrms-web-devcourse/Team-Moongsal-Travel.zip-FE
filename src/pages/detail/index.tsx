@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import Spinner from '@/components/common/Spinner';
 import { TravelogueDetail } from '@/components/TravelogueDetail';
-import { usePatchTravelogueDetailById } from '@/hooks/api/travelogue';
+import { usePatchTravelogueDetailById } from '@/hooks/query/detail';
 import { TravelogueDetailType } from '@/types/travelogue';
 
 const DetailPage = () => {

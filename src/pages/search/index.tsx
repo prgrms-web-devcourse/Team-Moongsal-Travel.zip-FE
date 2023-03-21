@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { FilterButton } from '@/components/common';
 import { Feed } from '@/components/Travelogue/Feed';
-import { useGetTravelogueByFilter } from '@/hooks/api/travelogue';
 import useIntersect from '@/hooks/common/useIntersect';
+import { useGetTravelogueByFilter } from '@/hooks/query/main';
 import { fontStyle } from '@/styles/commonStyle';
 import { FilterProps } from '@/types/filter';
 

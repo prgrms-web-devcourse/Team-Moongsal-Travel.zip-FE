@@ -3,8 +3,8 @@ import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Control, UseFormSetError } from 'react-hook-form';
 
-import { usePostSendEmail, usePostVerifyCode } from '@/hooks/api/user';
 import useGetUserForms from '@/hooks/auth/useGetUserForms';
+import { usePostSendEmail, usePostVerifyCode } from '@/hooks/query/auth';
 import { UserRegisterForm } from '@/pages/auth/register';
 import { inputStyle } from '@/styles/commonStyle';
 

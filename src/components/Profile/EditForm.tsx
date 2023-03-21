@@ -2,7 +2,7 @@ import { Add as AddIcon } from '@mui/icons-material';
 import { Box, Stack, TextField } from '@mui/material';
 
 import { ProfileAvatar } from '@/components/common';
-import { useUserInformation } from '@/hooks/api/profile';
+import { useUserInformation } from '@/hooks/query/member';
 import { flexCenterStyle, inputStyle } from '@/styles/commonStyle';
 
 const EditForm = () => {

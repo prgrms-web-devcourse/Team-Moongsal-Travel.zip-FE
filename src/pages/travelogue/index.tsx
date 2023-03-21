@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form';
 
 import { PostBasic } from '@/components/CreatePost';
 import { travelogueFormProps } from '@/constants/defaultFormValue';
+import useImageUpload from '@/hooks/common/useImageUpload';
 import {
   useGetTravelogueForEdit,
   usePatchTraveloguePublish,
   useSaveTravelogue,
-} from '@/hooks/api/post';
-import useImageUpload from '@/hooks/common/useImageUpload';
+} from '@/hooks/query/travelogue';
 import { TravelogueFormType, TravelogueSaveResponseType } from '@/types/post';
 import { createPeriodArray } from '@/utils/helper';
 import { getItem, setItem } from '@/utils/storage';

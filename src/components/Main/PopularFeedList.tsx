@@ -1,5 +1,5 @@
 import SwipeSlider from '@/components/common/SwipeSlider';
-import { useGetBaseTravelogueList } from '@/hooks/api/travelogue';
+import { useGetBaseTravelogueList } from '@/hooks/query/main';
 
 const PopularFeedList = () => {
   const { data: popularTravelogues } = useGetBaseTravelogueList({

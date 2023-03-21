@@ -3,7 +3,7 @@ import { tempPost } from 'public/images';
 
 import { SwipeSlider } from '@/components/common';
 import EmptyData from '@/components/common/EmptyData';
-import { useGetTemporarySaveTravelogues } from '@/hooks/api/travelogue';
+import { useGetTemporarySaveTravelogues } from '@/hooks/query/main';
 
 const TemporarySaveTravelogues = () => {
   const { data: travelogues } = useGetTemporarySaveTravelogues();

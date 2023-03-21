@@ -7,7 +7,7 @@ import {
   TemporarySaveTravelogues,
   WrittenByMeTravelogues,
 } from '@/components/Profile';
-import { useUserInformation } from '@/hooks/api/profile';
+import { useUserInformation } from '@/hooks/query/member';
 
 const MemberPage = () => {
   const [isOpen, setIsOpen] = useState(false);

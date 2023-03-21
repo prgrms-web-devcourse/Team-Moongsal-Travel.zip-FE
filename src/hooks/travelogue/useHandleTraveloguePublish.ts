@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { usePatchTraveloguePublish } from '@/hooks/api/post';
+import { usePatchTraveloguePublish } from '@/hooks/query/travelogue';
 
 const useHandleTraveloguePublish = (travelogueId: string) => {
   const router = useRouter();
