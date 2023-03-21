@@ -10,8 +10,9 @@ import {
 
 // import { useState } from 'react';
 import { Row } from '@/components/common';
-import { FeedChip } from '@/components/Travelogue';
 import { TravelogueFeedType } from '@/types/travelogue';
+
+import { FeedChip } from '.';
 
 type FeedContentProps = Pick<
   TravelogueFeedType,

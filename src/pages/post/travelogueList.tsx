@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
 import { FilterButton } from '@/components/common';
-import { TravelogueFeed } from '@/components/Travelogue';
+import { Feed } from '@/components/Travelogue/Feed';
 import { useGetTravelogueByFilter } from '@/hooks/api/travelogue';
 import useIntersect from '@/hooks/useIntersect';
 import { fontStyle } from '@/styles/commonStyle';
@@ -59,9 +59,7 @@ const TravelogueList = () => {
       <Stack>
         {travelogues.map(
           (travelogue) =>
-            travelogue && (
-              <TravelogueFeed key={travelogue.travelogueId} data={travelogue} />
-            ),
+            travelogue && <Feed key={travelogue.travelogueId} data={travelogue} />,
         )}
       </Stack>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

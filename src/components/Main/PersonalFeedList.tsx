@@ -2,7 +2,7 @@ import { Box, CircularProgress, Fade, Stack } from '@mui/material';
 import { useMemo } from 'react';
 
 import { Title } from '@/components/common';
-import { TravelogueFeed } from '@/components/Travelogue';
+import { Feed } from '@/components/Travelogue/Feed';
 import { useGetPersonalTravelogues } from '@/hooks/api/travelogue';
 import useIntersect from '@/hooks/useIntersect';
 import { flexCenterStyle } from '@/styles/commonStyle';
@@ -32,11 +32,7 @@ const PersonalFeedList = () => {
         추천 여행 일지
       </Title>
       {personalTravelogues.map((travelogue) => (
-        <TravelogueFeed
-          key={String(travelogue.travelogueId)}
-          data={travelogue}
-          isBottomPadding
-        />
+        <Feed key={String(travelogue.travelogueId)} data={travelogue} isBottomPadding />
       ))}
       <Box sx={flexCenterStyle}>
         <Fade in={isFetching}>

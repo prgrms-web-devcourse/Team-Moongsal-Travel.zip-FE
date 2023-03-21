@@ -1,22 +1,19 @@
 import { Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 
-import { FeedContent, FeedHeader, FeedImage } from '@/components/Travelogue';
 import useAuth from '@/hooks/useAuth';
 import { TravelogueFeedType } from '@/types/travelogue';
 import { setItem } from '@/utils/storage';
 
-interface TravelogueFeedProps {
+import { FeedContent, FeedHeader, FeedImage } from '.';
+
+interface FeedProps {
   data: TravelogueFeedType;
   isBottomPadding?: boolean;
   isTemp?: boolean;
 }
 
-const TravelogueFeed = ({
-  data,
-  isBottomPadding = false,
-  isTemp = false,
-}: TravelogueFeedProps) => {
+const Feed = ({ data, isBottomPadding = false, isTemp = false }: FeedProps) => {
   const router = useRouter();
   const { handleOpenAuthConfirmModal } = useAuth();
 
@@ -70,4 +67,4 @@ const TravelogueFeed = ({
   );
 };
 
-export default TravelogueFeed;
+export default Feed;
