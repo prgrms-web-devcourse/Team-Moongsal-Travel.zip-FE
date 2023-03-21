@@ -6,7 +6,7 @@ import {
 import { Chip, Divider, Stack, Typography } from '@mui/material';
 import { Fragment, useState } from 'react';
 
-import { ScrapDialog } from '@/components/scraptemp';
+import { ScrapDialog } from '@/components/scrap';
 
 interface VisitedRegionProps {
   addresses: { region: string }[];
