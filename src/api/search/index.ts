@@ -1,4 +1,4 @@
-import { baseRequest } from '@/api/core';
+import http from '@/api/core';
 import { FilterAxiosProps } from '@/types/search';
 
 export const getTravelogueListByFilter = async ({
@@ -11,13 +11,12 @@ export const getTravelogueListByFilter = async ({
   maxCost,
   sort,
 }: FilterAxiosProps) => {
-  const response = await baseRequest({
-    method: 'GET',
-    url: `/api/travelogues/search/filters?keyword=${keyword}&page=${page}&size=${size}
+  const response = await http.get(
+    `/api/travelogues/search/filters?keyword=${keyword}&page=${page}&size=${size}
     ${minDays ? `&minDays=${minDays}` : ''} ${maxDays ? `&maxDays=${maxDays}` : ''}
     ${minCost ? `&minCost=${minCost}` : ''} ${maxCost ? `&maxCost=${maxCost}` : ''}
     ${sort === 'popular' ? `&sort=${sort}` : ''}
     `,
-  });
+  );
   return response;
 };
