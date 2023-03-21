@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { FilterButton } from '@/components/common';
 import { Feed } from '@/components/Travelogue/Feed';
 import useIntersect from '@/hooks/common/useIntersect';
-import { useGetTravelogueByFilter } from '@/hooks/query/main';
+import { useGetTravelogueByFilter } from '@/hooks/query/search';
 import { fontStyle } from '@/styles/commonStyle';
 import { FilterProps } from '@/types/filter';
 
