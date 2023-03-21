@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { ElementType } from 'react';
 
-import { TravelInfoTitle } from '@/types/main';
+import { TravelInfoTitle } from '@/types/detail';
 
 interface TravelInfoProps {
   title: TravelInfoTitle;
