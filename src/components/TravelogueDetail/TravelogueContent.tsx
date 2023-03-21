@@ -23,7 +23,7 @@ const TravelogueContent = ({
 
   const handleEditClick = () => {
     router.push({
-      pathname: '/post/[id]',
+      pathname: '/travelogue/[id]',
       query: { id, travelogueId, day, edit: true },
     });
   };

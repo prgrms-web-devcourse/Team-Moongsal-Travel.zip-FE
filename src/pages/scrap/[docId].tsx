@@ -19,7 +19,7 @@ import { useEffect, useState } from 'react';
 import { deleteScrap, getScrapDetail } from '@/api/scrap';
 import { ScrapDetailType } from '@/types/scrap';
 
-const ScrapDetail = () => {
+const ScrapDetailPage = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [scrapId, setScrapId] = useState<string>('');
   const [scrapTitle, setScrapTitle] = useState();
@@ -161,4 +161,4 @@ const ScrapDetail = () => {
   );
 };
 
-export default ScrapDetail;
+export default ScrapDetailPage;

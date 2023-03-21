@@ -15,7 +15,7 @@ const Header = () => {
 
   const handleSubmit = (value: string) => {
     router.push({
-      pathname: '/post/travelogueList',
+      pathname: '/search',
       query: { keyword: value },
     });
     setValue('');

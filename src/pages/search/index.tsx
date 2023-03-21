@@ -9,7 +9,7 @@ import useIntersect from '@/hooks/useIntersect';
 import { fontStyle } from '@/styles/commonStyle';
 import { FilterProps } from '@/types/filter';
 
-const TravelogueList = () => {
+const SearchPage = () => {
   const router = useRouter();
   const [keyword, setKeyword] = useState<string>("''");
   const [filter, setFilter] = useState<FilterProps>({});
@@ -74,4 +74,4 @@ const TravelogueList = () => {
   );
 };
 
-export default TravelogueList;
+export default SearchPage;

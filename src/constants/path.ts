@@ -1,8 +1,8 @@
 export const PATH_ROUTER = {
   home: '/',
-  add: '/post/first',
+  add: '/travelogue',
   scrap: '/scrap',
-  profile: '/profile',
+  member: '/member',
 };
 
 export const TRAVELOGUE_API_ROUTER = {

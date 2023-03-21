@@ -2,6 +2,7 @@ import { Box, Stack } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
 import Link from 'next/link';
 
+// 삭제요망
 const TemporaryButton = () => {
   return (
     <Stack spacing={4} direction='row' justifyContent='space-between'>

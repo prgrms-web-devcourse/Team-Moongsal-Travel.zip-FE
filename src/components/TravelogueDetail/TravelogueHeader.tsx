@@ -17,7 +17,7 @@ const TravelogueHeader = ({ travelogueDetail }: PostInfoProps) => {
 
   const handleEditClick = () => {
     router.push({
-      pathname: '/post/first',
+      pathname: '/travelogue',
       query: { travelogueId: router.query.travelogueId, edit: true },
     });
   };

@@ -15,7 +15,7 @@ import { TravelogueFormType, TravelogueSaveResponseType } from '@/types/post';
 import { createPeriodArray } from '@/utils/helper';
 import { getItem, setItem } from '@/utils/storage';
 
-const First = () => {
+const TraveloguePage = () => {
   const router = useRouter();
   const { handleSubmit, control, setValue } =
     useForm<TravelogueFormType>(travelogueFormProps);
@@ -108,8 +108,8 @@ const First = () => {
           step: createPeriodArray(parseInt(days)),
         });
         router.push(
-          { pathname: '/post/[id]', query: { travelogueId, days } },
-          '/post/detail',
+          { pathname: '/travelogue/[id]', query: { travelogueId, days } },
+          '/travelogue/detail',
         );
       }
     }
@@ -122,8 +122,8 @@ const First = () => {
       step: createPeriodArray(days),
     });
     router.push(
-      { pathname: '/post/[id]', query: { travelogueId, days } },
-      '/post/detail',
+      { pathname: '/travelogue/[id]', query: { travelogueId, days } },
+      '/travelogue/detail',
     );
   };
 
@@ -154,4 +154,4 @@ const First = () => {
   );
 };
 
-export default First;
+export default TraveloguePage;

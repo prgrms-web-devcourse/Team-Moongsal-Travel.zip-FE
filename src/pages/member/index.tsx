@@ -9,7 +9,7 @@ import {
 } from '@/components/Profile';
 import { useUserInformation } from '@/hooks/api/profile';
 
-const Profile = () => {
+const MemberPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoading } = useUserInformation();
 
@@ -30,4 +30,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default MemberPage;

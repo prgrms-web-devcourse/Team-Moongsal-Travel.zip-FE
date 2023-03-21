@@ -14,7 +14,7 @@ const WrittenByMeTravelogues = () => {
         src={addPost}
         text='작성 중인 여행 일지가 없습니다.'
         button='작성하러 가기'
-        link='/post/first'
+        link='/travelogue'
       />
     );
   }

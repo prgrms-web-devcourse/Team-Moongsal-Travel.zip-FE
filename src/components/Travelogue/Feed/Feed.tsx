@@ -27,7 +27,7 @@ const Feed = ({ data, isBottomPadding = false, isTemp = false }: FeedProps) => {
       const subsId = ['1', '2'];
       setItem(`temp-data-${travelogueId}`, { days, subsId });
       router.push({
-        pathname: '/post/first',
+        pathname: '/travelogue',
         query: { travelogueId, temp: true },
       });
       return;

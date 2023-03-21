@@ -7,7 +7,7 @@ import { TravelogueDetail } from '@/components/TravelogueDetail';
 import { usePatchTravelogueDetailById } from '@/hooks/api/travelogue';
 import { TravelogueDetailType } from '@/types/travelogue';
 
-const Detail = () => {
+const DetailPage = () => {
   const router = useRouter();
   const { mutate, isLoading } = usePatchTravelogueDetailById();
   const [travelogueDetail, setTravelogueDetail] = useState<TravelogueDetailType>();
@@ -35,4 +35,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default DetailPage;

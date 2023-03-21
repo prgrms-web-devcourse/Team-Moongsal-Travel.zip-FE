@@ -32,7 +32,7 @@ const GNB = () => {
 
   const onChangeNavigationRoute = (_: unknown, newValue: PathRouterType) => {
     if (
-      (newValue === 'add' || newValue === 'profile' || newValue === 'scrap') &&
+      (newValue === 'add' || newValue === 'member' || newValue === 'scrap') &&
       handleOpenAuthConfirmModal()
     ) {
       return;
@@ -70,7 +70,7 @@ const GNB = () => {
       />
       <BottomNavigationAction
         label='나의 여행'
-        value='profile'
+        value='member'
         disableRipple
         icon={<PersonIcon fontSize='medium' />}
         sx={GNBActionStyle}

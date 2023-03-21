@@ -23,7 +23,7 @@ import { useEffect } from 'react';
 import { SubTitle } from '@/components/common';
 import useScrapDocsData from '@/hooks/useScrapDocsData';
 
-const Scrap = () => {
+const ScrapPage = () => {
   const router = useRouter();
   const {
     scrapDocs,
@@ -183,7 +183,7 @@ const Scrap = () => {
   );
 };
 
-export default Scrap;
+export default ScrapPage;
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 30,

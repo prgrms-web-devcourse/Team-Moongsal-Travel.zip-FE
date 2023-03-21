@@ -19,7 +19,7 @@ const PlacesAutocomplete = () => {
   const handleSubmit = () => {
     setIsOpen(false);
     router.push({
-      pathname: '/post/travelogueList',
+      pathname: '/search',
       query: { keyword: value },
     });
   };
