@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { logoBlue } from 'public/images';
 
 import { CommonButton } from '@/components/common';
-import useAuth from '@/hooks/useAuth';
+import useAuth from '@/hooks/auth/useAuth';
 import { flexCenterStyle } from '@/styles/commonStyle';
 
 const SigninLeadModal = () => {

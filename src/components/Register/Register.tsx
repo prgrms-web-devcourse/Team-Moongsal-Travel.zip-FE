@@ -11,7 +11,7 @@ import {
 import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
 
 import { postVerifyNickname } from '@/api/user';
-import useGetUserForms from '@/hooks/useGetUserForms';
+import useGetUserForms from '@/hooks/auth/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
 import { inputStyle } from '@/styles/commonStyle';
 

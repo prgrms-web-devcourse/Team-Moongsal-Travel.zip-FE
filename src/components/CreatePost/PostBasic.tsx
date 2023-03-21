@@ -5,7 +5,7 @@ import { Control, Controller } from 'react-hook-form';
 
 import { FileInput, SubTitle, Title } from '@/components/common';
 import { CountrySelect } from '@/components/common';
-import useTravelogueForm from '@/hooks/useTravelogueForm';
+import useTravelogueForm from '@/hooks/travelogue/useTravelogueForm';
 import { inputStyle } from '@/styles/commonStyle';
 import { TravelogueFormType, TravelogueResponseType } from '@/types/post';
 

@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { Title } from '@/components/common';
 import { Feed } from '@/components/Travelogue/Feed';
 import { useGetPersonalTravelogues } from '@/hooks/api/travelogue';
-import useIntersect from '@/hooks/useIntersect';
+import useIntersect from '@/hooks/common/useIntersect';
 import { flexCenterStyle } from '@/styles/commonStyle';
 
 const PersonalFeedList = () => {

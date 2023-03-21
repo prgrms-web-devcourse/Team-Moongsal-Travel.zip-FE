@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import useImageUpload from '@/hooks/useImageUpload';
+import useImageUpload from '@/hooks/common/useImageUpload';
 import { TravelogueFormType } from '@/types/post';
 
 import { SubTitle } from './';

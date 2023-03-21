@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { PATH_ROUTER } from '@/constants/path';
-import useAuth from '@/hooks/useAuth';
+import useAuth from '@/hooks/auth/useAuth';
 import { PathRouterType } from '@/types/common';
 import { getInitialPathName } from '@/utils/helper';
 

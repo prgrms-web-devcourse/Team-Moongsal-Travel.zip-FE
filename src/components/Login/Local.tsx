@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { CommonInput } from '@/components/common';
 import { ACCESS_TOKEN } from '@/constants';
 import { usePostUserSignIn } from '@/hooks/api/user';
-import useAuth from '@/hooks/useAuth';
+import useAuth from '@/hooks/auth/useAuth';
 import { inputStyle } from '@/styles/commonStyle';
 import { User } from '@/types/auth';
 import { setItem } from '@/utils/storage';

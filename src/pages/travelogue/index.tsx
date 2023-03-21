@@ -10,7 +10,7 @@ import {
   usePatchTraveloguePublish,
   useSaveTravelogue,
 } from '@/hooks/api/post';
-import useImageUpload from '@/hooks/useImageUpload';
+import useImageUpload from '@/hooks/common/useImageUpload';
 import { TravelogueFormType, TravelogueSaveResponseType } from '@/types/post';
 import { createPeriodArray } from '@/utils/helper';
 import { getItem, setItem } from '@/utils/storage';

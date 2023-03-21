@@ -4,7 +4,7 @@ import { Combobox, ComboboxInput } from '@reach/combobox';
 import { ControllerRenderProps } from 'react-hook-form';
 
 import { AutoCompleteList } from '@/components/SearchModal';
-import useAutoComplete from '@/hooks/useAutoComplete';
+import useAutoComplete from '@/hooks/common/useAutoComplete';
 import { SubTravelogueType } from '@/types/post';
 
 interface LocationProps {

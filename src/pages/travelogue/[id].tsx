@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { VerticalStepper } from '@/components/Stepper';
 import { TravelogueInfoType } from '@/components/Stepper/VerticalStepper';
 import { SubTravelogue } from '@/components/SubTravelogue';
-import useHandleTraveloguePublish from '@/hooks/useHandleTraveloguePublish';
+import useHandleTraveloguePublish from '@/hooks/travelogue/useHandleTraveloguePublish';
 import { getItem } from '@/utils/storage';
 
 const SubTraveloguePage = () => {

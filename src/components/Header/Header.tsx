@@ -7,7 +7,7 @@ import { logo } from 'public/images';
 import { KeyboardEvent } from 'react';
 
 import { AutoCompleteList } from '@/components/SearchModal';
-import useAutoComplete from '@/hooks/useAutoComplete';
+import useAutoComplete from '@/hooks/common/useAutoComplete';
 
 const Header = () => {
   const router = useRouter();

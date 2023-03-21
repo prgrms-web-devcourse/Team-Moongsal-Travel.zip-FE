@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 
 import { createScrap } from '@/api/scrap';
 import { Transition } from '@/components/common';
-import useScrapDocsData from '@/hooks/useScrapDocsData';
+import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
 
 export interface ScrapDialogProps {
   open: boolean;

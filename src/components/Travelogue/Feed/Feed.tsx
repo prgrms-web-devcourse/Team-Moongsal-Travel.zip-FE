@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 
-import useAuth from '@/hooks/useAuth';
+import useAuth from '@/hooks/auth/useAuth';
 import { TravelogueFeedType } from '@/types/travelogue';
 import { setItem } from '@/utils/storage';
 

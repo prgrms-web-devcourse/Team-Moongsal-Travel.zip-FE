@@ -8,7 +8,7 @@ import { ControllerRenderProps } from 'react-hook-form';
 import ReactQuill, { Quill } from 'react-quill';
 
 import { IMAGE_EXTENSION, IMAGE_TYPE } from '@/constants';
-import useImageUpload from '@/hooks/useImageUpload';
+import useImageUpload from '@/hooks/common/useImageUpload';
 import { SubTravelogueType } from '@/types/post';
 
 import { editorModules } from './index';

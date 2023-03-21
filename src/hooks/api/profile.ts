@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 
 import { getUserInformation, patchUserInformation } from '@/api/profile';
 import { NICKNAME_PATTERN } from '@/constants/pattern';
-import useImageUpload from '@/hooks/useImageUpload';
+import useImageUpload from '@/hooks/common/useImageUpload';
 import { userInformationState } from '@/recoil';
 import { UserInformationPatchType } from '@/types/profile';
 

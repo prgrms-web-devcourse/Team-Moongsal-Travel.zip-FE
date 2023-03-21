@@ -20,7 +20,7 @@ import { useForm } from 'react-hook-form';
 
 import { SubTitle } from '@/components/common';
 import { filterFormDefault } from '@/constants/defaultFormValue';
-import useFilterForm from '@/hooks/useFilterForm';
+import useFilterForm from '@/hooks/search/useFilterForm';
 import { FilterFormType, FilterProps } from '@/types/filter';
 
 interface FilterButtonProps {
@@ -58,7 +58,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        minWidth: '100px'
+        minWidth: '100px',
       }}>
       <Box>
         <Button variant='outlined' startIcon={<TuneIcon />} onClick={toggleDrawer(true)}>

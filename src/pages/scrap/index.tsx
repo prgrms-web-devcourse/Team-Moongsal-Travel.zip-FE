@@ -21,7 +21,7 @@ import { folder, scrapBg } from 'public/images';
 import { useEffect } from 'react';
 
 import { SubTitle } from '@/components/common';
-import useScrapDocsData from '@/hooks/useScrapDocsData';
+import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
 
 const ScrapPage = () => {
   const router = useRouter();

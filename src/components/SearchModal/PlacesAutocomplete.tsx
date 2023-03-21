@@ -6,7 +6,7 @@ import { KeyboardEvent } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import AutoCompleteList from '@/components/SearchModal/AutoCompleteList';
-import useAutoComplete from '@/hooks/useAutoComplete';
+import useAutoComplete from '@/hooks/common/useAutoComplete';
 import { isHeaderOpenState } from '@/recoil';
 
 const PLACEHOLDER_SEARCH = '도시 또는 키워드를 입력해주세요';
