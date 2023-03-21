@@ -1,6 +1,6 @@
 import { Control, useController } from 'react-hook-form';
 
-import { SubTravelogueType } from '@/types/post';
+import { SubTravelogueType } from '@/types/travelogue';
 
 const useSubTravelogueForm = (control: Control<SubTravelogueType>) => {
   const { field: title } = useController({

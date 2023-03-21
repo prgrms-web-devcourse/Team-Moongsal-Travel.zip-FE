@@ -7,7 +7,7 @@ import { Feed } from '@/components/Travelogue/Feed';
 import useIntersect from '@/hooks/common/useIntersect';
 import { useGetTravelogueByFilter } from '@/hooks/query/search';
 import { fontStyle } from '@/styles/commonStyle';
-import { FilterProps } from '@/types/filter';
+import { FilterProps } from '@/types/search';
 
 const SearchPage = () => {
   const router = useRouter();

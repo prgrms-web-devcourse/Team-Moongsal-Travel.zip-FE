@@ -11,7 +11,7 @@ import {
   usePatchTraveloguePublish,
   useSaveTravelogue,
 } from '@/hooks/query/travelogue';
-import { TravelogueFormType, TravelogueSaveResponseType } from '@/types/post';
+import { TravelogueFormType, TravelogueSaveResponseType } from '@/types/travelogue';
 import { createPeriodArray } from '@/utils/helper';
 import { getItem, setItem } from '@/utils/storage';
 

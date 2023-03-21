@@ -9,7 +9,7 @@ import {
   postSubTravelogue,
   postTravelogue,
 } from '@/api/travelogue';
-import { SubTravelogueType, TravelogueType } from '@/types/post';
+import { SubTravelogueType, TravelogueType } from '@/types/travelogue';
 
 export const useSaveSubTravelogue = (isPatch: boolean) => {
   return useMutation({

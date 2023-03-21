@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Dayjs } from 'dayjs';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import { TravelogueType } from '@/types/post';
+import { TravelogueType } from '@/types/travelogue';
 import { getDateInfo } from '@/utils/helper';
 
 interface DatePickerProps {

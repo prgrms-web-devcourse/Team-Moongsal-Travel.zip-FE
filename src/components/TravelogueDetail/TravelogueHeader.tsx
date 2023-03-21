@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { Title } from '@/components/common';
-import { TravelogueDetailType } from '@/types/travelogue';
+import { TravelogueDetailType } from '@/types/detail';
 
 import { TravelInfo, TravelogueInfo } from '.';
 

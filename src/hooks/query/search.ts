@@ -6,8 +6,8 @@ import {
 import { AxiosResponse } from 'axios';
 
 import { getTravelogueListByFilter } from '@/api/search';
-import { FilterAxiosProps } from '@/types/filter';
-import { TravelogueListType } from '@/types/travelogue';
+import { TravelogueListType } from '@/types/main';
+import { FilterAxiosProps } from '@/types/search';
 
 export const useGetTravelogueByFilter = ({
   keyword,

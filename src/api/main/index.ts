@@ -4,7 +4,7 @@ import {
   BaseTravelogueParamsType,
   TravelogueFeedType,
   TravelogueListType,
-} from '@/types/travelogue';
+} from '@/types/main';
 
 export const getTypeOfTravelogues = async ({
   page,

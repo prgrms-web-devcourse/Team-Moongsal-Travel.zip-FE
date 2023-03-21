@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { QueryFunctionContext, useInfiniteQuery } from '@tanstack/react-query';
 
 import { getPersonalTravelogues, getTypeOfTravelogues } from '@/api/main';
-import { BaseTravelogueParamsType } from '@/types/travelogue';
+import { BaseTravelogueParamsType } from '@/types/main';
 
 export const useGetBaseTravelogueList = ({
   page = 0,

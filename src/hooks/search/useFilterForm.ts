@@ -1,6 +1,6 @@
 import { Control, useController } from 'react-hook-form';
 
-import { FilterFormType } from '@/types/filter';
+import { FilterFormType } from '@/types/search';
 
 const useFilterForm = (control: Control<FilterFormType>) => {
   const { field: keyword, fieldState: keywordState } = useController({

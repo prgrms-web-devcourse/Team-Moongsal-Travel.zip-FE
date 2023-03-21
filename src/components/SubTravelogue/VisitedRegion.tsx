@@ -4,7 +4,7 @@ import { Control, Controller, useFieldArray } from 'react-hook-form';
 
 import { SubTitle } from '@/components/common';
 import { AutoComplete } from '@/components/SearchModal';
-import { SubTravelogueType } from '@/types/post';
+import { SubTravelogueType } from '@/types/travelogue';
 
 import { Location } from '.';
 

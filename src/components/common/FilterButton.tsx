@@ -21,7 +21,7 @@ import { useForm } from 'react-hook-form';
 import { SubTitle } from '@/components/common';
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/search/useFilterForm';
-import { FilterFormType, FilterProps } from '@/types/filter';
+import { FilterFormType, FilterProps } from '@/types/search';
 
 interface FilterButtonProps {
   setFilter: Dispatch<SetStateAction<FilterProps>>;

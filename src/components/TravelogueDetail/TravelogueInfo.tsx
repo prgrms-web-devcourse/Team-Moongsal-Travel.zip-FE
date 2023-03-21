@@ -2,7 +2,7 @@ import { Visibility as VisibilityIcon } from '@mui/icons-material';
 import { Stack, Typography } from '@mui/material';
 
 import UserProfile from '@/components/common/UserProfile';
-import { TravelogueDetailType } from '@/types/travelogue';
+import { TravelogueDetailType } from '@/types/detail';
 
 interface PostProfileProps {
   travelogueDetail: TravelogueDetailType;

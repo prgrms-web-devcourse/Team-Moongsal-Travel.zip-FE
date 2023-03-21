@@ -2,7 +2,7 @@ import { Stack } from '@mui/material';
 
 import TravelogueContent from '@/components/TravelogueDetail/TravelogueContent';
 import TravelogueHeader from '@/components/TravelogueDetail/TravelogueHeader';
-import { TravelogueDetailType } from '@/types/travelogue';
+import { TravelogueDetailType } from '@/types/detail';
 
 interface TravelogueDetailProps {
   travelogueDetail: TravelogueDetailType;

@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import Image from 'next/image';
 
 import { NO_IMAGE_URL } from '@/constants';
-import { TravelogueFeedType } from '@/types/travelogue';
+import { TravelogueFeedType } from '@/types/main';
 
 interface TravelogueFeedProps {
   thumbnailURL: TravelogueFeedType['thumbnail'];

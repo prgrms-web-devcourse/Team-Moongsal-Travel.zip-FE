@@ -15,7 +15,7 @@ import {
 import useHandleTraveloguePublish from '@/hooks/travelogue/useHandleTraveloguePublish';
 import useSubTravelogueForm from '@/hooks/travelogue/useSubTravelogueForm';
 import { inputStyle } from '@/styles/commonStyle';
-import { SubTravelogueType } from '@/types/post';
+import { SubTravelogueType } from '@/types/travelogue';
 import { getItem, setItem } from '@/utils/storage';
 
 const RichEditor = dynamic(() => import('@/components/Editor/RichEditor'), {

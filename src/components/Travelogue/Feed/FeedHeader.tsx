@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { location } from 'public/images';
 
 import UserProfile from '@/components/common/UserProfile';
-import { TravelogueFeedType } from '@/types/travelogue';
+import { TravelogueFeedType } from '@/types/main';
 
 type FeedHeaderProps = TravelogueFeedType['member'] & {
   country: TravelogueFeedType['country'];

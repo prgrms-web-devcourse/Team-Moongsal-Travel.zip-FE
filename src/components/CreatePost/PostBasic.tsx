@@ -7,7 +7,7 @@ import { FileInput, SubTitle, Title } from '@/components/common';
 import { CountrySelect } from '@/components/common';
 import useTravelogueForm from '@/hooks/travelogue/useTravelogueForm';
 import { inputStyle } from '@/styles/commonStyle';
-import { TravelogueFormType, TravelogueResponseType } from '@/types/post';
+import { TravelogueFormType, TravelogueResponseType } from '@/types/travelogue';
 
 import { ComplexButton, DatePicker } from './';
 

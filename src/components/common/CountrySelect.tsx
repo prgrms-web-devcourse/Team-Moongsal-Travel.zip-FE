@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
 import { COUNTRIES } from '@/constants/autoComplete';
-import { TravelogueFormType } from '@/types/post';
+import { TravelogueFormType } from '@/types/travelogue';
 
 interface LocationProps {
   isKorea: boolean;

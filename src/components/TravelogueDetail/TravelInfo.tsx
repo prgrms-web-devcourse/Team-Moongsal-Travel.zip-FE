@@ -3,7 +3,7 @@ import { Grid, List } from '@mui/material';
 
 import TravelInfoItem from '@/components/TravelogueDetail/TravelInfoItem';
 import { TRANSPORT_TYPE } from '@/constants';
-import { TravelogueDetailType } from '@/types/travelogue';
+import { TravelogueDetailType } from '@/types/detail';
 
 interface PostCategoryProps {
   travelogueDetail: TravelogueDetailType;

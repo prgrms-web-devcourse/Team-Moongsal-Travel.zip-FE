@@ -1,5 +1,5 @@
 import { baseRequest } from '@/api/core';
-import { FilterAxiosProps } from '@/types/filter';
+import { FilterAxiosProps } from '@/types/search';
 
 export const getTravelogueListByFilter = async ({
   keyword,

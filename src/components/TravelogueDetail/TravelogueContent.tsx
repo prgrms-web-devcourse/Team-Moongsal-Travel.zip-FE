@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import { Title } from '@/components/common';
 import { VisitedRegionList } from '@/components/TravelogueDetail';
-import { SubTravelogueDetailType } from '@/types/post';
+import { SubTravelogueDetailType } from '@/types/detail';
 
 interface TravelogueContentProps {
   travelogueId: number;

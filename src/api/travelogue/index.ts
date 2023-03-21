@@ -6,7 +6,7 @@ import {
   TravelogueResponseType,
   TravelogueSaveResponseType,
   TravelogueType,
-} from '@/types/post';
+} from '@/types/travelogue';
 
 export const postTravelogue = async ({
   data,

@@ -10,7 +10,7 @@ import {
 
 // import { useState } from 'react';
 import { Row } from '@/components/common';
-import { TravelogueFeedType } from '@/types/travelogue';
+import { TravelogueFeedType } from '@/types/main';
 
 import { FeedChip } from '.';
 

@@ -5,7 +5,7 @@ import { ControllerRenderProps } from 'react-hook-form';
 
 import { AutoCompleteList } from '@/components/SearchModal';
 import useAutoComplete from '@/hooks/common/useAutoComplete';
-import { SubTravelogueType } from '@/types/post';
+import { SubTravelogueType } from '@/types/travelogue';
 
 interface LocationProps {
   field?: ControllerRenderProps<SubTravelogueType, `addresses.${number}.region`>;

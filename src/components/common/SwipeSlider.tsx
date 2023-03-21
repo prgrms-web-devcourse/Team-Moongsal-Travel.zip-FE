@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 
 import { Title } from '@/components/common';
 import { Feed } from '@/components/Travelogue/Feed';
-import { TravelogueFeedType } from '@/types/travelogue';
+import { TravelogueFeedType } from '@/types/main';
 
 interface SwipeSliderProps {
   travelogues: TravelogueFeedType[];
