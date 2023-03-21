@@ -1,4 +1,4 @@
-import http from '@/api/core/axiosInstance';
+import http from '@/api/core';
 import { TRAVELOGUE_API_ROUTER } from '@/constants/path';
 import {
   BaseTravelogueParamsType,

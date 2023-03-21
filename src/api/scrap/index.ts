@@ -1,4 +1,4 @@
-import http from '@/api/core/axiosInstance';
+import http from '@/api/core';
 import { ScrapInfoType } from '@/types/scrap';
 
 export const getScrapDocument = () => {

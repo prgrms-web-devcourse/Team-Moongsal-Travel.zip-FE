@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import http from '@/api/core/axiosInstance';
+import http from '@/api/core';
 import {
   SubTravelogueType,
   TravelogueResponseType,

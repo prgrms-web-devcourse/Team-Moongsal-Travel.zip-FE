@@ -1,4 +1,4 @@
-import http from '@/api/core/axiosInstance';
+import http from '@/api/core';
 import { UserInformationPatchType, UserInformationType } from '@/types/member';
 
 export const getUserInformation = async (): Promise<UserInformationType> => {
