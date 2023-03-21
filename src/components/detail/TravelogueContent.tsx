@@ -3,7 +3,7 @@ import { Button, Card, CardContent, Divider, Stack, Typography } from '@mui/mate
 import Parser from 'html-react-parser';
 import { useRouter } from 'next/router';
 
-import { Title } from '@/components/common';
+import { Title } from '@/components/common/Title';
 import { VisitedRegionList } from '@/components/detail';
 import { SubTravelogueDetailType } from '@/types/detail';
 
