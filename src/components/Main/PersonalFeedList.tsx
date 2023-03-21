@@ -1,9 +1,9 @@
 import { Box, CircularProgress, Fade, Stack } from '@mui/material';
 import { useMemo } from 'react';
 
-import { useGetPersonalTravelogues } from '@/api/hooks/travelogue';
 import { Title } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
+import { useGetPersonalTravelogues } from '@/hooks/api/travelogue';
 import useIntersect from '@/hooks/useIntersect';
 import { flexCenterStyle } from '@/styles/commonStyle';
 

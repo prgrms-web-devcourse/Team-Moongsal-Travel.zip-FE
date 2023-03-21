@@ -1,7 +1,7 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 
-import { useUserInformation } from '@/api/hooks/profile';
 import { ProfileAvatar } from '@/components/common';
+import { useUserInformation } from '@/hooks/api/profile';
 import { fontStyle } from '@/styles/commonStyle';
 
 interface ManagementProps {
@@ -27,7 +27,7 @@ const Management = ({ handleOpenEditModal }: ManagementProps) => {
           width: '100%',
           justifyContent: 'start',
           alignItems: 'center',
-          px: '15px',  
+          px: '15px',
           boxSizing: 'border-box',
           gap: 2.5,
         }}>

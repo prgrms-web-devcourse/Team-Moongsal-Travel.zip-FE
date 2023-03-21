@@ -2,9 +2,9 @@ import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import { usePatchTravelogueDetailById } from '@/api/hooks/travelogue';
 import Spinner from '@/components/common/Spinner';
 import { TravelogueDetail } from '@/components/TravelogueDetail';
+import { usePatchTravelogueDetailById } from '@/hooks/api/travelogue';
 import { TravelogueDetailType } from '@/types/travelogue';
 
 const Detail = () => {

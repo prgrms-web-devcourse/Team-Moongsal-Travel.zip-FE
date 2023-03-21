@@ -1,11 +1,10 @@
-import { Box, Stack, Typography } from '@mui/material';
-import { CircularProgress, Fade } from '@mui/material';
+import { Box, CircularProgress, Fade, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
-import { useGetTravelogueByFilter } from '@/api/hooks/travelogue';
 import { FilterButton } from '@/components/common';
 import { TravelogueFeed } from '@/components/Travelogue';
+import { useGetTravelogueByFilter } from '@/hooks/api/travelogue';
 import useIntersect from '@/hooks/useIntersect';
 import { fontStyle } from '@/styles/commonStyle';
 import { FilterProps } from '@/types/filter';

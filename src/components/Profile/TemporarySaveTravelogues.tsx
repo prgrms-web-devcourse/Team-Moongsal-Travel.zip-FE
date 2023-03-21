@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import { tempPost } from 'public/images';
 
-import { useGetTemporarySaveTravelogues } from '@/api/hooks/travelogue';
 import { SwipeSlider } from '@/components/common';
 import EmptyData from '@/components/common/EmptyData';
+import { useGetTemporarySaveTravelogues } from '@/hooks/api/travelogue';
 
 const TemporarySaveTravelogues = () => {
   const { data: travelogues } = useGetTemporarySaveTravelogues();

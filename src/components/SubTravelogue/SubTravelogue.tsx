@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
-import { useGetSubTravelogueForEdit, useSaveSubTravelogue } from '@/api/hooks/post';
 import { SubTitle } from '@/components/common';
 import { Transportation, VisitedRegion } from '@/components/SubTravelogue';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
+import { useGetSubTravelogueForEdit, useSaveSubTravelogue } from '@/hooks/api/post';
 import useHandleTraveloguePublish from '@/hooks/useHandleTraveloguePublish';
 import useSubTravelogueForm from '@/hooks/useSubTravelogueForm';
 import { inputStyle } from '@/styles/commonStyle';

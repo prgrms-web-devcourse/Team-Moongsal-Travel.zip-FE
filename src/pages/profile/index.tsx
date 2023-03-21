@@ -1,13 +1,13 @@
 import { Divider, Stack } from '@mui/material';
 import { useState } from 'react';
 
-import { useUserInformation } from '@/api/hooks/profile';
 import {
   EditDrawer,
   Management,
   TemporarySaveTravelogues,
   WrittenByMeTravelogues,
 } from '@/components/Profile';
+import { useUserInformation } from '@/hooks/api/profile';
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);

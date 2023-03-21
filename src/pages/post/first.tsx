@@ -3,13 +3,13 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { PostBasic } from '@/components/CreatePost';
+import { travelogueFormProps } from '@/constants/defaultFormValue';
 import {
   useGetTravelogueForEdit,
   usePatchTraveloguePublish,
   useSaveTravelogue,
-} from '@/api/hooks/post';
-import { PostBasic } from '@/components/CreatePost';
-import { travelogueFormProps } from '@/constants/defaultFormValue';
+} from '@/hooks/api/post';
 import useImageUpload from '@/hooks/useImageUpload';
 import { TravelogueFormType, TravelogueSaveResponseType } from '@/types/post';
 import { createPeriodArray } from '@/utils/helper';

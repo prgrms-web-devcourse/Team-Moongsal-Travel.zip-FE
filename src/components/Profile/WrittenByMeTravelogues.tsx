@@ -1,8 +1,8 @@
 import { Box } from '@mui/system';
 import { addPost } from 'public/images';
 
-import { useGetWrittenByMeTravelogues } from '@/api/hooks/travelogue';
 import { EmptyData, SwipeSlider } from '@/components/common';
+import { useGetWrittenByMeTravelogues } from '@/hooks/api/travelogue';
 
 const WrittenByMeTravelogues = () => {
   const { data: travelogues } = useGetWrittenByMeTravelogues();

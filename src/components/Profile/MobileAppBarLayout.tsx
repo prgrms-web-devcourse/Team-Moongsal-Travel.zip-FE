@@ -2,7 +2,7 @@ import { Close as CloseIcon } from '@mui/icons-material';
 import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import { useUserInformation } from '@/api/hooks/profile';
+import { useUserInformation } from '@/hooks/api/profile';
 import { flexCenterStyle, mobileModalLayoutStyle } from '@/styles/commonStyle';
 
 interface MobileAppBarLayoutProps {

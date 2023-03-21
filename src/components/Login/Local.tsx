@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { usePostUserSignIn } from '@/api/hooks/user';
 import { CommonInput } from '@/components/common';
 import { ACCESS_TOKEN } from '@/constants';
+import { usePostUserSignIn } from '@/hooks/api/user';
 import useAuth from '@/hooks/useAuth';
 import { inputStyle } from '@/styles/commonStyle';
 import { User } from '@/types/auth';
