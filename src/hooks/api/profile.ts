@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRecoilState } from 'recoil';
 
-import { getUserInformation, patchUserInformation } from '@/api/profile';
+import { getUserInformation, patchUserInformation } from '@/api/member';
 import { NICKNAME_PATTERN } from '@/constants/pattern';
 import useImageUpload from '@/hooks/common/useImageUpload';
 import { userInformationState } from '@/recoil';

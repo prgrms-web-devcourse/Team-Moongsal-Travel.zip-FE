@@ -5,7 +5,7 @@ import {
   postUserRegister,
   postUserSignIn,
   postVerifyCode,
-} from '@/api/user';
+} from '@/api/auth';
 import { User, UserRegister } from '@/types/auth';
 
 export const usePostUserRegister = () => {

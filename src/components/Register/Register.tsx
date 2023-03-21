@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { Control, UseFormSetError, UseFormTrigger } from 'react-hook-form';
 
-import { postVerifyNickname } from '@/api/user';
+import { postVerifyNickname } from '@/api/auth';
 import useGetUserForms from '@/hooks/auth/useGetUserForms';
 import { UserRegisterForm } from '@/pages/auth/register';
 import { inputStyle } from '@/styles/commonStyle';

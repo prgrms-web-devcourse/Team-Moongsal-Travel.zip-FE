@@ -4,11 +4,10 @@ import { AxiosResponse } from 'axios';
 
 import {
   getPersonalTravelogues,
-  getTravelogueListByFilter,
-  getTravelogueListByKeyword,
   getTypeOfTravelogues,
   patchTravelogueDetailById,
-} from '@/api/travelogue';
+} from '@/api/main';
+import { getTravelogueListByFilter } from '@/api/search';
 import { FilterAxiosProps } from '@/types/filter';
 import { BaseTravelogueParamsType, TravelogueListType } from '@/types/travelogue';
 
@@ -34,19 +33,19 @@ export const useGetPersonalTravelogues = (size: number) => {
   );
 };
 
-export const useGetTravelogueByKeyword = (
-  keyword: string,
-  size: number,
-): UseInfiniteQueryResult<AxiosResponse<TravelogueListType>, unknown> => {
-  return useInfiniteQuery(
-    ['KEYWORD_TRAVELOGUES', keyword],
-    ({ pageParam = 0 }: QueryFunctionContext) =>
-      getTravelogueListByKeyword(keyword, pageParam, size),
-    {
-      getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
-    },
-  );
-};
+// export const useGetTravelogueByKeyword = (
+//   keyword: string,
+//   size: number,
+// ): UseInfiniteQueryResult<AxiosResponse<TravelogueListType>, unknown> => {
+//   return useInfiniteQuery(
+//     ['KEYWORD_TRAVELOGUES', keyword],
+//     ({ pageParam = 0 }: QueryFunctionContext) =>
+//       getTravelogueListByKeyword(keyword, pageParam, size),
+//     {
+//       getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
+//     },
+//   );
+// };
 
 export const useGetTravelogueByFilter = ({
   keyword,

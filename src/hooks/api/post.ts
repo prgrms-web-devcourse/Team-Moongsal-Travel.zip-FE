@@ -8,7 +8,7 @@ import {
   patchTraveloguePublish,
   postSubTravelogue,
   postTravelogue,
-} from '@/api/post';
+} from '@/api/travelogue';
 import { SubTravelogueType, TravelogueType } from '@/types/post';
 
 export const useSaveSubTravelogue = (isPatch: boolean) => {
