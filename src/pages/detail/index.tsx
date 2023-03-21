@@ -2,12 +2,12 @@ import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import { usePatchTravelogueDetailById } from '@/api/hooks/travelogue';
-import Spinner from '@/components/common/Spinner';
-import { TravelogueDetail } from '@/components/TravelogueDetail';
-import { TravelogueDetailType } from '@/types/travelogue';
+import { Spinner } from '@/components/common/Motion';
+import { TravelogueDetail } from '@/components/detail';
+import { usePatchTravelogueDetailById } from '@/hooks/query/detail';
+import { TravelogueDetailType } from '@/types/detail';
 
-const Detail = () => {
+const DetailPage = () => {
   const router = useRouter();
   const { mutate, isLoading } = usePatchTravelogueDetailById();
   const [travelogueDetail, setTravelogueDetail] = useState<TravelogueDetailType>();
@@ -35,4 +35,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default DetailPage;

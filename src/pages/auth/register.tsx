@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { usePostUserRegister } from '@/api/hooks/user';
-import { AuthHeader } from '@/components/common';
-import { Register, VerifyByEmail } from '@/components/Register';
-import { Stepper } from '@/components/Stepper';
+import { AuthHeader } from '@/components/auth';
+import { Register, VerifyByEmail } from '@/components/auth/Register';
+import { Stepper } from '@/components/common/Stepper';
+import { usePostUserRegister } from '@/hooks/query/auth';
 import { UserRegister } from '@/types/auth';
 
 const REGISTER_STEP = ['이메일 인증', '회원가입'];

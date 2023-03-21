@@ -1,55 +1,51 @@
-import { TRAVELOGUE_API_ROUTER } from '@/constants/path';
-import { SubTravelogueDetailType } from '@/types/post';
-
-export interface TravelogueFeedType {
-  travelogueId: number;
-  title: string;
-  country: string;
-  thumbnail: string;
-  nights: number;
-  days: number;
-  totalCost: number;
-  member: {
-    nickname: string;
-    profileImageUrl: string;
+export interface TravelogueType {
+  country: {
+    name: string;
   };
-}
-
-export interface TravelogueListType {
-  content: TravelogueFeedType[];
-  pageable: string;
-  size: number;
-  number: number;
-  numberOfElements: number;
-  first: boolean;
-  last: boolean;
-  empty: boolean;
-}
-
-export interface TravelogueDetailType {
-  profileImageUrl: string;
-  nickname: string;
-  id: number;
+  period: { startDate: string; endDate: string };
+  cost: {
+    transportation?: string;
+    lodge?: string;
+    etc?: string;
+    total: string;
+  };
   title: string;
-  country: string;
-  nights: number;
-  days: number;
-  totalCost: number;
-  subTravelogues: SubTravelogueDetailType[];
-  transportations: string[];
-  countLikes: number;
-  isLiked: boolean;
-  viewCount: number;
-  bookmarked: boolean;
   thumbnail: string;
-  isWriter: boolean;
 }
 
-export type TravelInfoTitle = '여행지' | '여행기간' | '여행경비' | '이동수단';
-
-export interface BaseTravelogueParamsType {
-  page: number;
-  size: number;
-  sortedType?: 'viewCount,desc';
-  type: keyof typeof TRAVELOGUE_API_ROUTER;
+export interface TravelogueResponseType {
+  country: {
+    name: string;
+  };
+  period: { startDate: string; endDate: string; nights: number };
+  cost: {
+    transportation: number;
+    lodge: number;
+    etc: number;
+    total: number;
+  };
+  title: string;
+  thumbnail: string;
+  subTravelogueIds: number[];
 }
+
+export type TravelogueFormType = Omit<TravelogueType, 'thumbnail'> & {
+  thumbnail: File | null;
+};
+
+export interface TravelogueSaveResponseType {
+  id: number;
+  days: number;
+  nights: number;
+}
+
+export interface SubTravelogueType {
+  title: string;
+  content: string;
+  day: number;
+  addresses: { region: string }[];
+  transportationSet: string[];
+  travelPhotoCreateReqs: { url: string }[];
+}
+
+export type StepType = 'next' | 'back';

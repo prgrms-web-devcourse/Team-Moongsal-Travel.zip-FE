@@ -1,75 +1,75 @@
 import { AxiosResponse } from 'axios';
 
-import { baseRequest } from '@/api/core';
 import http from '@/api/core/axiosInstance';
-import { TRAVELOGUE_API_ROUTER } from '@/constants/path';
-import { FilterAxiosProps } from '@/types/filter';
 import {
-  BaseTravelogueParamsType,
-  TravelogueFeedType,
-  TravelogueListType,
+  SubTravelogueType,
+  TravelogueResponseType,
+  TravelogueSaveResponseType,
+  TravelogueType,
 } from '@/types/travelogue';
 
-export const getTypeOfTravelogues = async ({
-  page,
-  size,
-  type,
-  sortedType,
-}: BaseTravelogueParamsType): Promise<TravelogueFeedType[]> => {
-  const response = await http.get<TravelogueListType>(
-    `${TRAVELOGUE_API_ROUTER[type]}?page=${page}&size=${size}${
-      sortedType ? `&sort=${sortedType}` : ''
-    }`,
+export const postTravelogue = async ({
+  data,
+}: {
+  data: TravelogueType;
+}): Promise<AxiosResponse<TravelogueSaveResponseType>> => {
+  return await http.post(`api/travelogues`, data);
+};
+
+export const postSubTravelogue = async ({
+  data,
+  travelogueId,
+}: {
+  data: SubTravelogueType;
+  travelogueId: string;
+}) => {
+  return await http.post(`api/travelogues/${travelogueId}/subTravelogues`, data);
+};
+
+export const patchTravelogue = async ({
+  data,
+  travelogueId,
+}: {
+  data: TravelogueType;
+  travelogueId: string;
+}) => {
+  return await http.patch(`api/members/my/travelogues/${travelogueId}`, data);
+};
+
+export const patchSubTravelogue = async ({
+  data,
+  travelogueId,
+  subTravelogueId,
+}: {
+  data: SubTravelogueType;
+  travelogueId: string;
+  subTravelogueId: string;
+}) => {
+  return await http.patch(
+    `api/members/my/travelogues/${travelogueId}/subTravelogues/${subTravelogueId}`,
+    data,
   );
-
-  return response.data.content;
 };
 
-export const getPersonalTravelogues = async (size: number, page: number) => {
-  return await http.get<TravelogueListType>(`api/travelogues?&page=${page}&=${size}`);
-};
-
-// 현재 사용하지 않음: 리팩터링시 사용할 수 있을것같아서 남겨두겠습니다.
-export const getTravelogueListByKeyword = async (
-  keyword = "''",
-  page = 0,
-  size = 5,
-): Promise<AxiosResponse<TravelogueListType>> => {
-  keyword === '' ? (keyword = "''") : keyword;
-  const response = await baseRequest({
-    method: 'GET',
-    url: `/api/travelogues/search?keyword=${keyword}&page=${page}&size=${size}`,
-  });
-
-  return response;
-};
-
-export const getTravelogueListByFilter = async ({
-  keyword,
-  page = 0,
-  size = 5,
-  minDays,
-  maxDays,
-  minCost,
-  maxCost,
-  sort,
-}: FilterAxiosProps) => {
-  const response = await baseRequest({
-    method: 'GET',
-    url: `/api/travelogues/search/filters?keyword=${keyword}&page=${page}&size=${size}
-    ${minDays ? `&minDays=${minDays}` : ''} ${maxDays ? `&maxDays=${maxDays}` : ''}
-    ${minCost ? `&minCost=${minCost}` : ''} ${maxCost ? `&maxCost=${maxCost}` : ''}
-    ${sort === 'popular' ? `&sort=${sort}` : ''}
-    `,
-  });
-  return response;
-};
-
-export const patchTravelogueDetailById = async ({
+export const patchTraveloguePublish = async ({
   travelogueId,
 }: {
   travelogueId: string;
 }) => {
-  const response = await http.patch(`/api/travelogues/${travelogueId}`);
-  return response;
+  return await http.patch(`api/travelogues/${travelogueId}/publish`);
+};
+
+export const getTravelogueForEdit = async (
+  travelogueId: string,
+): Promise<AxiosResponse<TravelogueResponseType>> => {
+  return await http.get(`api/members/my/travelogues/${travelogueId}`);
+};
+
+export const getSubTravelogueForEdit = async (
+  travelogueId: string,
+  subTravelogueId: string,
+) => {
+  return await http.get(
+    `api/members/my/travelogues/${travelogueId}/subTravelogues/${subTravelogueId}`,
+  );
 };

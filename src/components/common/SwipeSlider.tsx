@@ -4,9 +4,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Stack, SxProps, Theme } from '@mui/material';
 import Slider from 'react-slick';
 
-import { Title } from '@/components/common';
-import { TravelogueFeed } from '@/components/Travelogue';
-import { TravelogueFeedType } from '@/types/travelogue';
+import { Feed } from '@/components/common/Feed';
+import { Title } from '@/components/common/Title';
+import { TravelogueFeedType } from '@/types/main';
 
 interface SwipeSliderProps {
   travelogues: TravelogueFeedType[];
@@ -41,7 +41,7 @@ const SwipeSlider = ({
       </Title>
       <Slider {...settings}>
         {travelogues.map((travelogue) => (
-          <TravelogueFeed key={String(travelogue.travelogueId)} data={travelogue} isTemp={isTemp} />
+          <Feed key={String(travelogue.travelogueId)} data={travelogue} isTemp={isTemp} />
         ))}
       </Slider>
     </Stack>

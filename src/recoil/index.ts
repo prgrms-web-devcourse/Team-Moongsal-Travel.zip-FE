@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 import { v4 } from 'uuid';
 
 import { ACCESS_TOKEN } from '@/constants';
-import { UserInformationType } from '@/types/profile';
+import { UserInformationType } from '@/types/member';
 import { getItem } from '@/utils/storage';
 
 export const isHeaderOpenState = atom({

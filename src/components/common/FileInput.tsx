@@ -4,10 +4,9 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
-import useImageUpload from '@/hooks/useImageUpload';
-import { TravelogueFormType } from '@/types/post';
-
-import { SubTitle } from './';
+import { SubTitle } from '@/components/common/Title';
+import useImageUpload from '@/hooks/common/useImageUpload';
+import { TravelogueFormType } from '@/types/travelogue';
 
 interface FileInputProps {
   thumbnail: ControllerRenderProps<TravelogueFormType, 'thumbnail'>;

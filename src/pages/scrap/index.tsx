@@ -20,10 +20,10 @@ import { useRouter } from 'next/router';
 import { folder, scrapBg } from 'public/images';
 import { useEffect } from 'react';
 
-import { SubTitle } from '@/components/common';
-import useScrapDocsData from '@/hooks/useScrapDocsData';
+import { SubTitle } from '@/components/common/Title';
+import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
 
-const Scrap = () => {
+const ScrapPage = () => {
   const router = useRouter();
   const {
     scrapDocs,
@@ -183,7 +183,7 @@ const Scrap = () => {
   );
 };
 
-export default Scrap;
+export default ScrapPage;
 
 const Puller = styled(Box)(({ theme }) => ({
   width: 30,

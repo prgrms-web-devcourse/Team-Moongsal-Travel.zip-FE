@@ -2,7 +2,7 @@ import { Button, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { Title } from '@/components/common';
+import { Title } from '@/components/common/Title';
 import { fontStyle } from '@/styles/commonStyle';
 
 interface EmptyDataProps {
