@@ -2,7 +2,7 @@ import { Box, CircularProgress, Fade, Stack } from '@mui/material';
 import { useMemo } from 'react';
 
 import { Title } from '@/components/common';
-import { Feed } from '@/components/Travelogue/Feed';
+import { Feed } from '@/components/common/Feed';
 import useIntersect from '@/hooks/common/useIntersect';
 import { useGetPersonalTravelogues } from '@/hooks/query/main';
 import { flexCenterStyle } from '@/styles/commonStyle';

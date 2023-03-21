@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { PostBasic } from '@/components/CreatePost';
+import { PostBasic } from '@/components/travelogue/Travelogue';
 import { travelogueFormProps } from '@/constants/defaultFormValue';
 import useImageUpload from '@/hooks/common/useImageUpload';
 import {

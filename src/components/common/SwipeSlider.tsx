@@ -5,7 +5,7 @@ import { Stack, SxProps, Theme } from '@mui/material';
 import Slider from 'react-slick';
 
 import { Title } from '@/components/common';
-import { Feed } from '@/components/Travelogue/Feed';
+import { Feed } from '@/components/common/Feed';
 import { TravelogueFeedType } from '@/types/main';
 
 interface SwipeSliderProps {

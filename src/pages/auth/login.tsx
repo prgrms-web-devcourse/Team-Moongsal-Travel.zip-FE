@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 
+import { Local } from '@/components/auth/Login';
 import { AuthHeader } from '@/components/common';
-import { Local } from '@/components/Login';
 
 const LoginPage = () => {
   return (

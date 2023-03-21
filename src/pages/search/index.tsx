@@ -2,8 +2,8 @@ import { Box, CircularProgress, Fade, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
-import { FilterButton } from '@/components/common';
-import { Feed } from '@/components/Travelogue/Feed';
+import { Feed } from '@/components/common/Feed';
+import { FilterButton } from '@/components/search';
 import useIntersect from '@/hooks/common/useIntersect';
 import { useGetTravelogueByFilter } from '@/hooks/query/search';
 import { fontStyle } from '@/styles/commonStyle';

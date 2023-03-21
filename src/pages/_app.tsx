@@ -4,9 +4,9 @@ import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 
 import { SigninLeadModal } from '@/components/common';
-import { GNB } from '@/components/GNB';
-import { Header } from '@/components/Header';
-import { AutoComplete } from '@/components/SearchModal';
+import { AutoComplete } from '@/components/common/AutoComplete';
+import { GNB } from '@/components/common/GNB';
+import { Header } from '@/components/common/Header';
 import GlobalStyle from '@/styles/GlobalStyle';
 import MobileLayout from '@/styles/MobileLayout';
 import { theme } from '@/styles/MuiTheme';

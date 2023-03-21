@@ -2,9 +2,9 @@ import { Box, Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { VerticalStepper } from '@/components/Stepper';
-import { TravelogueInfoType } from '@/components/Stepper/VerticalStepper';
-import { SubTravelogue } from '@/components/SubTravelogue';
+import { VerticalStepper } from '@/components/common/Stepper';
+import { TravelogueInfoType } from '@/components/common/Stepper/VerticalStepper';
+import { SubTravelogue } from '@/components/travelogue/SubTravelogue';
 import useHandleTraveloguePublish from '@/hooks/travelogue/useHandleTraveloguePublish';
 import { getItem } from '@/utils/storage';
 

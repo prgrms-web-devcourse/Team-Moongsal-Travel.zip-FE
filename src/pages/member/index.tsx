@@ -6,7 +6,7 @@ import {
   Management,
   TemporarySaveTravelogues,
   WrittenByMeTravelogues,
-} from '@/components/Profile';
+} from '@/components/member';
 import { useUserInformation } from '@/hooks/query/member';
 
 const MemberPage = () => {

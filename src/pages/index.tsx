@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { PersonalFeedList, PopularFeedList } from '@/components/Main';
+import { PersonalFeedList, PopularFeedList } from '@/components/main';
 
 export default function Home() {
   return (

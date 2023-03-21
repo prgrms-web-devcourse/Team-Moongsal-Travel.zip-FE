@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Register, VerifyByEmail } from '@/components/auth/Register';
 import { AuthHeader } from '@/components/common';
-import { Register, VerifyByEmail } from '@/components/Register';
-import { Stepper } from '@/components/Stepper';
+import { Stepper } from '@/components/common/Stepper';
 import { usePostUserRegister } from '@/hooks/query/auth';
 import { UserRegister } from '@/types/auth';
 
