@@ -1,7 +1,8 @@
 import { Stack, Typography } from '@mui/material';
 
-import Avatar from '@/components/common/UserProfile/Avatar';
 import { fontStyle } from '@/styles/commonStyle';
+
+import { Avatar } from '.';
 
 interface UserProfileProps {
   profileImageUrl: string;

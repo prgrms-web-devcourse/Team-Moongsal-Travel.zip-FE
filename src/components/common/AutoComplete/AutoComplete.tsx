@@ -1,7 +1,7 @@
 import { useLoadScript } from '@react-google-maps/api';
 import { ReactNode } from 'react';
 
-import Spinner from '@/components/common/Spinner';
+import { Spinner } from '@/components/common/Motion';
 
 const libraries: (
   | 'drawing'

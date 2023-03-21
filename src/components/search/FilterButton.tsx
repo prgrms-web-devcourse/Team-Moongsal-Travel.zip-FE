@@ -18,7 +18,7 @@ import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { SubTitle } from '@/components/common';
+import { SubTitle } from '@/components/common/Title';
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/search/useFilterForm';
 import { FilterFormType, FilterProps } from '@/types/search';

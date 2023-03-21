@@ -1,7 +1,7 @@
 import { Stack, SvgIcon, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import { SubTitle } from '@/components/common';
+import { SubTitle } from '@/components/common/Title';
 import { TRANSPORT_TYPE } from '@/constants';
 
 interface TransportationProps {

@@ -1,7 +1,7 @@
 import { Add as AddIcon } from '@mui/icons-material';
 import { Box, Stack, TextField } from '@mui/material';
 
-import { ProfileAvatar } from '@/components/common';
+import { Avatar } from '@/components/common/UserProfile';
 import { useUserInformation } from '@/hooks/query/member';
 import { flexCenterStyle, inputStyle } from '@/styles/commonStyle';
 
@@ -24,12 +24,7 @@ const EditForm = () => {
       />
       <label htmlFor='select-profile-image'>
         <Box sx={{ position: 'relative', cursor: 'pointer' }}>
-          <ProfileAvatar
-            url={profileImageUrl}
-            size={100}
-            iconSize={100}
-            isLoading={isLoading}
-          />
+          <Avatar url={profileImageUrl} size={100} iconSize={100} isLoading={isLoading} />
           <Box
             sx={{
               position: 'absolute',

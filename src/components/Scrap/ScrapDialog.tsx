@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { createScrap } from '@/api/scrap';
-import { Transition } from '@/components/common';
+import { Transition } from '@/components/common/Motion';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
 
 export interface ScrapDialogProps {

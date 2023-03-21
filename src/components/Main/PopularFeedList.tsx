@@ -1,4 +1,4 @@
-import SwipeSlider from '@/components/common/SwipeSlider';
+import { SwipeSlider } from '@/components/common';
 import { useGetBaseTravelogueList } from '@/hooks/query/main';
 
 const PopularFeedList = () => {

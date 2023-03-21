@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import { tempPost } from 'public/images';
 
-import { SwipeSlider } from '@/components/common';
-import EmptyData from '@/components/common/EmptyData';
+import { EmptyData, SwipeSlider } from '@/components/common';
 import { useGetTemporarySaveTravelogues } from '@/hooks/query/main';
 
 const TemporarySaveTravelogues = () => {

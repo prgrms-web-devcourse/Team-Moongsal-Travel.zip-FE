@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 
-import { ProfileAvatar } from '@/components/common';
+import { Avatar } from '@/components/common/UserProfile';
 import { useUserInformation } from '@/hooks/query/member';
 import { fontStyle } from '@/styles/commonStyle';
 
@@ -31,12 +31,7 @@ const Management = ({ handleOpenEditModal }: ManagementProps) => {
           boxSizing: 'border-box',
           gap: 2.5,
         }}>
-        <ProfileAvatar
-          url={profileImageUrl}
-          size={75}
-          iconSize={75}
-          isLoading={isLoading}
-        />
+        <Avatar url={profileImageUrl} size={75} iconSize={75} isLoading={isLoading} />
         <Stack>
           <Typography variant='h2' component='h2' sx={{ ...fontStyle, fontSize: '16px' }}>
             {nickname}

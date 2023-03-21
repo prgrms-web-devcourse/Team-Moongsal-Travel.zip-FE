@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import Spinner from '@/components/common/Spinner';
+import { Spinner } from '@/components/common/Motion';
 import { TravelogueDetail } from '@/components/detail';
 import { usePatchTravelogueDetailById } from '@/hooks/query/detail';
 import { TravelogueDetailType } from '@/types/detail';

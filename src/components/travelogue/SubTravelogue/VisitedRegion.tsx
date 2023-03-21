@@ -2,8 +2,8 @@ import { AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { Button, IconButton, Stack } from '@mui/material';
 import { Control, Controller, useFieldArray } from 'react-hook-form';
 
-import { SubTitle } from '@/components/common';
 import { AutoComplete } from '@/components/common/AutoComplete';
+import { SubTitle } from '@/components/common/Title';
 import { SubTravelogueType } from '@/types/travelogue';
 
 import { Location } from '.';

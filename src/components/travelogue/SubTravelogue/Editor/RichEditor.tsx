@@ -11,7 +11,7 @@ import { IMAGE_EXTENSION, IMAGE_TYPE } from '@/constants';
 import useImageUpload from '@/hooks/common/useImageUpload';
 import { SubTravelogueType } from '@/types/travelogue';
 
-import { editorModules } from './index';
+import { editorModules } from '.';
 
 Quill.register('modules/imageResize', ImageResize);
 

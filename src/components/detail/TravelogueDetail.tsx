@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material';
 
-import TravelogueContent from '@/components/detail/TravelogueContent';
-import TravelogueHeader from '@/components/detail/TravelogueHeader';
 import { TravelogueDetailType } from '@/types/detail';
+
+import { TravelogueContent, TravelogueHeader } from '.';
 
 interface TravelogueDetailProps {
   travelogueDetail: TravelogueDetailType;

@@ -20,7 +20,7 @@ import { useRouter } from 'next/router';
 import { folder, scrapBg } from 'public/images';
 import { useEffect } from 'react';
 
-import { SubTitle } from '@/components/common';
+import { SubTitle } from '@/components/common/Title';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
 
 const ScrapPage = () => {

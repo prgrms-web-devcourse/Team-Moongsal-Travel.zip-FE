@@ -1,9 +1,10 @@
 import { DateRangeOutlined, DirectionsCar, Payment, Public } from '@mui/icons-material';
 import { Grid, List } from '@mui/material';
 
-import TravelInfoItem from '@/components/detail/TravelInfoItem';
 import { TRANSPORT_TYPE } from '@/constants';
 import { TravelogueDetailType } from '@/types/detail';
+
+import { TravelInfoItem } from '.';
 
 interface PostCategoryProps {
   travelogueDetail: TravelogueDetailType;

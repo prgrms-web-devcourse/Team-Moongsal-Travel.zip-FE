@@ -2,7 +2,7 @@ import { Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import { location } from 'public/images';
 
-import UserProfile from '@/components/common/UserProfile/UserProfile';
+import { UserProfile } from '@/components/common/UserProfile';
 import { TravelogueFeedType } from '@/types/main';
 
 type FeedHeaderProps = TravelogueFeedType['member'] & {

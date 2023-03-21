@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
-import { SubTitle } from '@/components/common';
+import { SubTitle } from '@/components/common/Title';
 import { Transportation, VisitedRegion } from '@/components/travelogue/SubTravelogue';
 import { subTravelogueFormDefault } from '@/constants/defaultFormValue';
 import {
