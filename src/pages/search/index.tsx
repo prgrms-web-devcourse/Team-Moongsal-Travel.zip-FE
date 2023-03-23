@@ -13,10 +13,11 @@ const SearchPage = () => {
   const router = useRouter();
   const [keyword, setKeyword] = useState<string>("''");
   const [filter, setFilter] = useState<FilterProps>({});
+  console.log(filter);
 
   const { data, hasNextPage, isFetching, fetchNextPage } = useGetTravelogueByFilter({
     keyword,
-    size: 5,
+    size: '5',
     ...filter,
   });
 
