@@ -24,6 +24,7 @@ interface FilterMenuProps {
     | ControllerRenderProps<FilterFormType, 'maxCost'>;
   minValue: number;
   maxValue: number;
+  steps: number;
 }
 
 const FilterMenu = ({
@@ -32,6 +33,7 @@ const FilterMenu = ({
   maxState,
   minValue,
   maxValue,
+  steps,
 }: FilterMenuProps) => {
   const { minPlaceholder, maxPlaceholder, helperText } = getTextBySubTitle(
     subTitle,
@@ -55,6 +57,7 @@ const FilterMenu = ({
             }
           }}
           valueLabelDisplay='auto'
+          step={steps}
           min={minValue}
           max={maxValue}
           slots={{ thumb: ThumbComponent }}

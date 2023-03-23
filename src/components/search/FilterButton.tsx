@@ -6,12 +6,7 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
-  Slider,
-  SliderThumb,
-  Stack,
   SwipeableDrawer,
-  TextField,
-  Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
@@ -89,45 +84,21 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
               </RadioGroup>
             </FormControl>
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <SubTitle>여행 경비</SubTitle>
-            <Stack flexDirection='column'>
-              <StyledSlider
-                value={[
-                  parseInt(minCost.value || '0'),
-                  parseInt(maxCost.value || '10000000'),
-                ]}
-                onChange={(_, newValue) => {
-                  if (Array.isArray(newValue)) {
-                    minCost.onChange(newValue[0].toString());
-                    maxCost.onChange(newValue[1].toString());
-                  }
-                }}
-                valueLabelDisplay='auto'
-                step={100000}
-                min={0}
-                max={10000000}
-                slots={{ thumb: ThumbComponent }}
-              />
-              <Stack flexDirection='row'>
-                <TextField {...minCost} placeholder='최소금액' type='number' />
-                <TextField {...maxCost} placeholder='최대금액' type='number' />
-              </Stack>
-              <Typography variant='body1' component='span'>
-                {minCost.value &&
-                  maxCost.value &&
-                  `최소:${parseInt(minCost.value).toLocaleString(
-                    'ko-KR',
-                  )}원 - 최대:${parseInt(maxCost.value).toLocaleString('ko-KR')}원`}
-              </Typography>
-            </Stack>
-          </Box>
+          <FilterMenu
+            subTitle='여행 경비'
+            minState={minCost}
+            maxState={maxCost}
+            minValue={0}
+            maxValue={5000000}
+            steps={100000}
+          />
           <FilterMenu
             subTitle='여행 기간'
             minState={minDays}
             maxState={maxDays}
             minValue={0}
             maxValue={30}
+            steps={1}
           />
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button type='submit'>적용</Button>
@@ -162,46 +133,3 @@ const swipeStyle = {
     borderTopLeftRadius: 10,
   },
 } as const;
-
-interface ThumbComponentProps extends React.HTMLAttributes<unknown> {}
-function ThumbComponent(props: ThumbComponentProps) {
-  const { children, ...other } = props;
-  return (
-    <SliderThumb {...other}>
-      {children}
-      <span className='bar' />
-      <span className='bar' />
-      <span className='bar' />
-    </SliderThumb>
-  );
-}
-
-const StyledSlider = styled(Slider)(({ theme }) => ({
-  color: theme.palette.blue070.main,
-  height: 3,
-  padding: '13px 0',
-  '& .MuiSlider-thumb': {
-    width: 27,
-    height: 27,
-    backgroundColor: theme.palette.white.main,
-    border: '1px solid currentColor',
-    '&:hover': {
-      boxShadow: `0 0 0 1px rgba(${theme.palette.blue070.main}, 0.16)`,
-    },
-    '& .bar': {
-      width: 1,
-      height: 9,
-      marginRight: 1,
-      marginLeft: 1,
-      backgroundColor: 'currentColor',
-    },
-  },
-  '& .MuiSlider-track': {
-    height: 3,
-  },
-  '& .MuiSlider-rail': {
-    height: 3,
-    color: theme.palette.gray010.main,
-    opacity: 1,
-  },
-}));
