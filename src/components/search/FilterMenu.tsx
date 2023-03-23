@@ -11,10 +11,11 @@ import { ControllerRenderProps } from 'react-hook-form';
 
 import { SubTitle } from '@/components/common/Title';
 import { FilterFormType } from '@/types/search';
+import { getTextBySubTitle } from '@/utils/helper';
 
 interface FilterMenuProps {
-  subTitle: string;
-  // 해당부분을 ControllerRenderProps<FilterFormType, 'maxDays' | 'maxCost'>; 이렇게 쓰고싶었는데 타입에러 발생
+  subTitle: '여행 기간' | '여행 경비';
+  // 해당부분을 ControllerRenderProps<FilterFormType, 'maxDays' | 'maxCost'>; 로 사용하려 했는데 타입에러 발생
   minState:
     | ControllerRenderProps<FilterFormType, 'minDays'>
     | ControllerRenderProps<FilterFormType, 'minCost'>;
@@ -32,6 +33,12 @@ const FilterMenu = ({
   minValue,
   maxValue,
 }: FilterMenuProps) => {
+  const { minPlaceholder, maxPlaceholder, helperText } = getTextBySubTitle(
+    subTitle,
+    minState.value ? minState.value : '',
+    maxState.value ? maxState.value : '',
+  );
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <SubTitle>{subTitle}</SubTitle>
@@ -53,13 +60,11 @@ const FilterMenu = ({
           slots={{ thumb: ThumbComponent }}
         />
         <Stack flexDirection='row'>
-          <TextField {...minState} placeholder='최소기간' type='number' />
-          <TextField {...maxState} placeholder='최대기간' type='number' />
+          <TextField {...minState} placeholder={minPlaceholder} type='number' />
+          <TextField {...maxState} placeholder={maxPlaceholder} type='number' />
         </Stack>
         <Typography variant='body1' component='span'>
-          {minState.value &&
-            maxState.value &&
-            `최소:${minState.value}일 - 최대:${maxState.value}일`}
+          {minState.value && maxState.value && helperText}
         </Typography>
       </Stack>
     </Box>
