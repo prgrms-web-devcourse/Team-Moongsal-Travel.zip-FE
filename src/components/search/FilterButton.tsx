@@ -23,6 +23,8 @@ import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/search/useFilterForm';
 import { FilterFormType, FilterProps } from '@/types/search';
 
+import { FilterMenu } from '.';
+
 interface FilterButtonProps {
   setFilter: Dispatch<SetStateAction<FilterProps>>;
 }
@@ -121,33 +123,13 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
               </Typography>
             </Stack>
           </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <SubTitle>여행 기간</SubTitle>
-            <Stack flexDirection='column'>
-              <StyledSlider
-                value={[parseInt(minDays.value || '0'), parseInt(maxDays.value || '30')]}
-                onChange={(_, newValue) => {
-                  if (Array.isArray(newValue)) {
-                    minDays.onChange(newValue[0].toString());
-                    maxDays.onChange(newValue[1].toString());
-                  }
-                }}
-                valueLabelDisplay='auto'
-                min={0}
-                max={30}
-                slots={{ thumb: ThumbComponent }}
-              />
-              <Stack flexDirection='row'>
-                <TextField {...minDays} placeholder='최소기간' type='number' />
-                <TextField {...maxDays} placeholder='최대기간' type='number' />
-              </Stack>
-              <Typography variant='body1' component='span'>
-                {minDays.value &&
-                  maxDays.value &&
-                  `최소:${minDays.value}일 - 최대:${maxDays.value}일`}
-              </Typography>
-            </Stack>
-          </Box>
+          <FilterMenu
+            subTitle='여행 기간'
+            minState={minDays}
+            maxState={maxDays}
+            minValue={0}
+            maxValue={30}
+          />
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button type='submit'>적용</Button>
           </Box>

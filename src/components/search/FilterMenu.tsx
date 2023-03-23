@@ -14,8 +14,13 @@ import { FilterFormType } from '@/types/search';
 
 interface FilterMenuProps {
   subTitle: string;
-  minState: ControllerRenderProps<FilterFormType>;
-  maxState: ControllerRenderProps<FilterFormType>;
+  // 해당부분을 ControllerRenderProps<FilterFormType, 'maxDays' | 'maxCost'>; 이렇게 쓰고싶었는데 타입에러 발생
+  minState:
+    | ControllerRenderProps<FilterFormType, 'minDays'>
+    | ControllerRenderProps<FilterFormType, 'minCost'>;
+  maxState:
+    | ControllerRenderProps<FilterFormType, 'maxDays'>
+    | ControllerRenderProps<FilterFormType, 'maxCost'>;
   minValue: number;
   maxValue: number;
 }
