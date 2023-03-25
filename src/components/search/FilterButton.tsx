@@ -38,14 +38,14 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
     setOpen(newOpen);
   };
 
-  const handleApply = async (data: FilterFormType) => {
-    setFilter({
-      minDays: data.minDays,
-      maxDays: data.maxDays,
-      minCost: data.minCost,
-      maxCost: data.maxCost,
-      sort: data.sort,
-    });
+  const handleApply = async ({
+    minDays,
+    maxDays,
+    minCost,
+    maxCost,
+    sort,
+  }: FilterFormType) => {
+    setFilter({ minDays, maxDays, minCost, maxCost, sort });
     setOpen(false);
   };
 
