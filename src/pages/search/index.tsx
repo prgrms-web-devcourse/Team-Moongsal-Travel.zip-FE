@@ -6,7 +6,7 @@ import { Feed } from '@/components/common/Feed';
 import { FilterButton } from '@/components/search';
 import useIntersect from '@/hooks/common/useIntersect';
 import { useGetTravelogueByFilter } from '@/hooks/query/search';
-import { fontStyle } from '@/styles/commonStyle';
+import { flexCenterStyle, fontStyle } from '@/styles/commonStyle';
 import { FilterProps } from '@/types/search';
 
 const SearchPage = () => {
@@ -45,7 +45,7 @@ const SearchPage = () => {
         justifyContent='space-between'
         alignItems='flex-start'
         sx={{ p: '16px 15px 10px 15px' }}>
-        <Typography component='p' sx={{ ...fontStyle }}>
+        <Typography component='p' sx={fontStyle}>
           <Typography
             color='blue070.main'
             component='span'
@@ -62,7 +62,7 @@ const SearchPage = () => {
             travelogue && <Feed key={travelogue.travelogueId} data={travelogue} />,
         )}
       </Stack>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box sx={flexCenterStyle}>
         <Fade in={isFetching}>
           <Box sx={{ bgcolor: 'white.main' }}>
             <CircularProgress color='primary' size={25} />
