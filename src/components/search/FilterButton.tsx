@@ -19,7 +19,7 @@ interface FilterButtonProps {
 const FilterButton = ({ setFilter }: FilterButtonProps) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const { handleSubmit, control } = useForm<FilterFormType>(filterFormDefault);
+  const { handleSubmit, control, reset } = useForm<FilterFormType>(filterFormDefault);
   const { minDays, maxDays, minCost, maxCost, keyword, sort } = useFilterForm(control);
 
   useEffect(() => {
@@ -28,6 +28,16 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
+  };
+
+  const handleReset = () => {
+    reset({
+      minDays: '',
+      maxDays: '',
+      minCost: '',
+      maxCost: '',
+      sort: 'recent',
+    });
   };
 
   const handleApply = async ({
@@ -49,7 +59,6 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
         </Button>
       </Box>
       <SwipeableDrawer open={open} toggleDrawer={toggleDrawer}>
-        <Box sx={{ pb: 2 }} />
         <Box component='form' onSubmit={handleSubmit(handleApply)}>
           <FilterRadio sort={sort} />
           <FilterMenu
@@ -68,8 +77,12 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
             maxValue={30}
             steps={1}
           />
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button type='submit'>적용</Button>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+            <Button onClick={handleReset}>초기화</Button>
+            <Box>
+              <Button onClick={toggleDrawer(false)}>취소</Button>
+              <Button type='submit'>적용</Button>
+            </Box>
           </Box>
         </Box>
       </SwipeableDrawer>

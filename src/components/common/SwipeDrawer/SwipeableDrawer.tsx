@@ -1,4 +1,4 @@
-import { SwipeableDrawer as MuiSwipeableDrawer } from '@mui/material';
+import { Box, SwipeableDrawer as MuiSwipeableDrawer } from '@mui/material';
 import { ReactNode } from 'react';
 
 import { swipeStyle } from '@/styles/commonStyle';
@@ -25,6 +25,7 @@ const SwipeableDrawer = ({ open, toggleDrawer, children }: SwipeableDrawer) => {
         keepMounted: false,
       }}>
       <Puller />
+      <Box sx={{ pb: 2 }} />
       {children}
     </MuiSwipeableDrawer>
   );
