@@ -1,13 +1,13 @@
 import { Tune as TuneIcon } from '@mui/icons-material';
-import { Box, Button, SwipeableDrawer } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Puller } from '@/components/common/SwipeDrawer';
+import { SwipeableDrawer } from '@/components/common/SwipeDrawer';
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/search/useFilterForm';
-import { horizontalCenterstyle, swipeStyle } from '@/styles/commonStyle';
+import { horizontalCenterstyle } from '@/styles/commonStyle';
 import { FilterFormType, FilterProps } from '@/types/search';
 
 import { FilterMenu, FilterRadio } from '.';
@@ -48,18 +48,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
           필터
         </Button>
       </Box>
-      <SwipeableDrawer
-        container={() => document.body}
-        anchor='bottom'
-        open={open}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
-        disableScrollLock
-        sx={swipeStyle}
-        ModalProps={{
-          keepMounted: false,
-        }}>
-        <Puller />
+      <SwipeableDrawer open={open} toggleDrawer={toggleDrawer}>
         <Box sx={{ pb: 2 }} />
         <Box component='form' onSubmit={handleSubmit(handleApply)}>
           <FilterRadio sort={sort} />
