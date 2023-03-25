@@ -13,8 +13,8 @@ export const getTravelogueListByFilter = async ({
 }: FilterAxiosProps) => {
   const params = new URLSearchParams({
     keyword: keyword || '',
-    page: page,
-    size: size,
+    page,
+    size,
     ...(minDays && { minDays }),
     ...(maxDays && { maxDays }),
     ...(minCost && { minCost }),
