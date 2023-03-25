@@ -16,7 +16,7 @@ const SearchPage = () => {
 
   const { data, hasNextPage, isFetching, fetchNextPage } = useGetTravelogueByFilter({
     keyword,
-    size: 5,
+    size: '5',
     ...filter,
   });
 

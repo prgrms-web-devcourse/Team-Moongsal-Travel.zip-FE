@@ -39,17 +39,3 @@ export const useGetTravelogueByFilter = ({
     },
   );
 };
-
-// export const useGetTravelogueByKeyword = (
-//   keyword: string,
-//   size: number,
-// ): UseInfiniteQueryResult<AxiosResponse<TravelogueListType>, unknown> => {
-//   return useInfiniteQuery(
-//     ['KEYWORD_TRAVELOGUES', keyword],
-//     ({ pageParam = 0 }: QueryFunctionContext) =>
-//       getTravelogueListByKeyword(keyword, pageParam, size),
-//     {
-//       getNextPageParam: ({ data: { last, number } }) => (last ? undefined : number + 1),
-//     },
-//   );
-// };

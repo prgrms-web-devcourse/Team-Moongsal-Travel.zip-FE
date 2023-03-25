@@ -12,7 +12,7 @@ export interface FilterFormType extends FilterProps {
 
 export interface FilterAxiosProps extends FilterProps {
   keyword: string;
-  size: number;
-  page?: number;
+  size: string;
+  page?: string;
   sort?: string;
 }
