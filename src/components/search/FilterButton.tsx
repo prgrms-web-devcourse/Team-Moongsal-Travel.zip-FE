@@ -1,24 +1,16 @@
 import { Tune as TuneIcon } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  SwipeableDrawer,
-} from '@mui/material';
+import { Box, Button, SwipeableDrawer } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { SubTitle } from '@/components/common/Title';
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/search/useFilterForm';
+import { horizontalCenterstyle } from '@/styles/commonStyle';
 import { FilterFormType, FilterProps } from '@/types/search';
 
-import { FilterMenu } from '.';
+import { FilterMenu, FilterRadio } from '.';
 
 interface FilterButtonProps {
   setFilter: Dispatch<SetStateAction<FilterProps>>;
@@ -50,12 +42,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        minWidth: '100px',
-      }}>
+    <Box sx={{ ...horizontalCenterstyle, minWidth: '100px' }}>
       <Box>
         <Button variant='outlined' startIcon={<TuneIcon />} onClick={toggleDrawer(true)}>
           필터
@@ -75,15 +62,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
         <Puller />
         <Box sx={{ pb: 2 }} />
         <Box component='form' onSubmit={handleSubmit(handleApply)}>
-          <Box>
-            <FormControl>
-              <SubTitle>정렬</SubTitle>
-              <RadioGroup row {...sort} defaultValue='recent' defaultChecked>
-                <FormControlLabel value='recent' control={<Radio />} label='최신순' />
-                <FormControlLabel value='popular' control={<Radio />} label='인기순' />
-              </RadioGroup>
-            </FormControl>
-          </Box>
+          <FilterRadio sort={sort} />
           <FilterMenu
             subTitle='여행 경비'
             minState={minCost}

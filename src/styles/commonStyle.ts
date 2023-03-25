@@ -1,4 +1,4 @@
-export const CenterStyle = {
+export const horizontalCenterstyle = {
   display: 'flex',
   justifyContent: 'center',
 };
