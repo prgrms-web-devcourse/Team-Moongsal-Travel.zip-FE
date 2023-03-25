@@ -21,16 +21,13 @@ const SearchPage = () => {
   });
 
   useEffect(() => {
-    if (router.isReady && typeof router.query.keyword === 'string') {
+    if (router.isReady && typeof router.query.keyword === 'string')
       setKeyword(router.query.keyword);
-    }
   }, [data, router.isReady, router.query.keyword]);
 
   const ref = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);
-    if (hasNextPage) {
-      fetchNextPage();
-    }
+    if (hasNextPage) fetchNextPage();
   });
 
   const travelogues = useMemo(
