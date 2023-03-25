@@ -10,7 +10,6 @@ import {
   ListItemText,
   Paper,
   Stack,
-  styled,
   SwipeableDrawer,
   TextField,
   Typography,
@@ -20,6 +19,7 @@ import { useRouter } from 'next/router';
 import { folder, scrapBg } from 'public/images';
 import { useEffect } from 'react';
 
+import { Puller } from '@/components/common/SwipeDrawer';
 import { SubTitle } from '@/components/common/Title';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
 import { swipeStyle } from '@/styles/commonStyle';
@@ -185,13 +185,3 @@ const ScrapPage = () => {
 };
 
 export default ScrapPage;
-
-const Puller = styled(Box)(({ theme }) => ({
-  width: 30,
-  height: 6,
-  backgroundColor: theme.palette.gray030.main,
-  borderRadius: 3,
-  position: 'absolute',
-  top: 8,
-  left: 'calc(50% - 15px)',
-}));

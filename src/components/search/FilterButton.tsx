@@ -1,10 +1,10 @@
 import { Tune as TuneIcon } from '@mui/icons-material';
 import { Box, Button, SwipeableDrawer } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Puller } from '@/components/common/SwipeDrawer';
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/search/useFilterForm';
 import { horizontalCenterstyle, swipeStyle } from '@/styles/commonStyle';
@@ -89,13 +89,3 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
 };
 
 export default FilterButton;
-
-const Puller = styled(Box)(({ theme }) => ({
-  width: 30,
-  height: 6,
-  backgroundColor: theme.palette.gray030.main,
-  borderRadius: 3,
-  position: 'absolute',
-  top: 8,
-  left: 'calc(50% - 15px)',
-}));
