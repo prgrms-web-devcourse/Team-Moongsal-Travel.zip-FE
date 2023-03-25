@@ -48,3 +48,16 @@ export const stepStyle = {
     },
   },
 };
+
+export const swipeStyle = {
+  '&.MuiDrawer-root > .MuiPaper-root': {
+    boxSizing: 'border-box',
+    minWidth: '390px',
+    maxWidth: '414px',
+    margin: 'auto',
+    padding: '1rem 2rem',
+    overflow: 'visible',
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+} as const;

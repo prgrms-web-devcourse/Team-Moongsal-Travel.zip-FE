@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 
 import { SubTitle } from '@/components/common/Title';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
+import { swipeStyle } from '@/styles/commonStyle';
 
 const ScrapPage = () => {
   const router = useRouter();
@@ -194,16 +195,3 @@ const Puller = styled(Box)(({ theme }) => ({
   top: 8,
   left: 'calc(50% - 15px)',
 }));
-
-const swipeStyle = {
-  '&.MuiDrawer-root > .MuiPaper-root': {
-    boxSizing: 'border-box',
-    minWidth: '390px',
-    maxWidth: '414px',
-    margin: 'auto',
-    padding: '1rem 2rem',
-    overflow: 'visible',
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
-  },
-} as const;

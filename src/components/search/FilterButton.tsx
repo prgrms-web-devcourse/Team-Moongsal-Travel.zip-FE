@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import { filterFormDefault } from '@/constants/defaultFormValue';
 import useFilterForm from '@/hooks/search/useFilterForm';
-import { horizontalCenterstyle } from '@/styles/commonStyle';
+import { horizontalCenterstyle, swipeStyle } from '@/styles/commonStyle';
 import { FilterFormType, FilterProps } from '@/types/search';
 
 import { FilterMenu, FilterRadio } from '.';
@@ -99,16 +99,3 @@ const Puller = styled(Box)(({ theme }) => ({
   top: 8,
   left: 'calc(50% - 15px)',
 }));
-
-const swipeStyle = {
-  '&.MuiDrawer-root > .MuiPaper-root': {
-    boxSizing: 'border-box',
-    minWidth: '390px',
-    maxWidth: '414px',
-    margin: 'auto',
-    padding: '1rem 2rem',
-    overflow: 'visible',
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
-  },
-} as const;
