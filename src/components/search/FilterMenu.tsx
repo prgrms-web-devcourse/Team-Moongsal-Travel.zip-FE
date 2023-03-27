@@ -62,7 +62,7 @@ const FilterMenu = ({
           max={maxValue}
           slots={{ thumb: ThumbComponent }}
         />
-        <Stack flexDirection='row'>
+        <Stack direction='row' spacing={1}>
           <TextField {...minState} placeholder={minPlaceholder} type='number' />
           <TextField {...maxState} placeholder={maxPlaceholder} type='number' />
         </Stack>
