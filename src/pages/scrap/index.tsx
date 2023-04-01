@@ -2,7 +2,6 @@ import { Delete as DeleteIcon } from '@mui/icons-material';
 import {
   Box,
   Button,
-  IconButton,
   ListItem,
   ListItemText,
   Paper,
@@ -76,21 +75,18 @@ const ScrapPage = () => {
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
             <Stack key={storageObjectId} flexDirection='row' pb={1.5}>
-              <Paper key={storageObjectId} sx={scrapPaperStyle}>
+              <Paper sx={scrapPaperStyle}>
                 <ListItem
                   onClick={() => handleClick(storageObjectId)}
-                  sx={{
-                    cursor: 'pointer',
-                    width: '85%',
-                  }}>
+                  sx={{ cursor: 'pointer', width: '85%' }}>
                   <ScrapAvatar image={folder} />
                   <ListItemText primary={title} sx={scrapListTextStyle} />
                 </ListItem>
-                <IconButton
+                <Button
                   onClick={() => deleteScrapDoc(storageObjectId)}
                   sx={{ color: 'red.main' }}>
                   <DeleteIcon />
-                </IconButton>
+                </Button>
               </Paper>
             </Stack>
           ))}
