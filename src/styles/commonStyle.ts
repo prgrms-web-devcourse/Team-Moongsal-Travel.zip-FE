@@ -61,3 +61,36 @@ export const swipeStyle = {
     borderTopLeftRadius: 10,
   },
 } as const;
+
+export const scrapListStyle = {
+  minHeight: 'calc(100vh - 18rem - 65px)',
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  borderTopLeftRadius: '2rem',
+  borderTopRightRadius: '2rem',
+  mt: '18rem',
+  p: 3,
+  boxSizing: 'border-box',
+  backgroundColor: 'blue010.main',
+} as const;
+
+export const scrapImageStyle = {
+  width: '100%',
+  height: '355px',
+  position: 'absolute',
+  top: '-295px',
+  left: 0,
+  paddingBottom: '3.5rem',
+  boxSizing: 'border-box',
+  backgroundColor: '#c4e2f5',
+  zIndex: -1,
+} as const;
+
+export const scrapPaperStyle = {
+  display: 'flex',
+  width: '100%',
+  padding: '0.5rem',
+  boxSizing: 'border-box',
+  borderRadius: '0.5rem',
+} as const;

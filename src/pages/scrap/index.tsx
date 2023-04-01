@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import { SwipeableDrawer } from '@/components/common/SwipeDrawer';
 import { SubTitle, Title } from '@/components/common/Title';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
+import { scrapImageStyle, scrapListStyle, scrapPaperStyle } from '@/styles/commonStyle';
 
 const ScrapPage = () => {
   const router = useRouter();
@@ -68,8 +69,8 @@ const ScrapPage = () => {
           </Stack>
         </Box>
       </SwipeableDrawer>
-      <List sx={listStyle}>
-        <Image src={scrapBg} alt={scrapBg} style={listImageStyle} />
+      <List sx={scrapListStyle}>
+        <Image src={scrapBg} alt={scrapBg} style={scrapImageStyle} />
         <Title fontSize='1.5rem' bold='900' color='blue040.main' sx={{ mb: 2 }}>
           나만의 장소 모음집
         </Title>
@@ -81,15 +82,7 @@ const ScrapPage = () => {
         {scrapDocs &&
           scrapDocs.map(({ title, storageObjectId }) => (
             <Stack key={storageObjectId} flexDirection='row' pb={1.5}>
-              <Paper
-                key={storageObjectId}
-                sx={{
-                  display: 'flex',
-                  width: '100%',
-                  padding: '0.5rem',
-                  boxSizing: 'border-box',
-                  borderRadius: '0.5rem',
-                }}>
+              <Paper key={storageObjectId} sx={scrapPaperStyle}>
                 <ListItem
                   onClick={() => handleClick(storageObjectId)}
                   sx={{
@@ -133,29 +126,3 @@ const ScrapPage = () => {
 };
 
 export default ScrapPage;
-
-const listStyle = {
-  minHeight: 'calc(100vh - 18rem - 65px)',
-  display: 'flex',
-  flexDirection: 'column',
-  borderTopLeftRadius: '2rem',
-  borderTopRightRadius: '2rem',
-  mt: '18rem',
-  p: 3,
-  boxSizing: 'border-box',
-  '&.MuiList-root': {
-    backgroundColor: 'blue010.main',
-  },
-} as const;
-
-const listImageStyle = {
-  width: '100%',
-  height: '355px',
-  position: 'absolute',
-  top: '-295px',
-  left: 0,
-  paddingBottom: '3.5rem',
-  boxSizing: 'border-box',
-  backgroundColor: '#c4e2f5',
-  zIndex: -1,
-} as const;
