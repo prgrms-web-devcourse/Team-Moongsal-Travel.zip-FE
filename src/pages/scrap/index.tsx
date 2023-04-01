@@ -11,7 +11,6 @@ import {
   Paper,
   Stack,
   TextField,
-  Typography,
 } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -19,7 +18,7 @@ import { folder, scrapBg } from 'public/images';
 import { useEffect } from 'react';
 
 import { SwipeableDrawer } from '@/components/common/SwipeDrawer';
-import { SubTitle } from '@/components/common/Title';
+import { SubTitle, Title } from '@/components/common/Title';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
 
 const ScrapPage = () => {
@@ -69,46 +68,11 @@ const ScrapPage = () => {
           </Stack>
         </Box>
       </SwipeableDrawer>
-      <List
-        sx={{
-          minHeight: 'calc(100vh - 18rem - 65px)',
-          display: 'flex',
-          flexDirection: 'column',
-          borderTopLeftRadius: '2rem',
-          borderTopRightRadius: '2rem',
-          mt: '18rem',
-          p: 3,
-          boxSizing: 'border-box',
-          '&.MuiList-root': {
-            backgroundColor: 'blue010.main',
-          },
-        }}>
-        <Image
-          src={scrapBg}
-          alt={scrapBg}
-          height={355}
-          style={{
-            width: '100%',
-            position: 'absolute',
-            top: '-295px',
-            left: 0,
-            paddingBottom: '3.5rem',
-            boxSizing: 'border-box',
-            backgroundColor: '#c4e2f5',
-            zIndex: -1,
-          }}
-        />
-        <Typography
-          sx={{
-            mb: 2,
-            fontWeight: 900,
-            fontSize: '1.5rem',
-            color: 'blue040.main',
-          }}
-          variant='h6'
-          component='div'>
+      <List sx={listStyle}>
+        <Image src={scrapBg} alt={scrapBg} style={listImageStyle} />
+        <Title fontSize='1.5rem' bold='900' color='blue040.main' sx={{ mb: 2 }}>
           나만의 장소 모음집
-        </Typography>
+        </Title>
         <Button
           onClick={toggleDrawer(true)}
           sx={{ fontSize: '1rem', fontWeight: 700, color: 'blue040.main' }}>
@@ -169,3 +133,29 @@ const ScrapPage = () => {
 };
 
 export default ScrapPage;
+
+const listStyle = {
+  minHeight: 'calc(100vh - 18rem - 65px)',
+  display: 'flex',
+  flexDirection: 'column',
+  borderTopLeftRadius: '2rem',
+  borderTopRightRadius: '2rem',
+  mt: '18rem',
+  p: 3,
+  boxSizing: 'border-box',
+  '&.MuiList-root': {
+    backgroundColor: 'blue010.main',
+  },
+} as const;
+
+const listImageStyle = {
+  width: '100%',
+  height: '355px',
+  position: 'absolute',
+  top: '-295px',
+  left: 0,
+  paddingBottom: '3.5rem',
+  boxSizing: 'border-box',
+  backgroundColor: '#c4e2f5',
+  zIndex: -1,
+} as const;
