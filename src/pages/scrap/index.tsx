@@ -34,7 +34,7 @@ const ScrapPage = () => {
 
   useEffect(() => {
     fetchScrapDoc();
-  }, []);
+  }, [fetchScrapDoc]);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
