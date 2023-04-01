@@ -1,26 +1,23 @@
 import { Delete as DeleteIcon } from '@mui/icons-material';
 import {
-  Avatar,
   Box,
   Button,
   IconButton,
   ListItem,
-  ListItemAvatar,
   ListItemText,
   Paper,
   Stack,
   TextField,
 } from '@mui/material';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { folder } from 'public/images';
 import { useEffect } from 'react';
 
 import { SwipeableDrawer } from '@/components/common/SwipeDrawer';
 import { SubTitle } from '@/components/common/Title';
-import { ScrapList } from '@/components/scrap';
+import { ScrapAvatar, ScrapList } from '@/components/scrap';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
-import { scrapPaperStyle } from '@/styles/commonStyle';
+import { scrapListTextStyle, scrapPaperStyle } from '@/styles/commonStyle';
 
 const ScrapPage = () => {
   const router = useRouter();
@@ -86,28 +83,8 @@ const ScrapPage = () => {
                     cursor: 'pointer',
                     width: '85%',
                   }}>
-                  <ListItemAvatar sx={{ mr: 1 }}>
-                    <Avatar
-                      sx={{
-                        bgcolor: 'transparent',
-                        borderRadius: 0,
-                        width: '3rem',
-                        height: '3rem',
-                      }}>
-                      <Image src={folder} alt='document' fill />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={title}
-                    sx={{
-                      '.MuiTypography-root': {
-                        fontWeight: 700,
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                      },
-                    }}
-                  />
+                  <ScrapAvatar image={folder} />
+                  <ListItemText primary={title} sx={scrapListTextStyle} />
                 </ListItem>
                 <IconButton
                   onClick={() => deleteScrapDoc(storageObjectId)}

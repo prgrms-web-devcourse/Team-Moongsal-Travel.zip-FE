@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import { deleteScrap, getScrapDetail } from '@/api/scrap';
 import { ScrapList } from '@/components/scrap';
-import { scrapPaperStyle } from '@/styles/commonStyle';
+import { scrapListTextStyle, scrapPaperStyle } from '@/styles/commonStyle';
 import { ScrapDetailType } from '@/types/scrap';
 
 const ScrapDetailPage = () => {
@@ -69,18 +69,7 @@ const ScrapDetailPage = () => {
             <Paper key={scrapObjectId} sx={{ ...scrapPaperStyle, mb: 1 }}>
               <ListItem>
                 <PushPinIcon sx={{ color: 'blue050.main', mr: 1 }} />
-                <ListItemText
-                  primary={placeName}
-                  sx={{
-                    width: '100%',
-                    '.MuiTypography-root': {
-                      fontWeight: 700,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                    },
-                  }}
-                />
+                <ListItemText primary={placeName} sx={scrapListTextStyle} />
                 <Button
                   onClick={(e) => handleClick(e, scrapObjectId, postId)}
                   sx={{ minWidth: 0 }}>

@@ -94,3 +94,12 @@ export const scrapPaperStyle = {
   boxSizing: 'border-box',
   borderRadius: '0.5rem',
 } as const;
+
+export const scrapListTextStyle = {
+  '.MuiTypography-root': {
+    fontWeight: 700,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+} as const;
