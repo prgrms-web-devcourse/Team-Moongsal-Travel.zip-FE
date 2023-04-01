@@ -9,14 +9,12 @@ import {
   MenuItem,
   Paper,
 } from '@mui/material';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { scrapBg } from 'public/images';
 import { useEffect, useState } from 'react';
 
 import { deleteScrap, getScrapDetail } from '@/api/scrap';
-import { Title } from '@/components/common/Title';
-import { scrapImageStyle, scrapListStyle, scrapPaperStyle } from '@/styles/commonStyle';
+import { ScrapList } from '@/components/scrap';
+import { scrapPaperStyle } from '@/styles/commonStyle';
 import { ScrapDetailType } from '@/types/scrap';
 
 const ScrapDetailPage = () => {
@@ -73,11 +71,7 @@ const ScrapDetailPage = () => {
 
   return (
     <>
-      <List sx={scrapListStyle}>
-        <Image src={scrapBg} alt={scrapBg} style={scrapImageStyle} />
-        <Title fontSize='1.5rem' bold='900' color='blue040.main' sx={{ mb: 2 }}>
-          {scrapTitle}
-        </Title>
+      <ScrapList scrapTitle={scrapTitle}>
         <List>
           {scrapContents &&
             scrapContents.map(({ scrapObjectId, placeName, postId }) => (
@@ -105,7 +99,7 @@ const ScrapDetailPage = () => {
               </Paper>
             ))}
         </List>
-      </List>
+      </ScrapList>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem onClick={handleRouter}>게시글 이동</MenuItem>
         <MenuItem onClick={deleteScrapItem} sx={{ color: 'red.main' }}>

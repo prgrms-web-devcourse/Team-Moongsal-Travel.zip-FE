@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   IconButton,
-  List,
   ListItem,
   ListItemAvatar,
   ListItemText,
@@ -14,13 +13,14 @@ import {
 } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { folder, scrapBg } from 'public/images';
+import { folder } from 'public/images';
 import { useEffect } from 'react';
 
 import { SwipeableDrawer } from '@/components/common/SwipeDrawer';
-import { SubTitle, Title } from '@/components/common/Title';
+import { SubTitle } from '@/components/common/Title';
+import { ScrapList } from '@/components/scrap';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
-import { scrapImageStyle, scrapListStyle, scrapPaperStyle } from '@/styles/commonStyle';
+import { scrapPaperStyle } from '@/styles/commonStyle';
 
 const ScrapPage = () => {
   const router = useRouter();
@@ -69,11 +69,8 @@ const ScrapPage = () => {
           </Stack>
         </Box>
       </SwipeableDrawer>
-      <List sx={scrapListStyle}>
-        <Image src={scrapBg} alt={scrapBg} style={scrapImageStyle} />
-        <Title fontSize='1.5rem' bold='900' color='blue040.main' sx={{ mb: 2 }}>
-          나만의 장소 모음집
-        </Title>
+
+      <ScrapList scrapTitle='나만의 장소 모음집'>
         <Button
           onClick={toggleDrawer(true)}
           sx={{ fontSize: '1rem', fontWeight: 700, color: 'blue040.main' }}>
@@ -120,7 +117,7 @@ const ScrapPage = () => {
               </Paper>
             </Stack>
           ))}
-      </List>
+      </ScrapList>
     </>
   );
 };
