@@ -10,7 +10,6 @@ import {
   ListItemText,
   Paper,
   Stack,
-  SwipeableDrawer,
   TextField,
   Typography,
 } from '@mui/material';
@@ -19,10 +18,9 @@ import { useRouter } from 'next/router';
 import { folder, scrapBg } from 'public/images';
 import { useEffect } from 'react';
 
-import { Puller } from '@/components/common/SwipeDrawer';
+import { SwipeableDrawer } from '@/components/common/SwipeDrawer';
 import { SubTitle } from '@/components/common/Title';
 import useScrapDocsData from '@/hooks/scrap/useScrapDocsData';
-import { swipeStyle } from '@/styles/commonStyle';
 
 const ScrapPage = () => {
   const router = useRouter();
@@ -54,35 +52,21 @@ const ScrapPage = () => {
 
   return (
     <>
-      <SwipeableDrawer
-        container={() => document.body}
-        anchor='bottom'
-        open={open}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
-        disableScrollLock
-        sx={swipeStyle}
-        ModalProps={{
-          keepMounted: false,
-        }}>
-        <Puller />
-        <Box sx={{ pb: 2 }} />
-        <Box>
-          <Box component='form' onSubmit={handleSubmit(createScrapDoc)}>
-            <SubTitle>나만의 장소 추가</SubTitle>
-            <TextField
-              {...title}
-              fullWidth
-              placeholder='폴더 이름을 입력해주세요'
-              sx={{ mt: 2 }}
-              error={titleState.error && true}
-              helperText={titleState.error && titleState.error.message}
-            />
-            <Stack flexDirection='row' justifyContent='flex-end' mt={2}>
-              <Button onClick={toggleDrawer(false)}>취소</Button>
-              <Button type='submit'>생성</Button>
-            </Stack>
-          </Box>
+      <SwipeableDrawer open={open} toggleDrawer={toggleDrawer}>
+        <Box component='form' onSubmit={handleSubmit(createScrapDoc)}>
+          <SubTitle>나만의 장소 추가</SubTitle>
+          <TextField
+            {...title}
+            fullWidth
+            placeholder='폴더 이름을 입력해주세요'
+            sx={{ mt: 2 }}
+            error={titleState.error && true}
+            helperText={titleState.error && titleState.error.message}
+          />
+          <Stack flexDirection='row' justifyContent='flex-end' mt={2}>
+            <Button onClick={toggleDrawer(false)}>취소</Button>
+            <Button type='submit'>생성</Button>
+          </Stack>
         </Box>
       </SwipeableDrawer>
       <List
