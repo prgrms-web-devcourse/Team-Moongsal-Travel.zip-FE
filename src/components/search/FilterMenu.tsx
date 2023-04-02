@@ -14,8 +14,8 @@ import { FilterFormType } from '@/types/search';
 import { getTextBySubTitle } from '@/utils/helper';
 
 interface CustomControllerRenderProps<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
 > extends ControllerRenderProps<TFieldValues, TName> {}
 
 interface FilterMenuProps {
