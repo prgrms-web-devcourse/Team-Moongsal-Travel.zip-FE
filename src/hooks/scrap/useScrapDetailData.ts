@@ -18,7 +18,6 @@ const useScrapDetailData = () => {
       const { data } = await getScrapDetail(router.query.docId);
       setScrapTitle(data.title);
       setScrapContents(data.contents);
-      console.log('fetch');
     }
   }, [router.isReady, router.query.docId]);
 
