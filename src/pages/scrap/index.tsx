@@ -23,22 +23,18 @@ const ScrapPage = () => {
   const {
     scrapDocs,
     open,
-    setOpen,
     title,
     titleState,
     fetchScrapDoc,
     createScrapDoc,
     deleteScrapDoc,
     handleSubmit,
+    toggleDrawer,
   } = useScrapDocsData();
 
   useEffect(() => {
     fetchScrapDoc();
   }, [fetchScrapDoc]);
-
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
-  };
 
   const handleClick = (docId: string) => {
     router.push({

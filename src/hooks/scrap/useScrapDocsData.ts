@@ -35,17 +35,21 @@ const useScrapDocsData = () => {
     );
   };
 
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
   return {
     scrapDocs,
     setScrapDocs,
     open,
-    setOpen,
     title,
     titleState,
     fetchScrapDoc,
     createScrapDoc,
     deleteScrapDoc,
     handleSubmit,
+    toggleDrawer,
   };
 };
 
