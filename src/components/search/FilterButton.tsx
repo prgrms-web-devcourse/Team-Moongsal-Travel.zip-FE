@@ -31,13 +31,7 @@ const FilterButton = ({ setFilter }: FilterButtonProps) => {
   };
 
   const handleReset = () => {
-    reset({
-      minDays: '',
-      maxDays: '',
-      minCost: '',
-      maxCost: '',
-      sort: 'recent',
-    });
+    reset({ minDays: '', maxDays: '', minCost: '', maxCost: '', sort: 'recent' });
   };
 
   const handleApply = async ({

@@ -7,21 +7,21 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { ControllerRenderProps } from 'react-hook-form';
+import { ControllerRenderProps, FieldPath, FieldValues } from 'react-hook-form';
 
 import { SubTitle } from '@/components/common/Title';
 import { FilterFormType } from '@/types/search';
 import { getTextBySubTitle } from '@/utils/helper';
 
+interface CustomControllerRenderProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> extends ControllerRenderProps<TFieldValues, TName> {}
+
 interface FilterMenuProps {
   subTitle: '여행 기간' | '여행 경비';
-  // 해당부분을 ControllerRenderProps<FilterFormType, 'maxDays' | 'maxCost'>; 로 사용하려 했는데 타입에러 발생
-  minState:
-    | ControllerRenderProps<FilterFormType, 'minDays'>
-    | ControllerRenderProps<FilterFormType, 'minCost'>;
-  maxState:
-    | ControllerRenderProps<FilterFormType, 'maxDays'>
-    | ControllerRenderProps<FilterFormType, 'maxCost'>;
+  minState: CustomControllerRenderProps<FilterFormType, 'minDays' | 'minCost'>;
+  maxState: CustomControllerRenderProps<FilterFormType, 'maxDays' | 'maxCost'>;
   minValue: number;
   maxValue: number;
   steps: number;
@@ -37,8 +37,8 @@ const FilterMenu = ({
 }: FilterMenuProps) => {
   const { minPlaceholder, maxPlaceholder, helperText } = getTextBySubTitle(
     subTitle,
-    minState.value ? minState.value : '',
-    maxState.value ? maxState.value : '',
+    minState.value || '',
+    maxState.value || '',
   );
 
   return (
