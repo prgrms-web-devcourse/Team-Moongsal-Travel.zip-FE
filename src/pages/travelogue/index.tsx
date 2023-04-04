@@ -11,7 +11,7 @@ import {
   usePatchTraveloguePublish,
   useSaveTravelogue,
 } from '@/hooks/query/travelogue';
-import { TravelogueFormType, TravelogueSaveResponseType } from '@/types/travelogue';
+import { TravelogueFormType } from '@/types/travelogue';
 import { createPeriodArray } from '@/utils/helper';
 import { getItem, setItem } from '@/utils/storage';
 
@@ -26,11 +26,16 @@ const TraveloguePage = () => {
   const { data: travelogue, refetch } = useGetTravelogueForEdit(travelogueId);
   const { mutate: saveMutate } = useSaveTravelogue(isEditPage);
   const { mutate: publishMutate } = usePatchTraveloguePublish();
+  const [tempDays, setTempDays] = useState('');
 
   useEffect(() => {
     const { travelogueId, edit, temp } = router.query;
     edit && setIsEditPage(true);
-    travelogueId && setTravelogueId(travelogueId as string);
+    if (travelogueId) {
+      setTravelogueId(travelogueId as string);
+      const tempData = getItem<{ days: string }>(`temp-data-${travelogueId}`);
+      tempData && setTempDays(tempData.days);
+    }
     if (temp) {
       setIsTempPage(true);
       setIsEditPage(true);
@@ -69,11 +74,10 @@ const TraveloguePage = () => {
       { data: { ...data, thumbnail: url }, travelogueId },
       {
         onSuccess: ({ data }) => {
-          isTempPage
-            ? goToTempSubTravelogue(data.travelogueId)
-            : isEditPage
+          const { id, travelogueId, days } = data;
+          isEditPage && !isTempPage
             ? publishTravelogue(data.travelogueId)
-            : goToSubTravelogue(data);
+            : goToSubTravelogue(id ?? travelogueId, days ?? tempDays);
         },
         onError: () => {
           key && deleteFile(key);
@@ -96,33 +100,10 @@ const TraveloguePage = () => {
     );
   };
 
-  const goToTempSubTravelogue = (travelogueId: string) => {
-    if (isTempPage) {
-      const tempData = getItem<{ days: string; subsId: string[] }>(
-        `temp-data-${travelogueId}`,
-      );
-      if (tempData) {
-        const { days } = tempData;
-        setItem(`travelogueInfo`, {
-          id: travelogueId,
-          step: createPeriodArray(parseInt(days)),
-        });
-        router.push(
-          { pathname: '/travelogue/[id]', query: { travelogueId, days } },
-          '/travelogue/detail',
-        );
-      }
-    }
-  };
-
-  const goToSubTravelogue = (data: TravelogueSaveResponseType) => {
-    const { id: travelogueId, days } = data;
-    setItem(`travelogueInfo`, {
-      id: travelogueId,
-      step: createPeriodArray(days),
-    });
+  const goToSubTravelogue = (id: number, days: number) => {
+    setItem(`travelogueInfo`, { id, step: createPeriodArray(days) });
     router.push(
-      { pathname: '/travelogue/[id]', query: { travelogueId, days } },
+      { pathname: '/travelogue/[id]', query: { travelogueId: id, days } },
       '/travelogue/detail',
     );
   };
