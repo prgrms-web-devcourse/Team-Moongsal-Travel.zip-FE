@@ -10,10 +10,10 @@ import { FeedContent, FeedHeader, FeedImage } from '.';
 interface FeedProps {
   data: TravelogueFeedType;
   isBottomPadding?: boolean;
-  isTemp?: boolean;
+  isTempSavedFeed?: boolean;
 }
 
-const Feed = ({ data, isBottomPadding = false, isTemp = false }: FeedProps) => {
+const Feed = ({ data, isBottomPadding = false, isTempSavedFeed = false }: FeedProps) => {
   const router = useRouter();
   const { handleOpenAuthConfirmModal } = useAuth();
 
@@ -22,20 +22,13 @@ const Feed = ({ data, isBottomPadding = false, isTemp = false }: FeedProps) => {
       return;
     }
 
-    if (isTemp) {
+    if (isTempSavedFeed) {
       const { days, travelogueId } = data;
-      const subsId = ['1', '2'];
-      setItem(`temp-data-${travelogueId}`, { days, subsId });
-      router.push({
-        pathname: '/travelogue',
-        query: { travelogueId, temp: true },
-      });
+      setItem(`temp-data-${travelogueId}`, { days });
+      router.push({ pathname: '/travelogue', query: { travelogueId, temp: true } });
       return;
     }
-    router.push({
-      pathname: '/detail',
-      query: { travelogueId: data.travelogueId },
-    });
+    router.push({ pathname: '/detail', query: { travelogueId: data.travelogueId } });
   };
 
   return (
