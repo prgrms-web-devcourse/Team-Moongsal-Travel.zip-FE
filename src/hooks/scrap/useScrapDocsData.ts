@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { createScrapDocument, deleteScrapDocument, getScrapDocument } from '@/api/scrap';
@@ -13,10 +13,10 @@ const useScrapDocsData = () => {
   const { handleSubmit, control, reset } = useForm<ScrapDocsFormType>(scrapFormDefault);
   const { title, titleState } = useScrapDocsForm(control);
 
-  const fetchScrapDoc = async () => {
+  const fetchScrapDoc = useCallback(async () => {
     const response = await getScrapDocument();
     setScrapDocs(response.data.list);
-  };
+  }, []);
 
   const createScrapDoc = async (data: ScrapDocsFormType) => {
     const { status } = await createScrapDocument(data.title);
@@ -35,17 +35,21 @@ const useScrapDocsData = () => {
     );
   };
 
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
   return {
     scrapDocs,
     setScrapDocs,
     open,
-    setOpen,
     title,
     titleState,
     fetchScrapDoc,
     createScrapDoc,
     deleteScrapDoc,
     handleSubmit,
+    toggleDrawer,
   };
 };
 
