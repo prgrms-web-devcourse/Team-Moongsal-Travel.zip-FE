@@ -43,8 +43,6 @@ const PostBasic = ({ control, data, isEditPage }: PostBasicProps) => {
     }
   }, [data]);
 
-  if (isEditPage && !data) return <></>;
-
   return (
     <>
       <Title bold='bold' sx={{ mb: '5px' }}>
